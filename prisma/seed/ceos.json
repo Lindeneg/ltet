@@ -1,0 +1,119 @@
+[
+  {
+    "id": "altman",
+    "name": "Sam Altman",
+    "company": "OpenAI",
+    "photo": {
+      "file": "assets/ceos/altman.jpg",
+      "author": "首相官邸ホームページ / Office of the Prime Minister of Japan Official Website",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Meeting_with_Masayoshi_Son_and_Sam_Altman_(February_3,_2025)_(3x4_cropped_on_Altman).jpg",
+      "changes": "cropped"
+    }
+  },
+  {
+    "id": "amodei",
+    "name": "Dario Amodei",
+    "company": "Anthropic",
+    "photo": {
+      "file": "assets/ceos/amodei.jpg",
+      "author": "TechCrunch",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Dario_Amodei_at_TechCrunch_Disrupt_2023_08.jpg",
+      "changes": "cropped"
+    }
+  },
+  {
+    "id": "hassabis",
+    "name": "Demis Hassabis",
+    "company": "Google DeepMind",
+    "photo": {
+      "file": "assets/ceos/hassabis.jpg",
+      "author": "Cmichel67",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Demis_Hassabis_in_2025_by_Christopher_Michel.jpg",
+      "changes": "cropped"
+    }
+  },
+  {
+    "id": "huang",
+    "name": "Jensen Huang",
+    "company": "Nvidia",
+    "photo": {
+      "file": "assets/ceos/huang.jpg",
+      "author": "The White House",
+      "licence": "Public domain",
+      "licenceUrl": null,
+      "source": "https://commons.wikimedia.org/wiki/File:Jen-Hsun_Huang_2025_(2).jpg",
+      "changes": "cropped"
+    }
+  },
+  {
+    "id": "musk",
+    "name": "Elon Musk",
+    "company": "xAI and Tesla",
+    "photo": {
+      "file": "assets/ceos/musk.jpg",
+      "author": "The White House",
+      "licence": "Public domain",
+      "licenceUrl": null,
+      "source": "https://commons.wikimedia.org/wiki/File:The_White_House_-_54442806707_(cropped).jpg",
+      "changes": "cropped"
+    }
+  },
+  {
+    "id": "nadella",
+    "name": "Satya Nadella",
+    "company": "Microsoft",
+    "photo": {
+      "file": "assets/ceos/nadella.jpg",
+      "author": "Brian Smale and Microsoft",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Satya_bookcover-print.jpg",
+      "changes": "cropped"
+    }
+  },
+  {
+    "id": "pichai",
+    "name": "Sundar Pichai",
+    "company": "Google",
+    "photo": {
+      "file": "assets/ceos/pichai.jpg",
+      "author": "Krystian Maj",
+      "licence": "CC BY 3.0 pl",
+      "licenceUrl": "https://creativecommons.org/licenses/by/3.0/pl/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Mateusz_Morawiecki_spotka%C5%82_si%C4%99_z_CEO_Google_Sundar_Pichai_w_KPRM_(2022.03.29)_01_(cropped).jpg",
+      "changes": "cropped"
+    }
+  },
+  {
+    "id": "suleyman",
+    "name": "Mustafa Suleyman",
+    "company": "Microsoft AI",
+    "photo": {
+      "file": "assets/ceos/suleyman.jpg",
+      "author": "Christopher Wilson",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Mustafa_Suleyman_photo_(cropped).jpg",
+      "changes": "cropped"
+    }
+  },
+  {
+    "id": "zuckerberg",
+    "name": "Mark Zuckerberg",
+    "company": "Meta",
+    "photo": {
+      "file": "assets/ceos/zuckerberg.jpg",
+      "author": "Jeff Sainlar; Social Producer and Editor, Meta",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Mark_Zuckerberg_(2025)_(cropped).jpg",
+      "changes": "cropped"
+    }
+  }
+]

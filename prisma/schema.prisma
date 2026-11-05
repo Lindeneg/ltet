@@ -1,0 +1,143 @@
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ProposalKind {
+  statement
+  suggestion
+  dispute
+}
+
+enum ProposalStatus {
+  open
+  approved
+  rejected
+  done
+}
+
+enum RunStatus {
+  running
+  ok
+  failed
+  stopped
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String
+  password     String
+  role         Role     @default(USER)
+  tokenVersion Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+
+model Statement {
+  id        String             @id
+  ceo       String
+  date      String
+  body      String
+  published Boolean            @default(true)
+  origin    String
+  history   StatementHistory[]
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @default(now()) @updatedAt
+
+  @@index([published, date])
+}
+
+model StatementHistory {
+  id          Int       @id @default(autoincrement())
+  statementId String
+  statement   Statement @relation(fields: [statementId], references: [id], onDelete: Cascade)
+  body        String
+  published   Boolean
+  note        String?
+  changedAt   DateTime  @default(now())
+
+  @@index([statementId])
+}
+
+model Proposal {
+  id          Int            @id @default(autoincrement())
+  kind        ProposalKind
+  status      ProposalStatus @default(open)
+  origin      String
+  statementId String?
+  body        String
+  checks      String?
+  runId       Int?
+  run         Run?           @relation(fields: [runId], references: [id])
+  note        String?
+  createdAt   DateTime       @default(now())
+  decidedAt   DateTime?
+
+  @@index([status, kind])
+}
+
+model Run {
+  id         Int        @id @default(autoincrement())
+  status     RunStatus  @default(running)
+  summary    String?
+  log        String?
+  startedBy  String?
+  dryRun     Boolean    @default(false)
+  pid        Int?
+  proposals  Proposal[]
+  startedAt  DateTime   @default(now())
+  finishedAt DateTime?
+}
+
+model Contender {
+  id              String  @id
+  name            String
+  company         String
+  position        Int
+  photoAuthor     String?
+  photoLicence    String?
+  photoLicenceUrl String?
+  photoSource     String?
+  photoChanges    String?
+}
+
+model Rubric {
+  id               Int    @id @default(1)
+  maxPerCategory   Int
+  unitOne          String
+  unitMany         String
+  titleFirst       String
+  titleLast        String
+  topStatementName String
+  topStatementFor  String
+}
+
+model Category {
+  id        String @id
+  position  Int
+  name      String
+  question  String
+  level0    String
+  level1    String
+  level3    String
+  level5    String
+  weight    Int
+  awardName String
+  awardFor  String
+}
+
+model Setting {
+  key   String @id
+  value String
+}

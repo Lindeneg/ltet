@@ -1,0 +1,103 @@
+import {Router, type Request, type Response} from "express";
+import type ContentService from "../../services/content-service.js";
+import {send} from "../../lib/http.js";
+import {AppError} from "../../lib/errors.js";
+import type ProposalService from "../../services/proposal-service.js";
+import type {InboxStatus} from "../../services/proposal-service.js";
+import type StatementService from "../../services/statement-service.js";
+import {WriteError} from "../../services/statement-service.js";
+import {InboxView, KINDS, inboxHref, type CardError, type InboxKind} from "../../ui/views/admin/inbox.js";
+import {readEditor} from "./editor-form.js";
+import {SOMETHING_WENT_WRONG, adminPage, intParam, sendError, withDone} from "./respond.js";
+
+const NO_OPEN_PROPOSAL = "No open proposal with that number.";
+
+function viewOf(kind: unknown, status: unknown): {kind: InboxKind; status: InboxStatus} {
+    return {
+        kind: KINDS.some((k) => k.id === kind) ? (kind as InboxKind) : "all",
+        status: status === "all" ? "all" : "open",
+    };
+}
+
+const noteOf = (value: unknown) => (typeof value === "string" ? value.trim() : "");
+
+export function inboxRouter(
+    proposalService: ProposalService,
+    statementService: StatementService,
+    content: ContentService
+): Router {
+    const router = Router();
+
+    async function render(
+        req: Request,
+        res: Response,
+        view: ReturnType<typeof viewOf>,
+        status = 200,
+        failed?: {id: number} & CardError
+    ) {
+        const page = await adminPage(req, proposalService, "inbox");
+        const items = await proposalService.inbox(view.status);
+        if (!items.ok) return sendError(res, page, SOMETHING_WENT_WRONG, 500);
+        send(res, InboxView({page, content: content.get(), items: items.data, ...view, failed}), status);
+    }
+
+    router.get("/", (req, res) => render(req, res, viewOf(req.query.kind, req.query.status)));
+
+    router.post("/proposals/:id/approve", async (req, res) => {
+        const view = viewOf(req.body?.kind, req.body?.view);
+        const note = noteOf(req.body?.note);
+        const id = intParam(req.params.id);
+        if (id === null) return sendError(res, await adminPage(req, proposalService, "inbox"), NO_OPEN_PROPOSAL, 404);
+
+        const form = readEditor(req.body ?? {}, content.get().rubric);
+        if (!form.ok)
+            return render(req, res, view, 422, {id, message: form.ctx.message, values: form.ctx.values, note});
+
+        const result = await statementService.approve(id, form.data.statement);
+        if (!result.ok) {
+            const failed = {id, values: form.data.values, note};
+            switch (result.ctx.code) {
+                case WriteError.NOT_OPEN:
+                    return render(req, res, view, 404, {...failed, message: NO_OPEN_PROPOSAL});
+                case WriteError.NOT_A_STATEMENT:
+                    return render(req, res, view, 400, {
+                        ...failed,
+                        message: "Only a proposed statement can be approved; close the others.",
+                    });
+                case WriteError.INVALID:
+                    return render(req, res, view, 422, {
+                        ...failed,
+                        message: "The statement is not valid yet.",
+                        errors: result.ctx.errors,
+                    });
+                default:
+                    return render(req, res, view, 500, {...failed, message: SOMETHING_WENT_WRONG});
+            }
+        }
+        res.redirect(302, withDone(inboxHref(view.kind, view.status), "published"));
+    });
+
+    router.post("/proposals/:id/close", async (req, res) => {
+        const view = viewOf(req.body?.kind, req.body?.view);
+        const note = noteOf(req.body?.note);
+        const id = intParam(req.params.id);
+        if (id === null) return sendError(res, await adminPage(req, proposalService, "inbox"), NO_OPEN_PROPOSAL, 404);
+
+        const status = req.body?.status;
+        if (status !== "rejected" && status !== "done") {
+            return render(req, res, view, 400, {id, note, message: 'status must be "rejected" or "done".'});
+        }
+        const result = await proposalService.close(id, status, note || null);
+        if (!result.ok) {
+            const missing = result.ctx === AppError.NOT_FOUND;
+            return render(req, res, view, missing ? 404 : 500, {
+                id,
+                note,
+                message: missing ? NO_OPEN_PROPOSAL : SOMETHING_WENT_WRONG,
+            });
+        }
+        res.redirect(302, withDone(inboxHref(view.kind, view.status), status === "rejected" ? "rejected" : "closed"));
+    });
+
+    return router;
+}

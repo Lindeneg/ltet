@@ -1,0 +1,97 @@
+{
+  "maxPerCategory": 5,
+  "unit": {
+    "one": "pitchfork",
+    "many": "pitchforks"
+  },
+  "categories": [
+    {
+      "id": "loss",
+      "name": "What you'll lose",
+      "question": "Does it tell people what they will have to do without: their job, their RAM, their privacy, their say?",
+      "levels": {
+        "0": "Nobody is asked to give anything up.",
+        "1": "A small or far-off loss, or one he says won't happen.",
+        "3": "A real loss to many: a craft, a feed, a share of the web's traffic.",
+        "5": "Taken outright, at scale: thousands of jobs, a whole trade, everything on your screen."
+      },
+      "weight": 1,
+      "award": {
+        "name": "The Brioche Prize",
+        "for": "for telling the public what it will have to do without"
+      }
+    },
+    {
+      "id": "condescension",
+      "name": "Condescension",
+      "question": "Does it talk down to the people it is about?",
+      "levels": {
+        "0": "Speaks to them as equals, or with some humility.",
+        "1": "A hint of looking down, in otherwise plain words.",
+        "3": "Their worries are brushed aside, or they are told what is good for them.",
+        "5": "Tells them their work, their view or they themselves don't count."
+      },
+      "weight": 1,
+      "award": {
+        "name": "The Powdered Wig",
+        "for": "for looking down on the public from the greatest height"
+      }
+    },
+    {
+      "id": "tone-deafness",
+      "name": "Tone-deafness",
+      "question": "Does it miss how it sounds to someone without a billion dollars?",
+      "levels": {
+        "0": "Reads the room: nobody without a billion dollars would wince.",
+        "1": "One line that grates, in an otherwise reasonable moment.",
+        "3": "Said to the people it costs, in the wrong room or at the wrong moment, as if it were good news.",
+        "5": "Hardship sold as an opportunity, at the worst possible moment, by the man who can afford it."
+      },
+      "weight": 1,
+      "award": {
+        "name": "The Hall of Mirrors",
+        "for": "for seeing nothing but his own reflection"
+      }
+    },
+    {
+      "id": "doom",
+      "name": "Doom",
+      "question": "Does it predict catastrophe, often while selling the cause of it?",
+      "levels": {
+        "0": "No catastrophe forecast; optimism, however grand, scores nothing here.",
+        "1": "A mild or narrow worry, hedged or in passing.",
+        "3": "Upheaval for society at large, forecast as coming.",
+        "5": "The end of humanity, or of work as we know it, said out loud."
+      },
+      "weight": 1,
+      "award": {
+        "name": "Après Moi, le Déluge",
+        "for": "for forecasting the flood and selling tickets to it"
+      }
+    },
+    {
+      "id": "hypocrisy",
+      "name": "Hypocrisy",
+      "question": "Does it contradict what the speaker or his company says or does elsewhere?",
+      "levels": {
+        "0": "No contradiction on record; selling the thing he talks about is not one.",
+        "1": "A small or arguable clash with something on record, named in the reason.",
+        "3": "Clearly at odds with something he or his company said or did, named in the reason.",
+        "5": "The opposite of what he said, or the very thing he ruled out."
+      },
+      "weight": 1,
+      "award": {
+        "name": "The Petit Hameau",
+        "for": "named after the toy village where Marie Antoinette played at peasant life"
+      }
+    }
+  ],
+  "titles": {
+    "first": "Marie Antoinette of the Year",
+    "last": "The Control Group",
+    "topStatement": {
+      "name": "The Cake",
+      "for": "for the single statement that raised the most pitchforks"
+    }
+  }
+}
