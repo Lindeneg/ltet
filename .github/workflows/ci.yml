@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
-      - run: npm run unit
+      - run: cp .env.test.example .env.test && NODE_ENV=test npm run db:generate && npm run build && npm run test:unit
 
   e2e:
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
-      - run: npm run e2e
+      - run: cp .env.test.example .env.test && NODE_ENV=test npm run db:generate && npx playwright install --with-deps --only-shell chromium && npm run test:e2e
 
   security:
     runs-on: ubuntu-latest
