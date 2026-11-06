@@ -28,7 +28,7 @@ const WORKING_NOTES = [
     /\b(?:HTTP|error|status)\s*403\b|\(403\)/i,
     /\bpages read\b/i,
     /\b(?:so|for|to|let) the lead\b|\bthe lead (?:can|could|should|may|might|will|would|decides?)\b/i,
-    /\bthe brief\b/i,
+    /\b(?:because|so|for|by) the brief\b|\bthe brief (?:covers|says|asks|allows|wants)\b/i,
     /\b(?:so|for|to|let) the owner\b|\bthe owner(?:'s call| can| could| should| may| might| will| would| decides?)\b/i,
     /\b(?:in|to) the dataset\b/i,
     /\bprimarySource\b/i,

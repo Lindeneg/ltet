@@ -165,6 +165,8 @@ describe("working notes", () => {
             "No court was found to have jurisdiction.",
             "There was no doubt the remark was found offensive.",
             "Intel cut 403 jobs.",
+            "In the brief clip he said it twice.",
+            "He read the brief statement aloud.",
             "Meta scraped the dataset without consent.",
         ]) {
             expect(inContext(text), text).toEqual([]);
