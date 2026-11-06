@@ -159,6 +159,38 @@ describe("the public site", () => {
         expect((await get("/match/nope")).status).toBe(404);
     });
 
+    it.each([
+        "/",
+        "/25-26",
+        "/results",
+        "/25-26/results?sort=pitchforks",
+        "/race",
+        "/honours",
+        "/rules",
+        "/club/altman",
+        "/match/pichai-2023-01-12000-layoffs-full-responsibility",
+        "/nowhere",
+    ])("gives %s exactly one h1, and alt text with every share image", async (path) => {
+        const doc = new JSDOM((await get(path)).html).window.document;
+        const image = doc.querySelector('meta[property="og:image"]');
+        const alt = doc.querySelector('meta[property="og:image:alt"]')?.getAttribute("content");
+
+        expect(doc.querySelectorAll("h1")).toHaveLength(1);
+        expect(Boolean(alt)).toBe(Boolean(image));
+        expect(doc.querySelector('meta[name="twitter:image:alt"]')?.getAttribute("content")).toBe(alt);
+    });
+
+    it("heads a match page with its headline, and describes its share image", async () => {
+        const doc = new JSDOM((await get("/match/pichai-2023-01-12000-layoffs-full-responsibility")).html).window
+            .document;
+        const headline = doc.querySelector("h1.rp-headline")!.textContent!;
+
+        const alt = doc.querySelector('meta[property="og:image:alt"]')!.getAttribute("content")!;
+
+        expect(alt.startsWith(`Sundar Pichai: “${headline}”, `)).toBe(true);
+        expect(alt).toMatch(/ pitchforks? of \d+$/);
+    });
+
     it("answers a missing file with a plain 404", async () => {
         const res = await get("/missing.css");
 

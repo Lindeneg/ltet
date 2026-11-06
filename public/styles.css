@@ -3308,6 +3308,7 @@ a.nav-button {
     margin: 0;
     font: 700 30px/1.1 var(--display);
     letter-spacing: 0.005em;
+    text-transform: none;
 }
 .rp-headline a {
     color: var(--ink);

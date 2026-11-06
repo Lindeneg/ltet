@@ -24,7 +24,7 @@ const TABS: {view: SeasonView | "rules"; label: string; icon: IconName}[] = [
     {view: "rules", label: "Rules", icon: "tab-rules"},
 ];
 
-export type Preview = {url: string; image: string};
+export type Preview = {url: string; image: string; alt: string};
 
 export type SiteLayoutProps = {
     title: string;
@@ -38,12 +38,14 @@ export type SiteLayoutProps = {
 // filled in per request, so a page cached once serves every origin
 export const PREVIEW_SLOT = "<!--preview-->";
 
-export function previewTags({url, image}: Preview): string {
+export function previewTags({url, image, alt}: Preview): string {
     return `
   <meta property="og:url" content="${esc(url)}">
   <meta property="og:image" content="${esc(image)}">
   <meta property="og:image:width" content="${OG_WIDTH}">
-  <meta property="og:image:height" content="${OG_HEIGHT}">`;
+  <meta property="og:image:height" content="${OG_HEIGHT}">
+  <meta property="og:image:alt" content="${esc(alt)}">
+  <meta name="twitter:image:alt" content="${esc(alt)}">`;
 }
 
 export function robotsTag(content: string): string {

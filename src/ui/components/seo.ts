@@ -15,6 +15,7 @@ export type PageMeta = {
     article?: boolean;
     robots?: string;
     image?: string;
+    imageAlt?: string;
     data?: (base: string) => JsonLd[];
 };
 
@@ -29,7 +30,7 @@ function website(base: string): JsonLd {
 export function seoTags(meta: PageMeta, base: string): string {
     const url = `${base}${meta.path}`;
     const own = meta.image
-        ? previewTags({url, image: `${base}${meta.image}`})
+        ? previewTags({url, image: `${base}${meta.image}`, alt: meta.imageAlt ?? ""})
         : `\n  <meta property="og:url" content="${esc(url)}">`;
     const robots = meta.robots ? robotsTag(meta.robots) : "";
     const data = [website(base), ...(meta.data?.(base) ?? [])].map((item) => `\n  ${jsonLd(item)}`).join("");
@@ -61,6 +62,14 @@ export function resultsDescription(site: Site): string {
 
 export function matchDescription(statement: ScoredStatement): string {
     return clip(`${statement.who.name}: ${statement.headline.text} “${statement.quote}”`, DESCRIPTION_CHARS);
+}
+
+export function tableImageAlt(unit: string): string {
+    return `The all-time league table, every contender ranked by ${unit}`;
+}
+
+export function matchImageAlt(statement: ScoredStatement, unit: string, maxForks: number): string {
+    return `${statement.who.name}: “${statement.headline.text}”, ${statement.forks} ${unit} of ${maxForks}`;
 }
 
 export function matchData(site: Site, statement: ScoredStatement): (base: string) => JsonLd[] {
