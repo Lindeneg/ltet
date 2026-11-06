@@ -6,6 +6,7 @@ export function NotFoundView(site?: Site): string {
     return SiteLayout({
         title: `Not found · ${SITE_NAME}`,
         site,
+        noindex: true,
         children: ErrorBody({
             code: "404",
             heading: "Offside",
