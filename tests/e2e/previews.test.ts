@@ -42,7 +42,7 @@ describe("previews and share pages", () => {
 
         expect(res.status).toBe(200);
         expect(res.html).toContain(`<meta property="og:image" content="${BASE_URL}/og/${first.id}.png">`);
-        expect(res.html).toContain(`<link rel="canonical" href="${BASE_URL}/s/${first.id}">`);
+        expect(res.html).toContain(`<link rel="canonical" href="${BASE_URL}/match/${first.id}">`);
         expect(res.html).toContain(`<meta http-equiv="refresh" content="0; url=/match/${first.id}">`);
     });
 
