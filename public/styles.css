@@ -2576,6 +2576,11 @@ select {
 .race-rank-label {
     display: none;
 }
+:root:not([data-js]) .race-tools,
+:root:not([data-js]) .race-rank-label,
+:root:not([data-js]) .race-rank-label + .race-rank {
+    display: none;
+}
 @media (max-width: 599px) {
     .race-card .race-tools,
     .race-note-wide {
