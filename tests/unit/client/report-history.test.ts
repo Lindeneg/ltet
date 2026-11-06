@@ -56,7 +56,7 @@ async function start(page: "table" | "match" = "table") {
         vi.fn(async (path: string) => ({ok: true, text: async () => pages.get(path)}))
     );
     const html = page === "table" ? TableView({site, title: "t"}) : pages.get(`/match/${ALTMAN.id}`)!;
-    history.replaceState(null, "", page === "table" ? "/" : `/match/${ALTMAN.id}`);
+    history.pushState(null, "", page === "table" ? "/" : `/match/${ALTMAN.id}`);
     document.documentElement.innerHTML = html.replace(/^<!doctype html>/i, "");
     runScript("report.js");
 }
@@ -162,6 +162,33 @@ describe("the report dialog and the browser's history", () => {
         expect(history.length).toBe(before + 1);
         expect(history.state).toMatchObject({report: MUSK.id});
         expect(history.state.doc).not.toBe("earlier");
+    });
+
+    it("goes back when closed by a click on the backdrop", async () => {
+        await start();
+        await openFromTicker(ALTMAN.id);
+
+        const done = popped();
+        dialog().click();
+        await done;
+        expect(shown()).toBeNull();
+        expect(location.pathname).toBe("/");
+    });
+
+    it("adds no entry and opens no dialog when the match fails to load", async () => {
+        await start();
+        vi.stubGlobal(
+            "fetch",
+            vi.fn(async () => ({ok: false, status: 500}))
+        );
+        const before = history.length;
+
+        document.querySelector<HTMLAnchorElement>(`#ticker-list a[data-report="${ALTMAN.id}"]`)!.click();
+        await vi.waitFor(() => expect(fetch).toHaveBeenCalledWith(`/match/${ALTMAN.id}`));
+        await new Promise((resolve) => setTimeout(resolve));
+
+        expect(history.length).toBe(before);
+        expect(shown()).toBeNull();
     });
 
     it("keeps one entry when reopened before the browser has finished going back", async () => {

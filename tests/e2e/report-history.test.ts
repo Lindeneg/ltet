@@ -45,4 +45,19 @@ describe("the match dialog and the browser's Back button", () => {
         await page.waitForURL("**/rules");
         await page.close();
     });
+
+    it("closes the dialog on the first of two quick Backs and leaves on the second", async () => {
+        const page = await browser.newPage();
+        await page.goto(BASE_URL + "/rules");
+        await page.goto(BASE_URL + "/results");
+        await openFirst(page);
+
+        await page.evaluate(() => {
+            history.back();
+            history.back();
+        });
+
+        await page.waitForURL("**/rules");
+        await page.close();
+    });
 });
