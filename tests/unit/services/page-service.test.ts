@@ -192,6 +192,14 @@ describe("PageService", () => {
             expect(notFound).toContain('id="ticker"');
             expect(serverError).toContain("Match suspended");
             expect(serverError).toContain("Something went wrong on our side. Try again in a moment.");
+            expect(notFound).toContain(`<meta name="robots" content="noindex">`);
+            expect(serverError).toContain(`<meta name="robots" content="noindex">`);
+        });
+
+        it("leave other pages indexable", async () => {
+            const {pages} = makePages();
+
+            expect(await html(pages.getRace({season: undefined}))).not.toContain(`name="robots"`);
         });
 
         it("render without the league when it can't load", async () => {

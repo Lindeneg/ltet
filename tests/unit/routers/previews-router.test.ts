@@ -71,6 +71,8 @@ describe("previews router", () => {
         expect(html).toContain(`<meta property="og:image:width" content="1200">`);
         expect(html).toContain(`<meta http-equiv="refresh" content="0; url=/match/musk-one">`);
         expect(html).toContain(`<a href="/match/musk-one">Read what Elon Musk actually said</a>`);
+        expect(html).toContain(`<meta name="robots" content="noindex">`);
+        expect(html).toContain(`<link rel="canonical" href="${server.url}/match/musk-one">`);
         const quote = `${long.slice(0, 180).trimEnd()}…`;
         expect(html).toContain(`content="1 pitchfork. “${quote}” Elon Musk, 2 October 2025."`);
     });
@@ -80,7 +82,7 @@ describe("previews router", () => {
 
         const html = await (await fetch(`${server.url}/s/altman-2025-09-01-statement`)).text();
 
-        expect(html).toContain(`<link rel="canonical" href="https://ltet.example/s/altman-2025-09-01-statement">`);
+        expect(html).toContain(`<link rel="canonical" href="https://ltet.example/match/altman-2025-09-01-statement">`);
         expect(html).toContain(`content="https://ltet.example/og/altman-2025-09-01-statement.png"`);
         expect(html).toContain(
             `content="5 pitchforks. “These are the exact words that were said in public” Sam Altman, 1 September 2025."`

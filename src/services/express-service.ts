@@ -6,6 +6,7 @@ import helmet from "helmet";
 import {failure, emptySuccess, type EmptyResult} from "../lib/result.js";
 import {MAX_FORM_BYTES} from "../lib/http.js";
 import type {MaybeNull} from "../lib/types.js";
+import {noIndex} from "../middleware/no-index.js";
 import type LoggerService from "./logger-service.js";
 import type {GlobalErrorHandler} from "../lib/error-handler.js";
 
@@ -22,6 +23,7 @@ export type AppRouters = {
     api: Router;
     admin: Router;
     previews: Router;
+    seo: Router;
     public: Router;
 };
 
@@ -62,12 +64,14 @@ class ExpressService {
         this.app.use(this.log.makeRequestLogger());
 
         this.app.use(routers.previews);
+        this.app.use(routers.seo);
         this.app.use("/assets/ceos", expressStatic(opts.photosRoot, {index: false, maxAge: STATIC_MAX_AGE}));
         this.app.use(expressStatic(opts.staticPublicRoot, {index: false, maxAge: STATIC_MAX_AGE}));
 
-        this.app.use("/api", routers.api);
+        this.app.use("/api", noIndex, routers.api);
         this.app.use(
             "/admin",
+            noIndex,
             express.urlencoded({extended: true, limit: MAX_FORM_BYTES}),
             cookieParser(),
             routers.admin

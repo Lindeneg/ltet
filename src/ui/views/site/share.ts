@@ -7,9 +7,10 @@ export type ShareViewProps = {
     image: {url: string; width: number; height: number};
     description: string;
     target: string;
+    canonical: string;
 };
 
-export function ShareView({statement, url, image, description, target}: ShareViewProps): string {
+export function ShareView({statement, url, image, description, target, canonical}: ShareViewProps): string {
     return `<!doctype html>
 <html lang="en">
 <head>
@@ -17,6 +18,7 @@ export function ShareView({statement, url, image, description, target}: ShareVie
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(statement.headline.text)} | Let Them Eat Tokens</title>
   <meta name="description" content="${esc(description)}">
+  <meta name="robots" content="noindex">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Let Them Eat Tokens">
   <meta property="og:title" content="${esc(statement.headline.text)}">
@@ -26,7 +28,7 @@ export function ShareView({statement, url, image, description, target}: ShareVie
   <meta property="og:image:width" content="${esc(String(image.width))}">
   <meta property="og:image:height" content="${esc(String(image.height))}">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="${esc(url)}">
+  <link rel="canonical" href="${esc(canonical)}">
   <meta http-equiv="refresh" content="0; url=${esc(target)}">
 </head>
 <body>

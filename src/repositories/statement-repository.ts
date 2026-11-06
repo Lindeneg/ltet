@@ -45,6 +45,15 @@ class StatementRepository {
         );
     }
 
+    listChanges(): AsyncResult<Map<string, Date>, DbError> {
+        return this.db.run(
+            "statement-repo.listChanges",
+            this.db.p.statement
+                .findMany({where: {published: true}, select: {id: true, updatedAt: true}})
+                .then((rows) => new Map(rows.map((row) => [row.id, row.updatedAt])))
+        );
+    }
+
     listAll(): AsyncResult<StatementRecord[], DbError> {
         return this.db.run(
             "statement-repo.listAll",
