@@ -123,7 +123,7 @@ class PageService {
                 title: this.#title(site, VIEW_TITLES.results),
                 description: resultsDescription(site),
                 path: site.href("results"),
-                noindex: Boolean(ceo || count || sort !== "newest"),
+                robots: ceo || count || sort !== "newest" ? "noindex, follow" : undefined,
             }),
             base
         );

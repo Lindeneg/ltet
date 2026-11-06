@@ -32,6 +32,7 @@ export type SiteLayoutProps = {
     site?: Site;
     preview?: boolean;
     scripts?: string[];
+    noindex?: boolean;
 };
 
 // filled in per request, so a page cached once serves every origin
@@ -45,19 +46,23 @@ export function previewTags({url, image}: Preview): string {
   <meta property="og:image:height" content="${OG_HEIGHT}">`;
 }
 
-function siteTags(): string {
+export function robotsTag(content: string): string {
+    return `\n  <meta name="robots" content="${esc(content)}">`;
+}
+
+function siteTags(noindex: boolean): string {
     return `
-  <meta name="description" content="${esc(DESCRIPTION)}">
+  <meta name="description" content="${esc(DESCRIPTION)}">${noindex ? robotsTag("noindex") : ""}
   <meta property="og:type" content="website">
   <meta property="og:title" content="Let Them Eat Tokens">
   <meta property="og:description" content="${esc(OG_DESCRIPTION)}">`;
 }
 
-function head(title: string, preview: boolean, scripts: string[]): string {
+function head(title: string, preview: boolean, scripts: string[], noindex: boolean): string {
     const own = scripts.map((src) => `\n  <script src="${esc(src)}" defer></script>`).join("");
     return `<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>${esc(title)}</title>${preview ? PREVIEW_SLOT : siteTags()}
+  <title>${esc(title)}</title>${preview ? PREVIEW_SLOT : siteTags(noindex)}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="/assets/pitchfork.svg" type="image/svg+xml">
@@ -241,11 +246,11 @@ function Dialogs(site: Site): string {
   </dialog>`;
 }
 
-export function SiteLayout({title, children, site, preview, scripts = []}: SiteLayoutProps): string {
+export function SiteLayout({title, children, site, preview, scripts = [], noindex = false}: SiteLayoutProps): string {
     return `<!doctype html>
 <html lang="en">
 <head>
-  ${head(title, preview ?? isPage(site), scripts)}
+  ${head(title, preview ?? isPage(site), scripts, noindex)}
 </head>
 <body>
   ${SPRITE}

@@ -52,6 +52,7 @@ export function makePreviewsRouter({leagueService, previewService, content, publ
                 image: {url: `${base}/og/${statement.id}.png`, width: OG_WIDTH, height: OG_HEIGHT},
                 description: `${statement.forks} ${unit}. “${quote}” ${statement.who.name}, ${dayFormat.format(new Date(statement.time))}.`,
                 target: `/match/${encodeURIComponent(statement.id)}`,
+                canonical: `${base}/match/${encodeURIComponent(statement.id)}`,
             })
         );
     });

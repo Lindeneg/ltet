@@ -1,11 +1,10 @@
 import type {ScoredStatement} from "../../lib/score.js";
 import {clip, esc, jsonLd, matches} from "../lib.js";
 import {SITE_NAME, seasonTitle, type Site} from "../site.js";
-import {DESCRIPTION, previewTags} from "./layout.js";
+import {DESCRIPTION, previewTags, robotsTag} from "./layout.js";
 import {matchPath} from "./pieces.js";
 
 const DESCRIPTION_CHARS = 160;
-const NOINDEX = "noindex, follow";
 
 type JsonLd = Record<string, unknown>;
 
@@ -14,7 +13,7 @@ export type PageMeta = {
     description: string;
     path: string;
     article?: boolean;
-    noindex?: boolean;
+    robots?: string;
     image?: string;
     data?: (base: string) => JsonLd[];
 };
@@ -32,7 +31,7 @@ export function seoTags(meta: PageMeta, base: string): string {
     const own = meta.image
         ? previewTags({url, image: `${base}${meta.image}`})
         : `\n  <meta property="og:url" content="${esc(url)}">`;
-    const robots = meta.noindex ? `\n  <meta name="robots" content="${NOINDEX}">` : "";
+    const robots = meta.robots ? robotsTag(meta.robots) : "";
     const data = [website(base), ...(meta.data?.(base) ?? [])].map((item) => `\n  ${jsonLd(item)}`).join("");
     return `
   <meta name="description" content="${esc(meta.description)}">${robots}
