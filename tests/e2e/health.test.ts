@@ -34,8 +34,8 @@ describe("the server, once started", () => {
         expect(csp).toContain("default-src 'self'");
         expect(csp).toContain("script-src 'self'");
         expect(csp).toContain("object-src 'none'");
-        expect(csp).toContain("style-src 'self';");
-        expect(csp).toContain("font-src 'self';");
+        expect(csp).toMatch(/style-src 'self'(;|$)/);
+        expect(csp).toMatch(/font-src 'self'(;|$)/);
         expect(csp).not.toMatch(/googleapis|gstatic/);
     });
 
