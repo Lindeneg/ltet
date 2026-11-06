@@ -151,6 +151,55 @@ describe("ScoutService", () => {
         });
     });
 
+    it("keeps the notes on the proposal", async () => {
+        claudeRun.mockReset().mockResolvedValueOnce({
+            output: {leads: [lead], suggestionOutcomes: [], searched: ""},
+            costUsd: 0,
+            turns: 1,
+        });
+        claudeRun.mockResolvedValueOnce({
+            output: {results: [{lead: 0, keep: true, dropReason: "", statement: {...written, notes: "Not fetched."}}]},
+            costUsd: 0,
+            turns: 1,
+        });
+
+        await (await scout()).run({dryRun: false});
+
+        expect(proposalRepo.create.mock.calls[0][0].body).toMatchObject({notes: "Not fetched."});
+    });
+
+    it("fails a statement whose public prose holds a working note", async () => {
+        claudeRun.mockReset().mockResolvedValueOnce({
+            output: {leads: [lead], suggestionOutcomes: [], searched: ""},
+            costUsd: 0,
+            turns: 1,
+        });
+        claudeRun.mockResolvedValueOnce({
+            output: {
+                results: [
+                    {
+                        lead: 0,
+                        keep: true,
+                        dropReason: "",
+                        statement: {...written, backlash: {summary: "Mild. Few cared.", url: B}},
+                    },
+                ],
+            },
+            costUsd: 0,
+            turns: 1,
+        });
+
+        await (await scout()).run({dryRun: false});
+
+        expect(proposalRepo.create).not.toHaveBeenCalled();
+        expect(runRepo.finish.mock.calls[0][1].outcomes.missed).toEqual([
+            expect.objectContaining({
+                kind: "failed",
+                reason: 'backlash summary holds a working note ("Mild."), which belongs in notes',
+            }),
+        ]);
+    });
+
     it("records empty outcomes on a quiet run", async () => {
         claudeRun
             .mockReset()

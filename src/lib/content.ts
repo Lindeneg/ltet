@@ -69,6 +69,7 @@ export type RawStatement = {
     topics?: string[];
     scores: Record<string, Score>;
     manualCheck?: {date: string; note: string};
+    notes?: string;
 };
 
 export type Content = {ceos: Ceo[]; rubric: Rubric};
