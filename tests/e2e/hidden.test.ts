@@ -1,5 +1,6 @@
 import {chromium, type Browser} from "playwright";
 import {afterAll, beforeAll, describe, expect, it} from "vitest";
+import {seasonKey, seasonStartYear} from "../../src/lib/seasons.js";
 import {BASE_URL, get} from "./helpers.js";
 
 const table = await get("/");
@@ -31,6 +32,13 @@ describe("what the site hides", () => {
 
     it("shows the next fixture on the all-time results", async () => {
         expect(await fixture("/results")).toEqual({hidden: false, display: "flex"});
+    });
+
+    it("shows the next fixture on the running season's results", async () => {
+        const running = seasonKey(seasonStartYear(Date.now()));
+
+        expect(seasons).toContain(running);
+        expect(await fixture(`/${running}/results`)).toEqual({hidden: false, display: "flex"});
     });
 
     it.each(seasons)("shows the next fixture on %s only while that season runs", async (season) => {
