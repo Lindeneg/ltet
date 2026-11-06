@@ -2,7 +2,7 @@ import {mkdir, readFile} from "node:fs/promises";
 import {join} from "node:path";
 import type {Content, RawStatement} from "../lib/content.js";
 import type {Result} from "../lib/result.js";
-import {statementErrors} from "../lib/statement-rules.js";
+import {statementErrors, workingNoteErrors} from "../lib/statement-rules.js";
 import {tally} from "../lib/score.js";
 import {excerpt, pageCache, pageText, pageTitles, type PageLoader} from "../lib/pages.js";
 import {
@@ -363,7 +363,7 @@ class ScoutService {
                 log(`Duplicate: ${statement.id} repeats ${twin.id}.`);
                 continue;
             }
-            const errors = statementErrors(statement, {ceos, rubric});
+            const errors = [...statementErrors(statement, {ceos, rubric}), ...workingNoteErrors(statement)];
             const checks = await verify(statement, load);
             if (checks.foundOn === 0) errors.push("the quote was not found word for word on any page that loaded");
             if (errors.length > 0) {
