@@ -2,6 +2,8 @@ import type {Request, Response} from "express";
 
 export const MAX_FORM_BYTES = 256 * 1024;
 
+export const MAX_IMPORT_FORM_BYTES = 7 * 1024 * 1024;
+
 export function send(res: Response, html: string, status = 200) {
     res.status(status).type("html").send(html);
 }

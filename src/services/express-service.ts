@@ -4,7 +4,7 @@ import compression from "compression";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import {failure, emptySuccess, type EmptyResult} from "../lib/result.js";
-import {MAX_FORM_BYTES} from "../lib/http.js";
+import {MAX_FORM_BYTES, MAX_IMPORT_FORM_BYTES} from "../lib/http.js";
 import type {MaybeNull} from "../lib/types.js";
 import {noIndex} from "../middleware/no-index.js";
 import type LoggerService from "./logger-service.js";
@@ -69,6 +69,7 @@ class ExpressService {
         this.app.use(expressStatic(opts.staticPublicRoot, {index: false, maxAge: STATIC_MAX_AGE}));
 
         this.app.use("/api", noIndex, routers.api);
+        this.app.use("/admin/import", express.urlencoded({extended: true, limit: MAX_IMPORT_FORM_BYTES}));
         this.app.use(
             "/admin",
             noIndex,
