@@ -25,6 +25,8 @@ export function readEditor(
     } catch (err) {
         return failure({message: `The JSON does not parse: ${(err as Error).message}`, values});
     }
+    const blank = rubric.categories.filter((c) => values.scores[c.id].score.trim() === "").map((c) => c.name);
+    if (blank.length > 0) return failure({message: `The score for ${blank.join(", ")} is missing.`, values});
     const scores = Object.fromEntries(
         rubric.categories.map((c) => [
             c.id,

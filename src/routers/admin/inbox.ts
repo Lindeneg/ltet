@@ -49,31 +49,32 @@ export function inboxRouter(
         const id = intParam(req.params.id);
         if (id === null) return sendError(res, await adminPage(req, proposalService, "inbox"), NO_OPEN_PROPOSAL, 404);
 
+        const failed = (code: WriteError, values?: CardError["values"], errors: string[] = []) => {
+            const card = {id, values, note};
+            switch (code) {
+                case WriteError.NOT_OPEN:
+                    return render(req, res, view, 404, {...card, message: NO_OPEN_PROPOSAL});
+                case WriteError.NOT_A_STATEMENT:
+                    return render(req, res, view, 400, {
+                        ...card,
+                        message: "Only a proposed statement can be approved; close the others.",
+                    });
+                case WriteError.INVALID:
+                    return render(req, res, view, 422, {...card, message: "The statement is not valid yet.", errors});
+                default:
+                    return render(req, res, view, 500, {...card, message: SOMETHING_WENT_WRONG});
+            }
+        };
+
+        const approvable = await statementService.approvable(id);
+        if (!approvable.ok) return failed(approvable.ctx.code);
+
         const form = readEditor(req.body ?? {}, content.get().rubric);
         if (!form.ok)
             return render(req, res, view, 422, {id, message: form.ctx.message, values: form.ctx.values, note});
 
         const result = await statementService.approve(id, form.data.statement);
-        if (!result.ok) {
-            const failed = {id, values: form.data.values, note};
-            switch (result.ctx.code) {
-                case WriteError.NOT_OPEN:
-                    return render(req, res, view, 404, {...failed, message: NO_OPEN_PROPOSAL});
-                case WriteError.NOT_A_STATEMENT:
-                    return render(req, res, view, 400, {
-                        ...failed,
-                        message: "Only a proposed statement can be approved; close the others.",
-                    });
-                case WriteError.INVALID:
-                    return render(req, res, view, 422, {
-                        ...failed,
-                        message: "The statement is not valid yet.",
-                        errors: result.ctx.errors,
-                    });
-                default:
-                    return render(req, res, view, 500, {...failed, message: SOMETHING_WENT_WRONG});
-            }
-        }
+        if (!result.ok) return failed(result.ctx.code, form.data.values, result.ctx.errors);
         res.redirect(302, withDone(inboxHref(view.kind, view.status), "published"));
     });
 

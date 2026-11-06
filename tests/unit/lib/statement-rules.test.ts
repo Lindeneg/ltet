@@ -49,6 +49,22 @@ describe("statement rules", () => {
         ]);
     });
 
+    it("starts the record on 2022-11-30", () => {
+        expect(statementErrors(makeStatement({date: "2022-11-30"}), rules)).toEqual([]);
+        expect(statementErrors(makeStatement({date: "2022-11-29"}), rules)).toEqual([
+            "date is before the record starts on 2022-11-30",
+        ]);
+    });
+
+    it("refuses a fraction or a negative score", () => {
+        for (const score of [3.5, -1]) {
+            const statement = makeStatement();
+            statement.scores.loss = {...statement.scores.loss, score};
+
+            expect(statementErrors(statement, rules)).toEqual(["score for loss must be an integer from 0 to 5"]);
+        }
+    });
+
     it("treats a missing statement as one with every field missing", () => {
         expect(statementErrors(undefined, rules)).toContain("venue missing");
     });
