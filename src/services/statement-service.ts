@@ -5,6 +5,7 @@ import {statementErrors} from "../lib/statement-rules.js";
 import type {MaybeNull, ValueOf} from "../lib/types.js";
 import type StatementRepository from "../repositories/statement-repository.js";
 import type ProposalRepository from "../repositories/proposal-repository.js";
+import type {ProposalRecord} from "../repositories/proposal-repository.js";
 import type ContentService from "./content-service.js";
 
 export const WriteError = {
@@ -17,6 +18,8 @@ export const WriteError = {
 export type WriteError = ValueOf<typeof WriteError>;
 
 export type WriteFailure = {code: WriteError; errors: string[]};
+
+const existsAlready = (id: string) => `a statement with the id ${id} exists already`;
 
 const fail = (code: WriteError, errors: string[] = []) => failure<WriteFailure>({code, errors});
 
@@ -55,28 +58,37 @@ class StatementService {
         return success(undefined);
     }
 
-    async approve(proposalId: number, statement: unknown): AsyncResult<string, WriteFailure> {
+    async approvable(proposalId: number): AsyncResult<ProposalRecord, WriteFailure> {
         const proposal = await this.proposalRepo.get(proposalId);
         if (!proposal.ok) return fail(proposal.ctx);
         if (!proposal.data || proposal.data.status !== "open") return fail(WriteError.NOT_OPEN);
         if (proposal.data.kind !== "statement") return fail(WriteError.NOT_A_STATEMENT);
+        return success(proposal.data);
+    }
+
+    async approve(proposalId: number, statement: unknown): AsyncResult<string, WriteFailure> {
+        const proposal = await this.approvable(proposalId);
+        if (!proposal.ok) return proposal;
 
         const errors = statementErrors(statement, this.content.get());
         const id = String((statement as Partial<RawStatement>)?.id);
         const exists = await this.statementRepo.has(id);
         if (!exists.ok) return fail(exists.ctx);
-        if (exists.data) errors.push(`a statement with the id ${id} exists already`);
+        if (exists.data) errors.push(existsAlready(id));
         if (errors.length > 0) return fail(WriteError.INVALID, errors);
 
-        const saved = await this.statementRepo.save(statement as RawStatement, {
-            origin: proposal.data.origin,
-            note: `approved from proposal ${proposal.data.id}`,
-        });
-        if (!saved.ok) return fail(saved.ctx);
+        const approved = await this.statementRepo.approve(
+            proposal.data.id,
+            statement as RawStatement,
+            proposal.data.origin
+        );
+        if (!approved.ok) {
+            return approved.ctx === AppError.CONFLICT
+                ? fail(WriteError.INVALID, [existsAlready(id)])
+                : fail(approved.ctx);
+        }
+        if (!approved.data) return fail(WriteError.NOT_OPEN);
         this.onChange();
-
-        const decided = await this.proposalRepo.decide(proposal.data.id, "approved");
-        if (!decided.ok) return fail(decided.ctx);
         return success(id);
     }
 }

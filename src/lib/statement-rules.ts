@@ -1,4 +1,5 @@
 import {LEVELS, STRENGTHS, type Ceo, type RawStatement, type Rubric} from "./content.js";
+import {RECORD_START_DAY} from "./scout.js";
 import {isUrl} from "./url.js";
 
 export {isUrl};
@@ -64,6 +65,7 @@ export function statementErrors(value: unknown, {ceos, rubric}: Rules): string[]
     if (!ceos.some((ceo) => ceo.id === s.ceo)) fail(`unknown ceo "${s.ceo}"`);
     if (!isRealDate(s.date)) fail("date must be YYYY-MM-DD");
     else if (s.date > today) fail("date is in the future");
+    else if (s.date < RECORD_START_DAY) fail(`date is before the record starts on ${RECORD_START_DAY}`);
     if (!PRECISIONS.has(s.datePrecision)) fail("datePrecision must be day, month or reported");
 
     for (const field of ["venue", "quote", "context"] as const) {
