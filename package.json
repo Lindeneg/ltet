@@ -10,7 +10,7 @@
     "scripts": {
         "dev": "tsx watch src/index.ts",
         "build": "node tools/heavy.mjs build -- npm run build:run --",
-        "build:run": "tsc",
+        "build:run": "tsc && node tools/version.mjs dist/version.json",
         "start": "node dist/index.js",
         "db:migrate": "prisma migrate dev",
         "db:deploy": "prisma migrate deploy",
