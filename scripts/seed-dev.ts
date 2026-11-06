@@ -109,6 +109,18 @@ function summary(since: string, counts: Partial<Record<string, number>> = {}) {
     };
 }
 
+const proposedOutcome = (s: RawStatement, c: ReturnType<typeof checks>, proposalId: number | null) => ({
+    statementId: s.id,
+    ceo: s.ceo,
+    headline: s.headline.text,
+    verified: c.verified,
+    foundOn: c.foundOn,
+    forks: forks(s),
+    proposalId,
+});
+
+const noOutcomes = {proposed: [], missed: [], suggestions: []};
+
 const proposedLine = (s: RawStatement, foundOn: number) =>
     `Proposed: ${s.id}, ${forks(s)} ${content.rubric.unit.many}, quote on ${foundOn} site(s).`;
 
@@ -154,7 +166,7 @@ try {
         "adding run 1"
     );
     const approvedAt = at("2026-09-15T19:12:00Z");
-    must(
+    const approvedProposal = must(
         await seedRepo.addProposal({
             kind: "statement",
             status: "approved",
@@ -167,6 +179,23 @@ try {
             decidedAt: approvedAt,
         }),
         "adding the approved proposal"
+    );
+    must(
+        await seedRepo.setOutcomes(runOneId, {
+            proposed: [proposedOutcome(approved, approvedChecks, approvedProposal)],
+            missed: [
+                {
+                    kind: "duplicate",
+                    ceo: "pichai",
+                    date: "2026-05-20",
+                    venue: "Hard Fork",
+                    statementId: "pichai-2026-05-boo-strategy",
+                    reason: "repeats pichai-2026-05-hard-fork-boo-strategy",
+                },
+            ],
+            suggestions: [],
+        }),
+        "adding run 1's outcomes"
     );
     must(await seedRepo.setOrigin(approved.id, "scout", approvedAt), "marking the approved statement");
 
@@ -206,7 +235,7 @@ try {
     );
 
     const runThreeAt = at("2026-10-30T05:00:00Z");
-    must(
+    const runThreeId = must(
         await seedRepo.addRun({
             status: "failed",
             startedBy: SCHEDULE,
@@ -220,9 +249,10 @@ try {
         }),
         "adding run 3"
     );
+    must(await seedRepo.setOutcomes(runThreeId, noOutcomes), "adding run 3's outcomes");
 
     const runFourAt = at("2026-10-30T09:15:00Z");
-    must(
+    const runFourId = must(
         await seedRepo.addRun({
             status: "stopped",
             startedBy: DEV_ADMIN.email,
@@ -233,10 +263,20 @@ try {
         }),
         "adding run 4"
     );
+    must(await seedRepo.setOutcomes(runFourId, noOutcomes), "adding run 4's outcomes");
 
     const runFiveAt = at("2026-10-30T09:30:00Z");
-    const runFive = summary("2026-09-23", {costUsd: 0.41});
-    must(
+    const runFive = summary("2026-09-23", {
+        leads: 2,
+        written: 1,
+        proposed: 1,
+        verified: 1,
+        dropped: 1,
+        costUsd: 0.41,
+    });
+    const verifiedChecks = checks(verified);
+    const dropReason = "The remark is about chip export rules, which is general politics, not an AI or tech statement.";
+    const runFiveId = must(
         await seedRepo.addRun({
             status: "ok",
             startedBy: DEV_ADMIN.email,
@@ -246,47 +286,90 @@ try {
             finishedAt: later(runFiveAt, 4 * MINUTE),
             log: [
                 `Scout run 5: statements since 2026-09-23, model ${MODEL}.`,
-                "Find: 0 leads in 6 turns. Searched: interviews, keynotes and posts by the contenders since 23 September.",
+                "Find: 2 leads in 12 turns. Searched: interviews, keynotes and posts by the contenders since 23 September.",
+                `Dropped: huang, 2026-10-22, CNBC: ${dropReason}`,
+                proposedLine(verified, verifiedChecks.foundOn),
+                JSON.stringify(verified, null, 2),
                 doneLine(runFive),
             ].join("\n"),
         }),
         "adding run 5"
     );
+    must(
+        await seedRepo.setOutcomes(runFiveId, {
+            proposed: [proposedOutcome(verified, verifiedChecks, null)],
+            missed: [
+                {
+                    kind: "dropped",
+                    ceo: "huang",
+                    date: "2026-10-22",
+                    venue: "CNBC",
+                    statementId: null,
+                    reason: dropReason,
+                },
+            ],
+            suggestions: [],
+        }),
+        "adding run 5's outcomes"
+    );
 
-    const runSixAt = at("2026-10-31T05:00:00Z");
-    const runSix = summary("2026-09-23", {
-        leads: 2,
-        written: 2,
-        proposed: 2,
-        verified: 1,
-        onePage: 1,
-        suggestions: 1,
-        costUsd: 1.31,
-    });
-    const verifiedChecks = checks(verified);
-    const onePageChecks = checks(onePage, [onePage.sources[0].url]);
+    const runSixAt = at("2026-10-30T17:00:00Z");
+    const runSix = summary("2026-09-23", {costUsd: 0.38});
     const runSixId = must(
         await seedRepo.addRun({
             status: "ok",
-            startedBy: SCHEDULE,
+            startedBy: DEV_ADMIN.email,
             summary: runSix,
             startedAt: runSixAt,
-            finishedAt: later(runSixAt, 7 * MINUTE),
+            finishedAt: later(runSixAt, 4 * MINUTE),
             log: [
                 `Scout run 6: statements since 2026-09-23, model ${MODEL}.`,
-                "Find: 2 leads in 14 turns. Searched: interviews, keynotes and posts by the contenders since 23 September.",
-                proposedLine(verified, verifiedChecks.foundOn),
-                `${proposedLine(onePage, onePageChecks.foundOn).slice(0, -1)}, headline not found on its page.`,
+                "Find: 0 leads in 6 turns. Searched: interviews, keynotes and posts by the contenders since 23 September.",
                 doneLine(runSix),
             ].join("\n"),
         }),
         "adding run 6"
     );
+    must(await seedRepo.setOutcomes(runSixId, noOutcomes), "adding run 6's outcomes");
+
+    const runSevenAt = at("2026-10-31T05:00:00Z");
+    const runSeven = summary("2026-09-23", {
+        leads: 3,
+        written: 3,
+        proposed: 2,
+        failed: 1,
+        verified: 1,
+        onePage: 1,
+        suggestions: 1,
+        costUsd: 1.31,
+    });
+    const failedReason =
+        'headline "Zuckerberg says the metaverse was never the point" was not found on https://news.example/zuckerberg-metaverse-never-the-point-interview-transcript-and-full-remarks-from-the-evening-session; the quote was not found word for word on any page that loaded';
+    const onePageChecks = checks(onePage, [onePage.sources[0].url]);
+    const runSevenId = must(
+        await seedRepo.addRun({
+            status: "ok",
+            startedBy: SCHEDULE,
+            summary: runSeven,
+            startedAt: runSevenAt,
+            finishedAt: later(runSevenAt, 7 * MINUTE),
+            log: [
+                `Scout run 7: statements since 2026-09-23, model ${MODEL}.`,
+                "Find: 3 leads in 14 turns. Searched: interviews, keynotes and posts by the contenders since 23 September.",
+                proposedLine(verified, verifiedChecks.foundOn),
+                `${proposedLine(onePage, onePageChecks.foundOn).slice(0, -1)}, headline not found on its page.`,
+                `Failed checks: zuckerberg-2026-10-metaverse-never-the-point: ${failedReason}`,
+                doneLine(runSeven),
+            ].join("\n"),
+        }),
+        "adding run 7"
+    );
+    const runSevenProposed = [];
     for (const [s, c] of [
         [verified, verifiedChecks],
         [onePage, onePageChecks],
     ] as const) {
-        must(
+        const proposalId = must(
             await seedRepo.addProposal({
                 kind: "statement",
                 status: "open",
@@ -294,11 +377,12 @@ try {
                 statementId: s.id,
                 body: s,
                 checks: c,
-                runId: runSixId,
-                createdAt: later(runSixAt, 6 * MINUTE),
+                runId: runSevenId,
+                createdAt: later(runSevenAt, 6 * MINUTE),
             }),
             "adding an open proposal"
         );
+        runSevenProposed.push(proposedOutcome(s, c, proposalId));
     }
 
     must(
@@ -307,9 +391,9 @@ try {
             startedBy: SCHEDULE,
             summary: null,
             startedAt: new Date(Date.now() - 10 * MINUTE),
-            log: `Scout run 7: statements since 2026-10-28, model ${MODEL}.`,
+            log: `Scout run 8: statements since 2026-10-28, model ${MODEL}.`,
         }),
-        "adding run 7"
+        "adding run 8"
     );
 
     const published = seed.filter((s) => !heldBack.includes(s));
@@ -437,7 +521,7 @@ try {
             },
             status: "open",
             checks: {
-                run: runSixId,
+                run: runSevenId,
                 qualifies: false,
                 finding: "The page reports an interview already on the record, with no new remark.",
             },
@@ -468,8 +552,9 @@ try {
             decidedAt: at("2026-10-12T19:40:00Z"),
         },
     ] as const;
+    const researched = [];
     for (const s of suggestions) {
-        must(
+        const id = must(
             await seedRepo.addProposal({
                 kind: "suggestion",
                 status: s.status,
@@ -482,11 +567,29 @@ try {
             }),
             "adding a suggestion"
         );
+        if ("checks" in s) researched.push({id, url: s.body.url, ...s.checks, proposalId: null});
     }
+    must(
+        await seedRepo.setOutcomes(runSevenId, {
+            proposed: runSevenProposed,
+            missed: [
+                {
+                    kind: "failed",
+                    ceo: "zuckerberg",
+                    date: "2026-10-14",
+                    venue: "Evening session interview",
+                    statementId: "zuckerberg-2026-10-metaverse-never-the-point",
+                    reason: failedReason,
+                },
+            ],
+            suggestions: researched.map(({run: _run, ...rest}) => rest),
+        }),
+        "adding run 7's outcomes"
+    );
 
     must(await seeder.addAdmin(DEV_ADMIN), "adding the dev admin");
     console.log(
-        `Dev data: history on ${picks.length} statements, ${disputes.length} disputes, ${suggestions.length} suggestions, 4 scout proposals, 7 runs.`
+        `Dev data: history on ${picks.length} statements, ${disputes.length} disputes, ${suggestions.length} suggestions, 4 scout proposals, 8 runs.`
     );
     console.log(`Dev admin: ${DEV_ADMIN.email}, password ${DEV_ADMIN.password}`);
 } catch (error) {

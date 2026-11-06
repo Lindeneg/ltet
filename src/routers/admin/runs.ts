@@ -3,6 +3,7 @@ import {AppError} from "../../lib/errors.js";
 import {send} from "../../lib/http.js";
 import {RECORD_START_DAY, day} from "../../lib/scout.js";
 import {getAuth} from "../../middleware/admin-auth.js";
+import type ContentService from "../../services/content-service.js";
 import type ProposalService from "../../services/proposal-service.js";
 import type RunService from "../../services/run-service.js";
 import type ScoutRunnerService from "../../services/scout-runner-service.js";
@@ -27,7 +28,8 @@ function sinceOf(value: unknown, today: string): string | undefined | null {
 export function runsRouter(
     runService: RunService,
     proposalService: ProposalService,
-    scoutRunner: ScoutRunnerService
+    scoutRunner: ScoutRunnerService,
+    content: ContentService
 ): Router {
     const router = Router();
 
@@ -87,7 +89,7 @@ export function runsRouter(
         }
         const proposals = await runService.proposals(id);
         if (!proposals.ok) return sendError(res, page, SOMETHING_WENT_WRONG, 500);
-        send(res, RunView({page, run: run.data, proposals: proposals.data}));
+        send(res, RunView({page, content: content.get(), run: run.data, proposals: proposals.data}));
     });
 
     router.post("/runs/:id/stop", async (req, res) => {

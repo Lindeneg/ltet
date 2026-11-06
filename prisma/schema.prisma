@@ -92,6 +92,7 @@ model Run {
   status     RunStatus  @default(running)
   summary    String?
   log        String?
+  outcomes   String?
   startedBy  String?
   dryRun     Boolean    @default(false)
   pid        Int?

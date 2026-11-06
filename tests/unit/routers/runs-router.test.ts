@@ -5,7 +5,7 @@ import {runsRouter} from "../../../src/routers/admin/runs.js";
 import type RunService from "../../../src/services/run-service.js";
 import type ScoutRunnerService from "../../../src/services/scout-runner-service.js";
 import {StartError} from "../../../src/services/scout-runner-service.js";
-import {fake, makeRun} from "../helpers.js";
+import {fake, makeContentService, makeRun} from "../helpers.js";
 import {fakeProposalService, serveAdmin} from "./admin-app.js";
 
 describe("runs router", () => {
@@ -20,7 +20,7 @@ describe("runs router", () => {
     beforeEach(async () => {
         page = vi.fn().mockResolvedValue(success({runs: [makeRun()], page: 1, pages: 1}));
         get = vi.fn().mockResolvedValue(success(makeRun({log: "<script>x</script>"})));
-        proposals = vi.fn().mockResolvedValue(success([{id: 42, statementId: "altman-dishes"}]));
+        proposals = vi.fn().mockResolvedValue(success([{id: 42, statementId: "altman-dishes", status: "rejected"}]));
         start = vi.fn().mockResolvedValue(success(8));
         stop = vi.fn().mockResolvedValue(success(undefined));
         nextRun = vi.fn().mockReturnValue(new Date("2026-11-02T06:00:00Z"));
@@ -28,7 +28,8 @@ describe("runs router", () => {
             runsRouter(
                 fake<RunService>({page, get, proposals}),
                 fakeProposalService().service,
-                fake<ScoutRunnerService>({start, stop, nextRun})
+                fake<ScoutRunnerService>({start, stop, nextRun}),
+                makeContentService()
             )
         );
     });
@@ -132,7 +133,10 @@ describe("runs router", () => {
         expect(html).toContain("Run 1: Done");
         expect(html).toContain("&lt;script&gt;x&lt;/script&gt;");
         expect(html).toContain("<dt>Since</dt><dd>2025-08-31</dd>");
-        expect(html).toContain(`<a href="/admin?status=all#proposal-42">#42 altman-dishes</a>`);
+        expect(html).toContain("<h3>altman-dishes</h3>");
+        expect(html).toContain(
+            `<a href="/admin?status=all#proposal-42">In the inbox</a> <span class="tag">Rejected</span>`
+        );
         expect(html).not.toContain("http-equiv");
         expect(html).not.toContain(">Stop<");
     });

@@ -495,3 +495,45 @@ dl.summary dd {
     margin: 0;
     font-weight: 700;
 }
+dl.scoreboard {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+}
+dl.scoreboard > div {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 12px;
+}
+dl.scoreboard dd {
+    font-size: 22px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+.report h2 {
+    margin: 22px 0 10px;
+    font-size: 18px;
+}
+.report h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    line-height: 1.35;
+}
+.report .card .actions {
+    margin: 8px 0 0;
+    align-items: center;
+}
+.report .reason,
+.report .meta,
+.report h3,
+pre.log {
+    overflow-wrap: anywhere;
+}
+.report .reason {
+    margin: 8px 0 0;
+}
+details.card pre.log {
+    border: 0;
+    padding: 12px 0 0;
+    margin: 0;
+}

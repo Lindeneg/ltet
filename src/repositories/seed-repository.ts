@@ -2,6 +2,7 @@ import type {AsyncResult} from "../lib/result.js";
 import type {DbError} from "../lib/errors.js";
 import type {MaybeNull} from "../lib/types.js";
 import type {RawStatement} from "../lib/content.js";
+import type {RunOutcomes} from "../lib/scout.js";
 import type {ProposalKind, ProposalStatus, RunStatus} from "../generated/prisma/client.js";
 import type DataService from "../services/data-service.js";
 
@@ -123,6 +124,13 @@ class SeedRepository {
                     select: {id: true},
                 })
                 .then((row) => row.id)
+        );
+    }
+
+    setOutcomes(runId: number, outcomes: RunOutcomes): AsyncResult<void, DbError> {
+        return this.db.run(
+            "seed-repo.setOutcomes",
+            this.db.p.run.update({where: {id: runId}, data: {outcomes: JSON.stringify(outcomes)}}).then(() => undefined)
         );
     }
 }

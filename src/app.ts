@@ -108,7 +108,7 @@ export async function startApp(env: AppEnv, log: LoggerService): Promise<void> {
             statementsRouter(statementRepo, statementService, proposalService, content),
             contendersRouter(content, statementRepo, proposalService, previewService),
             rubricRouter(content, proposalService),
-            runsRouter(runService, proposalService, scoutRunner),
+            runsRouter(runService, proposalService, scoutRunner, content),
             settingsRouter(authService, proposalService, scoutRunner),
             notFoundRouter(proposalService),
         ]

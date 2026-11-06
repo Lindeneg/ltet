@@ -66,6 +66,8 @@ describe("the inbox", () => {
 });
 
 describe("the runs", () => {
+    const content = makeContent();
+
     it("keep a dry run's tag beside the status, the since date whole and the cost in cents", () => {
         const html = RunsView({
             page,
@@ -78,6 +80,226 @@ describe("the runs", () => {
     });
 
     it("show the cost in cents on a run's page", () => {
-        expect(RunView({page, run: makeRun({summary: {costUsd: 0.3}}), proposals: []})).toContain("<dd>$0.30</dd>");
+        expect(RunView({page, content, run: makeRun({summary: {costUsd: 0.3}}), proposals: []})).toContain(
+            "<dd>$0.30</dd>"
+        );
+    });
+});
+
+describe("a run's report", () => {
+    const content = makeContent();
+    const empty = {proposed: [], missed: [], suggestions: []};
+    const proposed = {
+        statementId: "altman-dishes",
+        ceo: "altman",
+        headline: "Robots <b>for</b> dishes",
+        verified: true,
+        foundOn: 2,
+        forks: 5,
+        proposalId: 42,
+    };
+    const counts = {since: "2026-10-01", leads: 0, proposed: 0, dropped: 0, failed: 0, costUsd: 0.2};
+
+    it("shows a quiet run as done with an empty report, not an error", () => {
+        const html = RunView({page, content, run: makeRun({summary: counts, outcomes: empty})});
+
+        expect(html).toContain("Run 1: Done");
+        expect(html).toContain("A quiet run: the scout found no new leads.");
+        expect(html).not.toContain(`class="error"`);
+        expect(html).not.toContain(`class="report"`);
+    });
+
+    it("renders a failed run without summary or outcomes, its last line up top", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({status: "failed", summary: null, log: "Started.\nFailed: <x>"}),
+        });
+
+        expect(html).toContain(`<p class="error">Failed: &lt;x&gt;</p>`);
+        expect(html).not.toContain("scoreboard");
+        expect(html).not.toContain("A quiet run");
+    });
+
+    it("renders a run without outcomes from its log, as the server marks a run that died", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({status: "failed", summary: null, log: "Scout run 1.\nThe scout ended without finishing."}),
+        });
+
+        expect(html).toContain(`<p class="error">The scout ended without finishing.</p>`);
+        expect(html).toContain(`<details class="card"><summary>Full log</summary>`);
+    });
+
+    it("shows a stopped run's partial report", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({status: "stopped", log: "Stopped.", outcomes: {...empty, proposed: [proposed]}}),
+            proposals: [{id: 42, statementId: "altman-dishes", status: "open"}],
+        });
+
+        expect(html).toContain(`<p class="error">Stopped.</p>`);
+        expect(html).toContain("<h2>Proposed</h2>");
+    });
+
+    it("shows the proposals as cards with their contender, reach and inbox link", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({
+                outcomes: {...empty, proposed: [proposed, {...proposed, verified: false, proposalId: 43, forks: 1}]},
+            }),
+            proposals: [
+                {id: 42, statementId: "altman-dishes", status: "open"},
+                {id: 43, statementId: "altman-dishes-2", status: "approved"},
+            ],
+        });
+
+        expect(html).toContain("<h3>Robots &lt;b&gt;for&lt;/b&gt; dishes</h3>");
+        expect(html).toContain("<span>Sam Altman</span>");
+        expect(html).toContain(`<span class="tag good">Verified</span>`);
+        expect(html).toContain(`<span class="tag warn">On one site</span>`);
+        expect(html).toContain("<span>5 pitchforks</span>");
+        expect(html).toContain("<span>1 pitchfork</span>");
+        expect(html).toContain(
+            `<a href="/admin?status=all#proposal-42">In the inbox</a> <span class="tag">Open</span>`
+        );
+    });
+
+    it("links a decided proposal into the inbox's all view with its status", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({outcomes: {...empty, proposed: [proposed]}}),
+            proposals: [{id: 42, statementId: "altman-dishes", status: "rejected"}],
+        });
+
+        expect(html).toContain(
+            `<a href="/admin?status=all#proposal-42">In the inbox</a> <span class="tag">Rejected</span>`
+        );
+    });
+
+    it("marks a dry run's proposals as not sent to the inbox, with no inbox link", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({dryRun: true, outcomes: {...empty, proposed: [{...proposed, proposalId: null}]}}),
+        });
+
+        expect(html).toContain(`<span class="tag">Not sent to the inbox</span>`);
+        expect(html).not.toContain("In the inbox");
+    });
+
+    it("falls back to the proposal rows and the summary for a run from before the outcomes", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({outcomes: null}),
+            proposals: [{id: 42, statementId: "altman-dishes", status: "done"}],
+        });
+
+        expect(html).toContain(`<dl class="summary scoreboard">`);
+        expect(html).toContain("<h3>altman-dishes</h3>");
+        expect(html).toContain(`<span class="tag">Done</span>`);
+        expect(html).not.toContain("Did not make it");
+    });
+
+    it("escapes every reason, finding and log line", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({
+                log: "<img src=x>",
+                outcomes: {
+                    proposed: [],
+                    missed: [
+                        {
+                            kind: "failed",
+                            ceo: "<musk>",
+                            date: "2026-10-01",
+                            venue: "<venue>",
+                            statementId: "<id>",
+                            reason: "<script>reason</script>",
+                        },
+                    ],
+                    suggestions: [
+                        {
+                            id: 5,
+                            url: "javascript:alert(1)",
+                            qualifies: false,
+                            finding: "<b>finding</b>",
+                            proposalId: null,
+                        },
+                    ],
+                },
+            }),
+        });
+
+        for (const raw of ["<script>reason", "<img", "<b>finding", "<musk>", "<venue>", "<id>"]) {
+            expect(html).not.toContain(raw);
+        }
+        expect(html).toContain("&lt;script&gt;reason&lt;/script&gt;");
+        expect(html).toContain("&lt;b&gt;finding&lt;/b&gt;");
+        expect(html).toContain("&lt;img src=x&gt;");
+        expect(html).not.toContain(`href="javascript`);
+    });
+
+    it("lists what did not make it and every suggestion researched", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({
+                outcomes: {
+                    proposed: [],
+                    missed: [
+                        {
+                            kind: "dropped",
+                            ceo: "musk",
+                            date: "2026-10-01",
+                            venue: "X",
+                            statementId: null,
+                            reason: "Politics.",
+                        },
+                        {
+                            kind: "duplicate",
+                            ceo: "musk",
+                            date: "2026-10-02",
+                            venue: "X",
+                            statementId: "a",
+                            reason: "repeats b",
+                        },
+                    ],
+                    suggestions: [
+                        {id: 5, url: "https://news.example/a", qualifies: true, finding: "Real.", proposalId: 42},
+                        {id: 6, url: "https://news.example/b", qualifies: false, finding: "Old.", proposalId: null},
+                    ],
+                },
+            }),
+        });
+
+        expect(html).toContain("<h2>Did not make it</h2>");
+        expect(html).toContain(`<span class="tag">Dropped</span><span>Elon Musk</span>`);
+        expect(html).toContain(`<span class="tag">Duplicate</span>`);
+        expect(html).toContain("<h2>Suggestions researched</h2>");
+        expect(html).toContain(
+            `<a href="/admin?status=all#proposal-5">Suggestion #5</a><span class="tag good">Qualifies</span>`
+        );
+        expect(html).toContain(`<span class="tag">Does not qualify</span>`);
+        expect(html).toContain(`<a href="/admin?status=all#proposal-42">Led to proposal #42</a>`);
+    });
+
+    it("keeps the live log, refresh and Stop for a running run, with no report", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({status: "running", finishedAt: null, summary: null, log: "Started.", outcomes: empty}),
+        });
+
+        expect(html).toContain(`action="/admin/runs/1/stop"`);
+        expect(html).toContain(`<pre class="log">Started.</pre>`);
+        expect(html).not.toContain("Full log");
+        expect(html).not.toContain("A quiet run");
     });
 });
