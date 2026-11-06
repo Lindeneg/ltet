@@ -5,7 +5,7 @@ import type {RawStatement} from "../../../src/lib/content.js";
 import LeagueService from "../../../src/services/league-service.js";
 import SitemapService from "../../../src/services/sitemap-service.js";
 import type StatementRepository from "../../../src/repositories/statement-repository.js";
-import {fake, makeContent, makeStatement, makeContentService} from "../helpers.js";
+import {fake, fakeLog, makeContent, makeStatement, makeContentService} from "../helpers.js";
 
 const NOW = Date.UTC(2026, 10, 15, 12);
 const ALTMAN = makeStatement();
@@ -25,7 +25,7 @@ function makeSitemap(statements: RawStatement[] = [ALTMAN, MUSK]) {
         )
     );
     const repo = fake<StatementRepository>({listPublished, listChanges});
-    const league = new LeagueService(repo, makeContentService(makeContent()), () => NOW);
+    const league = new LeagueService(repo, makeContentService(makeContent()), fakeLog(), () => NOW);
     return {listPublished, listChanges, league, sitemap: new SitemapService(league, repo)};
 }
 

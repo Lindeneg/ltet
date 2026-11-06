@@ -281,6 +281,6 @@ export function RaceChart(props: RaceChartProps): string {
         <div class="bump-frame race-frame" tabindex="0" role="group" aria-label="${esc(label)}">${charts.join("")}</div>
         ${rankList(props)}
         <script type="application/json" class="race-data">${tooltipData(snapshots, contenders)}</script>
-        <div class="tooltip" role="status" hidden></div>
+        <div class="tooltip" hidden></div>
     </div>`;
 }
