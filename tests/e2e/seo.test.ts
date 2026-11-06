@@ -26,6 +26,15 @@ describe("robots, sitemap and noindex", () => {
         expect(locs.some((loc) => /\/(admin|api|s)\//.test(loc))).toBe(false);
     });
 
+    it("lists only pages that render", async () => {
+        const res = await get("/sitemap.xml");
+        const paths = [...res.html.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].slice(BASE_URL.length));
+
+        const statuses = await Promise.all(paths.map(async (path) => [path, (await get(path)).status]));
+
+        expect(statuses.filter(([, status]) => status !== 200)).toEqual([]);
+    });
+
     it.each(["/admin/login", "/admin/", "/api/nothing"])("marks %s noindex, nofollow", async (path) => {
         expect((await get(path)).headers.get("x-robots-tag")).toBe("noindex, nofollow");
     });
