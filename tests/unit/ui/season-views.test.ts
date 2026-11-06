@@ -179,6 +179,7 @@ describe("RulesView", () => {
         );
         expect(html.indexOf('id="law-squad"')).toBeLessThan(html.indexOf('id="law-honours"'));
         expect(RulesView({site, title: "t", ceos: ceos.slice(0, 2)})).toContain("The squad is the 2 contenders");
+        expect(RulesView({site, title: "t", ceos: ceos.slice(0, 1)})).toContain("The squad is the 1 contender in");
     });
 
     it("credits only the contenders with a photo, escaped", async () => {
