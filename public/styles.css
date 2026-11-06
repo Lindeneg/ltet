@@ -3675,6 +3675,9 @@ a.sb-team:hover .sb-name {
 [data-js] .sort-submit {
     display: none;
 }
+:root:not([data-js]) :is(#theme-toggle, #ticker-toggle, #table-mode, .foul-line, .foul-cta, .var) {
+    display: none;
+}
 .rp-panel:focus-visible {
     outline-offset: 4px;
 }
