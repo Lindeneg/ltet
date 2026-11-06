@@ -99,7 +99,7 @@ export function ReportBody(site: Site, st: ScoredStatement): string {
     const champion = site.isChampion(st.ceo);
     const sourceCount = st.sources.length + (st.primarySource ? 1 : 0) + 1;
     return `<p class="rp-meta"><span class="ft">FT</span><span>${esc(cardDate(st))}</span>${st.leaked ? `<span class="tag">Leaked</span>` : ""}</p>
-      <h2 class="rp-headline" id="report-headline">${external(st.headline.url, esc(st.headline.text))}</h2>
+      <h1 class="rp-headline" id="report-headline">${external(st.headline.url, esc(st.headline.text))}</h1>
       <p class="rp-outlet">${esc(st.headline.outlet)}</p>
       <div class="scoreboard" data-ceo="${esc(st.ceo)}">
         <a class="sb-team home" href="${esc(site.href("club", st.ceo))}">${crest(st.who, `lg${champion ? " gold" : ""}`)}<span class="sb-name">${esc(st.who.name)}</span><span class="sb-co">${esc(st.who.company)}</span></a>

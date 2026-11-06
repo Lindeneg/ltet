@@ -84,6 +84,12 @@ describe("PageService", () => {
 
             expect(front).toContain(`<meta property="og:url" content="${ORIGIN}/">`);
             expect(front).toContain(`<meta property="og:image" content="${ORIGIN}/og.png">`);
+            expect(front).toContain(
+                `<meta property="og:image:alt" content="The all-time league table, every contender ranked by pitchforks">`
+            );
+            expect(front).toContain(
+                `<meta name="twitter:image:alt" content="The all-time league table, every contender ranked by pitchforks">`
+            );
             expect(front).toContain(`<link rel="canonical" href="${ORIGIN}/">`);
             expect(front).not.toContain("<!--preview-->");
             expect(other).toContain(`<meta property="og:url" content="${ORIGIN}/25-26">`);
@@ -380,6 +386,11 @@ describe("PageService", () => {
 
             expect(page).toContain('<meta property="og:type" content="article">');
             expect(page).toContain(`<meta property="og:image" content="${ORIGIN}/og/${match.id}.png">`);
+            const alt = page.match(/<meta property="og:image:alt" content="([^"]*)">/)?.[1];
+            expect(alt).toMatch(
+                /^Elon Musk: “He said &quot;&lt;\/script&gt;&lt;!--&quot; again”, \d+ pitchforks? of \d+$/
+            );
+            expect(page).toContain(`<meta name="twitter:image:alt" content="${alt}">`);
             expect(canonical(page)).toBe(`${ORIGIN}/match/${match.id}`);
             expect(article).toMatchObject({
                 "@context": "https://schema.org",

@@ -11,11 +11,13 @@ import {
     honoursDescription,
     matchData,
     matchDescription,
+    matchImageAlt,
     raceDescription,
     resultsDescription,
     rulesDescription,
     seoTags,
     tableDescription,
+    tableImageAlt,
     type PageMeta,
 } from "../ui/components/seo.js";
 import {ResultsView, SORTS, type ResultsFilters, type Sort} from "../ui/views/site/results.js";
@@ -57,6 +59,7 @@ class PageService {
                 description: tableDescription(site),
                 path: site.href("table"),
                 image: front ? "/og.png" : undefined,
+                imageAlt: front ? tableImageAlt(site.plural(0)) : undefined,
             }),
             base
         );
@@ -154,6 +157,7 @@ class PageService {
                 path: matchPath(statement.id),
                 article: true,
                 image: `/og/${encodeURIComponent(statement.id)}.png`,
+                imageAlt: matchImageAlt(statement, site.plural(statement.forks), site.maxForks),
                 data: matchData(site, statement),
             }),
             base
