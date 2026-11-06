@@ -286,6 +286,7 @@ export function writeSchema(ceos: Ceo[], rubric: Rubric) {
                                         "backlash",
                                         "backlashStrength",
                                         "topics",
+                                        "notes",
                                         "scores",
                                     ],
                                     properties: {
@@ -337,6 +338,7 @@ export function writeSchema(ceos: Ceo[], rubric: Rubric) {
                                         },
                                         backlashStrength: {type: "string", enum: STRENGTHS},
                                         topics: {type: "array", items: {type: "string"}},
+                                        notes: {type: "string"},
                                         scores: {
                                             type: "object",
                                             additionalProperties: false,
