@@ -7,7 +7,7 @@ import FeedbackService from "../../../src/services/feedback-service.js";
 import type ProposalRepository from "../../../src/repositories/proposal-repository.js";
 import type StatementRepository from "../../../src/repositories/statement-repository.js";
 import {makeApiRouter} from "../../../src/routers/api-router.js";
-import {fake, makeContent, makeStatement, makeContentService} from "../helpers.js";
+import {fake, fakeLog, makeContent, makeStatement, makeContentService} from "../helpers.js";
 import {serve, type Served} from "../serve.js";
 
 const content = makeContent();
@@ -33,7 +33,8 @@ describe("api router", () => {
         listPublished = vi.fn().mockResolvedValue(success([makeStatement()]));
         const leagueService = new LeagueService(
             fake<StatementRepository>({listPublished}),
-            makeContentService(content)
+            makeContentService(content),
+            fakeLog()
         );
         const feedbackService = new FeedbackService(fake<ProposalRepository>({create}));
         const app = express();
