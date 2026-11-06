@@ -3,12 +3,17 @@ import {AppError} from "../lib/errors.js";
 import {seasonKey, seasonStartYear} from "../lib/seasons.js";
 import type {MaybeNull, MaybeUndefined} from "../lib/types.js";
 import {makeSite, seasonShort, SITE_NAME, VIEW_TITLES, type Route, type Site} from "../ui/site.js";
-import {DESCRIPTION, PREVIEW_SLOT} from "../ui/components/layout.js";
+import {PREVIEW_SLOT} from "../ui/components/layout.js";
 import {matchPath} from "../ui/components/pieces.js";
 import {
+    clubData,
+    clubDescription,
+    honoursDescription,
     matchData,
     matchDescription,
+    raceDescription,
     resultsDescription,
+    rulesDescription,
     seoTags,
     tableDescription,
     type PageMeta,
@@ -63,7 +68,7 @@ class PageService {
             season,
             {view: "race"},
             (site) => RaceView({site, title: this.#title(site, VIEW_TITLES.race)}),
-            (site) => this.#meta(site, VIEW_TITLES.race, site.href("race")),
+            (site) => this.#meta(site, VIEW_TITLES.race, site.href("race"), raceDescription(site)),
             base
         );
     }
@@ -74,7 +79,7 @@ class PageService {
             season,
             {view: "honours"},
             (site) => HonoursView({site, title: this.#title(site, VIEW_TITLES.honours)}),
-            (site) => this.#meta(site, VIEW_TITLES.honours, site.href("honours")),
+            (site) => this.#meta(site, VIEW_TITLES.honours, site.href("honours"), honoursDescription(site)),
             base
         );
     }
@@ -85,7 +90,7 @@ class PageService {
             undefined,
             {view: "rules"},
             (site) => RulesView({site, title: this.#title(site, VIEW_TITLES.rules), ceos: this.content.get().ceos}),
-            (site) => this.#meta(site, VIEW_TITLES.rules, "/rules"),
+            (site) => this.#meta(site, VIEW_TITLES.rules, "/rules", rulesDescription(site)),
             base
         );
     }
@@ -100,7 +105,10 @@ class PageService {
                 const ceo = name(site);
                 return ceo ? ClubView({site, title: this.#title(site, ceo), id}) : null;
             },
-            (site) => this.#meta(site, name(site) ?? "", site.href("club", id)),
+            (site) => ({
+                ...this.#meta(site, name(site) ?? "", site.href("club", id), clubDescription(site, id)),
+                data: clubData(site, id),
+            }),
             base
         );
     }
@@ -162,8 +170,8 @@ class PageService {
         return ServerErrorView(site);
     }
 
-    #meta(site: Site, view: string, path: string): PageMeta {
-        return {title: this.#title(site, view), description: DESCRIPTION, path};
+    #meta(site: Site, view: string, path: string, description: string): PageMeta {
+        return {title: this.#title(site, view), description, path};
     }
 
     #title(site: Site, view: string): string {
