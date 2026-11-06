@@ -2,6 +2,7 @@ import {join} from "node:path";
 import type {AppEnv} from "./lib/env.js";
 import {makeGlobalErrorHandler} from "./lib/error-handler.js";
 import {PUBLIC_DIR, ROOT_DIR, databaseDir, photosDir} from "./lib/paths.js";
+import {deriveKey} from "./lib/secret-box.js";
 import type LoggerService from "./services/logger-service.js";
 import DataService from "./services/data-service.js";
 import ExpressService from "./services/express-service.js";
@@ -83,6 +84,7 @@ export async function startApp(env: AppEnv, log: LoggerService): Promise<void> {
         root: ROOT_DIR,
         logFile: join(databaseDir(env.DATABASE_URL), "scout.log"),
         env: process.env,
+        tokenKey: deriveKey(env.JWT_SECRET, "claude token"),
     });
     const authService = new AuthService(
         userRepo,
