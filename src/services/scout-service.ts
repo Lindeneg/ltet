@@ -10,6 +10,7 @@ import {
     VERIFIED_PAGES,
     day,
     daysBefore,
+    evidence,
     example,
     fill,
     findSchema,
@@ -18,6 +19,7 @@ import {
     rubricLines,
     sameStatement,
     spread,
+    topicsLine,
     uniqueId,
     verify,
     writeSchema,
@@ -227,14 +229,19 @@ class ScoutService {
         ].join("\n");
         const describeSuggestion = (p: ProposalRecord) => {
             const b = p.body as Suggestion;
-            return `- Suggestion ${p.id}: ${b.url}${b.ceo ? `, about ${b.ceo}` : ""}${b.quote ? `, words: "${b.quote}"` : ""}${b.note ? `, note: ${b.note}` : ""}`;
+            return evidence(
+                "suggestion",
+                {id: String(p.id), url: b.url, ...(b.ceo ? {about: b.ceo} : {})},
+                [b.quote ? `Words: "${b.quote}"` : "", b.note ? `Note: ${b.note}` : ""].filter(Boolean).join("\n")
+            );
         };
         const find = await claude.run<FindOutput>({
             prompt: fill(await this.#template("find.md"), {
                 today,
                 since,
                 ceos: ceos.map((c) => `- ${c.name} (${c.company}), id "${c.id}"`).join("\n"),
-                suggestions: suggestions.length === 0 ? "None today." : suggestions.map(describeSuggestion).join("\n"),
+                suggestions:
+                    suggestions.length === 0 ? "None today." : suggestions.map(describeSuggestion).join("\n\n"),
                 known,
             }),
             schema: findSchema(ceos),
@@ -304,7 +311,7 @@ class ScoutService {
         const write = await claude.run<WriteOutput>({
             prompt: fill(await this.#template("extract.md"), {
                 today,
-                topics: [...new Set(statements.flatMap((s) => s.topics ?? []))].join(", "),
+                topics: topicsLine([...new Set(statements.flatMap((s) => s.topics ?? []))]),
                 rubric: rubric.categories.map(rubricLines).join("\n"),
                 examples: spread(scored).map(example).join("\n"),
                 leads: leadPages
@@ -320,9 +327,13 @@ class ScoutService {
                                 .join("\n")}`,
                             `quoteSource: ${lead.quoteSource}; headline page: ${lead.headlineUrl}; backlash page: ${lead.backlashUrl} (${lead.backlashStrength}); why: ${lead.why}`,
                             ...pages.map((p) =>
-                                p.loaded
-                                    ? `#### ${p.url}\nTitles: ${p.titles.map((t) => `"${t}"`).join(" / ")}\nText: ${p.text}`
-                                    : `#### ${p.url}\n(did not load: ${p.status})`
+                                evidence(
+                                    "page",
+                                    {url: p.url},
+                                    p.loaded
+                                        ? `Titles: ${p.titles.map((t) => `"${t}"`).join(" / ")}\nText: ${p.text}`
+                                        : `(did not load: ${p.status})`
+                                )
                             ),
                         ].join("\n\n")
                     )
