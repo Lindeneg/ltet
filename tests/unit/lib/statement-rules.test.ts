@@ -148,6 +148,12 @@ describe("working notes", () => {
             "Nvidia took the lead in AI chips.",
             "Musk, the owner of X, posted it.",
             "The reaction was mild.",
+            "Nvidia took the lead.",
+            "Altman, the lead investor, spoke.",
+            "The owner, Musk, said it on X.",
+            "The launch date is Friday.",
+            "Regulators want machine-readable labels.",
+            "A vulnerability was found in the model.",
         ]) {
             expect(inContext(text), text).toEqual([]);
         }
