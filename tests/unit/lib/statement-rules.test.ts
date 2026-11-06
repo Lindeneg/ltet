@@ -98,6 +98,8 @@ describe("working notes", () => {
             "The CBS page returned an error to the fetch.",
             "The keynote video was not fetched.",
             "The post itself was not read.",
+            "Neowin ran a headline (page blocked, not read).",
+            "The NYT page was not fetched (403).",
             "The original post was not readable.",
             "The FT original is paywalled.",
             "The WSJ article (https://www.wsj.com/a) ran first.",
@@ -126,7 +128,12 @@ describe("working notes", () => {
     });
 
     it("finds grades of the reaction", () => {
-        for (const text of ["Mild. Fox News quoted experts.", "Weak. Futurism frames it.", "No backlash was found."]) {
+        for (const text of [
+            "Mild. Fox News quoted experts.",
+            "Weak. Futurism frames it.",
+            "No backlash was found.",
+            "No broad public backlash was found.",
+        ]) {
             expect(inContext(text), text).not.toEqual([]);
         }
     });
@@ -154,6 +161,11 @@ describe("working notes", () => {
             "The launch date is Friday.",
             "Regulators want machine-readable labels.",
             "A vulnerability was found in the model.",
+            "Musk said he had not read the bill.",
+            "No court was found to have jurisdiction.",
+            "There was no doubt the remark was found offensive.",
+            "Intel cut 403 jobs.",
+            "Meta scraped the dataset without consent.",
         ]) {
             expect(inContext(text), text).toEqual([]);
         }

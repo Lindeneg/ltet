@@ -24,21 +24,21 @@ const isText = (value: unknown) => typeof value === "string" && value.trim() !==
 
 const WORKING_NOTES = [
     /\bfetch(?:ed|ing)?\b/i,
-    /\bnot read\b/i,
+    /\b(?:was|were|blocked,?) not read\b|\bnot read on a page\b/i,
     /(?<![\w-])(?:un)?readable\b/i,
     /\bpaywalled\b/i,
     /\bhttps?\b/i,
-    /\b403\b/,
+    /\b(?:HTTP|error|status)\s*403\b|\(403\)/i,
     /\bpages read\b/i,
     /\b(?:so|for|to|let) the lead\b|\bthe lead (?:can|could|should|may|might|will|would|decides?)\b/i,
     /\bthe brief\b/i,
     /\b(?:so|for|to|let) the owner\b|\bthe owner(?:'s call| can| could| should| may| might| will| would| decides?)\b/i,
-    /\bthe dataset\b/i,
+    /\b(?:in|to) the dataset\b/i,
     /\bprimarySource\b/i,
     /(?:^|[.;(]\s*)(?:the )?date is\b/i,
     /\bMild\./,
     /\bWeak\./,
-    /\bno\b[^.]*\bwas found\b/i,
+    /\bno (?:[\w']+[\s-]+){0,4}?(?:backlash|outrage|reaction|criticism|coverage|pile-on)\b[^.]*\bwas found\b/i,
 ];
 
 export function workingNoteErrors(value: unknown): string[] {
