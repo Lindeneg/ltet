@@ -100,7 +100,7 @@ function Topbar(site: MaybeUndefined<Site>): string {
       </a>
       ${season}
       ${site && hasSeason(site) ? SeasonMenu(site) : ""}
-      <button type="button" id="theme-toggle" class="icon-button theme-toggle">
+      <button type="button" id="theme-toggle" class="icon-button theme-toggle" aria-label="Switch to dark mode">
         ${icon("sun")}
         <span class="theme-text" aria-hidden="true"></span>
       </button>

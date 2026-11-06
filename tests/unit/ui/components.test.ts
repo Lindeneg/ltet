@@ -84,6 +84,15 @@ describe("face", () => {
         );
         expect(photoCredit({...photo, licence: "Public Domain"})).toContain("A, public domain, cropped");
     });
+
+    it.each(["javascript:alert(1)", "data:text/html,x", "/wiki/File:A.jpg"])(
+        "credits a photo as plain text where a url is %s",
+        (url) => {
+            expect(photoCredit({...photo, licenceUrl: url, source: url})).toBe(
+                "A, CC BY 2.0, cropped, source on Wikimedia Commons"
+            );
+        }
+    );
 });
 
 describe("splitBar", () => {
@@ -190,4 +199,26 @@ describe("ReportBody", () => {
         );
         expect(html).toContain('id="panel-report" data-tab="report" aria-labelledby="tab-report" tabindex="0" hidden');
     });
+
+    it.each(["javascript:alert(1)", "data:text/html,x", "/elsewhere"])(
+        "links no source whose url is %s, and shows its text",
+        async (url) => {
+            const st = makeStatement({
+                headline: {text: "Big words", outlet: "Outlet", url},
+                quoteSource: url,
+                primarySource: {url, kind: "video"},
+                backlash: {summary: "Uproar", url},
+                sources: [{outlet: "Daily", title: "A story", url}],
+            });
+            const site = await siteFor([st], "25-26");
+
+            const html = ReportBody(site, site.ctx.statements[0]);
+
+            expect(html).not.toContain(url);
+            expect(html).not.toContain('target="_blank"');
+            expect(html).toContain("Big words");
+            expect(html).toContain("See the reaction");
+            expect(html).toContain('<span class="outlet">Daily</span>: A story');
+        }
+    );
 });
