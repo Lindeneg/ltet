@@ -145,6 +145,8 @@ describe("seo audit of every page in the sitemap", () => {
         const share = await get(`/s/${first.id}`);
 
         expect(paths.some((path) => path.includes("?") || path.startsWith("/s/"))).toBe(false);
+        expect(filtered.status).toBe(200);
+        expect(share.status).toBe(200);
         expect(filtered.html).toMatch(/<meta name="robots" content="noindex[^"]*">/);
         expect(share.html).toContain(`<meta name="robots" content="noindex">`);
     });
