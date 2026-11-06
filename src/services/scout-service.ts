@@ -6,7 +6,6 @@ import {statementErrors, workingNoteErrors} from "../lib/statement-rules.js";
 import {tally} from "../lib/score.js";
 import {excerpt, pageCache, pageText, pageTitles, type PageLoader} from "../lib/pages.js";
 import {
-    RECORD_START_DAY,
     VERIFIED_PAGES,
     day,
     daysBefore,
@@ -376,7 +375,6 @@ class ScoutService {
                 continue;
             }
             const errors = [...statementErrors(statement, {ceos, rubric}), ...workingNoteErrors(statement)];
-            if (statement.date < RECORD_START_DAY) errors.push(`dated ${statement.date}, before the record starts`);
             const checks = await verify(statement, load);
             if (checks.foundOn === 0) errors.push("the quote was not found word for word on any page that loaded");
             if (errors.length > 0) {

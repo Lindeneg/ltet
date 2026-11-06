@@ -12,6 +12,7 @@ function setup() {
         has: vi.fn().mockResolvedValue(success(false)),
         save: vi.fn().mockResolvedValue(success(false)),
         setPublished: vi.fn().mockResolvedValue(success(true)),
+        approve: vi.fn().mockResolvedValue(success(true)),
     };
     const proposalRepo = {
         get: vi.fn().mockResolvedValue(success(makeProposal())),
@@ -112,12 +113,36 @@ describe("StatementService", () => {
             const statement = makeStatement();
 
             expect(await service.approve(1, statement)).toEqual(success(id));
-            expect(statementRepo.save).toHaveBeenCalledWith(statement, {
-                origin: "scout",
-                note: "approved from proposal 1",
-            });
-            expect(proposalRepo.decide).toHaveBeenCalledWith(1, "approved");
+            expect(statementRepo.approve).toHaveBeenCalledWith(1, statement, "scout");
+            expect(statementRepo.save).not.toHaveBeenCalled();
+            expect(proposalRepo.decide).not.toHaveBeenCalled();
             expect(onChange).toHaveBeenCalledOnce();
+        });
+
+        it("reports a proposal closed before the commit and changes nothing", async () => {
+            const {service, statementRepo, onChange} = setup();
+            statementRepo.approve.mockResolvedValue(success(false));
+
+            expect(await service.approve(1, makeStatement())).toEqual(failure({code: WriteError.NOT_OPEN, errors: []}));
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it("reports a statement saved with the id before the commit as existing", async () => {
+            const {service, statementRepo, onChange} = setup();
+            statementRepo.approve.mockResolvedValue(failure(AppError.CONFLICT));
+
+            expect(await service.approve(1, makeStatement())).toEqual(
+                failure({code: WriteError.INVALID, errors: [`a statement with the id ${id} exists already`]})
+            );
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it("passes a database failure on without a change", async () => {
+            const {service, statementRepo, onChange} = setup();
+            statementRepo.approve.mockResolvedValue(failure(AppError.DB_ERROR));
+
+            expect(await service.approve(1, makeStatement())).toEqual(failure({code: AppError.DB_ERROR, errors: []}));
+            expect(onChange).not.toHaveBeenCalled();
         });
 
         it("refuses a proposal that is not open", async () => {
@@ -150,8 +175,24 @@ describe("StatementService", () => {
             expect(await service.approve(1, makeStatement())).toEqual(
                 failure({code: WriteError.INVALID, errors: [`a statement with the id ${id} exists already`]})
             );
-            expect(statementRepo.save).not.toHaveBeenCalled();
-            expect(proposalRepo.decide).not.toHaveBeenCalled();
+            expect(statementRepo.approve).not.toHaveBeenCalled();
+        });
+    });
+
+    describe("approvable", () => {
+        it("gives the open proposed statement", async () => {
+            const {service} = setup();
+
+            expect(await service.approvable(1)).toEqual(success(makeProposal()));
+        });
+
+        it("refuses a closed proposal and another kind", async () => {
+            const {service, proposalRepo} = setup();
+            proposalRepo.get.mockResolvedValue(success(makeProposal({status: "approved"})));
+            expect(await service.approvable(1)).toEqual(failure({code: WriteError.NOT_OPEN, errors: []}));
+
+            proposalRepo.get.mockResolvedValue(success(makeProposal({kind: "suggestion"})));
+            expect(await service.approvable(1)).toEqual(failure({code: WriteError.NOT_A_STATEMENT, errors: []}));
         });
     });
 });
