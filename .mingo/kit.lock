@@ -1,0 +1,25 @@
+# mingo apply writes this file: the module, the mingo version and the hash of each file it rendered
+
+[[file]]
+path = ".github/actions/setup/action.yml"
+module = "ci"
+mingo = "v0.0.0-20261105222606-1ac949d16aba+dirty"
+sha256 = "c3a036b0631a21071be69a41a8f486e0fe921e71ea1b8550c00e105bf8f5f287"
+
+[[file]]
+path = ".github/workflows/ci.yml"
+module = "ci"
+mingo = "v0.0.0-20261106004305-d80fd402a3bd"
+sha256 = "fa0622cada8f0485f40e19aa8d237a2afeed2f19db46ce7f764f5c07f3059002"
+
+[[file]]
+path = ".github/workflows/review.yml"
+module = "review"
+mingo = "v0.0.0-20261105222606-1ac949d16aba+dirty"
+sha256 = "eda165d663798248ce201deedec41b3fb64cb5a0c691adc8652602c4583c1a87"
+
+[[file]]
+path = "tools/heavy.mjs"
+module = "heavy"
+mingo = "v0.0.0-20261106004305-d80fd402a3bd"
+sha256 = "2f77ce4459156316c0d3e300208bddf723ca36ada55e3a9bad0353670f7d4440"
