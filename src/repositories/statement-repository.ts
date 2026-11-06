@@ -2,7 +2,11 @@ import type {AsyncResult} from "../lib/result.js";
 import type {DbError} from "../lib/errors.js";
 import type {MaybeNull} from "../lib/types.js";
 import type {RawStatement} from "../lib/content.js";
-import type {Statement as StatementModel, StatementHistory as HistoryModel} from "../generated/prisma/client.js";
+import type {
+    Prisma,
+    Statement as StatementModel,
+    StatementHistory as HistoryModel,
+} from "../generated/prisma/client.js";
 import type DataService from "../services/data-service.js";
 
 export type StatementRecord = Omit<StatementModel, "body"> & {body: RawStatement};
@@ -16,6 +20,10 @@ export type SaveOpts = {origin: string; published?: boolean; note?: MaybeNull<st
 function parsed<T extends {body: string}>(row: T): Omit<T, "body"> & {body: RawStatement} {
     return {...row, body: JSON.parse(row.body) as RawStatement};
 }
+
+// a transaction that reads first cannot wait for another writer later and fails busy at once, so it writes first
+const lock = (tx: Prisma.TransactionClient, id: string) =>
+    tx.statement.updateMany({where: {id}, data: {updatedAt: new Date()}}).then((result) => result.count > 0);
 
 class StatementRepository {
     constructor(private readonly db: DataService) {}
@@ -87,19 +95,37 @@ class StatementRepository {
         );
     }
 
+    // resolves to false when the proposal was no longer open, and a statement with the id already there fails it
+    approve(proposalId: number, body: RawStatement, origin: string): AsyncResult<boolean, DbError> {
+        return this.db.run(
+            "statement-repo.approve",
+            this.db.p.$transaction(async (tx) => {
+                const decided = await tx.proposal.updateMany({
+                    where: {id: proposalId, status: "open"},
+                    data: {status: "approved", decidedAt: new Date()},
+                });
+                if (decided.count === 0) return false;
+                await tx.statement.create({
+                    data: {id: body.id, ceo: body.ceo, date: body.date, body: JSON.stringify(body), origin},
+                });
+                return true;
+            })
+        );
+    }
+
     // resolves to true when the statement was new
     save(body: RawStatement, {origin, published = true, note = null}: SaveOpts): AsyncResult<boolean, DbError> {
         const json = JSON.stringify(body);
         return this.db.run(
             "statement-repo.save",
             this.db.p.$transaction(async (tx) => {
-                const old = await tx.statement.findUnique({where: {id: body.id}});
-                if (!old) {
+                if (!(await lock(tx, body.id))) {
                     await tx.statement.create({
                         data: {id: body.id, ceo: body.ceo, date: body.date, body: json, published, origin},
                     });
                     return true;
                 }
+                const old = await tx.statement.findUniqueOrThrow({where: {id: body.id}});
                 await tx.statementHistory.create({
                     data: {statementId: old.id, body: old.body, published: old.published, note},
                 });
@@ -117,8 +143,8 @@ class StatementRepository {
         return this.db.run(
             "statement-repo.setPublished",
             this.db.p.$transaction(async (tx) => {
-                const old = await tx.statement.findUnique({where: {id}});
-                if (!old) return false;
+                if (!(await lock(tx, id))) return false;
+                const old = await tx.statement.findUniqueOrThrow({where: {id}});
                 await tx.statementHistory.create({
                     data: {statementId: id, body: old.body, published: old.published, note},
                 });

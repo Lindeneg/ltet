@@ -42,6 +42,13 @@ describe("statement rules", () => {
         ]);
     });
 
+    it("starts the record on 2022-11-30", () => {
+        expect(statementErrors(makeStatement({date: "2022-11-30"}), rules)).toEqual([]);
+        expect(statementErrors(makeStatement({date: "2022-11-29"}), rules)).toEqual([
+            "date is before the record starts on 2022-11-30",
+        ]);
+    });
+
     it("treats a missing statement as one with every field missing", () => {
         expect(statementErrors(undefined, rules)).toContain("venue missing");
     });

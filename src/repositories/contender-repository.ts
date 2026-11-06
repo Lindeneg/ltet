@@ -40,8 +40,10 @@ class ContenderRepository {
         return this.db.run(
             "contender-repo.create",
             this.db.p.$transaction(async (tx) => {
-                const last = await tx.contender.aggregate({_max: {position: true}});
-                await tx.contender.create({data: {id, position: (last._max.position ?? -1) + 1, ...fields}});
+                // created before the read so the transaction holds the write lock and never fails busy
+                await tx.contender.create({data: {id, position: 0, ...fields}});
+                const last = await tx.contender.aggregate({where: {id: {not: id}}, _max: {position: true}});
+                await tx.contender.update({where: {id}, data: {position: (last._max.position ?? -1) + 1}});
             })
         );
     }

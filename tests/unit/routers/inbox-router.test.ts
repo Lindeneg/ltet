@@ -22,11 +22,13 @@ function editorFields(statement: RawStatement, extra: Record<string, string> = {
 
 describe("inbox router", () => {
     let approve: Mock;
+    let approvable: Mock;
     let proposals: ReturnType<typeof fakeProposalService>;
     let app: Awaited<ReturnType<typeof serveAdmin>>;
 
     beforeEach(async () => {
         approve = vi.fn().mockResolvedValue(success("an-id"));
+        approvable = vi.fn().mockResolvedValue(success(makeProposal({id: 1})));
         proposals = fakeProposalService({
             inbox: vi.fn().mockResolvedValue(
                 success([
@@ -46,7 +48,9 @@ describe("inbox router", () => {
                 ])
             ),
         });
-        app = await serveAdmin(inboxRouter(proposals.service, fake<StatementService>({approve}), makeContentService()));
+        app = await serveAdmin(
+            inboxRouter(proposals.service, fake<StatementService>({approve, approvable}), makeContentService())
+        );
     });
 
     afterEach(() => app.close());
@@ -146,6 +150,28 @@ describe("inbox router", () => {
             expect(res.status, message).toBe(status);
             expect(await res.text()).toContain(message);
         }
+    });
+
+    it("reports a suggestion's own message before it reads the form", async () => {
+        approvable.mockResolvedValue(failure({code: WriteError.NOT_A_STATEMENT, errors: []}));
+
+        const res = await app.post("/admin/proposals/3/approve", {kind: "all", view: "open"});
+
+        expect(res.status).toBe(400);
+        const html = await res.text();
+        expect(html).toContain("Only a proposed statement can be approved; close the others.");
+        expect(html).not.toContain("The JSON does not parse");
+        expect(approvable).toHaveBeenCalledWith(3);
+        expect(approve).not.toHaveBeenCalled();
+    });
+
+    it("says a closed proposal is not open before it reads the form", async () => {
+        approvable.mockResolvedValue(failure({code: WriteError.NOT_OPEN, errors: []}));
+
+        const res = await app.post("/admin/proposals/1/approve", {json: "{"});
+
+        expect(res.status).toBe(404);
+        expect(await res.text()).toContain("No open proposal with that number.");
     });
 
     it("closes as done or rejected with the reason", async () => {
