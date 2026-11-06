@@ -12,7 +12,7 @@ Live at [let-them-eat-tokens.com](https://let-them-eat-tokens.com).
 - Leaked remarks count, and say so.
 - The referee is biased, and admits it: every score comes with its reasons.
 
-The photos are free-licensed from Wikimedia Commons, and the Rules page credits each one.
+The code is MIT licensed. The photos are free-licensed from Wikimedia Commons and keep their own licences, and the Rules page credits each one.
 
 ## Spotted a foul?
 
