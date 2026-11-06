@@ -131,6 +131,89 @@ describe("ScoutService", () => {
         expect(finish.log).toBe(printed.join("\n"));
     });
 
+    it("records the proposal on the run's outcomes with its inbox id", async () => {
+        await (await scout()).run({dryRun: false});
+
+        expect(runRepo.finish.mock.calls[0][1].outcomes).toEqual({
+            proposed: [
+                {
+                    statementId: "altman-dishes",
+                    ceo: "altman",
+                    headline: "Robots for dishes",
+                    verified: true,
+                    foundOn: 2,
+                    forks: 5,
+                    proposalId: 42,
+                },
+            ],
+            missed: [],
+            suggestions: [],
+        });
+    });
+
+    it("records empty outcomes on a quiet run", async () => {
+        claudeRun
+            .mockReset()
+            .mockResolvedValue({output: {leads: [], suggestionOutcomes: [], searched: ""}, costUsd: 0, turns: 1});
+
+        expect(await (await scout()).run({dryRun: false})).toBe(true);
+
+        const finish = runRepo.finish.mock.calls[0][1];
+        expect(finish.status).toBe("ok");
+        expect(finish.outcomes).toEqual({proposed: [], missed: [], suggestions: []});
+    });
+
+    it("records every lead that did not make it with its reason", async () => {
+        const long = "x".repeat(2000);
+        claudeRun
+            .mockReset()
+            .mockResolvedValueOnce({
+                output: {leads: [lead, lead, {...lead, venue: "Elsewhere"}], suggestionOutcomes: [], searched: ""},
+                costUsd: 0,
+                turns: 1,
+            })
+            .mockResolvedValueOnce({
+                output: {
+                    results: [
+                        {lead: 0, keep: false, dropReason: long, statement: null},
+                        {
+                            lead: 1,
+                            keep: true,
+                            dropReason: "",
+                            statement: makeStatement({id: "again", date: "2026-10-20"}),
+                        },
+                        {lead: 2, keep: true, dropReason: "", statement: {...written, quote: "words on no page"}},
+                    ],
+                },
+                costUsd: 0,
+                turns: 1,
+            });
+
+        await (await scout()).run({dryRun: false});
+
+        const {missed, proposed} = runRepo.finish.mock.calls[0][1].outcomes;
+        expect(proposed).toEqual([]);
+        expect(missed).toEqual([
+            {kind: "dropped", ceo: "altman", date: "2026-10-20", venue: "A stage", statementId: null, reason: long},
+            {
+                kind: "duplicate",
+                ceo: "altman",
+                date: "2026-10-20",
+                venue: "A stage",
+                statementId: "again",
+                reason: expect.stringMatching(/^repeats /),
+            },
+            {
+                kind: "failed",
+                ceo: "altman",
+                date: "2026-10-20",
+                venue: "Elsewhere",
+                statementId: "altman-dishes",
+                reason: expect.stringContaining("the quote was not found word for word on any page that loaded"),
+            },
+        ]);
+    });
+
     it("looks back 14 days at most and takes --since over that", async () => {
         runRepo.lastGoodStart.mockResolvedValue(success(null));
         await (await scout()).run({dryRun: false});
@@ -202,6 +285,9 @@ describe("ScoutService", () => {
         expect(id).toBe(9);
         expect(finish.status).toBe("ok");
         expect(finish.log).toContain(`"id": "altman-dishes"`);
+        expect(finish.outcomes.proposed).toEqual([
+            expect.objectContaining({statementId: "altman-dishes", proposalId: null}),
+        ]);
     });
 
     it("leaves a claimed run alone when it is no longer running", async () => {
@@ -226,6 +312,41 @@ describe("ScoutService", () => {
 
         expect(printed.at(-1)).toBe("Stopped.");
         expect(runRepo.finish.mock.calls[0][1].status).toBe("stopped");
+        expect(runRepo.finish.mock.calls[0][1].outcomes).toEqual({proposed: [], missed: [], suggestions: []});
+    });
+
+    it("saves the outcomes found before a stop", async () => {
+        const stop = new AbortController();
+        claudeRun
+            .mockReset()
+            .mockResolvedValueOnce({
+                output: {leads: [lead, {...lead, venue: "Elsewhere"}], suggestionOutcomes: [], searched: ""},
+                costUsd: 0,
+                turns: 1,
+            })
+            .mockResolvedValueOnce({
+                output: {
+                    results: [
+                        {lead: 0, keep: true, dropReason: "", statement: written},
+                        {lead: 1, keep: false, dropReason: "never reached", statement: null},
+                    ],
+                },
+                costUsd: 0,
+                turns: 1,
+            });
+        proposalRepo.create.mockImplementation(async () => {
+            stop.abort();
+            return success(42);
+        });
+
+        expect(await (await scout()).run({dryRun: false, signal: stop.signal})).toBe(false);
+
+        const finish = runRepo.finish.mock.calls[0][1];
+        expect(finish.status).toBe("stopped");
+        expect(finish.outcomes.proposed).toEqual([
+            expect.objectContaining({statementId: "altman-dishes", proposalId: 42}),
+        ]);
+        expect(finish.outcomes.missed).toEqual([]);
     });
 
     it("finishes the run as failed when claude fails", async () => {
@@ -271,6 +392,9 @@ describe("ScoutService", () => {
         expect(proposalRepo.setChecks).toHaveBeenCalledWith(5, {run: 7, qualifies: true, finding: "real"});
         expect(proposalRepo.create).toHaveBeenCalledWith(expect.objectContaining({origin: "visitor"}));
         expect(proposalRepo.decide).toHaveBeenCalledWith(5, "done", "Researched by run 7: proposal 42.");
+        expect(runRepo.finish.mock.calls[0][1].outcomes.suggestions).toEqual([
+            {id: 5, url: A, qualifies: true, finding: "real", proposalId: 42},
+        ]);
     });
 
     it.each([

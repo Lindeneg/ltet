@@ -139,6 +139,7 @@ export function makeRun(overrides: Partial<RunRecord> = {}): RunRecord {
         status: "ok",
         summary: {since: "2025-08-31", proposed: 1, dropped: 2, failed: 0, costUsd: 0.42},
         log: "a line\nanother line",
+        outcomes: null,
         startedAt: new Date("2025-09-01T03:00:00Z"),
         finishedAt: new Date("2025-09-01T03:10:00Z"),
         startedBy: "schedule",

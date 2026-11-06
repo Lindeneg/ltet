@@ -1,22 +1,31 @@
 import type {AsyncResult} from "../lib/result.js";
 import type {DbError} from "../lib/errors.js";
 import type {MaybeNull} from "../lib/types.js";
-import type {Run as RunModel, RunStatus} from "../generated/prisma/client.js";
+import type {RunOutcomes} from "../lib/scout.js";
+import type {ProposalStatus, Run as RunModel, RunStatus} from "../generated/prisma/client.js";
 import type DataService from "../services/data-service.js";
 
 export type {RunStatus};
 
-export type RunRecord = Omit<RunModel, "summary"> & {summary: unknown};
+export type RunRecord = Omit<RunModel, "summary" | "outcomes"> & {summary: unknown; outcomes: MaybeNull<RunOutcomes>};
 
-export type RunListItem = Omit<RunRecord, "log">;
+export type RunListItem = Omit<RunRecord, "log" | "outcomes">;
 
-export type RunFinish = {status: Exclude<RunStatus, "running">; summary: unknown; log: string};
+export type RunFinish = {
+    status: Exclude<RunStatus, "running">;
+    summary: unknown;
+    log: string;
+    outcomes?: RunOutcomes;
+};
 
 export type RunClaim = {startedBy: MaybeNull<string>; dryRun: boolean; staleBefore: Date};
 
-export type RunProposal = {id: number; statementId: MaybeNull<string>};
+export type RunProposal = {id: number; statementId: MaybeNull<string>; status: ProposalStatus};
 
 const parseSummary = (summary: MaybeNull<string>) => (summary === null ? null : JSON.parse(summary));
+
+const parseOutcomes = (outcomes: MaybeNull<string>): MaybeNull<RunOutcomes> =>
+    outcomes === null ? null : (JSON.parse(outcomes) as RunOutcomes);
 
 class RunRepository {
     constructor(private readonly db: DataService) {}
@@ -39,7 +48,7 @@ class RunRepository {
                 .findFirst({
                     where: {status: "running", startedAt: {gt: staleBefore}},
                     orderBy: {id: "desc"},
-                    omit: {log: true},
+                    omit: {log: true, outcomes: true},
                 })
                 .then((row) => (row ? {...row, summary: parseSummary(row.summary)} : null))
         );
@@ -63,13 +72,19 @@ class RunRepository {
     }
 
     // a run already finished keeps its status, so a late finish can't undo a stop
-    finish(id: number, {status, summary, log}: RunFinish): AsyncResult<void, DbError> {
+    finish(id: number, {status, summary, log, outcomes}: RunFinish): AsyncResult<void, DbError> {
         return this.db.run(
             "run-repo.finish",
             this.db.p.run
                 .updateMany({
                     where: {id, status: "running"},
-                    data: {status, summary: JSON.stringify(summary), log, finishedAt: new Date()},
+                    data: {
+                        status,
+                        summary: JSON.stringify(summary),
+                        log,
+                        outcomes: outcomes ? JSON.stringify(outcomes) : undefined,
+                        finishedAt: new Date(),
+                    },
                 })
                 .then(() => undefined)
         );
@@ -79,7 +94,7 @@ class RunRepository {
         return this.db.run(
             "run-repo.list",
             this.db.p.run
-                .findMany({orderBy: {id: "desc"}, take: limit, skip, omit: {log: true}})
+                .findMany({orderBy: {id: "desc"}, take: limit, skip, omit: {log: true, outcomes: true}})
                 .then((rows) => rows.map((row) => ({...row, summary: parseSummary(row.summary)})))
         );
     }
@@ -93,7 +108,9 @@ class RunRepository {
             "run-repo.get",
             this.db.p.run
                 .findUnique({where: {id}})
-                .then((row) => (row ? {...row, summary: parseSummary(row.summary)} : null))
+                .then((row) =>
+                    row ? {...row, summary: parseSummary(row.summary), outcomes: parseOutcomes(row.outcomes)} : null
+                )
         );
     }
 
@@ -103,7 +120,7 @@ class RunRepository {
             this.db.p.proposal.findMany({
                 where: {runId: id},
                 orderBy: {id: "asc"},
-                select: {id: true, statementId: true},
+                select: {id: true, statementId: true, status: true},
             })
         );
     }
