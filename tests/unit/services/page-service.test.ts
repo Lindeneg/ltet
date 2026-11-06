@@ -7,7 +7,7 @@ import PageCacheService from "../../../src/services/page-cache-service.js";
 import PageService from "../../../src/services/page-service.js";
 import type StatementRepository from "../../../src/repositories/statement-repository.js";
 import {esc} from "../../../src/ui/lib.js";
-import {fake, makeCeo, makeContent, makeStatement, makeContentService} from "../helpers.js";
+import {fake, fakeLog, makeCeo, makeContent, makeStatement, makeContentService} from "../helpers.js";
 
 const NOW = Date.UTC(2026, 10, 15, 12);
 const ORIGIN = "http://localhost:3000";
@@ -17,6 +17,7 @@ function makePages(statements: RawStatement[] = [makeStatement()], content = mak
     const league = new LeagueService(
         fake<StatementRepository>({listPublished}),
         makeContentService(content),
+        fakeLog(),
         () => NOW
     );
     const cache = new PageCacheService(10);

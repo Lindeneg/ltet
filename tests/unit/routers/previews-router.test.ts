@@ -5,7 +5,7 @@ import LeagueService from "../../../src/services/league-service.js";
 import type PreviewService from "../../../src/services/preview-service.js";
 import type StatementRepository from "../../../src/repositories/statement-repository.js";
 import {makePreviewsRouter} from "../../../src/routers/previews-router.js";
-import {fake, makeContent, makeStatement, makeContentService} from "../helpers.js";
+import {fake, fakeLog, makeContent, makeStatement, makeContentService} from "../helpers.js";
 import {serve, type Served} from "../serve.js";
 
 const NOW = Date.UTC(2026, 0, 15);
@@ -36,6 +36,7 @@ describe("previews router", () => {
         const leagueService = new LeagueService(
             fake<StatementRepository>({listPublished}),
             makeContentService(content),
+            fakeLog(),
             () => NOW
         );
         const previewService = fake<PreviewService>({siteCard, statementCard});

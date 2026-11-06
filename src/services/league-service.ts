@@ -1,5 +1,5 @@
-import {success, type AsyncResult} from "../lib/result.js";
-import type {DbError} from "../lib/errors.js";
+import {failure, success, type AsyncResult} from "../lib/result.js";
+import {AppError, type DbError} from "../lib/errors.js";
 import type {MaybeNull, MaybeUndefined} from "../lib/types.js";
 import type {Category, RawStatement} from "../lib/content.js";
 import {tally, type ScoredStatement, type Standing, type Tally} from "../lib/score.js";
@@ -7,6 +7,7 @@ import {listSeasons, seasonStartYear, type Season} from "../lib/seasons.js";
 import {buildSnapshots, type Snapshot} from "../lib/snapshots.js";
 import type StatementRepository from "../repositories/statement-repository.js";
 import type ContentService from "./content-service.js";
+import type LoggerService from "./logger-service.js";
 
 export const RECORD_START = Date.UTC(2022, 10, 30);
 export const ALL_TIME_KEY = "all-time";
@@ -71,6 +72,7 @@ class LeagueService {
     constructor(
         private readonly statementRepo: StatementRepository,
         private readonly content: ContentService,
+        private readonly log: LoggerService,
         private readonly clock: () => number = Date.now
     ) {}
 
@@ -94,9 +96,14 @@ class LeagueService {
     }
 
     async #load(now: number, stamp: string): AsyncResult<League, DbError> {
-        const raw = await this.statementRepo.listPublished();
-        if (!raw.ok) return raw;
-        return success(this.#build(raw.data, now, stamp));
+        try {
+            const raw = await this.statementRepo.listPublished();
+            if (!raw.ok) return raw;
+            return success(this.#build(raw.data, now, stamp));
+        } catch (err) {
+            this.log.error(err, "failed to build the league");
+            return failure(AppError.DB_ERROR);
+        }
     }
 
     #build(raw: RawStatement[], now: number, stamp: string): League {
