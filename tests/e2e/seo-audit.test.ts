@@ -59,7 +59,10 @@ function linkName(link: HTMLAnchorElement): string {
         .map((id) => link.ownerDocument.getElementById(id)?.textContent ?? "")
         .join(" ");
     const alts = [...link.querySelectorAll("img[alt]")].map((img) => img.getAttribute("alt")).join(" ");
-    return (link.getAttribute("aria-label") || labelled || link.textContent || alts).trim();
+    return (
+        [link.getAttribute("aria-label"), labelled, link.textContent, alts].map((name) => name?.trim()).find(Boolean) ??
+        ""
+    );
 }
 
 function factsOf(res: TestResponse): PageFacts {
