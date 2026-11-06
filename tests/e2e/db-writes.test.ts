@@ -1,6 +1,6 @@
 import {spawn} from "node:child_process";
 import {once} from "node:events";
-import {beforeAll, describe, expect, it} from "vitest";
+import {afterAll, beforeAll, describe, expect, it} from "vitest";
 import {readSeed, type RawStatement} from "../../src/lib/content.js";
 import {AppError} from "../../src/lib/errors.js";
 import {failure, success} from "../../src/lib/result.js";
@@ -10,14 +10,20 @@ import {db, env, uid} from "./helpers.js";
 
 const statements = new StatementRepository(db);
 const contenders = new ContenderRepository(db);
+const PREFIX = `altman-2026-01-02-db-${uid()}`;
 let seed: RawStatement[];
 
 beforeAll(async () => {
     seed = await readSeed();
 });
 
+afterAll(async () => {
+    await db.p.statement.deleteMany({where: {id: {startsWith: PREFIX}}});
+    await db.p.proposal.deleteMany({where: {body: {contains: PREFIX}}});
+});
+
 function newStatement(): RawStatement {
-    const id = `altman-2026-01-02-db-${uid()}`;
+    const id = `${PREFIX}-${uid()}`;
     return {...seed[0], id, ceo: "altman", date: "2026-01-02"};
 }
 
