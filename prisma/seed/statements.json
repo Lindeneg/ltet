@@ -301,7 +301,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "The answer to 'you've turned it loose on society?'"
+        "reason": "A shrug at 'you've turned it loose on society?', with no one's cost in the room."
       },
       "hypocrisy": {
         "score": 0,
@@ -1143,7 +1143,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "A boast that doubled as a price tag."
+        "reason": "A boast aimed at rivals; nobody outside the trade pays for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -1208,7 +1208,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "A new species, introduced at TED."
+        "reason": "A grand metaphor; nobody is asked to pay for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -1655,7 +1655,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "A rival's deal, declared a security violation."
+        "reason": "A swipe at a rival's deal; the public pays nothing."
       },
       "hypocrisy": {
         "score": 0,
@@ -1865,7 +1865,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "'And so we hallucinate, if you will, the other 32.'"
+        "reason": "'We hallucinate the other 32' grates, but costs gamers little."
       },
       "hypocrisy": {
         "score": 0,
@@ -1942,7 +1942,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "A new unit of time, coined while raising billions."
+        "reason": "Hype with a made-up unit of time; nobody pays for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -2090,7 +2090,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "Users: 'It tries to be my friend when I need it to be a tool.'"
+        "reason": "One grating line while users wanted a tool, not a friend."
       },
       "hypocrisy": {
         "score": 0,
@@ -2241,7 +2241,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "About 15,000 words of techno-optimism."
+        "reason": "Long and optimistic; nobody is asked to pay for it."
       },
       "hypocrisy": {
         "score": 2,
@@ -2469,7 +2469,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "'Impossible without artificial intelligence.'"
+        "reason": "A launch-day boast; nobody pays for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -2768,7 +2768,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Doubling the human lifespan, forecast at Davos."
+        "reason": "A grand forecast at Davos, but nobody is asked to pay for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -3059,7 +3059,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "An overly attached companion, as PC Gamer put it."
+        "reason": "A clingy companion pitch; nobody pays for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -3136,7 +3136,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "All disease, within a decade, on 60 Minutes."
+        "reason": "A big promise on 60 Minutes; nobody pays for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -3354,7 +3354,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "The model's errors, defended by pointing at yours."
+        "reason": "One grating comparison with human error; nobody pays for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -3560,7 +3560,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Optimistic about doom."
+        "reason": "Cheerful about a risk he calls high, but nobody pays for it yet."
       },
       "hypocrisy": {
         "score": 0,
@@ -3693,7 +3693,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "A question about outages, answered with the Earth's power supply."
+        "reason": "A laugh about the Earth's power going to AI; grates, but not said to those who pay."
       },
       "hypocrisy": {
         "score": 0,
@@ -3764,7 +3764,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "Announced days after Grok contradicted his own claims."
+        "reason": "Rewriting knowledge grates, but nobody's loss is cheered."
       },
       "hypocrisy": {
         "score": 2,
@@ -3832,7 +3832,7 @@
       },
       "tone-deafness": {
         "score": 3,
-        "reason": "Said a day after xAI removed Grok's antisemitic posts."
+        "reason": "A boast a day after xAI removed Grok's antisemitic posts."
       },
       "hypocrisy": {
         "score": 0,
@@ -3959,7 +3959,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Illustrated with a map of Manhattan."
+        "reason": "A boast about size; nobody is asked to pay for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -4021,7 +4021,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "'No bad person should ever benefit' is 'a pretty difficult principle to run a business on'."
+        "reason": "Said to staff; the cost falls on others, far from the room."
       },
       "hypocrisy": {
         "score": 3,
@@ -4230,7 +4230,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Said on an earnings call, about a product he sells."
+        "reason": "A sales pitch for his own glasses; one line that grates."
       },
       "hypocrisy": {
         "score": 0,
@@ -4312,7 +4312,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Superintelligence for everyone, in a letter signed 'Mark'."
+        "reason": "A vague vision letter; nobody pays for it."
       },
       "hypocrisy": {
         "score": 3,
@@ -4656,7 +4656,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "Erotica as the flagship of adult freedom."
+        "reason": "Erotica as adult freedom grates, but nobody's loss is cheered."
       },
       "hypocrisy": {
         "score": 0,
@@ -4794,7 +4794,7 @@
       },
       "tone-deafness": {
         "score": 3,
-        "reason": "'Building a robot army' as the reason for the pay."
+        "reason": "A trillion-dollar ask for a robot army, to the shareholders paying it."
       },
       "hypocrisy": {
         "score": 0,
@@ -4862,7 +4862,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "'We will never be perfect', in the same breath as the boast."
+        "reason": "A boast about a rival to Wikipedia; nobody pays for it."
       },
       "hypocrisy": {
         "score": 4,
@@ -4925,7 +4925,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "'Enough', about $1 trillion of commitments."
+        "reason": "Testy with an investor; the public pays nothing."
       },
       "hypocrisy": {
         "score": 0,
@@ -5067,7 +5067,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "'You don't have to put people in prisons and stuff, I think.'"
+        "reason": "'You don't have to put people in prisons' grates, but costs nobody today."
       },
       "hypocrisy": {
         "score": 0,
@@ -5496,7 +5496,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "'Absurdly positive things about me', fitter than LeBron James."
+        "reason": "An absurd excuse for absurd praise; nobody pays for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -5638,7 +5638,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "Said on late-night television, to millions of parents."
+        "reason": "Grates with millions of parents, but costs them nothing."
       },
       "hypocrisy": {
         "score": 0,
@@ -5880,7 +5880,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "'Not helpful', four times in a row."
+        "reason": "Waves off critics, but nobody's loss is cheered."
       },
       "hypocrisy": {
         "score": 0,
@@ -6181,7 +6181,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "'Social permission', discussed at Davos."
+        "reason": "Mostly reads the room; 'social permission' grates a little."
       },
       "hypocrisy": {
         "score": 0,
@@ -6322,7 +6322,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "About 420 words in reply to a joke."
+        "reason": "A long reply to a rival's joke; nobody pays for it."
       },
       "hypocrisy": {
         "score": 4,
@@ -6702,7 +6702,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "The meter, said aloud at an investors' infrastructure summit."
+        "reason": "A meter for thinking grates, but it is a future pitch to investors."
       },
       "hypocrisy": {
         "score": 2,
@@ -6910,7 +6910,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "Said about his own customers, a day after the reveal."
+        "reason": "Tells his customers they are 'completely wrong'; their cost is small."
       },
       "hypocrisy": {
         "score": 3,
@@ -6990,7 +6990,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "A token budget as a recruiting perk, from the man who sells the chips behind the tokens."
+        "reason": "A $250,000 token budget grates, but nobody's hardship is sold."
       },
       "hypocrisy": {
         "score": 0,
@@ -7221,7 +7221,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Asked about his robot army, answered with extinction; the judge called a break."
+        "reason": "Doom in court; nobody's cost is waved off."
       },
       "hypocrisy": {
         "score": 2,
@@ -7364,7 +7364,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Asked for his 'boo strategy'."
+        "reason": "Corporate speak about the graduates; nobody pays for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -7580,7 +7580,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "The chip seller's advice: use more."
+        "reason": "The chip seller's advice, use more; one line that grates."
       },
       "hypocrisy": {
         "score": 0,
@@ -7706,7 +7706,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Abundance, still undefined a year later, per TechCrunch."
+        "reason": "Abundance promised without detail; nobody pays for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -7893,7 +7893,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "The internet's reply: 'Just talk to your children'."
+        "reason": "A podcast for the school run grates widely, but costs nobody."
       },
       "hypocrisy": {
         "score": 0,
@@ -7963,7 +7963,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "6,500 words; critics called it exactly why people don't like AI."
+        "reason": "A personal agent for everyone; grates, nobody pays for it."
       },
       "hypocrisy": {
         "score": 0,
@@ -8025,7 +8025,7 @@
       },
       "tone-deafness": {
         "score": 2,
-        "reason": "Pitched as a feature."
+        "reason": "A screen that watches everything, pitched as a feature; the cost is future."
       },
       "hypocrisy": {
         "score": 0,
@@ -8107,7 +8107,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Doctors called it 'wildly off-base and impossible'."
+        "reason": "A bold cure forecast; 'ordinary people' grates, nobody pays for it."
       },
       "hypocrisy": {
         "score": 2,
@@ -8259,7 +8259,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Largely agrees AI could kill us all; back to work on Monday."
+        "reason": "Agrees AI could kill us all; a warning, not a cheer."
       },
       "hypocrisy": {
         "score": 0,
@@ -8328,7 +8328,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Zero percent, to the decimal."
+        "reason": "Zero percent, to the decimal; dismisses doom, costs nobody."
       },
       "hypocrisy": {
         "score": 0,
@@ -8482,7 +8482,7 @@
       },
       "tone-deafness": {
         "score": 1,
-        "reason": "Grey kittens on grey tarmac, from the cameras-only company."
+        "reason": "An excuse about grey kittens; nobody pays for it."
       },
       "hypocrisy": {
         "score": 4,

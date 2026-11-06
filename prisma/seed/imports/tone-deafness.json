@@ -37,6 +37,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "The answer to 'you've turned it loose on society?'",
+                    "to": "A shrug at 'you've turned it loose on society?', with no one's cost in the room."
                 }
             }
         },
@@ -122,6 +126,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "A boast that doubled as a price tag.",
+                    "to": "A boast aimed at rivals; nobody outside the trade pays for it."
                 }
             }
         },
@@ -131,6 +139,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "A new species, introduced at TED.",
+                    "to": "A grand metaphor; nobody is asked to pay for it."
                 }
             }
         },
@@ -162,6 +174,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "A rival's deal, declared a security violation.",
+                    "to": "A swipe at a rival's deal; the public pays nothing."
                 }
             }
         },
@@ -180,6 +196,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "'And so we hallucinate, if you will, the other 32.'",
+                    "to": "'We hallucinate the other 32' grates, but costs gamers little."
                 }
             }
         },
@@ -189,6 +209,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "A new unit of time, coined while raising billions.",
+                    "to": "Hype with a made-up unit of time; nobody pays for it."
                 }
             }
         },
@@ -198,6 +222,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Users: 'It tries to be my friend when I need it to be a tool.'",
+                    "to": "One grating line while users wanted a tool, not a friend."
                 }
             }
         },
@@ -216,6 +244,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "About 15,000 words of techno-optimism.",
+                    "to": "Long and optimistic; nobody is asked to pay for it."
                 }
             }
         },
@@ -243,6 +275,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "'Impossible without artificial intelligence.'",
+                    "to": "A launch-day boast; nobody pays for it."
                 }
             }
         },
@@ -270,6 +306,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Doubling the human lifespan, forecast at Davos.",
+                    "to": "A grand forecast at Davos, but nobody is asked to pay for it."
                 }
             }
         },
@@ -288,6 +328,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "An overly attached companion, as PC Gamer put it.",
+                    "to": "A clingy companion pitch; nobody pays for it."
                 }
             }
         },
@@ -297,6 +341,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "All disease, within a decade, on 60 Minutes.",
+                    "to": "A big promise on 60 Minutes; nobody pays for it."
                 }
             }
         },
@@ -324,6 +372,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "The model's errors, defended by pointing at yours.",
+                    "to": "One grating comparison with human error; nobody pays for it."
                 }
             }
         },
@@ -342,6 +394,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Optimistic about doom.",
+                    "to": "Cheerful about a risk he calls high, but nobody pays for it yet."
                 }
             }
         },
@@ -351,6 +407,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "A question about outages, answered with the Earth's power supply.",
+                    "to": "A laugh about the Earth's power going to AI; grates, but not said to those who pay."
                 }
             }
         },
@@ -360,6 +420,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Announced days after Grok contradicted his own claims.",
+                    "to": "Rewriting knowledge grates, but nobody's loss is cheered."
                 }
             }
         },
@@ -369,6 +433,10 @@
                 "scores.tone-deafness.score": {
                     "from": 5,
                     "to": 3
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Said a day after xAI removed Grok's antisemitic posts.",
+                    "to": "A boast a day after xAI removed Grok's antisemitic posts."
                 }
             }
         },
@@ -387,6 +455,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Illustrated with a map of Manhattan.",
+                    "to": "A boast about size; nobody is asked to pay for it."
                 }
             }
         },
@@ -396,6 +468,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "'No bad person should ever benefit' is 'a pretty difficult principle to run a business on'.",
+                    "to": "Said to staff; the cost falls on others, far from the room."
                 }
             }
         },
@@ -405,6 +481,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Said on an earnings call, about a product he sells.",
+                    "to": "A sales pitch for his own glasses; one line that grates."
                 }
             }
         },
@@ -414,6 +494,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Superintelligence for everyone, in a letter signed 'Mark'.",
+                    "to": "A vague vision letter; nobody pays for it."
                 }
             }
         },
@@ -432,6 +516,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Erotica as the flagship of adult freedom.",
+                    "to": "Erotica as adult freedom grates, but nobody's loss is cheered."
                 }
             }
         },
@@ -450,6 +538,10 @@
                 "scores.tone-deafness.score": {
                     "from": 5,
                     "to": 3
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "'Building a robot army' as the reason for the pay.",
+                    "to": "A trillion-dollar ask for a robot army, to the shareholders paying it."
                 }
             }
         },
@@ -459,6 +551,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "'We will never be perfect', in the same breath as the boast.",
+                    "to": "A boast about a rival to Wikipedia; nobody pays for it."
                 }
             }
         },
@@ -468,6 +564,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "'Enough', about $1 trillion of commitments.",
+                    "to": "Testy with an investor; the public pays nothing."
                 }
             }
         },
@@ -486,6 +586,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "'You don't have to put people in prisons and stuff, I think.'",
+                    "to": "'You don't have to put people in prisons' grates, but costs nobody today."
                 }
             }
         },
@@ -522,6 +626,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "'Absurdly positive things about me', fitter than LeBron James.",
+                    "to": "An absurd excuse for absurd praise; nobody pays for it."
                 }
             }
         },
@@ -540,6 +648,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Said on late-night television, to millions of parents.",
+                    "to": "Grates with millions of parents, but costs them nothing."
                 }
             }
         },
@@ -571,6 +683,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "'Not helpful', four times in a row.",
+                    "to": "Waves off critics, but nobody's loss is cheered."
                 }
             }
         },
@@ -598,6 +714,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "'Social permission', discussed at Davos.",
+                    "to": "Mostly reads the room; 'social permission' grates a little."
                 }
             }
         },
@@ -616,6 +736,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "About 420 words in reply to a joke.",
+                    "to": "A long reply to a rival's joke; nobody pays for it."
                 }
             }
         },
@@ -652,6 +776,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "The meter, said aloud at an investors' infrastructure summit.",
+                    "to": "A meter for thinking grates, but it is a future pitch to investors."
                 }
             }
         },
@@ -670,6 +798,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Said about his own customers, a day after the reveal.",
+                    "to": "Tells his customers they are 'completely wrong'; their cost is small."
                 }
             }
         },
@@ -679,6 +811,10 @@
                 "scores.tone-deafness.score": {
                     "from": 5,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "A token budget as a recruiting perk, from the man who sells the chips behind the tokens.",
+                    "to": "A $250,000 token budget grates, but nobody's hardship is sold."
                 }
             }
         },
@@ -706,6 +842,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Asked about his robot army, answered with extinction; the judge called a break.",
+                    "to": "Doom in court; nobody's cost is waved off."
                 }
             }
         },
@@ -724,6 +864,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Asked for his 'boo strategy'.",
+                    "to": "Corporate speak about the graduates; nobody pays for it."
                 }
             }
         },
@@ -742,6 +886,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "The chip seller's advice: use more.",
+                    "to": "The chip seller's advice, use more; one line that grates."
                 }
             }
         },
@@ -764,6 +912,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Abundance, still undefined a year later, per TechCrunch.",
+                    "to": "Abundance promised without detail; nobody pays for it."
                 }
             }
         },
@@ -782,6 +934,10 @@
                 "scores.tone-deafness.score": {
                     "from": 5,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "The internet's reply: 'Just talk to your children'.",
+                    "to": "A podcast for the school run grates widely, but costs nobody."
                 }
             }
         },
@@ -791,6 +947,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "6,500 words; critics called it exactly why people don't like AI.",
+                    "to": "A personal agent for everyone; grates, nobody pays for it."
                 }
             }
         },
@@ -800,6 +960,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 2
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Pitched as a feature.",
+                    "to": "A screen that watches everything, pitched as a feature; the cost is future."
                 }
             }
         },
@@ -809,6 +973,10 @@
                 "scores.tone-deafness.score": {
                     "from": 4,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Doctors called it 'wildly off-base and impossible'.",
+                    "to": "A bold cure forecast; 'ordinary people' grates, nobody pays for it."
                 }
             }
         },
@@ -827,6 +995,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Largely agrees AI could kill us all; back to work on Monday.",
+                    "to": "Agrees AI could kill us all; a warning, not a cheer."
                 }
             }
         },
@@ -836,6 +1008,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Zero percent, to the decimal.",
+                    "to": "Zero percent, to the decimal; dismisses doom, costs nobody."
                 }
             }
         },
@@ -854,6 +1030,10 @@
                 "scores.tone-deafness.score": {
                     "from": 3,
                     "to": 1
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Grey kittens on grey tarmac, from the cameras-only company.",
+                    "to": "An excuse about grey kittens; nobody pays for it."
                 }
             }
         },
