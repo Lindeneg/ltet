@@ -48,8 +48,12 @@ ping_until_success() {
 }
 
 kill_server() {
-    kill "$SERVER_PID" 2> /dev/null
+    [[ -n "$SERVER_PID" ]] && kill "$SERVER_PID" 2> /dev/null
 }
+
+trap kill_server EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
 
 echo starting test server
 # node runs directly rather than through npx so $! is the server process itself
