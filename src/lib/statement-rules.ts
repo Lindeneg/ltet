@@ -1,5 +1,8 @@
 import {LEVELS, STRENGTHS, type Ceo, type RawStatement, type Rubric} from "./content.js";
 import {RECORD_START_DAY} from "./scout.js";
+import {isUrl} from "./url.js";
+
+export {isUrl};
 
 const ID_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
@@ -9,12 +12,6 @@ type Rules = {ceos: Ceo[]; rubric: Rubric};
 
 export function isId(value: unknown): boolean {
     return typeof value === "string" && ID_PATTERN.test(value);
-}
-
-export function isUrl(value: unknown): boolean {
-    if (typeof value !== "string" || !URL.canParse(value)) return false;
-    const {protocol} = new URL(value);
-    return protocol === "https:" || protocol === "http:";
 }
 
 export function isRealDate(value: unknown): boolean {
