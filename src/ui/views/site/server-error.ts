@@ -6,6 +6,7 @@ export function ServerErrorView(site?: Site): string {
     return SiteLayout({
         title: `Error · ${SITE_NAME}`,
         site,
+        noindex: true,
         children: ErrorBody({
             code: "500",
             heading: "Match suspended",

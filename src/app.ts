@@ -12,6 +12,7 @@ import PageService from "./services/page-service.js";
 import StatementService from "./services/statement-service.js";
 import PreviewService from "./services/preview-service.js";
 import FeedbackService from "./services/feedback-service.js";
+import SitemapService from "./services/sitemap-service.js";
 import StatementRepository from "./repositories/statement-repository.js";
 import ProposalRepository from "./repositories/proposal-repository.js";
 import RunRepository from "./repositories/run-repository.js";
@@ -40,6 +41,7 @@ import {ErrorView} from "./ui/views/admin/error.js";
 import {makeApiRouter} from "./routers/api-router.js";
 import {makePreviewsRouter} from "./routers/previews-router.js";
 import {makePublicRouter} from "./routers/public-router.js";
+import {makeSeoRouter} from "./routers/seo-router.js";
 
 const PAGE_CACHE_SIZE = 500;
 
@@ -141,6 +143,10 @@ export async function startApp(env: AppEnv, log: LoggerService): Promise<void> {
                 leagueService,
                 previewService,
                 content,
+                publicUrl: env.PUBLIC_URL,
+            }),
+            seo: makeSeoRouter({
+                sitemapService: new SitemapService(leagueService, statementRepo),
                 publicUrl: env.PUBLIC_URL,
             }),
             public: makePublicRouter({pageService, publicUrl: env.PUBLIC_URL}),

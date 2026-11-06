@@ -32,6 +32,7 @@ export type SiteLayoutProps = {
     site?: Site;
     preview?: boolean;
     scripts?: string[];
+    noindex?: boolean;
 };
 
 // filled in per request, so a page cached once serves every origin
@@ -45,12 +46,12 @@ export function previewTags({url, image}: Preview): string {
   <meta property="og:image:height" content="${OG_HEIGHT}">`;
 }
 
-function head(title: string, preview: boolean, scripts: string[]): string {
+function head(title: string, preview: boolean, scripts: string[], noindex: boolean): string {
     const own = scripts.map((src) => `\n  <script src="${esc(src)}" defer></script>`).join("");
     return `<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>${esc(title)}</title>
-  <meta name="description" content="${esc(DESCRIPTION)}">
+  <meta name="description" content="${esc(DESCRIPTION)}">${noindex ? `\n  <meta name="robots" content="noindex">` : ""}
   <meta property="og:type" content="website">${preview ? PREVIEW_SLOT : ""}
   <meta property="og:title" content="Let Them Eat Tokens">
   <meta property="og:description" content="${esc(OG_DESCRIPTION)}">
@@ -233,11 +234,11 @@ function Dialogs(site: Site): string {
   </dialog>`;
 }
 
-export function SiteLayout({title, children, site, preview, scripts = []}: SiteLayoutProps): string {
+export function SiteLayout({title, children, site, preview, scripts = [], noindex = false}: SiteLayoutProps): string {
     return `<!doctype html>
 <html lang="en">
 <head>
-  ${head(title, preview ?? false, scripts)}
+  ${head(title, preview ?? false, scripts, noindex)}
 </head>
 <body>
   ${SPRITE}
