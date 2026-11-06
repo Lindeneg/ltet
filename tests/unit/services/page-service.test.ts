@@ -6,6 +6,7 @@ import LeagueService from "../../../src/services/league-service.js";
 import PageCacheService from "../../../src/services/page-cache-service.js";
 import PageService from "../../../src/services/page-service.js";
 import type StatementRepository from "../../../src/repositories/statement-repository.js";
+import {esc} from "../../../src/ui/lib.js";
 import {fake, makeContent, makeStatement, makeContentService} from "../helpers.js";
 
 const NOW = Date.UTC(2026, 10, 15, 12);
@@ -415,6 +416,20 @@ describe("PageService", () => {
             expect(canonical(page)).toBe(`${odd}/match/${match.id}`);
             expect(ofType(page, "WebSite")?.url).toBe(`${odd}/`);
             expect(page).not.toContain(ORIGIN);
+        });
+
+        it("keeps a hostile origin inside its attributes and its JSON-LD", async () => {
+            const {pages} = makePages([match]);
+            const hostile = 'http://x"><script>alert(1)</script>.example';
+
+            const page = await html(pages.getMatch(match.id, hostile));
+            const head = page.slice(0, page.indexOf("</head>"));
+
+            expect(head.match(/<script>/g)).toBeNull();
+            expect(canonical(page)).toBe(`${esc(hostile)}/match/${match.id}`);
+            expect(ofType(page, "WebSite")?.url).toBe(`${hostile}/`);
+            expect(ofType(page, "Article")?.mainEntityOfPage).toBe(`${hostile}/match/${match.id}`);
+            for (const [, body] of head.matchAll(LD)) expect(body).not.toContain("<");
         });
 
         it("leaves a missing match a 404 with no page", async () => {
