@@ -23,7 +23,8 @@ describe("the public site", () => {
 
         expect(season.status).toBe(200);
         expect(season.html).toContain("League table 25/26 · Let Them Eat Tokens");
-        expect(season.html).not.toContain("og:url");
+        expect(season.html).toContain(`<link rel="canonical" href="${BASE_URL}/25-26">`);
+        expect(season.html).not.toContain("og:image");
         expect(season.html).toContain('<details class="season-menu">');
         expect(season.html).toContain('<svg class="tab-icon" aria-hidden="true"><use href="#tab-honours"/></svg>');
     });

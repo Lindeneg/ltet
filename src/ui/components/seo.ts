@@ -48,7 +48,9 @@ export function seoTags(meta: PageMeta, base: string): string {
 export function tableDescription(site: Site): string {
     const {ctx} = site;
     if (ctx.season.allTime) return DESCRIPTION;
-    const played = ctx.finished ? `final table after ${matches(ctx.statements.length)}` : `after ${matches(ctx.statements.length)}`;
+    const played = ctx.finished
+        ? `final table after ${matches(ctx.statements.length)}`
+        : `after ${matches(ctx.statements.length)}`;
     return `${seasonTitle(ctx.season)} league table, ${played}: the most powerful men in tech, ranked by the pitchforks their own words raised.`;
 }
 
@@ -84,7 +86,12 @@ export function matchData(site: Site, statement: ScoredStatement): (base: string
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-                {"@type": "ListItem", position: 1, name: "Table", item: `${base}${site.href("table", undefined, site.league.defaultKey)}`},
+                {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Table",
+                    item: `${base}${site.href("table", undefined, site.league.defaultKey)}`,
+                },
                 {"@type": "ListItem", position: 2, name: statement.who.name, item: `${base}${club}`},
                 {"@type": "ListItem", position: 3, name: statement.headline.text},
             ],
