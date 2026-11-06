@@ -188,12 +188,14 @@ describe("settings router", () => {
             expect(res.headers.get("location")).toBe("/admin/settings?done=saved");
         });
 
-        it("refuses an empty or too long token without echoing it", async () => {
+        it("refuses an empty, too long or odd token without echoing it", async () => {
             const long = `${TOKEN}${"x".repeat(4096)}`;
             const cases: Array<[string, string]> = [
                 ["", "Paste the token."],
                 [" \n ", "Paste the token."],
                 [long, "That token is too long."],
+                [`${TOKEN}\u0000`, "That doesn&#39;t look like a token."],
+                [`${TOKEN}æ`, "That doesn&#39;t look like a token."],
             ];
             for (const [value, message] of cases) {
                 const res = await app.post("/admin/settings/claude-token", {claudeToken: value});

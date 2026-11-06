@@ -32,6 +32,7 @@ const ScoutTimeSchema = z.object({scoutTime: z.string().regex(/^([01]\d|2[0-3]):
 
 const EMPTY_TOKEN = "Paste the token.";
 const LONG_TOKEN = "That token is too long.";
+const NOT_A_TOKEN = "That doesn't look like a token.";
 const MAX_TOKEN_LENGTH = 4096;
 
 const currentPath = "/admin/settings";
@@ -94,6 +95,7 @@ export function settingsRouter(
         const token = typeof req.body?.claudeToken === "string" ? req.body.claudeToken.replace(/\s+/g, "") : "";
         if (!token) return send(res, await view(req, {tokenError: EMPTY_TOKEN}), 400);
         if (token.length > MAX_TOKEN_LENGTH) return send(res, await view(req, {tokenError: LONG_TOKEN}), 400);
+        if (!/^[\x21-\x7e]+$/.test(token)) return send(res, await view(req, {tokenError: NOT_A_TOKEN}), 400);
         const saved = await scoutRunner.setClaudeToken(token);
         if (!saved.ok) return send(res, await view(req, {tokenError: SOMETHING_WENT_WRONG}), 500);
         res.redirect(302, withDone(currentPath, "saved"));
