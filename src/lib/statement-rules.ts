@@ -21,7 +21,7 @@ const isText = (value: unknown) => typeof value === "string" && value.trim() !==
 
 const WORKING_NOTES = [
     /\bfetch(?:ed|ing)?\b/i,
-    /\b(?:was|were|blocked,?) not read\b|\bnot read on a page\b/i,
+    /\b(?:page|post|original|article|transcript|episode|video)\b[^.]*\b(?:was|were) not read\b|\bblocked,? not read\b|\bnot read on a page\b/i,
     /(?<![\w-])(?:un)?readable\b/i,
     /\bpaywalled\b/i,
     /\bhttps?\b/i,
@@ -30,7 +30,7 @@ const WORKING_NOTES = [
     /\b(?:so|for|to|let) the lead\b|\bthe lead (?:can|could|should|may|might|will|would|decides?)\b/i,
     /\b(?:because|so|for|by) the brief\b|\bthe brief (?:covers|says|asks|allows|wants)\b/i,
     /\b(?:so|for|to|let) the owner\b|\bthe owner(?:'s call| can| could| should| may| might| will| would| decides?)\b/i,
-    /\b(?:in|to) the dataset\b/i,
+    /\balready in the dataset\b/i,
     /\bprimarySource\b/i,
     /(?:^|[.;(]\s*)(?:the )?date is\b/i,
     /\bMild\./,
