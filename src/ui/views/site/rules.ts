@@ -72,7 +72,7 @@ function laws(site: Site, ceos: Ceo[]): Law[] {
         {
             id: "squad",
             title: "The squad",
-            body: `<p>${esc(`The squad is the ${ceos.length} contenders in the table: the people who run the companies building and selling the biggest AI models and platforms. A place comes with the job, not with anything said; what they say decides only where they finish. The squad can change.`)}</p>`,
+            body: `<p>${esc(`The squad is the ${ceos.length} contenders in the table: the people who lead the biggest AI labs and platforms. A place comes with the job, not with anything said; what they say decides only where they finish. The squad can change.`)}</p>`,
         },
         {
             id: "honours",

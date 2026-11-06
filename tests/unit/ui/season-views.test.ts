@@ -175,9 +175,10 @@ describe("RulesView", () => {
             '<a href="#law-squad" data-law="squad"><span class="law-n">Law 5</span><span>The squad</span></a>'
         );
         expect(html).toContain(
-            "<p>The squad is the 3 contenders in the table: the people who run the companies building and selling the biggest AI models and platforms."
+            "<p>The squad is the 3 contenders in the table: the people who lead the biggest AI labs and platforms."
         );
         expect(html.indexOf('id="law-squad"')).toBeLessThan(html.indexOf('id="law-honours"'));
+        expect(RulesView({site, title: "t", ceos: ceos.slice(0, 2)})).toContain("The squad is the 2 contenders");
     });
 
     it("credits only the contenders with a photo, escaped", async () => {
