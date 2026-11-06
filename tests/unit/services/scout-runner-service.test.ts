@@ -448,6 +448,7 @@ describe("ScoutRunnerService", () => {
                 root: dir,
                 logFile: join(dir, "scout.log"),
                 env: {},
+                tokenKey: KEY,
             });
 
             expect(await service.start({startedBy: "admin@example.com", dryRun: true})).toEqual(success(1));
