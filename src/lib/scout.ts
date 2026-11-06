@@ -91,6 +91,17 @@ export const daysBefore = (iso: string, days: number) => day(new Date(Date.parse
 export const fill = (text: string, values: Record<string, string>) =>
     text.replace(/\{\{(\w+)\}\}/g, (_, key: string) => values[key]);
 
+const attribute = (value: string) => value.replace(/"/g, "%22").replace(/</g, "%3C").replace(/>/g, "%3E");
+
+export function evidence(tag: "page" | "suggestion", attrs: Record<string, string>, body: string): string {
+    const attributes = Object.entries(attrs)
+        .map(([name, value]) => ` ${name}="${attribute(value)}"`)
+        .join("");
+    return `<${tag}${attributes}>\n${body.replace(/<(?=\s*\/?\s*(?:page|suggestion)\b)/gi, "‹")}\n</${tag}>`;
+}
+
+export const topicsLine = (topics: string[]) => (topics.length > 0 ? `from ${topics.join(", ")}` : "an empty list");
+
 export function hostOf(url: string): string {
     try {
         return new URL(url).hostname.replace(/^www\./, "");
