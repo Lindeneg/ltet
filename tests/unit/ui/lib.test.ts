@@ -1,6 +1,8 @@
 import {describe, expect, it} from "vitest";
 import {
     attrs,
+    clip,
+    jsonLd,
     cardDate,
     dayThisYear,
     esc,
@@ -94,5 +96,36 @@ describe("dates", () => {
 
         expect(dayThisYear(Date.UTC(2026, 9, 30), now)).toBe("30 October");
         expect(dayThisYear(Date.UTC(2025, 11, 30), now)).toBe("30 December 2025");
+    });
+});
+
+describe("jsonLd", () => {
+    it("writes every < as its unicode escape, so the data can't leave its script", () => {
+        const html = jsonLd({text: '</script><!-- "x" & y'});
+
+        expect(html).toBe(
+            '<script type="application/ld+json">{"text":"\\u003c/script>\\u003c!-- \\"x\\" & y"}</script>'
+        );
+        expect(JSON.parse(html.slice(35, -9))).toEqual({text: '</script><!-- "x" & y'});
+    });
+});
+
+describe("clip", () => {
+    it("leaves a short text whole, with its spaces flattened", () => {
+        expect(clip(" one\ntwo  three ", 20)).toBe("one two three");
+    });
+
+    it("cuts at a word boundary within the limit, ellipsis included", () => {
+        expect(clip("alpha beta gamma delta", 12)).toBe("alpha beta…");
+        expect(clip("alpha beta gamma delta", 11)).toBe("alpha beta…");
+        expect(clip("alpha beta gamma delta", 10)).toBe("alpha…");
+    });
+
+    it("drops punctuation left at the cut", () => {
+        expect(clip("alpha, beta gamma", 10)).toBe("alpha…");
+    });
+
+    it("cuts a single long word at the limit", () => {
+        expect(clip("abcdefghij", 5)).toBe("abcd…");
     });
 });

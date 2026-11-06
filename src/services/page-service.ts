@@ -3,7 +3,16 @@ import {AppError} from "../lib/errors.js";
 import {seasonKey, seasonStartYear} from "../lib/seasons.js";
 import type {MaybeNull, MaybeUndefined} from "../lib/types.js";
 import {makeSite, seasonShort, SITE_NAME, VIEW_TITLES, type Route, type Site} from "../ui/site.js";
-import {PREVIEW_SLOT, previewTags} from "../ui/components/layout.js";
+import {DESCRIPTION, PREVIEW_SLOT} from "../ui/components/layout.js";
+import {matchPath} from "../ui/components/pieces.js";
+import {
+    matchData,
+    matchDescription,
+    resultsDescription,
+    seoTags,
+    tableDescription,
+    type PageMeta,
+} from "../ui/components/seo.js";
 import {ResultsView, SORTS, type ResultsFilters, type Sort} from "../ui/views/site/results.js";
 import {MatchView} from "../ui/views/site/match.js";
 import {TableView} from "../ui/views/site/table.js";
@@ -31,41 +40,72 @@ class PageService {
         private readonly cache: PageCacheService
     ) {}
 
-    async getTable({season}: SeasonPage, base: string): AsyncResult<string, AppError> {
+    getTable({season}: SeasonPage, base: string): AsyncResult<string, AppError> {
         const front = season === undefined;
-        const html = await this.#render(`table:${season ?? ""}`, season, {view: "table"}, (site) =>
-            TableView({site, title: this.#title(site, VIEW_TITLES.table), preview: front})
-        );
-        if (!html.ok || !front) return html;
-        return success(html.data.replace(PREVIEW_SLOT, previewTags({url: `${base}/`, image: `${base}/og.png`})));
-    }
-
-    getRace({season}: SeasonPage): AsyncResult<string, AppError> {
-        return this.#render(`race:${season ?? ""}`, season, {view: "race"}, (site) =>
-            RaceView({site, title: this.#title(site, VIEW_TITLES.race)})
-        );
-    }
-
-    getHonours({season}: SeasonPage): AsyncResult<string, AppError> {
-        return this.#render(`honours:${season ?? ""}`, season, {view: "honours"}, (site) =>
-            HonoursView({site, title: this.#title(site, VIEW_TITLES.honours)})
+        return this.#render(
+            `table:${season ?? ""}`,
+            season,
+            {view: "table"},
+            (site) => TableView({site, title: this.#title(site, VIEW_TITLES.table)}),
+            (site) => ({
+                title: this.#title(site, VIEW_TITLES.table),
+                description: tableDescription(site),
+                path: site.href("table"),
+                image: front ? "/og.png" : undefined,
+            }),
+            base
         );
     }
 
-    getRules(): AsyncResult<string, AppError> {
-        return this.#render("rules", undefined, {view: "rules"}, (site) =>
-            RulesView({site, title: this.#title(site, VIEW_TITLES.rules), ceos: this.content.get().ceos})
+    getRace({season}: SeasonPage, base: string): AsyncResult<string, AppError> {
+        return this.#render(
+            `race:${season ?? ""}`,
+            season,
+            {view: "race"},
+            (site) => RaceView({site, title: this.#title(site, VIEW_TITLES.race)}),
+            (site) => this.#meta(site, VIEW_TITLES.race, site.href("race")),
+            base
         );
     }
 
-    getClub({season}: SeasonPage, id: string): AsyncResult<string, AppError> {
-        return this.#render(`club:${season ?? ""}:${id}`, season, {view: "club", id}, (site) => {
-            const row = site.ctx.rowById.get(id);
-            return row ? ClubView({site, title: this.#title(site, row.ceo.name), id}) : null;
-        });
+    getHonours({season}: SeasonPage, base: string): AsyncResult<string, AppError> {
+        return this.#render(
+            `honours:${season ?? ""}`,
+            season,
+            {view: "honours"},
+            (site) => HonoursView({site, title: this.#title(site, VIEW_TITLES.honours)}),
+            (site) => this.#meta(site, VIEW_TITLES.honours, site.href("honours")),
+            base
+        );
     }
 
-    async getResults({season}: SeasonPage, query: ResultsQuery): AsyncResult<string, AppError> {
+    getRules(base: string): AsyncResult<string, AppError> {
+        return this.#render(
+            "rules",
+            undefined,
+            {view: "rules"},
+            (site) => RulesView({site, title: this.#title(site, VIEW_TITLES.rules), ceos: this.content.get().ceos}),
+            (site) => this.#meta(site, VIEW_TITLES.rules, "/rules"),
+            base
+        );
+    }
+
+    getClub({season}: SeasonPage, id: string, base: string): AsyncResult<string, AppError> {
+        const name = (site: Site) => site.ctx.rowById.get(id)?.ceo.name;
+        return this.#render(
+            `club:${season ?? ""}:${id}`,
+            season,
+            {view: "club", id},
+            (site) => {
+                const ceo = name(site);
+                return ceo ? ClubView({site, title: this.#title(site, ceo), id}) : null;
+            },
+            (site) => this.#meta(site, name(site) ?? "", site.href("club", id)),
+            base
+        );
+    }
+
+    async getResults({season}: SeasonPage, query: ResultsQuery, base: string): AsyncResult<string, AppError> {
         const ceo = query.ceo || undefined;
         const count = query.count || undefined;
         const sort = (query.sort || "newest") as Sort;
@@ -78,17 +118,37 @@ class PageService {
             `results:${season ?? ""}:${ceo ?? ""}:${count ?? ""}:${sort}`,
             season,
             {view: "results"},
-            (site) => ResultsView({site, title: this.#title(site, VIEW_TITLES.results), filters})
+            (site) => ResultsView({site, title: this.#title(site, VIEW_TITLES.results), filters}),
+            (site) => ({
+                title: this.#title(site, VIEW_TITLES.results),
+                description: resultsDescription(site),
+                path: site.href("results"),
+                robots: ceo || count || sort !== "newest" ? "noindex, follow" : undefined,
+            }),
+            base
         );
     }
 
-    async getMatch(id: string): AsyncResult<string, AppError> {
+    async getMatch(id: string, base: string): AsyncResult<string, AppError> {
         const league = await this.#league();
         if (!league.ok) return league;
         const statement = league.data.byId.get(id);
         if (!statement) return failure(AppError.NOT_FOUND);
-        return this.#render(`match:${id}`, seasonKey(seasonStartYear(statement.time)), {view: "match", id}, (site) =>
-            MatchView({site, title: `${statement.headline.text} · ${SITE_NAME}`, statement})
+        const title = `${statement.headline.text} · ${SITE_NAME}`;
+        return this.#render(
+            `match:${id}`,
+            seasonKey(seasonStartYear(statement.time)),
+            {view: "match", id},
+            (site) => MatchView({site, title, statement}),
+            (site) => ({
+                title,
+                description: matchDescription(statement),
+                path: matchPath(statement.id),
+                article: true,
+                image: `/og/${encodeURIComponent(statement.id)}.png`,
+                data: matchData(site, statement),
+            }),
+            base
         );
     }
 
@@ -100,6 +160,10 @@ class PageService {
     async getServerError(): Promise<string> {
         const site = await this.#defaultSite();
         return ServerErrorView(site);
+    }
+
+    #meta(site: Site, view: string, path: string): PageMeta {
+        return {title: this.#title(site, view), description: DESCRIPTION, path};
     }
 
     #title(site: Site, view: string): string {
@@ -129,20 +193,25 @@ class PageService {
         cacheKey: string,
         season: MaybeUndefined<string>,
         route: Route,
-        render: (site: Site) => MaybeNull<string>
+        render: (site: Site) => MaybeNull<string>,
+        meta: (site: Site) => PageMeta,
+        base: string
     ): AsyncResult<string, AppError> {
         const league = await this.#league();
         if (!league.ok) return league;
         if (season === ALL_TIME_KEY) return failure(AppError.NOT_FOUND);
         if (season !== undefined && !league.data.seasonByKey.has(season)) return failure(AppError.NOT_FOUND);
 
-        const cached = this.cache.get(cacheKey);
-        if (cached) return success(cached);
-
-        const html = render(makeSite(league.data, this.content.get(), season, route));
-        if (html === null) return failure(AppError.NOT_FOUND);
-        this.cache.set(cacheKey, html);
-        return success(html);
+        const site = makeSite(league.data, this.content.get(), season, route);
+        let html = this.cache.get(cacheKey);
+        if (!html) {
+            const rendered = render(site);
+            if (rendered === null) return failure(AppError.NOT_FOUND);
+            html = rendered;
+            this.cache.set(cacheKey, html);
+        }
+        const tags = seoTags(meta(site), base);
+        return success(html.replace(PREVIEW_SLOT, () => tags));
     }
 }
 

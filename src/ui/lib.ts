@@ -91,3 +91,16 @@ export function tickDate({date, datePrecision}: Dated): string {
     const time = dayOf(date);
     return datePrecision === "month" ? shortMonthFormat.format(time) : dayMonthFormat.format(time);
 }
+
+export function jsonLd(data: unknown): string {
+    const json = JSON.stringify(data).replace(/</g, "\\u003c");
+    return `<script type="application/ld+json">${json}</script>`;
+}
+
+export function clip(text: string, max: number): string {
+    const flat = text.replace(/\s+/g, " ").trim();
+    if (flat.length <= max) return flat;
+    const room = max - 1;
+    const end = flat.lastIndexOf(" ", room);
+    return `${flat.slice(0, end > 0 ? end : room).replace(/[\s,;:.–—-]+$/, "")}…`;
+}

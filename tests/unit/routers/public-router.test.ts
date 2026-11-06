@@ -116,6 +116,23 @@ describe("public router", () => {
         expect(pages.getTable).toHaveBeenCalledWith({season: undefined}, "https://ltet.example");
     });
 
+    it("uses the public url as every page's base when it has one", async () => {
+        const app = express();
+        app.use(makePublicRouter({pageService: fake<PageService>(pages), publicUrl: "https://ltet.example"}));
+        const other = await serve(app);
+
+        await Promise.all(
+            ["/results", "/match/x", "/race", "/25-26/honours", "/rules"].map((path) => fetch(other.url + path))
+        );
+        await other.close();
+
+        expect(pages.getResults).toHaveBeenCalledWith({season: undefined}, {}, "https://ltet.example");
+        expect(pages.getMatch).toHaveBeenCalledWith("x", "https://ltet.example");
+        expect(pages.getRace).toHaveBeenCalledWith({season: undefined}, "https://ltet.example");
+        expect(pages.getHonours).toHaveBeenCalledWith({season: "25-26"}, "https://ltet.example");
+        expect(pages.getRules).toHaveBeenCalledWith("https://ltet.example");
+    });
+
     it("passes the results filters on as they come", async () => {
         const res = await get("/25-26/results?ceo=musk&count=doom&sort=pitchforks&utm_source=x");
 
@@ -123,7 +140,8 @@ describe("public router", () => {
         expect(await res.text()).toBe("<p>results</p>");
         expect(pages.getResults).toHaveBeenCalledWith(
             {season: "25-26"},
-            {ceo: "musk", count: "doom", sort: "pitchforks"}
+            {ceo: "musk", count: "doom", sort: "pitchforks"},
+            server.url
         );
     });
 
@@ -138,7 +156,7 @@ describe("public router", () => {
         const res = await get("/match/altman-2025-09-01-statement");
 
         expect(res.status).toBe(200);
-        expect(pages.getMatch).toHaveBeenCalledWith("altman-2025-09-01-statement");
+        expect(pages.getMatch).toHaveBeenCalledWith("altman-2025-09-01-statement", server.url);
     });
 
     it("answers a missing file with a plain 404 rather than the page", async () => {
@@ -177,7 +195,7 @@ describe("public router", () => {
         const res = await get(path);
 
         expect(res.status).toBe(200);
-        expect(pages[method]).toHaveBeenCalledWith({season});
+        expect(pages[method]).toHaveBeenCalledWith({season}, server.url);
     });
 
     it.each([
@@ -190,7 +208,7 @@ describe("public router", () => {
 
         expect(res.status).toBe(200);
         expect(await res.text()).toBe("<p>club</p>");
-        expect(pages.getClub).toHaveBeenCalledWith({season}, "altman");
+        expect(pages.getClub).toHaveBeenCalledWith({season}, "altman", server.url);
     });
 
     it("serves the rules without a season", async () => {
@@ -198,6 +216,7 @@ describe("public router", () => {
 
         expect(res.status).toBe(200);
         expect(await res.text()).toBe("<p>rules</p>");
+        expect(pages.getRules).toHaveBeenCalledWith(server.url);
     });
 
     it.each(["/25-26/rules", "/nope/race", "/club"])("sends the 404 page for %s", async (path) => {

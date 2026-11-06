@@ -78,11 +78,14 @@ describe("TableView", () => {
         expect(html).toMatch(/<td class="col-num col-cat c-[a-z-]+"><i class="dot" aria-hidden="true"><\/i>\d+<\/td>/);
     });
 
-    it("leaves a slot for the front page's preview tags only when asked", async () => {
+    it("leaves a slot for the page's own head tags in place of the site's", async () => {
         const site = await siteFor([makeStatement()]);
 
-        expect(TableView({site, title: "t", preview: true})).toContain("<!--preview-->");
-        expect(TableView({site, title: "t"})).not.toContain("<!--preview-->");
+        const html = TableView({site, title: "t"});
+
+        expect(html).toContain("<!--preview-->");
+        expect(html).not.toContain('name="description"');
+        expect(TableView({site, title: "t", preview: false})).toContain('name="description"');
     });
 
     it("marks the table tab and points every season at the table", async () => {
@@ -176,6 +179,17 @@ describe("error views", () => {
         expect(NotFoundView(site)).not.toContain('class="seasonbar"');
         expect(NotFoundView(site)).not.toContain('class="season-menu"');
         expect(ServerErrorView()).not.toContain('class="seasonbar"');
+    });
+
+    it("keep the site's head tags, with no canonical or structured data", async () => {
+        const site = await siteFor([makeStatement()], undefined, {view: "error"});
+
+        for (const html of [NotFoundView(site), NotFoundView(), ServerErrorView()]) {
+            expect(html).toContain('<meta name="description"');
+            expect(html).not.toContain("<!--preview-->");
+            expect(html).not.toContain("canonical");
+            expect(html).not.toContain("ld+json");
+        }
     });
 });
 

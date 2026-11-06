@@ -61,17 +61,17 @@ export function makePublicRouter({pageService, publicUrl}: PublicDeps): Router {
     seasonal("/results", async (page, req) => {
         const query = stringParams(req, ["ceo", "count", "sort"]);
         if (!query) return failure(AppError.NOT_FOUND);
-        return pageService.getResults(page, query);
+        return pageService.getResults(page, query, baseUrl(req, publicUrl));
     });
 
     router.get("/match/:id", async (req, res) => {
-        await sendResult(res, await pageService.getMatch(req.params.id));
+        await sendResult(res, await pageService.getMatch(req.params.id, baseUrl(req, publicUrl)));
     });
 
-    seasonal("/race", (page) => pageService.getRace(page));
-    seasonal("/honours", (page) => pageService.getHonours(page));
-    seasonal("/club/:id", (page, req) => pageService.getClub(page, req.params.id as string));
-    router.get("/rules", async (_req, res) => sendResult(res, await pageService.getRules()));
+    seasonal("/race", (page, req) => pageService.getRace(page, baseUrl(req, publicUrl)));
+    seasonal("/honours", (page, req) => pageService.getHonours(page, baseUrl(req, publicUrl)));
+    seasonal("/club/:id", (page, req) => pageService.getClub(page, req.params.id as string, baseUrl(req, publicUrl)));
+    router.get("/rules", async (req, res) => sendResult(res, await pageService.getRules(baseUrl(req, publicUrl))));
 
     router.use(async (req, res, next) => {
         if (req.method !== "GET" && req.method !== "HEAD") return next();
