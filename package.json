@@ -1,6 +1,7 @@
 {
     "name": "let-them-eat-tokens",
     "private": true,
+    "license": "MIT",
     "type": "module",
     "description": "The court gazette of artificial intelligence: AI CEOs ranked by the pitchforks their own words raised.",
     "engines": {
