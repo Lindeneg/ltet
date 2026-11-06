@@ -37,6 +37,7 @@ type PageFacts = {
     robots: string[];
     lang: string;
     title: string;
+    h1s: string[];
     description: string;
     canonicals: string[];
     jsonLd: string[];
@@ -69,6 +70,7 @@ function factsOf(res: TestResponse): PageFacts {
         robots: attrs('meta[name="robots"]', "content"),
         lang: doc.documentElement.getAttribute("lang") ?? "",
         title: doc.title.trim(),
+        h1s: [...doc.querySelectorAll("h1")].map((h1) => (h1.textContent ?? "").trim()),
         description: (doc.querySelector('meta[name="description"]')?.getAttribute("content") ?? "").trim(),
         canonicals: attrs('link[rel="canonical"]', "href"),
         jsonLd: [...doc.querySelectorAll('script[type="application/ld+json"]')].map((s) => s.textContent ?? ""),
@@ -99,10 +101,12 @@ describe("seo audit of every page in the sitemap", () => {
         expect(page.lang).toMatch(/^[a-z]{2}/);
     });
 
-    it.each(paths)("%s has a title, a description and its own canonical", (path) => {
+    it.each(paths)("%s has a title, one h1, a description and its own canonical", (path) => {
         const page = pages.get(path)!;
 
         expect(page.title).not.toBe("");
+        expect(page.h1s).toHaveLength(1);
+        expect(page.h1s[0]).not.toBe("");
         expect(page.description).not.toBe("");
         expect(page.canonicals).toEqual([locs.get(path)]);
     });
