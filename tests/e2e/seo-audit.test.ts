@@ -21,6 +21,8 @@ const GENERIC_LINK_TEXT = new Set([
     "this",
 ]);
 
+const FETCH_BATCH = 8;
+
 const sitemap = await get("/sitemap.xml");
 const locs = new Map(
     [...sitemap.html.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => {
@@ -84,9 +86,16 @@ function factsOf(res: TestResponse): PageFacts {
 }
 
 describe("seo audit of every page in the sitemap", () => {
-    beforeAll(async () => {
-        for (const path of paths) pages.set(path, factsOf(await get(path)));
-    }, 60000);
+    beforeAll(
+        async () => {
+            for (let i = 0; i < paths.length; i += FETCH_BATCH) {
+                const batch = paths.slice(i, i + FETCH_BATCH);
+                const responses = await Promise.all(batch.map((path) => get(path)));
+                batch.forEach((path, j) => pages.set(path, factsOf(responses[j])));
+            }
+        },
+        Math.max(60000, paths.length * 500)
+    );
 
     it("lists pages", () => {
         expect(paths.length).toBeGreaterThan(0);
@@ -149,15 +158,24 @@ describe("seo audit of every page in the sitemap", () => {
         expect(quiet.length).toBeGreaterThan(0);
     });
 
-    it("leaves the filtered results view and the share page out of the sitemap and the index", async () => {
+    it.each(["/results?ceo=altman", "/results?count=doom", "/results?sort=pitchforks"])(
+        "keeps the filtered results view %s out of the sitemap and the index",
+        async (path) => {
+            const filtered = await get(path);
+
+            expect(paths).toContain("/results");
+            expect(paths.some((listed) => listed.includes("?"))).toBe(false);
+            expect(filtered.status).toBe(200);
+            expect(filtered.html).toMatch(/<meta name="robots" content="noindex[^"]*">/);
+        }
+    );
+
+    it("keeps the share page out of the sitemap and the index", async () => {
         const [first] = await readSeed();
-        const filtered = await get("/results?ceo=altman");
         const share = await get(`/s/${first.id}`);
 
-        expect(paths.some((path) => path.includes("?") || path.startsWith("/s/"))).toBe(false);
-        expect(filtered.status).toBe(200);
+        expect(paths.some((path) => path.startsWith("/s/"))).toBe(false);
         expect(share.status).toBe(200);
-        expect(filtered.html).toMatch(/<meta name="robots" content="noindex[^"]*">/);
         expect(share.html).toContain(`<meta name="robots" content="noindex">`);
     });
 });
