@@ -194,7 +194,7 @@ A page behind a paywall or a bot wall cannot be fetched; such a statement record
 | `npm run db:studio` | Prisma Studio on the database |
 | `npm run clean` | removes what can be rebuilt; `npm run bootstrap` sets it up again |
 
-The code lives in `src/`: `lib` for the rules and the arithmetic, `repositories` for the queries, `services`, `routers` and `middleware`, and `ui` for the views, which are functions returning HTML. CI runs the build and both test suites on every pull request against `main` and every push to it.
+The code lives in `src/`: `lib` for the rules and the arithmetic, `repositories` for the queries, `services`, `routers` and `middleware`, and `ui` for the views, which are functions returning HTML. CI runs the build, both test suites and a security job (npm audit, gitleaks, semgrep) on every pull request, and a Claude review comments on each. The build and test scripts go through `tools/heavy.mjs`, which waits for a free slot where mingo is installed and runs at once where it isn't.
 
 ## Adding a statement
 

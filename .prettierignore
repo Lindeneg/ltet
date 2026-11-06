@@ -6,4 +6,6 @@ package-lock.json
 prisma/migrations
 *.md
 prisma/seed
-
+.github
+tools/heavy.mjs
+.claude
