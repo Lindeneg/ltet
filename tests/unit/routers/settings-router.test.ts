@@ -12,6 +12,9 @@ describe("settings router", () => {
     let setAuthCookies: Mock;
     let scoutTime: Mock;
     let setScoutTime: Mock;
+    let claudeToken: Mock;
+    let setClaudeToken: Mock;
+    let removeClaudeToken: Mock;
     let app: Awaited<ReturnType<typeof serveAdmin>>;
 
     const good = {
@@ -27,7 +30,16 @@ describe("settings router", () => {
         const auth = fake<AuthService>({changePassword, setAuthCookies});
         scoutTime = vi.fn().mockResolvedValue(success("06:00"));
         setScoutTime = vi.fn().mockResolvedValue(success(undefined));
-        const runner = fake<ScoutRunnerService>({scoutTime, setScoutTime});
+        claudeToken = vi.fn().mockResolvedValue(success({source: "env", unreadable: false}));
+        setClaudeToken = vi.fn().mockResolvedValue(success(undefined));
+        removeClaudeToken = vi.fn().mockResolvedValue(success(undefined));
+        const runner = fake<ScoutRunnerService>({
+            scoutTime,
+            setScoutTime,
+            claudeToken,
+            setClaudeToken,
+            removeClaudeToken,
+        });
         app = await serveAdmin(settingsRouter(auth, fakeProposalService().service, runner));
     });
 
@@ -131,5 +143,94 @@ describe("settings router", () => {
         setScoutTime.mockResolvedValue(failure(AppError.DB_ERROR));
 
         expect((await app.post("/admin/settings/scout", {scoutTime: "07:30"})).status).toBe(500);
+    });
+
+    describe("the claude token", () => {
+        const TOKEN = "sk-ant-oat01-the-pasted-token";
+        const page = async () => (await app.get("/admin/settings")).text();
+
+        it("shows a write only field and says where the token comes from", async () => {
+            const html = await page();
+
+            expect(html).toContain(
+                `<input name="claudeToken" type="password" autocomplete="off" spellcheck="false" required />`
+            );
+            expect(html).toContain("Now from the server's environment.");
+            expect(html).not.toContain("Remove token");
+
+            claudeToken.mockResolvedValue(success({source: "none", unreadable: false}));
+            expect(await page()).toContain("None set, so the scout can't log in to Claude.");
+
+            claudeToken.mockResolvedValue(
+                success({source: "cms", setAt: new Date("2026-11-06T10:00:00Z"), unreadable: false})
+            );
+            const cms = await page();
+            expect(cms).toContain(`Now from the CMS, set <time datetime="2026-11-06T10:00:00.000Z"`);
+            expect(cms).toContain("Remove token");
+        });
+
+        it("asks for the token again when the saved one can't be read", async () => {
+            claudeToken.mockResolvedValue(success({source: "env", unreadable: true}));
+
+            const html = await page();
+
+            expect(html).toContain("The saved token can&#39;t be read, since the server&#39;s secret changed.");
+            expect(html).toContain("Remove token");
+        });
+
+        it("saves the token with all whitespace taken out, and says so", async () => {
+            const res = await app.post("/admin/settings/claude-token", {
+                claudeToken: ` sk-ant-oat01-\nthe-pasted token\n`,
+            });
+
+            expect(setClaudeToken).toHaveBeenCalledWith("sk-ant-oat01-the-pastedtoken");
+            expect(res.status).toBe(302);
+            expect(res.headers.get("location")).toBe("/admin/settings?done=saved");
+        });
+
+        it("refuses an empty, too long or odd token without echoing it", async () => {
+            const long = `${TOKEN}${"x".repeat(4096)}`;
+            const cases: Array<[string, string]> = [
+                ["", "Paste the token."],
+                [" \n ", "Paste the token."],
+                [long, "That token is too long."],
+                [`${TOKEN}\u0000`, "That doesn&#39;t look like a token."],
+                [`${TOKEN}æ`, "That doesn&#39;t look like a token."],
+            ];
+            for (const [value, message] of cases) {
+                const res = await app.post("/admin/settings/claude-token", {claudeToken: value});
+                const html = await res.text();
+                expect(res.status, message).toBe(400);
+                expect(html).toContain(message);
+                expect(html).not.toContain(TOKEN);
+            }
+            expect((await app.post("/admin/settings/claude-token", {})).status).toBe(400);
+            expect(setClaudeToken).not.toHaveBeenCalled();
+        });
+
+        it("answers a failure to save with a 500 that doesn't echo the token", async () => {
+            setClaudeToken.mockResolvedValue(failure(AppError.DB_ERROR));
+
+            const res = await app.post("/admin/settings/claude-token", {claudeToken: TOKEN});
+            const html = await res.text();
+
+            expect(res.status).toBe(500);
+            expect(html).toContain("Something went wrong.");
+            expect(html).not.toContain(TOKEN);
+        });
+
+        it("removes the token and says so, whether one was set or not", async () => {
+            const res = await app.post("/admin/settings/claude-token/remove", {});
+
+            expect(removeClaudeToken).toHaveBeenCalled();
+            expect(res.headers.get("location")).toBe("/admin/settings?done=removed");
+            expect(await (await app.get("/admin/settings?done=removed")).text()).toContain("Removed.");
+        });
+
+        it("answers a failure to remove with a 500", async () => {
+            removeClaudeToken.mockResolvedValue(failure(AppError.DB_ERROR));
+
+            expect((await app.post("/admin/settings/claude-token/remove", {})).status).toBe(500);
+        });
     });
 });

@@ -420,6 +420,58 @@ describe("the scout's time", () => {
     });
 });
 
+describe("the claude token", () => {
+    const TOKEN = "sk-ant-oat01-e2e-token";
+    const stored = async () => (await db.p.setting.findUnique({where: {key: "claudeToken"}}))?.value ?? null;
+
+    it("is saved sealed, never shown again, and removed", async () => {
+        await db.p.setting.deleteMany({where: {key: "claudeToken"}});
+
+        const saved = await postForm("/admin/settings/claude-token", {claudeToken: `${TOKEN}\n`}, cookie);
+
+        expect(saved.location).toBe("/admin/settings?done=saved");
+        const value = await stored();
+        expect(value).not.toBeNull();
+        expect(value).not.toContain(TOKEN);
+        const page = (await get("/admin/settings?done=saved", cookie)).html;
+        expect(page).toContain("Now from the CMS, set");
+        expect(page).toContain("Remove token");
+        expect(page).not.toContain(TOKEN);
+
+        const removed = await postForm("/admin/settings/claude-token/remove", {}, cookie);
+
+        expect(removed.location).toBe("/admin/settings?done=removed");
+        expect(await stored()).toBeNull();
+        expect((await get("/admin/settings", cookie)).html).not.toContain("Now from the CMS");
+        expect((await postForm("/admin/settings/claude-token/remove", {}, cookie)).location).toBe(
+            "/admin/settings?done=removed"
+        );
+    });
+
+    it("asks for it again when the saved one can't be read", async () => {
+        await db.p.setting.upsert({
+            where: {key: "claudeToken"},
+            create: {key: "claudeToken", value: JSON.stringify({sealed: "AAAA", setAt: "2026-11-06T00:00:00Z"})},
+            update: {value: JSON.stringify({sealed: "AAAA", setAt: "2026-11-06T00:00:00Z"})},
+        });
+
+        expect((await get("/admin/settings", cookie)).html).toContain("The saved token can&#39;t be read");
+        await db.p.setting.deleteMany({where: {key: "claudeToken"}});
+    });
+
+    it("refuses an empty paste and a post from elsewhere", async () => {
+        const empty = await postForm("/admin/settings/claude-token", {claudeToken: "  "}, cookie);
+        expect(empty.status).toBe(400);
+        expect(empty.html).toContain("Paste the token.");
+
+        const foreign = await postForm("/admin/settings/claude-token", {claudeToken: TOKEN}, cookie, {
+            origin: "https://evil.example",
+        });
+        expect(foreign.status).toBe(403);
+        expect(await stored()).toBeNull();
+    });
+});
+
 describe("an unknown cms path", () => {
     it("answers 404 inside the cms", async () => {
         const res = await get("/admin/nowhere", cookie);
