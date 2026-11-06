@@ -21,6 +21,7 @@ export function MatchView({site, title, statement}: MatchViewProps): string {
     return SiteLayout({
         title,
         site,
+        tickerPaused: true,
         children: `<section class="view" aria-labelledby="report-headline">
       <article class="report-page">
         <div class="report-frame">

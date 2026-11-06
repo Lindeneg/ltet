@@ -28,38 +28,56 @@ if (ticker) {
     let position = 0;
     let loop = 0;
     let last = 0;
+    let frameId = 0;
     let hovering = false;
     let focused = false;
-    let paused = false;
+    let onScreen = true;
+    let paused = ticker.hasAttribute("data-paused");
     const moving = () => !reduced.matches && !paused && !hovering && !focused && loop > 0;
+    const running = () => moving() && onScreen && !document.hidden;
     const apply = () => {
         belt.style.transform = reduced.matches ? "" : `translate3d(${-position}px, 0, 0)`;
-    };
-    const measure = () => {
-        loop = list.getBoundingClientRect().width;
     };
     const frame = (time) => {
         const elapsed = last ? Math.min(0.1, (time - last) / 1000) : 0;
         last = time;
-        if (moving()) {
-            position = (position + TICKER_SPEED * elapsed) % loop;
-            apply();
+        position = (position + TICKER_SPEED * elapsed) % loop;
+        apply();
+        frameId = requestAnimationFrame(frame);
+    };
+    const sync = () => {
+        if (running() && !frameId) {
+            last = 0;
+            frameId = requestAnimationFrame(frame);
+        } else if (!running() && frameId) {
+            cancelAnimationFrame(frameId);
+            frameId = 0;
         }
-        requestAnimationFrame(frame);
+    };
+    const measure = () => {
+        loop = list.getBoundingClientRect().width;
+        sync();
     };
     new ResizeObserver(measure).observe(list);
+    new IntersectionObserver(([entry]) => {
+        onScreen = entry.isIntersecting;
+        sync();
+    }).observe(ticker);
+    document.addEventListener("visibilitychange", sync);
     measure();
-    requestAnimationFrame(frame);
 
     track.addEventListener("pointerenter", (event) => {
         if (event.pointerType === "touch") return;
         hovering = true;
+        sync();
     });
     track.addEventListener("pointerleave", () => {
         hovering = false;
+        sync();
     });
     track.addEventListener("focusin", (event) => {
         focused = true;
+        sync();
         const link = event.target.closest(".tick");
         rove(links.indexOf(link), false);
         if (!reduced.matches && link) {
@@ -75,6 +93,7 @@ if (ticker) {
     track.addEventListener("focusout", (event) => {
         if (track.contains(event.relatedTarget)) return;
         focused = false;
+        sync();
     });
     // the belt moves and not the track, so the scroll a focused link would cause is undone
     track.addEventListener("scroll", () => {
@@ -89,8 +108,12 @@ if (ticker) {
     toggle.addEventListener("click", () => {
         paused = !paused;
         paintToggle();
+        sync();
     });
-    reduced.addEventListener("change", apply);
+    reduced.addEventListener("change", () => {
+        apply();
+        sync();
+    });
     paintToggle();
     apply();
 }
