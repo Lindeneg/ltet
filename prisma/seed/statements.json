@@ -59,7 +59,7 @@
         "reason": "Contrite in tone."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 3,
         "reason": "'Weighs heavily on me', in a memo that pivots to AI."
       },
       "hypocrisy": {
@@ -141,7 +141,7 @@
         "reason": "Google, made to dance."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "A taunt on launch day."
       },
       "hypocrisy": {
@@ -217,8 +217,8 @@
         "reason": "'There's no way around that.'"
       },
       "tone-deafness": {
-        "score": 3,
-        "reason": "The 'Year of Efficiency'; investors cheered."
+        "score": 4,
+        "reason": "10,000 jobs, billed as the 'Year of Efficiency'; investors cheered."
       },
       "hypocrisy": {
         "score": 0,
@@ -300,7 +300,7 @@
         "reason": "We don't understand the human mind either."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "The answer to 'you've turned it loose on society?'"
       },
       "hypocrisy": {
@@ -442,7 +442,7 @@
         "reason": "Polite, to a friendly committee."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Asking to be regulated by the agency he designs."
       },
       "hypocrisy": {
@@ -510,7 +510,7 @@
         "reason": "Comply with us or we leave, said to a continent of 450 million."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "Read as an ultimatum to lawmakers; walked back within a day."
       },
       "hypocrisy": {
@@ -587,8 +587,8 @@
         "reason": "The people it replaces: 'median humans'."
       },
       "tone-deafness": {
-        "score": 4,
-        "reason": "The profile's own author flagged it as tech-bubble tone."
+        "score": 3,
+        "reason": "The people his product would replace, summed up as 'median'."
       },
       "hypocrisy": {
         "score": 0,
@@ -657,7 +657,7 @@
         "reason": "Lower case, casual."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "'Some very strange outcomes', left unexplained."
       },
       "hypocrisy": {
@@ -799,7 +799,7 @@
         "reason": "Said with nuance."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Augmentation first, replacement later."
       },
       "hypocrisy": {
@@ -860,7 +860,7 @@
         "reason": "Open, 'as responsibly' as he decides."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Announced with 350,000 H100s on order."
       },
       "hypocrisy": {
@@ -938,7 +938,7 @@
         "reason": "'Everybody in the world is now a programmer.'"
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "Said to governments planning their schools."
       },
       "hypocrisy": {
@@ -1012,7 +1012,7 @@
         "reason": "Agreeing with Hinton, then not."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "Up to a one-in-five chance of ending humanity: worth it."
       },
       "hypocrisy": {
@@ -1142,7 +1142,7 @@
         "reason": "Rivals' chips are not worth taking for free."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "A boast that doubled as a price tag."
       },
       "hypocrisy": {
@@ -1207,7 +1207,7 @@
         "reason": "'Don't take this too literally.'"
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "A new species, introduced at TED."
       },
       "hypocrisy": {
@@ -1344,7 +1344,7 @@
         "reason": "One word, but it said enough."
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 4,
         "reason": "A wink at the film after the actor had said no."
       },
       "hypocrisy": {
@@ -1499,8 +1499,8 @@
         "reason": "'Creepy' answered with 'trust'."
       },
       "tone-deafness": {
-        "score": 4,
-        "reason": "Called it 'a magical thing'."
+        "score": 3,
+        "reason": "Called it 'a magical thing' while users called it creepy."
       },
       "hypocrisy": {
         "score": 2,
@@ -1654,7 +1654,7 @@
         "reason": "Apple's privacy explanation, waved away."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "A rival's deal, declared a security violation."
       },
       "hypocrisy": {
@@ -1802,7 +1802,7 @@
         "reason": "Confident as ever."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "'Shocked' is doing a lot of work."
       },
       "hypocrisy": {
@@ -1864,7 +1864,7 @@
         "reason": "Gamers told the future is inferred."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "'And so we hallucinate, if you will, the other 32.'"
       },
       "hypocrisy": {
@@ -1941,7 +1941,7 @@
         "reason": "The '(!)' is doing a lot of work."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "A new unit of time, coined while raising billions."
       },
       "hypocrisy": {
@@ -2089,7 +2089,7 @@
         "reason": "'In your corner', whether you asked or not."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "Users: 'It tries to be my friend when I need it to be a tool.'"
       },
       "hypocrisy": {
@@ -2168,7 +2168,7 @@
         "reason": "'Please be nice to the Optimus robots.'"
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Showbiz on a Hollywood lot."
       },
       "hypocrisy": {
@@ -2240,7 +2240,7 @@
         "reason": "A 'country of geniuses in a datacenter', population: his product."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "About 15,000 words of techno-optimism."
       },
       "hypocrisy": {
@@ -2310,7 +2310,7 @@
         "reason": "Plain enough."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Good news for the earnings call."
       },
       "hypocrisy": {
@@ -2387,7 +2387,7 @@
         "reason": "'Very exciting', for Facebook."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "Announced to investors on an earnings call."
       },
       "hypocrisy": {
@@ -2468,7 +2468,7 @@
         "reason": "Gamers can count frames."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "'Impossible without artificial intelligence.'"
       },
       "hypocrisy": {
@@ -2535,7 +2535,7 @@
         "reason": "Offhand."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "An industry's timeline, set from another industry's stage."
       },
       "hypocrisy": {
@@ -2608,7 +2608,7 @@
         "reason": "Framed as augmentation."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "Told to millions of listeners, engineers among them."
       },
       "hypocrisy": {
@@ -2767,7 +2767,7 @@
         "reason": "Hedged as 'not a very exact science'."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 1,
         "reason": "Doubling the human lifespan, forecast at Davos."
       },
       "hypocrisy": {
@@ -2921,7 +2921,7 @@
         "reason": "Plainly put."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Six months later, critics checked."
       },
       "hypocrisy": {
@@ -3058,7 +3058,7 @@
         "reason": "'Far more than just a piece of software.'"
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "An overly attached companion, as PC Gamer put it."
       },
       "hypocrisy": {
@@ -3135,7 +3135,7 @@
         "reason": "Gentle."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "All disease, within a decade, on 60 Minutes."
       },
       "hypocrisy": {
@@ -3204,7 +3204,7 @@
         "reason": "Your manners, priced in dollars."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Joked about tens of millions while others counted the power bill."
       },
       "hypocrisy": {
@@ -3292,7 +3292,7 @@
         "reason": "Your friend count, diagnosed by the man who runs Facebook."
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 4,
         "reason": "Loneliness as a market opportunity."
       },
       "hypocrisy": {
@@ -3353,7 +3353,7 @@
         "reason": "Humans make mistakes too."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "The model's errors, defended by pointing at yours."
       },
       "hypocrisy": {
@@ -3433,7 +3433,7 @@
         "reason": "'Most of them are unaware that this is about to happen.'"
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "A bloodbath, announced by its supplier."
       },
       "hypocrisy": {
@@ -3559,7 +3559,7 @@
         "reason": "Faith in humanity, offered as a plan."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "Optimistic about doom."
       },
       "hypocrisy": {
@@ -3692,7 +3692,7 @@
         "reason": "Said with a laugh."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "A question about outages, answered with the Earth's power supply."
       },
       "hypocrisy": {
@@ -3763,7 +3763,7 @@
         "reason": "'Far too much garbage' in what humanity wrote."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "Announced days after Grok contradicted his own claims."
       },
       "hypocrisy": {
@@ -3831,7 +3831,7 @@
         "reason": "'Smarter than almost all graduate students in all disciplines.'"
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 3,
         "reason": "Said a day after xAI removed Grok's antisemitic posts."
       },
       "hypocrisy": {
@@ -3896,7 +3896,7 @@
         "reason": "The users made it do it."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 3,
         "reason": "'Too eager to please', of a chatbot that called itself 'MechaHitler'."
       },
       "hypocrisy": {
@@ -3958,7 +3958,7 @@
         "reason": "Matter of fact."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 1,
         "reason": "Illustrated with a map of Manhattan."
       },
       "hypocrisy": {
@@ -4020,7 +4020,7 @@
         "reason": "Candid, to his staff."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "'No bad person should ever benefit' is 'a pretty difficult principle to run a business on'."
       },
       "hypocrisy": {
@@ -4229,7 +4229,7 @@
         "reason": "Everyone without his product, at a 'cognitive disadvantage'."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 1,
         "reason": "Said on an earnings call, about a product he sells."
       },
       "hypocrisy": {
@@ -4311,7 +4311,7 @@
         "reason": "The rivals' plan, reduced to 'a dole'."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "Superintelligence for everyone, in a letter signed 'Mark'."
       },
       "hypocrisy": {
@@ -4445,7 +4445,7 @@
         "reason": "AI welfare research: 'frankly dangerous'."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "A lecture to the field."
       },
       "hypocrisy": {
@@ -4655,7 +4655,7 @@
         "reason": "Critics recast as would-be police."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "Erotica as the flagship of adult freedom."
       },
       "hypocrisy": {
@@ -4719,7 +4719,7 @@
         "reason": "Then told an OpenAI researcher not to call himself a 'researcher'."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "AGI by the next version, probability 'rising'."
       },
       "hypocrisy": {
@@ -4793,7 +4793,7 @@
         "reason": "Proxy advisers as 'corporate terrorists'."
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 3,
         "reason": "'Building a robot army' as the reason for the pay."
       },
       "hypocrisy": {
@@ -4861,7 +4861,7 @@
         "reason": "'Several orders of magnitude' better, on day one."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "'We will never be perfect', in the same breath as the boast."
       },
       "hypocrisy": {
@@ -4924,7 +4924,7 @@
         "reason": "A fair question answered with an offer to buy him out."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "'Enough', about $1 trillion of commitments."
       },
       "hypocrisy": {
@@ -4992,7 +4992,7 @@
         "reason": "Matter of fact."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "Chips piling up for want of power: 'that is my problem today'."
       },
       "hypocrisy": {
@@ -5066,7 +5066,7 @@
         "reason": "'But other than that you get to do anything.'"
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "'You don't have to put people in prisons and stuff, I think.'"
       },
       "hypocrisy": {
@@ -5128,7 +5128,7 @@
         "reason": "Humble in tone."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Deeply uncomfortable, and still in charge."
       },
       "hypocrisy": {
@@ -5202,7 +5202,7 @@
         "reason": "Fact-checking is your job now."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "Said by the man selling the answers."
       },
       "hypocrisy": {
@@ -5350,7 +5350,7 @@
         "reason": "'Jeez there so many cynics!'"
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 4,
         "reason": "Snake on a Nokia, offered as an argument."
       },
       "hypocrisy": {
@@ -5495,7 +5495,7 @@
         "reason": "Users blamed again."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "'Absurdly positive things about me', fitter than LeBron James."
       },
       "hypocrisy": {
@@ -5569,7 +5569,7 @@
         "reason": "Five words."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 3,
         "reason": "Texting while driving is illegal in nearly every state."
       },
       "hypocrisy": {
@@ -5637,7 +5637,7 @@
         "reason": "Generations raised children without it, as he conceded."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "Said on late-night television, to millions of parents."
       },
       "hypocrisy": {
@@ -5727,8 +5727,8 @@
         "reason": "The public, asked to 'get beyond the arguments of slop'."
       },
       "tone-deafness": {
-        "score": 5,
-        "reason": "The internet replied with 'Microslop'."
+        "score": 3,
+        "reason": "Told users to move past 'slop' while they asked for a way to turn it off."
       },
       "hypocrisy": {
         "score": 0,
@@ -5804,7 +5804,7 @@
         "reason": "'Don't worry about squirreling money away.'"
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 4,
         "reason": "Financial advice from the richest man alive."
       },
       "hypocrisy": {
@@ -5879,7 +5879,7 @@
         "reason": "Concern, recast as damage."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "'Not helpful', four times in a row."
       },
       "hypocrisy": {
@@ -5950,7 +5950,7 @@
         "reason": "Only on user request, he noted."
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 4,
         "reason": "'Literally zero', after days of reports."
       },
       "hypocrisy": {
@@ -6100,7 +6100,7 @@
         "reason": "Five words, aimed at a rival."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "Shared death figures that Forbes said could not be verified."
       },
       "hypocrisy": {
@@ -6180,7 +6180,7 @@
         "reason": "Fair warning, mostly."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "'Social permission', discussed at Davos."
       },
       "hypocrisy": {
@@ -6258,7 +6258,7 @@
         "reason": "People of lower intellectual ability, and where they will go."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "Some 22,000 words; one critic read it as a plea against regulation."
       },
       "hypocrisy": {
@@ -6321,7 +6321,7 @@
         "reason": "'We are not stupid.'"
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "About 420 words in reply to a joke."
       },
       "hypocrisy": {
@@ -6394,7 +6394,7 @@
         "reason": "Careful phrasing."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Unsure whether the product is conscious."
       },
       "hypocrisy": {
@@ -6474,7 +6474,7 @@
         "reason": "Plainly put."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "Delivered to the Financial Times's white-collar readers."
       },
       "hypocrisy": {
@@ -6552,7 +6552,7 @@
         "reason": "Human childhood as a training run."
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 4,
         "reason": "Compared raising a person to training a model."
       },
       "hypocrisy": {
@@ -6701,7 +6701,7 @@
         "reason": "People 'buy it from us'."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "The meter, said aloud at an investors' infrastructure summit."
       },
       "hypocrisy": {
@@ -6760,7 +6760,7 @@
         "reason": "Plain enough."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Rebuilt from the foundations, as co-founders left."
       },
       "hypocrisy": {
@@ -6909,7 +6909,7 @@
         "reason": "'They're completely wrong.'"
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "Said about his own customers, a day after the reveal."
       },
       "hypocrisy": {
@@ -6989,7 +6989,7 @@
         "reason": "'Deeply alarmed' at engineers who spend too little."
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 2,
         "reason": "A token budget as a recruiting perk, from the man who sells the chips behind the tokens."
       },
       "hypocrisy": {
@@ -7057,7 +7057,7 @@
         "reason": "The good news: you will be busier."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 3,
         "reason": "Harassment by agents, pitched as job security."
       },
       "hypocrisy": {
@@ -7140,7 +7140,7 @@
         "reason": "'Fully autonomous digital task forces'."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Staff mocked the tools on internal meme boards weeks later."
       },
       "hypocrisy": {
@@ -7220,7 +7220,7 @@
         "reason": "None."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "Asked about his robot army, answered with extinction; the judge called a break."
       },
       "hypocrisy": {
@@ -7294,7 +7294,7 @@
         "reason": "Staff as 'people-oriented things'."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 5,
         "reason": "Two cost centres: the computers and the people."
       },
       "hypocrisy": {
@@ -7363,7 +7363,7 @@
         "reason": "Optimism about the next generation, from above."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "Asked for his 'boo strategy'."
       },
       "hypocrisy": {
@@ -7516,7 +7516,7 @@
         "reason": "A data center, as thirsty as a single restaurant."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "A comparison made for the brochure."
       },
       "hypocrisy": {
@@ -7579,7 +7579,7 @@
         "reason": "The first new social norm: everyone uses AI."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "The chip seller's advice: use more."
       },
       "hypocrisy": {
@@ -7642,8 +7642,8 @@
         "reason": "Peers told what they cannot say."
       },
       "tone-deafness": {
-        "score": 2,
-        "reason": "A lecture from a fellow builder."
+        "score": 0,
+        "reason": "Takes the public's side on jobs and power."
       },
       "hypocrisy": {
         "score": 3,
@@ -7705,7 +7705,7 @@
         "reason": "'Anyone can have anything they can think of.'"
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "Abundance, still undefined a year later, per TechCrunch."
       },
       "hypocrisy": {
@@ -7767,7 +7767,7 @@
         "reason": "Mostly a mood."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "Declared days after an agent broke out of its sandbox."
       },
       "hypocrisy": {
@@ -7892,7 +7892,7 @@
         "reason": "Your children's day, summarised for you."
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 2,
         "reason": "The internet's reply: 'Just talk to your children'."
       },
       "hypocrisy": {
@@ -7962,7 +7962,7 @@
         "reason": "Your relationships, improved 24/7 on your behalf."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 1,
         "reason": "6,500 words; critics called it exactly why people don't like AI."
       },
       "hypocrisy": {
@@ -8024,7 +8024,7 @@
         "reason": "You choose what it sees, he says."
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 2,
         "reason": "Pitched as a feature."
       },
       "hypocrisy": {
@@ -8106,7 +8106,7 @@
         "reason": "'As crazy as it may sound to ordinary people.'"
       },
       "tone-deafness": {
-        "score": 4,
+        "score": 1,
         "reason": "Doctors called it 'wildly off-base and impossible'."
       },
       "hypocrisy": {
@@ -8184,7 +8184,7 @@
         "reason": "Plain enough."
       },
       "tone-deafness": {
-        "score": 2,
+        "score": 1,
         "reason": "'Clearly, people hate data centers.'"
       },
       "hypocrisy": {
@@ -8258,7 +8258,7 @@
         "reason": "Measured."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "Largely agrees AI could kill us all; back to work on Monday."
       },
       "hypocrisy": {
@@ -8327,7 +8327,7 @@
         "reason": "'Scaring people is unnecessary. It is irresponsible.'"
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "Zero percent, to the decimal."
       },
       "hypocrisy": {
@@ -8404,7 +8404,7 @@
         "reason": "'Does it matter?'"
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 4,
         "reason": "He added that he does not know his own address or phone number."
       },
       "hypocrisy": {
@@ -8481,7 +8481,7 @@
         "reason": "Plain enough."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 1,
         "reason": "Grey kittens on grey tarmac, from the cameras-only company."
       },
       "hypocrisy": {
@@ -8558,7 +8558,7 @@
         "reason": "Safety people, recast as the 'stricter' ones."
       },
       "tone-deafness": {
-        "score": 5,
+        "score": 4,
         "reason": "'Accept some bad things happening', from the man selling the benefits."
       },
       "hypocrisy": {
@@ -8620,7 +8620,7 @@
         "reason": "Self-deprecating."
       },
       "tone-deafness": {
-        "score": 3,
+        "score": 2,
         "reason": "A joke about what chatbots can do to users' minds."
       },
       "hypocrisy": {

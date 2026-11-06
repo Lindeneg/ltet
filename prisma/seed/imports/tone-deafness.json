@@ -1,0 +1,879 @@
+{
+    "edits": [
+        {
+            "id": "pichai-2023-01-12000-layoffs-full-responsibility",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 3
+                }
+            }
+        },
+        {
+            "id": "nadella-2023-02-made-them-dance",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "zuckerberg-2023-03-year-of-efficiency-10000-layoffs-memo",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 4
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "The 'Year of Efficiency'; investors cheered.",
+                    "to": "10,000 jobs, billed as the 'Year of Efficiency'; investors cheered."
+                }
+            }
+        },
+        {
+            "id": "pichai-2023-04-60-minutes-human-mind",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "altman-2023-05-senate-licensing-agency",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2023-05-eu-cease-operating",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "altman-2023-09-median-human",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 3
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "The profile's own author flagged it as tech-bubble tone.",
+                    "to": "The people his product would replace, summed up as 'median'."
+                }
+            }
+        },
+        {
+            "id": "altman-2023-10-superhuman-persuasion",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "suleyman-2024-01-davos-labor-replacing-tools",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "zuckerberg-2024-01-open-source-agi",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "huang-2024-02-nobody-has-to-program",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "musk-2024-03-ai-annihilation-10-20-percent",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "huang-2024-03-free-chips-not-cheap-enough",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "suleyman-2024-04-ted-new-digital-species",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2024-05-her",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 4
+                }
+            }
+        },
+        {
+            "id": "nadella-2024-05-recall-photographic-memory",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 3
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "Called it 'a magical thing'.",
+                    "to": "Called it 'a magical thing' while users called it creepy."
+                }
+            }
+        },
+        {
+            "id": "musk-2024-06-apple-openai-ban",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "musk-2024-07-fsd-shocked-next-year",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "huang-2024-09-compute-one-pixel-infer-32",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2024-09-few-thousand-days",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "suleyman-2024-10-copilot-real-friend",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "musk-2024-10-optimus-walk-among-you",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "amodei-2024-10-machines-of-loving-grace",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "pichai-2024-10-quarter-of-new-code",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "zuckerberg-2024-10-new-category-ai-generated-content",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "huang-2025-01-rtx5070-4090-performance",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "huang-2025-01-quantum-15-to-30-years",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "zuckerberg-2025-01-rogan-ai-mid-level-engineer",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "amodei-2025-01-davos-double-human-lifespan",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "amodei-2025-03-ai-writes-90-percent-of-code",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "suleyman-2025-04-copilot-companion-lasting-relationship",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "hassabis-2025-04-60-minutes-cure-all-disease-decade",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2025-04-please-thank-you",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "zuckerberg-2025-04-ai-friends-fewer-than-three",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 4
+                }
+            }
+        },
+        {
+            "id": "amodei-2025-05-hallucinate-less-than-humans",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "amodei-2025-05-white-collar-bloodbath",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "pichai-2025-06-fridman-underlying-risk-pretty-high",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2025-06-amd-power-on-earth",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "musk-2025-06-grok-rewrite-human-knowledge",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "musk-2025-07-grok-4-smarter-than-grad-students",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 3
+                }
+            }
+        },
+        {
+            "id": "musk-2025-07-grok-too-compliant",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 3
+                }
+            }
+        },
+        {
+            "id": "zuckerberg-2025-07-hyperion-covers-part-of-manhattan",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "amodei-2025-07-gulf-money-leaked-memo",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "zuckerberg-2025-07-ai-glasses-cognitive-disadvantage",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "zuckerberg-2025-07-personal-superintelligence-dole",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "suleyman-2025-08-seemingly-conscious-ai-premature-and-dangerous",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2025-10-moral-police",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "musk-2025-10-grok-5-agi-10-percent",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "musk-2025-10-robot-army-pay-package",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 3
+                }
+            }
+        },
+        {
+            "id": "musk-2025-10-grokipedia-orders-of-magnitude",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2025-11-sell-your-shares",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "nadella-2025-10-bg2-chips-i-cant-plug-in-warm-shells",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "musk-2025-11-optimus-follow-criminals",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "amodei-2025-11-60-minutes-deeply-uncomfortable",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "pichai-2025-11-bbc-dont-blindly-trust-ai",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "suleyman-2025-11-so-many-cynics",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 4
+                }
+            }
+        },
+        {
+            "id": "musk-2025-11-grok-adversarial-prompting-praise",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "musk-2025-12-fsd-texting-while-driving",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 3
+                }
+            }
+        },
+        {
+            "id": "altman-2025-12-newborn-fallon",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "nadella-2025-12-slop-vs-sophistication",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 3
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "The internet replied with 'Microslop'.",
+                    "to": "Told users to move past 'slop' while they asked for a way to turn it off."
+                }
+            }
+        },
+        {
+            "id": "musk-2026-01-dont-save-for-retirement",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 4
+                }
+            }
+        },
+        {
+            "id": "huang-2026-01-doomer-narrative-not-helpful",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "musk-2026-01-grok-literally-zero",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 4
+                }
+            }
+        },
+        {
+            "id": "musk-2026-01-dont-let-loved-ones-use-chatgpt",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "nadella-2026-01-davos-social-permission",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "amodei-2026-01-adolescence-of-technology",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "altman-2026-02-super-bowl-ads",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "amodei-2026-02-claude-might-be-conscious",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "suleyman-2026-02-white-collar-work-automated-18-months",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "altman-2026-02-train-a-human",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 4
+                }
+            }
+        },
+        {
+            "id": "altman-2026-03-intelligence-on-a-meter",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "musk-2026-03-xai-not-built-right",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "huang-2026-03-dlss5-completely-wrong",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "huang-2026-03-tokens-deeply-alarmed",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "huang-2026-04-agents-micromanaging-you",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 3
+                }
+            }
+        },
+        {
+            "id": "pichai-2026-04-75-percent-new-code",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "musk-2026-04-terminator-situation-testimony",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "zuckerberg-2026-04-layoffs-two-cost-centers",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 5
+                }
+            }
+        },
+        {
+            "id": "pichai-2026-05-hard-fork-boo-strategy",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "nadella-2026-06-build-water-single-restaurant",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "huang-2026-06-social-norms-just-go-engage-it",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "nadella-2026-06-wsj-white-collar-weapon",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 0
+                },
+                "scores.tone-deafness.reason": {
+                    "from": "A lecture from a fellow builder.",
+                    "to": "Takes the public's side on jobs and power."
+                }
+            }
+        },
+        {
+            "id": "musk-2026-07-economist-ai-better-than-humans",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2026-07-singularity",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2026-07-parenting-podcast",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "zuckerberg-2026-08-essay-personal-agent-relationships",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2026-08-screen-watching",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 2
+                }
+            }
+        },
+        {
+            "id": "amodei-2026-08-x-reply-cure-most-disease-5-10-years",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 4,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2026-08-data-centers-hate",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 2,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "amodei-2026-09-agrees-with-coxon-ai-could-kill-us-all",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "huang-2026-09-zero-percent-chance-end-of-world",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "huang-2026-09-klein-basic-math-does-it-matter",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 4
+                }
+            }
+        },
+        {
+            "id": "musk-2026-10-robotaxi-grey-kittens",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 1
+                }
+            }
+        },
+        {
+            "id": "altman-2026-10-bad-things",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 5,
+                    "to": 4
+                }
+            }
+        },
+        {
+            "id": "musk-2026-10-ai-psychosis",
+            "set": {
+                "scores.tone-deafness.score": {
+                    "from": 3,
+                    "to": 2
+                }
+            }
+        }
+    ]
+}
