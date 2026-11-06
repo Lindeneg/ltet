@@ -185,6 +185,16 @@ if (report) {
         }
     };
 
+    // the headline is the page's h1 and sits under the list view's own h1 in the dialog
+    const demoteHeadline = (root) => {
+        const h1 = root.querySelector("h1.rp-headline");
+        if (!h1) return;
+        const h2 = root.ownerDocument.createElement("h2");
+        for (const attr of h1.attributes) h2.setAttribute(attr.name, attr.value);
+        h2.append(...h1.childNodes);
+        h1.replaceWith(h2);
+    };
+
     const champions = (report.dataset.champions ?? "").split(" ").filter(Boolean);
     const clubPath = report.dataset.clubPath;
     const followSeason = (root) => {
@@ -205,6 +215,7 @@ if (report) {
         const page = new DOMParser().parseFromString(await response.text(), "text/html");
         const found = page.querySelector("[data-report-body]");
         if (!found) throw new Error("no report");
+        demoteHeadline(found);
         prefixIds(found);
         bodies.set(id, found.innerHTML);
         return found.innerHTML;

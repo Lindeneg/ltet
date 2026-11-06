@@ -69,6 +69,12 @@ describe("previews router", () => {
         expect(html).toContain(`<meta property="og:url" content="${server.url}/s/musk-one">`);
         expect(html).toContain(`<meta property="og:image" content="${server.url}/og/musk-one.png">`);
         expect(html).toContain(`<meta property="og:image:width" content="1200">`);
+        expect(html).toMatch(
+            /<meta property="og:image:alt" content="Elon Musk: “&lt;Big&gt; &quot;news&quot;”, 1 pitchfork of \d+">/
+        );
+        expect(html).toMatch(
+            /<meta name="twitter:image:alt" content="Elon Musk: “&lt;Big&gt; &quot;news&quot;”, 1 pitchfork of \d+">/
+        );
         expect(html).toContain(`<meta http-equiv="refresh" content="0; url=/match/musk-one">`);
         expect(html).toContain(`<a href="/match/musk-one">Read what Elon Musk actually said</a>`);
         expect(html).toContain(`<meta name="robots" content="noindex">`);

@@ -4,6 +4,8 @@ import type ContentService from "../services/content-service.js";
 import type LeagueService from "../services/league-service.js";
 import type {League} from "../services/league-service.js";
 import PreviewService, {OG_HEIGHT, OG_WIDTH} from "../services/preview-service.js";
+import {maxPitchforks} from "../lib/score.js";
+import {matchImageAlt} from "../ui/components/seo.js";
 import {ShareView} from "../ui/views/site/share.js";
 
 const IMAGE_MAX_AGE_SECONDS = 86_400;
@@ -42,14 +44,20 @@ export function makePreviewsRouter({leagueService, previewService, content, publ
             statement.quote.length > DESCRIPTION_QUOTE_CHARS
                 ? `${statement.quote.slice(0, DESCRIPTION_QUOTE_CHARS).trimEnd()}…`
                 : statement.quote;
-        const {unit: units} = content.get().rubric;
+        const {rubric} = content.get();
+        const units = rubric.unit;
         const unit = statement.forks === 1 ? units.one : units.many;
         send(
             res,
             ShareView({
                 statement,
                 url: `${base}/s/${statement.id}`,
-                image: {url: `${base}/og/${statement.id}.png`, width: OG_WIDTH, height: OG_HEIGHT},
+                image: {
+                    url: `${base}/og/${statement.id}.png`,
+                    width: OG_WIDTH,
+                    height: OG_HEIGHT,
+                    alt: matchImageAlt(statement, unit, maxPitchforks(rubric)),
+                },
                 description: `${statement.forks} ${unit}. “${quote}” ${statement.who.name}, ${dayFormat.format(new Date(statement.time))}.`,
                 target: `/match/${encodeURIComponent(statement.id)}`,
                 canonical: `${base}/match/${encodeURIComponent(statement.id)}`,
