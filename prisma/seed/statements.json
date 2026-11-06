@@ -124,7 +124,7 @@
       }
     ],
     "backlash": {
-      "summary": "Mild and mostly retrospective. Contemporary commentary called it a playful-but-serious taunt, and Google's stock fell after its own Bard demo error that week; OfficeChai (2026-04-30) mocks the line as having aged badly ('Google sure seems to be dancing', market cap up 4x). No public outrage found.",
+      "summary": "Contemporary commentary called it a playful-but-serious taunt, and Google's stock fell after its own Bard demo error that week; OfficeChai (2026-04-30) mocks the line as having aged badly ('Google sure seems to be dancing', market cap up 4x).",
       "url": "https://officechai.com/ai/googles-market-cap-is-up-4x-since-microsoft-ceo-satya-nadellas-comment-about-making-them-dance/"
     },
     "backlashStrength": "critical commentary",
@@ -200,7 +200,7 @@
       }
     ],
     "backlash": {
-      "summary": "Mild and indirect. When the cuts began in April, Fortune (citing Reuters) reported employees venting in internal chats: 'You’ve shattered the morale and confidence in leadership of many high performers who work with intensity. Why should we stay at Meta?' The same Fortune/Yahoo piece of 14 March notes that investors received the efficiency push well. The reaction is to the layoffs the memo announced rather than to a single line.",
+      "summary": "When the cuts began in April, Fortune (citing Reuters) reported employees venting in internal chats: 'You’ve shattered the morale and confidence in leadership of many high performers who work with intensity. Why should we stay at Meta?' The same Fortune/Yahoo piece of 14 March notes that investors received the efficiency push well. The reaction is to the layoffs the memo announced rather than to a single line.",
       "url": "https://fortune.com/2023/04/20/meta-employees-tech-layoffs-mark-zuckerberg-morale-confidence"
     },
     "backlashStrength": "critical commentary",
@@ -248,7 +248,7 @@
       "url": "https://www.cbsnews.com/news/google-artificial-intelligence-future-60-minutes-transcript-2023-04-16/",
       "kind": "transcript"
     },
-    "context": "Pichai had called the way large models work a 'black box' that even people in the field cannot fully explain. Pelley then asked: 'You don't fully understand how it works. And yet, you've turned it loose on society?' Pichai answered with this line. The CBS page returned an error to the fetch, so the wording was confirmed on Rev's transcript of the broadcast and in four news reports.",
+    "context": "Pichai had called the way large models work a 'black box' that even people in the field cannot fully explain. Pelley then asked: 'You don't fully understand how it works. And yet, you've turned it loose on society?' Pichai answered with this line.",
     "sources": [
       {
         "outlet": "Fox News",
@@ -282,7 +282,7 @@
       }
     ],
     "backlash": {
-      "summary": "Linguist Emily Bender called the interview 'painful to watch' and said the 'we don't understand humans either' move is how boosters 'evade accountability or ... sell their system as some mysterious, magical, autonomous being'; other researchers, among them Margaret Mitchell and Abeba Birhane, disputed the segment's claims. Reported by Fox News (2023-04-20) and AIwire (2023-04-19); BuzzFeed News also covered it (page not readable). Criticism came from experts and commentators, not a mass public reaction.",
+      "summary": "Linguist Emily Bender called the interview 'painful to watch' and said the 'we don't understand humans either' move is how boosters 'evade accountability or ... sell their system as some mysterious, magical, autonomous being'; other researchers, among them Margaret Mitchell and Abeba Birhane, disputed the segment's claims. Criticism came from experts and commentators, not a mass public reaction.",
       "url": "https://www.foxnews.com/media/ai-researchers-google-60-minutes-spread-disinformation-recent-interview-still-bulls"
     },
     "backlashStrength": "widespread criticism",
@@ -331,7 +331,7 @@
       "url": "https://www.theverge.com/2023/5/12/23720731/google-io-2023-exclusive-sundar-pichai-search-generative-experience-ai-microsoft-bing-chatgpt",
       "kind": "transcript"
     },
-    "context": "Patel asked about white-collar work, lawyers in particular, being displaced by AI. Pichai said predictions of tech automation wiping out job categories had not fully played out, and that he did not know how it would go. Patel pointed to the Hollywood writers' strike over AI during the exchange. Date is the publication date of the interview.",
+    "context": "Patel asked about white-collar work, lawyers in particular, being displaced by AI. Pichai said predictions of tech automation wiping out job categories had not fully played out, and that he did not know how it would go. Patel pointed to the Hollywood writers' strike over AI during the exchange.",
     "sources": [
       {
         "outlet": "The Verge",
@@ -353,7 +353,7 @@
       }
     ],
     "backlash": {
-      "summary": "Futurism (2023-05-13) mocked the answer as flustered and out of touch given the writers' strike over AI. One outlet's commentary; no wider reaction found. The Fortune article covers the same interview but words the answer differently and does not contain the movie-theater lines.",
+      "summary": "Futurism (2023-05-13) mocked the answer as flustered and out of touch given the writers' strike over AI.",
       "url": "https://futurism.com/google-ceo-baffled-ai-take-jobs"
     },
     "backlashStrength": "critical commentary",
@@ -460,7 +460,7 @@
     "ceo": "altman",
     "date": "2023-05-24",
     "datePrecision": "reported",
-    "venue": "Remarks to reporters in London during a world tour (Time reported them first)",
+    "venue": "Remarks to reporters in London during a world tour",
     "leaked": false,
     "headline": {
       "text": "OpenAI chief accused of ‘blackmail’ in EU dispute",
@@ -541,7 +541,7 @@
       "url": "https://nymag.com/intelligencer/article/sam-altman-artificial-intelligence-openai-profile.html",
       "kind": "essay"
     },
-    "context": "Describing what he means by AGI, Altman used the phrase 'median human', which the profile's author flagged as an example of the tone-deafness common in the tech bubble. The profile does not date the remark; Business Insider notes he used similar language in a 2022 podcast.",
+    "context": "Describing what he means by AGI, Altman used the phrase 'median human', which the profile's author flagged as an example of the tone-deafness common in the tech bubble. Business Insider notes he used similar language in a 2022 podcast.",
     "sources": [
       {
         "outlet": "New York magazine",
@@ -640,7 +640,7 @@
       }
     ],
     "backlash": {
-      "summary": "Mild. Fox News quoted experts who questioned how legitimate the fear is (one said 'any fears over this are misplaced' and 'There's nothing superhuman about it'); Futurism noted he did not elaborate; Technocracy News, a fringe site, called it 'disingenuous behavior' and Altman a 'nimrod'. No broad public backlash was found.",
+      "summary": "Fox News quoted experts who questioned how legitimate the fear is (one said 'any fears over this are misplaced' and 'There's nothing superhuman about it'); Futurism noted he did not elaborate; Technocracy News, a fringe site, called it 'disingenuous behavior' and Altman a 'nimrod'.",
       "url": "https://www.foxnews.com/us/chatgpt-chief-warns-superhuman-skills-ai-develop"
     },
     "backlashStrength": "critical commentary",
@@ -739,67 +739,6 @@
     }
   },
   {
-    "id": "pichai-2024-01-tough-choices-memo",
-    "ceo": "pichai",
-    "date": "2024-01-17",
-    "datePrecision": "day",
-    "venue": "Internal all-hands memo to Google employees, shared with The Verge",
-    "leaked": true,
-    "headline": {
-      "text": "Google CEO tells employees to expect more job cuts in 2024",
-      "outlet": "The Verge",
-      "url": "https://www.theverge.com/2024/1/17/24042417/google-layoffs-2024-internal-employee-memo-sundar-pichai"
-    },
-    "quote": "We have ambitious goals and will be investing in our big priorities this year ... The reality is that to create the capacity for this investment, we have to make tough choices.",
-    "quoteSource": "https://www.theverge.com/2024/1/17/24042417/google-layoffs-2024-internal-employee-memo-sundar-pichai",
-    "primarySource": null,
-    "context": "After more than a thousand Google layoffs since 10 January 2024, Pichai told staff in an internal memo that more role eliminations would follow, though not at the scale of the 12,000 cuts of 2023. Futurism ties the cuts to Google's AI pivot; the memo's 'big priorities' are not named as AI in the quoted lines.",
-    "sources": [
-      {
-        "outlet": "The Verge",
-        "title": "Google CEO tells employees to expect more job cuts in 2024",
-        "url": "https://www.theverge.com/2024/1/17/24042417/google-layoffs-2024-internal-employee-memo-sundar-pichai",
-        "date": "2024-01-18"
-      },
-      {
-        "outlet": "Futurism",
-        "title": "As Google Pivots to AI, CEO Warns He Will Fire Even More Staff",
-        "url": "https://futurism.com/the-byte/google-ceo-ai-pivot-layoffs",
-        "date": "2024-01-18"
-      }
-    ],
-    "backlash": {
-      "summary": "Weak. Futurism's headline and text frame the memo as a CEO who 'pivots to AI' warning of more firings; the other coverage is straight reporting. Included so the lead can decide.",
-      "url": "https://futurism.com/the-byte/google-ceo-ai-pivot-layoffs"
-    },
-    "backlashStrength": "critical commentary",
-    "topics": [
-      "jobs"
-    ],
-    "scores": {
-      "loss": {
-        "score": 4,
-        "reason": "More cuts, after 12,000 the year before."
-      },
-      "condescension": {
-        "score": 0,
-        "reason": "Corporate, not cruel."
-      },
-      "tone-deafness": {
-        "score": 2,
-        "reason": "'Ambitious goals' and 'tough choices'."
-      },
-      "hypocrisy": {
-        "score": 0,
-        "reason": "None."
-      },
-      "doom": {
-        "score": 0,
-        "reason": "None."
-      }
-    }
-  },
-  {
     "id": "suleyman-2024-01-davos-labor-replacing-tools",
     "ceo": "suleyman",
     "date": "2024-01-17",
@@ -814,7 +753,7 @@
     "quote": "I think in the long-term — over many decades — we have to think very hard about how we integrate these tools, because left completely to the market... these are fundamentally labor-replacing tools",
     "quoteSource": "https://gizmodo.com/deepmind-founder-ai-davos-mustafa-suleyman-openai-jobs-1851176340",
     "primarySource": null,
-    "context": "Asked by CNBC whether AI would replace humans in the workplace in massive numbers, Suleyman, then CEO and co-founder of Inflection AI (Microsoft hired him in March 2024), said that in the long term the tools are labor replacing if left to the market, while for the next couple of decades they would \"augment us and make us smarter and more productive\". The wording is Business Insider's, reproduced on Yahoo; Fortune prints a version with an ellipsis.",
+    "context": "Asked by CNBC whether AI would replace humans in the workplace in massive numbers, Suleyman, then CEO and co-founder of Inflection AI (Microsoft hired him in March 2024), said that in the long term the tools are labor replacing if left to the market, while for the next couple of decades they would \"augment us and make us smarter and more productive\".",
     "sources": [
       {
         "outlet": "Business Insider (via Yahoo News)",
@@ -842,7 +781,7 @@
       }
     ],
     "backlash": {
-      "summary": "Gizmodo wrote that Suleyman \"recently said the quiet part out loud when he admitted that AI is designed to steal jobs from humans\" and that AI \"is a technology that was made by and for the managers of the world\"; PJ Media (right-leaning) headlined it \"techno hell\". Critical commentary; no mass outrage found.",
+      "summary": "Gizmodo wrote that Suleyman \"recently said the quiet part out loud when he admitted that AI is designed to steal jobs from humans\" and that AI \"is a technology that was made by and for the managers of the world\"; PJ Media (right-leaning) headlined it \"techno hell\".",
       "url": "https://gizmodo.com/deepmind-founder-ai-davos-mustafa-suleyman-openai-jobs-1851176340"
     },
     "backlashStrength": "critical commentary",
@@ -878,7 +817,7 @@
     "ceo": "zuckerberg",
     "date": "2024-01-18",
     "datePrecision": "day",
-    "venue": "Facebook and Instagram post and an interview with The Verge (the Guardian does not say which carried this sentence)",
+    "venue": "Facebook and Instagram post and an interview with The Verge",
     "leaked": false,
     "headline": {
       "text": "‘Very scary’: Mark Zuckerberg’s pledge to build advanced AI alarms experts",
@@ -888,7 +827,7 @@
     "quote": "This technology is so important and the opportunities are so great that we should open source and make it as widely available as we responsibly can, so everyone can benefit",
     "quoteSource": "https://www.theguardian.com/technology/2024/jan/19/mark-zuckerberg-artificial-general-intelligence-system-alarms-experts-meta-open-source",
     "primarySource": null,
-    "context": "Zuckerberg announced that Meta would build general intelligence and said he would lean toward open sourcing it; Futurism notes the same post announced a planned purchase of 350,000 Nvidia H100 chips. The Guardian dates its article 19 Jan 2024 and says his Verge interview was on \"Thursday\" (18 Jan); the post date is inferred from that, and the original post was not readable.",
+    "context": "Zuckerberg announced that Meta would build general intelligence and said he would lean toward open sourcing it; Futurism notes the same post announced a planned purchase of 350,000 Nvidia H100 chips.",
     "sources": [
       {
         "outlet": "The Guardian",
@@ -952,7 +891,7 @@
       "url": "https://blogs.nvidia.com/blog/world-governments-summit/",
       "kind": "blog"
     },
-    "context": "Onstage at the World Governments Summit, Huang said that for 10 to 15 years almost everyone on such a stage had insisted young people learn computer science, and that 'it's almost exactly the opposite': the aim is that nobody has to program. Headlines turned this into 'kids shouldn't learn to code'; he went on to say people should upskill and put time into domain expertise such as biology, farming and manufacturing. Nvidia's own recap of the event (dated 2024-02-12) words the line slightly differently ('computing technologies that nobody has to program ... that is the miracle'); the quote here follows the video as transcribed by Tom's Hardware.",
+    "context": "Onstage at the World Governments Summit, Huang said that for 10 to 15 years almost everyone on such a stage had insisted young people learn computer science, and that 'it's almost exactly the opposite': the aim is that nobody has to program. Headlines turned this into 'kids shouldn't learn to code'; he went on to say people should upskill and put time into domain expertise such as biology, farming and manufacturing.",
     "sources": [
       {
         "outlet": "Tom's Hardware",
@@ -1017,7 +956,7 @@
     "ceo": "musk",
     "date": "2024-03-01",
     "datePrecision": "month",
-    "venue": "Abundance Summit 2024, 'Great AI Debate' seminar (exact day not confirmed)",
+    "venue": "Abundance Summit 2024, 'Great AI Debate' seminar",
     "leaked": false,
     "headline": {
       "text": "Top AI researcher says AI will end humanity and we should stop developing it now — but don't worry, Elon Musk disagrees",
@@ -1027,7 +966,7 @@
     "quote": "I think there's some chance that it will end humanity. I probably agree with Geoff Hinton that it's about 10% or 20% or something like that ... I think that the probable positive scenario outweighs the negative scenario.",
     "quoteSource": "https://www.techradar.com/pro/top-ai-researcher-says-ai-will-end-humanity-and-we-should-stop-developing-it-now-but-dont-worry-elon-musk-disagrees",
     "primarySource": null,
-    "context": "Musk spoke at the four-day Abundance Summit in a seminar called the Great AI Debate. Asked about the risk from AI, he put his own odds at about 10% to 20% and said that the probable positive scenario outweighs the negative one, so development should continue. The outlets say 'earlier this month' (March 2024); the day was not confirmed.",
+    "context": "Musk spoke at the four-day Abundance Summit in a seminar called the Great AI Debate. Asked about the risk from AI, he put his own odds at about 10% to 20% and said that the probable positive scenario outweighs the negative one, so development should continue.",
     "sources": [
       {
         "outlet": "TechRadar",
@@ -1055,7 +994,7 @@
       }
     ],
     "backlash": {
-      "summary": "AI safety researcher Roman Yampolskiy told Business Insider that Musk was 'a bit too conservative' and asked: 'Not sure why he thinks it is a good idea to pursue this technology anyway' (TechRadar). TechRadar's headline sets Musk against the warning ('but don't worry, Elon Musk disagrees'), and Windows Central noted he 'didn't share how he came to this conclusion'. Business Insider's own headline (not readable) reportedly adds 'but we should do it anyway'.",
+      "summary": "AI safety researcher Roman Yampolskiy told Business Insider that Musk was 'a bit too conservative' and asked: 'Not sure why he thinks it is a good idea to pursue this technology anyway' (TechRadar). TechRadar's headline sets Musk against the warning ('but don't worry, Elon Musk disagrees'), and Windows Central noted he 'didn't share how he came to this conclusion'.",
       "url": "https://www.techradar.com/pro/top-ai-researcher-says-ai-will-end-humanity-and-we-should-stop-developing-it-now-but-dont-worry-elon-musk-disagrees"
     },
     "backlashStrength": "critical commentary",
@@ -1123,7 +1062,7 @@
       }
     ],
     "backlash": {
-      "summary": "Content Marketing Institute's headline is 'The Problem With AI Headlines': it says it is 'hard to raise a trillion dollars in venture money... without whipping up a little clickbait' and that creative professionals ask whether they will be knifed in the back; CMSWire calls it 'totally dramatic'. Mild, trade-press reaction.",
+      "summary": "Content Marketing Institute's headline is 'The Problem With AI Headlines': it says it is 'hard to raise a trillion dollars in venture money... without whipping up a little clickbait' and that creative professionals ask whether they will be knifed in the back; CMSWire calls it 'totally dramatic'.",
       "url": "https://contentmarketinginstitute.com/articles/problem-ai-headlines/"
     },
     "backlashStrength": "critical commentary",
@@ -1169,7 +1108,7 @@
     "quote": "even when the competitor's chips are free, it's not cheap enough",
     "quoteSource": "https://www.tomshardware.com/pc-components/gpus/jensen-huang-says-even-free-ai-chips-from-his-competitors-cant-beat-nvidias-gpus",
     "primarySource": null,
-    "context": "Asked by Stanford economist John Shoven whether cheaper 'good enough' rivals threaten Nvidia, Huang said Nvidia's total cost of ownership is so good that rivals' chips would not be cheap enough even if given away. Tom's Hardware says he 'recently' made the remark; the event day is not stated in the coverage fetched, so the date is the report date.",
+    "context": "Asked by Stanford economist John Shoven whether cheaper 'good enough' rivals threaten Nvidia, Huang said Nvidia's total cost of ownership is so good that rivals' chips would not be cheap enough even if given away.",
     "sources": [
       {
         "outlet": "Tom's Hardware",
@@ -1185,7 +1124,7 @@
       }
     ],
     "backlash": {
-      "summary": "Tom's Hardware calls the comments 'sure to be controversial' and says the claim of an 'open book' business 'may be harder to believe' given GPU-cartel accusations; TechSpot's subtitle is 'Jensen \"Humble\" Huang' and says his claims 'will likely raise some eyebrows' and that 'plenty will argue' with his benevolence. Mild.",
+      "summary": "Tom's Hardware calls the comments 'sure to be controversial' and says the claim of an 'open book' business 'may be harder to believe' given GPU-cartel accusations; TechSpot's subtitle is 'Jensen \"Humble\" Huang' and says his claims 'will likely raise some eyebrows' and that 'plenty will argue' with his benevolence.",
       "url": "https://www.techspot.com/news/102208-jensen-huang-even-if-competitors-ai-products-free.html"
     },
     "backlashStrength": "critical commentary",
@@ -1234,7 +1173,7 @@
       "url": "https://www.ted.com/talks/mustafa_suleyman_what_is_an_ai_anyway/transcript",
       "kind": "transcript"
     },
-    "context": "At TED2024 (April 2024; Futurism's piece of 2024-04-30 says \"last week\", so the exact day is not pinned down) Suleyman, then newly CEO of Microsoft AI, offered \"a new digital species\" as a metaphor for AI and predicted people would see AIs as digital companions. He added \"don't take this too literally\". The wording is confirmed on the TED transcript page (inside the page's embedded data) and on Futurism.",
+    "context": "At TED2024 Suleyman, then newly CEO of Microsoft AI, offered \"a new digital species\" as a metaphor for AI and predicted people would see AIs as digital companions. He added \"don't take this too literally\".",
     "sources": [
       {
         "outlet": "Futurism",
@@ -1250,7 +1189,7 @@
       }
     ],
     "backlash": {
-      "summary": "Futurism wrote that the vision \"needs some caveats\": chatbots \"have repeatedly proven to be factually unreliable\" and it is \"unclear whether AI programs will ever successfully mimic the human emotional experience\", while calling the predictions \"straight out of a sci-fi novel\". Mild and from one outlet.",
+      "summary": "Futurism wrote that the vision \"needs some caveats\": chatbots \"have repeatedly proven to be factually unreliable\" and it is \"unclear whether AI programs will ever successfully mimic the human emotional experience\", while calling the predictions \"straight out of a sci-fi novel\".",
       "url": "https://futurism.com/microsoft-executive-ai-digital-species"
     },
     "backlashStrength": "critical commentary",
@@ -1427,7 +1366,7 @@
     "ceo": "altman",
     "date": "2024-05-13",
     "datePrecision": "reported",
-    "venue": "All-In podcast (episode posted the week before the reports)",
+    "venue": "All-In podcast",
     "leaked": false,
     "headline": {
       "text": "Sam Altman envisions a future where universal basic income is a \"slice of GPT\"",
@@ -1459,7 +1398,7 @@
       }
     ],
     "backlash": {
-      "summary": "TechSpot writes that 'it's hard to imagine that many people will welcome it, particularly if it's an alternative to receiving monthly cash payments'; the Slashdot thread drew 79 comments. This is mild critical commentary.",
+      "summary": "TechSpot writes that 'it's hard to imagine that many people will welcome it, particularly if it's an alternative to receiving monthly cash payments'; the Slashdot thread drew 79 comments.",
       "url": "https://www.techspot.com/news/102975-sam-altman-envisions-future-where-universal-basic-income.html"
     },
     "backlashStrength": "critical commentary",
@@ -1508,7 +1447,7 @@
       "url": "https://www.youtube.com/watch?v=uHEPBzYick0",
       "kind": "video"
     },
-    "context": "Promoting Windows Copilot+ PCs to the Wall Street Journal, Nadella described Recall, which takes screenshots of what is on screen so an on-device model can make a PC's history searchable. Asked about the reaction that it is 'pretty creepy', he said it only works because it runs locally. Microsoft delayed Recall's broad release in June 2024 after privacy and security concerns. Outlets differ slightly on the 'magical thing' sentence (Blaze Media omits 'that it is on my computer'); the wording here follows the transcript of the video. The date is the day the clip circulated (an embedded post of 2024-05-20 in iTWire), not confirmed as the recording day.",
+    "context": "Promoting Windows Copilot+ PCs to the Wall Street Journal, Nadella described Recall, which takes screenshots of what is on screen so an on-device model can make a PC's history searchable. Asked about the reaction that it is 'pretty creepy', he said it only works because it runs locally. Microsoft delayed Recall's broad release in June 2024 after privacy and security concerns.",
     "sources": [
       {
         "outlet": "Blaze Media",
@@ -1591,7 +1530,7 @@
       "url": "https://www.theverge.com/24158374/google-ceo-sundar-pichai-ai-search-gemini-future-of-the-internet-web-openai-decoder-interview",
       "kind": "transcript"
     },
-    "context": "Patel cited two small sites, HouseFresh and Retro Dodo, that said their Google traffic had gone to zero, and asked whether that is the right outcome of the platform shift. Pichai answered with this. Later in the interview he said that if website owners 'don't see value coming back from Google, I think we'll pay a price'. Business Today paraphrases the line slightly differently; the wording here is the transcript's.",
+    "context": "Patel cited two small sites, HouseFresh and Retro Dodo, that said their Google traffic had gone to zero, and asked whether that is the right outcome of the platform shift. Pichai answered with this. Later in the interview he said that if website owners 'don't see value coming back from Google, I think we'll pay a price'.",
     "sources": [
       {
         "outlet": "The Verge",
@@ -1619,7 +1558,7 @@
       }
     ],
     "backlash": {
-      "summary": "Search Engine Journal wrote that 'Pichai's comments come across as tone-deaf to the plight of web publishers' (about his answers on publisher traffic and data in the same interview); Business Today framed the interview as Pichai defending AI search 'amidst publisher backlash'. The criticism is of the interview's answers on publishers; no reaction to the 'voting with their feet' line alone was found.",
+      "summary": "Search Engine Journal wrote that 'Pichai's comments come across as tone-deaf to the plight of web publishers' (about his answers on publisher traffic and data in the same interview); Business Today framed the interview as Pichai defending AI search 'amidst publisher backlash'. The criticism is of the interview's answers on publishers.",
       "url": "https://www.searchenginejournal.com/google-wont-commit-to-ai-search-traffic-data-in-search-console/516956/"
     },
     "backlashStrength": "critical commentary",
@@ -1743,7 +1682,7 @@
     "quote": "With respect to content that is already on the open web, the social contract of that content since the '90s has been that it is fair use... Anyone can copy it, recreate with it, reproduce with it. That has been freeware, if you like. That's been the understanding.",
     "quoteSource": "https://siliconangle.com/?p=662409",
     "primarySource": null,
-    "context": "Sorkin asked whether AI companies have effectively stolen the world's intellectual property by training on web content. Suleyman said publishers can opt out by telling crawlers not to scrape, and that other uses are a gray area that \"is going to get litigated\"; the remark came while Microsoft and OpenAI were being sued by publishers including The New York Times. TechCrunch's report of the same Aspen interview, dated 2024-06-25, says it took place \"on Tuesday\", which confirms the day.",
+    "context": "Sorkin asked whether AI companies have effectively stolen the world's intellectual property by training on web content. Suleyman said publishers can opt out by telling crawlers not to scrape, and that other uses are a gray area that \"is going to get litigated\"; the remark came while Microsoft and OpenAI were being sued by publishers including The New York Times.",
     "sources": [
       {
         "outlet": "SiliconANGLE",
@@ -1824,7 +1763,7 @@
     "quote": "I would be shocked if we cannot do it next year",
     "quoteSource": "https://www.sherwood.news/business/elon-musk-tesla-timeline-robotaxis",
     "primarySource": null,
-    "context": "Asked when Tesla would have unsupervised full self-driving, and so the first robotaxi rides, Musk said he thought it possible that year and 'shocked' if not the next. Electrek reports the same answer with the word 'surprised' rather than a verbatim quote, so the exact words are from Sherwood News. Musk had made a similar 'next year' promise of robotaxis at Tesla's 2019 investor day.",
+    "context": "Asked when Tesla would have unsupervised full self-driving, and so the first robotaxi rides, Musk said he thought it possible that year and 'shocked' if not the next. Musk had made a similar 'next year' promise of robotaxis at Tesla's 2019 investor day.",
     "sources": [
       {
         "outlet": "Sherwood News",
@@ -1881,7 +1820,7 @@
     "ceo": "huang",
     "date": "2024-09-13",
     "datePrecision": "reported",
-    "venue": "Goldman Sachs Communacopia + Technology Conference, San Francisco (week of 9 September 2024)",
+    "venue": "Goldman Sachs Communacopia + Technology Conference, San Francisco",
     "leaked": false,
     "headline": {
       "text": "'We can't do computer graphics anymore without artificial intelligence. We compute one pixel, we infer the other 32': Jensen thinks AI is integral to next-gen graphics tech",
@@ -1907,7 +1846,7 @@
       }
     ],
     "backlash": {
-      "summary": "Mild. TechSpot frames the quote with gamers' worry that AI upscaling 'might become a requirement for good performance' and says the concern has merit, and its forum thread answers Huang with jokes ('Jensen (probably): Graphics just aren't feasible anymore'). PC Gamer opens with 'It's easy to dunk on AI' and ends on the jab 'if we could only make it more accurate instead of better at hallucinating, that'd be dandy', but is otherwise sympathetic ('he may have a point'). No outrage found for the 2024 line; the larger gamer backlash came with DLSS 5 in 2026 (already in the dataset).",
+      "summary": "TechSpot frames the quote with gamers' worry that AI upscaling 'might become a requirement for good performance' and says the concern has merit, and its forum thread answers Huang with jokes ('Jensen (probably): Graphics just aren't feasible anymore'). PC Gamer opens with 'It's easy to dunk on AI' and ends on the jab 'if we could only make it more accurate instead of better at hallucinating, that'd be dandy', but is otherwise sympathetic ('he may have a point').",
       "url": "https://www.techspot.com/community/topics/nvidia-ceo-we-cant-do-computer-graphics-anymore-without-artificial-intelligence.288149/"
     },
     "backlashStrength": "critical commentary",
@@ -2067,7 +2006,7 @@
       }
     ],
     "backlash": {
-      "summary": "Futurism wrote that the comment 'will likely come as a slap in the face for those whose work is being used to create these models' and called it 'tone deaf'; a Data Leverage essay and a Substack by Katie Parrott argued it reveals 'a deeper dismissal of what individual creators bring to the table'. Music Ally was more neutral. No mass outrage was found, so this is critical commentary.",
+      "summary": "Futurism wrote that the comment 'will likely come as a slap in the face for those whose work is being used to create these models' and called it 'tone deaf'; a Data Leverage essay and a Substack by Katie Parrott argued it reveals 'a deeper dismissal of what individual creators bring to the table'. Music Ally was more neutral.",
       "url": "https://futurism.com/the-byte/zuckerberg-fine-train-ai-data-no-value"
     },
     "backlashStrength": "critical commentary",
@@ -2116,7 +2055,7 @@
       "url": "https://podscripts.co/podcasts/on-with-kara-swisher/microsoft-ai-ceo-mustafa-suleyman-on-ai-friends-openai-siblings-and-climate-change",
       "kind": "transcript"
     },
-    "context": "Swisher said Copilot sounded like a search engine; Suleyman replied that it would evolve way beyond that into a companion. The date is the episode date on the unofficial transcript page (2024-10-03); Windows Central's coverage is dated 2024-11-01. Windows Central ties the remark to the user reaction to Microsoft's October 2024 Copilot update, not to the interview itself.",
+    "context": "Swisher said Copilot sounded like a search engine; Suleyman replied that it would evolve way beyond that into a companion. Windows Central ties the remark to the user reaction to Microsoft's October 2024 Copilot update, not to the interview itself.",
     "sources": [
       {
         "outlet": "Windows Central",
@@ -2178,7 +2117,7 @@
     "quote": "One of the things we wanted to show tonight was that Optimus is not a canned video, it's not walled-off. The Optimus robots will walk among you. Please be nice to the Optimus robots.",
     "quoteSource": "https://electrek.co/2024/10/11/it-sure-seems-like-the-optimus-robots-at-teslas-event-were-under-human-control/",
     "primarySource": null,
-    "context": "At the Cybercab unveil, Musk introduced Tesla's Optimus humanoid robots, which then served drinks and mingled with guests. Fortune also quotes him as saying 'This will be the biggest product ever, of any kind'. Within days Bloomberg and others reported that some of the robots' abilities had been operated remotely by people, and one robot told a guest 'Today I'm assisted by a human'. Only Electrek prints the long quote word for word; Fortune quotes 'The Optimus robots will walk among you. Please be nice'.",
+    "context": "At the Cybercab unveil, Musk introduced Tesla's Optimus humanoid robots, which then served drinks and mingled with guests. Fortune also quotes him as saying 'This will be the biggest product ever, of any kind'. Within days Bloomberg and others reported that some of the robots' abilities had been operated remotely by people, and one robot told a guest 'Today I'm assisted by a human'.",
     "sources": [
       {
         "outlet": "Electrek",
@@ -2260,7 +2199,7 @@
       "url": "https://darioamodei.com/machines-of-loving-grace",
       "kind": "essay"
     },
-    "context": "Amodei published a long essay arguing that \"powerful AI\" could arrive as early as 2026 and compress a century of biological and medical progress into five to ten years. He framed it as a corrective to AI companies' grandiose claims and said his own predictions would sound radical. TechCrunch dates the publication to late Friday, 2024-10-11.",
+    "context": "Amodei published a long essay arguing that \"powerful AI\" could arrive as early as 2026 and compress a century of biological and medical progress into five to ten years. He framed it as a corrective to AI companies' grandiose claims and said his own predictions would sound radical.",
     "sources": [
       {
         "outlet": "TechCrunch",
@@ -2354,7 +2293,7 @@
       }
     ],
     "backlash": {
-      "summary": "Weak. Futurism questions the claim ('wouldn't it be faster and far less tedious to just let the programmers do their jobs?', 'the emperor has no clothes'); most other coverage was straight reporting. Included so the lead can decide.",
+      "summary": "Futurism questions the claim ('wouldn't it be faster and far less tedious to just let the programmers do their jobs?', 'the emperor has no clothes'); most other coverage was straight reporting.",
       "url": "https://futurism.com/the-byte/google-ceo-code-ai"
     },
     "backlashStrength": "critical commentary",
@@ -2402,7 +2341,7 @@
       "url": "https://www.marketbeat.com/earnings/reports/2024-10-30-facebook-inc-stock/",
       "kind": "earnings-call"
     },
-    "context": "Describing how Facebook and Instagram feeds had moved from friends' posts to creator content, Zuckerberg said AI-generated or AI-summarized content would be a new third category, which he called \"very exciting\" for Facebook, Instagram and maybe Threads. 404 Media and Fortune print the same sentence with \"AI generated\" unhyphenated; the hyphenated form is the transcript's.",
+    "context": "Describing how Facebook and Instagram feeds had moved from friends' posts to creator content, Zuckerberg said AI-generated or AI-summarized content would be a new third category, which he called \"very exciting\" for Facebook, Instagram and maybe Threads.",
     "sources": [
       {
         "outlet": "404 Media",
@@ -2476,7 +2415,7 @@
     "quote": "4090 performance at $549 ... Impossible without artificial intelligence.",
     "quoteSource": "https://pcgamer.com/hardware/graphics-cards/nvidia-announces-the-rtx-50-series-led-by-the-usd1-999-rtx-5090-with-twice-the-performance-of-the-4090",
     "primarySource": null,
-    "context": "Announcing the RTX 50 series, Huang said the $549 RTX 5070 would match the $1,599 RTX 4090 and that this was impossible without AI. PC Gamer noted the match was 'likely down to the new DLSS 4 magic' (Multi Frame Generation) rather than raw rendering. Quote follows PC Gamer's report of the keynote; the keynote video was not fetched.",
+    "context": "Announcing the RTX 50 series, Huang said the $549 RTX 5070 would match the $1,599 RTX 4090 and that this was impossible without AI. PC Gamer noted the match was 'likely down to the new DLSS 4 magic' (Multi Frame Generation) rather than raw rendering.",
     "sources": [
       {
         "outlet": "PC Gamer",
@@ -2557,7 +2496,7 @@
     "quote": "If you said 30, it's probably on the late side. But if you picked 20, I think a whole bunch of us would believe it.",
     "quoteSource": "https://nbcsandiego.com/news/business/money-report/quantum-stocks-like-rigetti-plunge-after-nvidias-huang-says-the-computers-are-15-to-30-years-away/3717408",
     "primarySource": null,
-    "context": "Asked about quantum computing at Nvidia's analyst day, Huang said that 15 years for 'very useful quantum computers' would probably be on the early side, and 20 was a timeline many would accept. He added that Nvidia would play a 'very significant part' in helping the industry get there. (Reuters and CNBC word the 15-year part slightly differently, so only the sentences both print identically are quoted.)",
+    "context": "Asked about quantum computing at Nvidia's analyst day, Huang said that 15 years for 'very useful quantum computers' would probably be on the early side, and 20 was a timeline many would accept. He added that Nvidia would play a 'very significant part' in helping the industry get there.",
     "sources": [
       {
         "outlet": "CNBC (via NBC 7 San Diego)",
@@ -2579,7 +2518,7 @@
       }
     ],
     "backlash": {
-      "summary": "Market backlash more than public outrage. Rigetti, D-Wave, Quantum Computing and IonQ fell by more than 40% in a day and, per Reuters, were set to lose more than $8 billion in value; Reuters says the remark 'throws cold water' on the sector. An analyst quoted by CNBC called the sell-off somewhat 'overblown', and a Craig-Hallum analyst quoted by Reuters argued that investors were missing a key part of the equation. This is the weakest of the included backlashes: no social-media or editorial pile-on was found, only the sell-off and analyst pushback.",
+      "summary": "Market backlash more than public outrage. Rigetti, D-Wave, Quantum Computing and IonQ fell by more than 40% in a day and, per Reuters, were set to lose more than $8 billion in value; Reuters says the remark 'throws cold water' on the sector. An analyst quoted by CNBC called the sell-off somewhat 'overblown', and a Craig-Hallum analyst quoted by Reuters argued that investors were missing a key part of the equation.",
       "url": "https://www.thestar.com.my/tech/tech-news/2025/01/08/quantum-computing-stocks-take-a-hit-as-nvidia-ceo-predicts-long-road-ahead"
     },
     "backlashStrength": "critical commentary",
@@ -2624,7 +2563,7 @@
     "quote": "Probably in 2025, we at Meta, as well as the other companies that are basically working on this, are going to have an AI that can effectively be a sort of midlevel engineer that you have at your company that can write code ... And over time it’ll get to the point where a lot of the code in our apps and including the AI that we generate is actually going to be built by AI engineers instead of people engineers.",
     "quoteSource": "https://futurism.com/the-byte/zuckerberg-automate-coding-ai",
     "primarySource": null,
-    "context": "On the Rogan podcast, Zuckerberg predicted that Meta and other companies would have an AI acting as a midlevel engineer in 2025, expensive at first and then more efficient. He argued the technology would \"augment\" workers and free people to be more creative. Date is the report date (Futurism, 13 Jan 2025); the episode date was not confirmed on a fetched page. The two quoted sentences are separated by other words of his in Futurism's article.",
+    "context": "On the Rogan podcast, Zuckerberg predicted that Meta and other companies would have an AI acting as a midlevel engineer in 2025, expensive at first and then more efficient. He argued the technology would \"augment\" workers and free people to be more creative.",
     "sources": [
       {
         "outlet": "Futurism",
@@ -2652,7 +2591,7 @@
       }
     ],
     "backlash": {
-      "summary": "Futurism wrote that although Zuckerberg \"doesn't explicitly say he'll replace his human grunts outright\", the implications for people's jobs are \"pretty clear\", and noted he gave no direct answer when pressed on job loss; Business Insider noted companies \"could see negative repercussions from hollowing out their mid-level engineer ranks\" and quoted a Cambridge AI researcher on the risks of AI-written code; TheCable headlined it as AI replacing mid-level engineers. Critical commentary of moderate size, no mass outcry found.",
+      "summary": "Futurism wrote that although Zuckerberg \"doesn't explicitly say he'll replace his human grunts outright\", the implications for people's jobs are \"pretty clear\", and noted he gave no direct answer when pressed on job loss; Business Insider noted companies \"could see negative repercussions from hollowing out their mid-level engineer ranks\" and quoted a Cambridge AI researcher on the risks of AI-written code; TheCable headlined it as AI replacing mid-level engineers.",
       "url": "https://futurism.com/the-byte/zuckerberg-automate-coding-ai"
     },
     "backlashStrength": "critical commentary",
@@ -2697,7 +2636,7 @@
     "quote": "I’ve decided to raise the bar on performance management and move out low-performers faster",
     "quoteSource": "https://www.fox13seattle.com/news/zuckerberg-cutting-low-performers-latest-round-meta-layoffs",
     "primarySource": null,
-    "context": "In a memo obtained by Bloomberg, Zuckerberg told staff to expect an \"intense year\" and said Meta would do \"more extensive performance-based cuts during this cycle\" than its usual practice. About 5% of staff (roughly 3,600 people) were cut on 10 February. A work-and-jobs remark rather than an AI one; included because the brief covers jobs and work.",
+    "context": "In a memo obtained by Bloomberg, Zuckerberg told staff to expect an \"intense year\" and said Meta would do \"more extensive performance-based cuts during this cycle\" than its usual practice. About 5% of staff (roughly 3,600 people) were cut on 10 February.",
     "sources": [
       {
         "outlet": "FOX 13 Seattle",
@@ -2782,7 +2721,7 @@
     "quote": "If I had to guess, and you know, this is not a very exact science, my guess is that we can make 100 years of progress in areas like biology in five or ten years if we really get this AI stuff right... I think a doubling of the human lifespan is not at all crazy. And then if AI is able to accelerate that, we may be able to get that in five to ten years",
     "quoteSource": "https://gizmodo.com/anthropic-ceo-hilariously-claims-ai-will-double-human-lifespans-within-a-decade-2000554601",
     "primarySource": null,
-    "context": "On a Davos panel, the moderator noted Amodei had the most optimistic predictions about the pace of AI-driven change. He argued that if AI compresses a century of biology into five to ten years, a doubling of human lifespan would follow, and hedged that this is \"not a very exact science\". The panel date comes from Gizmodo (\"Thursday\", photo caption Jan. 23, 2025) and dig.watch's session listing. No video of the session was reachable, so primarySource is null.",
+    "context": "On a Davos panel, the moderator noted Amodei had the most optimistic predictions about the pace of AI-driven change. He argued that if AI compresses a century of biology into five to ten years, a doubling of human lifespan would follow, and hedged that this is \"not a very exact science\".",
     "sources": [
       {
         "outlet": "Gizmodo",
@@ -2936,7 +2875,7 @@
       "url": "https://www.cfr.org/event/ceo-speaker-series-dario-amodei-anthropic",
       "kind": "video"
     },
-    "context": "Asked about AI and software engineering at a Council on Foreign Relations event on Monday 2025-03-10 (date from the CFR event page), Amodei predicted AI would write most code within months. Six months later critics said it had not happened industry-wide; John Gruber argued in March 2026 that Amodei was broadly right in substance.",
+    "context": "Asked about AI and software engineering at a Council on Foreign Relations event on Monday 2025-03-10, Amodei predicted AI would write most code within months. Six months later critics said it had not happened industry-wide; John Gruber argued in March 2026 that Amodei was broadly right in substance.",
     "sources": [
       {
         "outlet": "IT Pro",
@@ -3038,7 +2977,7 @@
       }
     ],
     "backlash": {
-      "summary": "Entrepreneur reports social media users calling the Ghibli trend 'an insult' to Hayao Miyazaki and accusing OpenAI of profiting from the studio's art; Decrypt calls his follow-up plea to 'chill' a 'whine-tweet' and says 'Altman may be crying all the way to the bank'. Mild: most of the criticism targets the trend, not the post.",
+      "summary": "Entrepreneur reports social media users calling the Ghibli trend 'an insult' to Hayao Miyazaki and accusing OpenAI of profiting from the studio's art; Decrypt calls his follow-up plea to 'chill' a 'whine-tweet' and says 'Altman may be crying all the way to the bank'. Most of the criticism targets the trend, not the post.",
       "url": "https://www.entrepreneur.com/business-news/chatgpt-users-generate-studio-ghibli-images-melting-gpus/489237"
     },
     "backlashStrength": "critical commentary",
@@ -3084,7 +3023,7 @@
     "quote": "My goal is really to create a true personal AI companion... One that knows your name, gets to know you, has a memory of everything that you've shared with it and talked about and really comes to kind of live life alongside you... It's far more than just a piece of software or a tool. It is unlike anything we've really ever created.",
     "quoteSource": "https://www.wsls.com/business/2025/04/04/microsofts-ai-division-head-wants-to-create-a-lasting-relationship-between-chatbots-and-their-users/",
     "primarySource": null,
-    "context": "Speaking to the Associated Press as Microsoft marked its 50th anniversary, Suleyman said the goal for Copilot was a personal AI companion that forms a \"lasting, meaningful relationship\" with users, and that AGI \"feels very far out\" to him. The quotes are the AP's, read on WSLS (an AP syndication) and in PC Gamer; the AP's own page is behind a bot check. The words in PC Gamer's headline are in the headline only, not in the body I could read, so they are not used in the quote.",
+    "context": "Speaking to the Associated Press as Microsoft marked its 50th anniversary, Suleyman said the goal for Copilot was a personal AI companion that forms a \"lasting, meaningful relationship\" with users, and that AGI \"feels very far out\" to him.",
     "sources": [
       {
         "outlet": "Associated Press (via WSLS)",
@@ -3100,7 +3039,7 @@
       }
     ],
     "backlash": {
-      "summary": "PC Gamer's headline called it an \"artificial overly-attached companion for us all\" and its closing line said \"We might not see Suleyman's vision of an overly-attached AI companion anytime soon but given how much money Microsoft and the rest of the tech world are spending on all of this right now, you can be sure that it will happen\", adding that Suleyman is \"well known for having the view that pretty much anything on the Internet is fair game to be used for AI training\". Mild, one outlet.",
+      "summary": "PC Gamer's headline called it an \"artificial overly-attached companion for us all\" and its closing line said \"We might not see Suleyman's vision of an overly-attached AI companion anytime soon but given how much money Microsoft and the rest of the tech world are spending on all of this right now, you can be sure that it will happen\", adding that Suleyman is \"well known for having the view that pretty much anything on the Internet is fair game to be used for AI training\".",
       "url": "https://www.pcgamer.com/software/ai/microsofts-head-of-ai-wants-to-create-an-artificial-overly-attached-companion-for-us-all-it-will-have-its-own-name-its-own-style-it-will-adapt-to-you-it-may-also-have-its-own-visual-appearance-and-expressions"
     },
     "backlashStrength": "critical commentary",
@@ -3147,7 +3086,7 @@
     "quote": "I think that’s within reach. Maybe within the next decade or so, I don’t see why not.",
     "quoteSource": "https://www.tearsinrain.ai/p/only-a-constellation-of-stars",
     "primarySource": null,
-    "context": "After describing how AI might cut drug design from years to months or weeks, Hassabis was asked by Scott Pelley whether AI could end all disease, and answered that it is within reach (the 'that' in his answer, as the Tears in Rain essay reads it). In the same segment, per Time, he said that one day we can cure all disease with the help of AI.",
+    "context": "After describing how AI might cut drug design from years to months or weeks, Hassabis was asked by Scott Pelley whether AI could end all disease, and answered that it is within reach. In the same segment, per Time, he said that one day we can cure all disease with the help of AI.",
     "sources": [
       {
         "outlet": "Trak.in",
@@ -3181,7 +3120,7 @@
       }
     ],
     "backlash": {
-      "summary": "Mild and mostly retrospective. Arianna Huffington's Time essay quotes him and answers 'there's a big reason why not: human nature'; the Center for Humane Technology says the claim 'has been so rarely questioned' and that no complex chronic disease has been cured; in the Marcus thread (Aug 2026) Eric Topol calls Hassabis's 60 Minutes argument similar and Marcus calls it 'maybe the most naive things I have ever heard Hassabis say'. Derek Lowe's 'The End of Disease' (Science, 21 April 2025) is cited as an immediate critical reply by the Tears in Rain essay but science.org could not be read.",
+      "summary": "Arianna Huffington's Time essay quotes him and answers 'there's a big reason why not: human nature'; the Center for Humane Technology says the claim 'has been so rarely questioned' and that no complex chronic disease has been cured; in the Marcus thread (Aug 2026) Eric Topol calls Hassabis's 60 Minutes argument similar and Marcus calls it 'maybe the most naive things I have ever heard Hassabis say'.",
       "url": "https://uk.news.yahoo.com/cure-ai-health-hype-100003112.html"
     },
     "backlashStrength": "critical commentary",
@@ -3246,7 +3185,7 @@
       }
     ],
     "backlash": {
-      "summary": "The Register is skeptical throughout, noting the energy wasted on politeness and questioning spending investors' money 'to keep AI from wiping out humanity'; this is mild mockery, not outrage.",
+      "summary": "The Register is skeptical throughout, noting the energy wasted on politeness and questioning spending investors' money 'to keep AI from wiping out humanity'.",
       "url": "https://www.theregister.com/2025/04/21/users_being_polite_to_chatgpt"
     },
     "backlashStrength": "critical commentary",
@@ -3397,7 +3336,7 @@
       }
     ],
     "backlash": {
-      "summary": "Mild. TechCrunch's own report was sceptical: it called the claim 'difficult to verify' because most benchmarks compare models with each other and not with humans, noted evidence that hallucinations are 'getting worse in advanced reasoning AI models', and said the remark suggests Anthropic may call a model AGI even if it still hallucinates, which 'may fall short of AGI by many people's definition'. Business Today repeated it with 'but there's a catch'. No social-media backlash was documented in the pages read.",
+      "summary": "TechCrunch's own report was sceptical: it called the claim 'difficult to verify' because most benchmarks compare models with each other and not with humans, noted evidence that hallucinations are 'getting worse in advanced reasoning AI models', and said the remark suggests Anthropic may call a model AGI even if it still hallucinates, which 'may fall short of AGI by many people's definition'. Business Today repeated it with 'but there's a catch'.",
       "url": "https://techcrunch.com/2025/05/22/anthropic-ceo-claims-ai-models-hallucinate-less-than-humans"
     },
     "backlashStrength": "critical commentary",
@@ -3538,7 +3477,7 @@
       }
     ],
     "backlash": {
-      "summary": "PPC Land says Pichai's claim 'directly contradict[s] multiple independent studies documenting substantial traffic declines' (it cites falls of 34.5% to 54.6% in click-through when AI summaries appear), and that the interview 'revealed apparent disconnection between Google's executive leadership and publisher experiences'. Patel opened the interview by noting a 'furious' statement from the News Media Alliance against AI Mode (seen in search summaries, not read on a page). This is the second Pichai occasion on this theme; the 2024 Verge interview is already in the dataset.",
+      "summary": "PPC Land says Pichai's claim 'directly contradict[s] multiple independent studies documenting substantial traffic declines' (it cites falls of 34.5% to 54.6% in click-through when AI summaries appear), and that the interview 'revealed apparent disconnection between Google's executive leadership and publisher experiences'. Patel opened the interview by noting a 'furious' statement from the News Media Alliance against AI Mode.",
       "url": "https://ppc.land/google-executives-contradict-research-on-ai-search-traffic-impact/"
     },
     "backlashStrength": "critical commentary",
@@ -3587,7 +3526,7 @@
       "url": "https://lexfridman.com/sundar-pichai-transcript",
       "kind": "transcript"
     },
-    "context": "Pichai had argued that if p(doom) were actually high, humanity would align to prevent it, a 'self-modulating' effect. The teaser at the start of the transcript words the line differently ('but that doesn't mean I think the underlying risk is actually pretty high'); this is the body text at about 45:50. Date is the release date of the episode.",
+    "context": "Pichai had argued that if p(doom) were actually high, humanity would align to prevent it, a 'self-modulating' effect.",
     "sources": [
       {
         "outlet": "Lex Fridman Podcast",
@@ -3603,7 +3542,7 @@
       }
     ],
     "backlash": {
-      "summary": "Weak. Windows Central's headline and text read the remark as a bold bet on humanity rallying against 'imminent catastrophe'. No public outrage found; included at the lowest strength.",
+      "summary": "Windows Central's headline and text read the remark as a bold bet on humanity rallying against 'imminent catastrophe'.",
       "url": "https://www.windowscentral.com/software-apps/google-ceo-claims-the-probability-of-ai-causing-existential-doom-is-pretty-high-but-hes-banking-on-humanity-to-rally-against-the-imminent-catastrophe"
     },
     "backlashStrength": "critical commentary",
@@ -3923,7 +3862,7 @@
       "url": "https://x.com/elonmusk/status/1942972449601225039",
       "kind": "post"
     },
-    "context": "A day after Grok posted antisemitic content and called itself 'MechaHitler', Musk replied on X to a user who said people wanted controversial answers from Grok. He attributed the behaviour to Grok being too easy for users to manipulate. Engadget prints the first sentence with a comma inside its quotation marks, so the two sentences are joined here with an ellipsis; Forbes Australia paraphrases the second as 'too eager to be manipulated'.",
+    "context": "A day after Grok posted antisemitic content and called itself 'MechaHitler', Musk replied on X to a user who said people wanted controversial answers from Grok. He attributed the behaviour to Grok being too easy for users to manipulate.",
     "sources": [
       {
         "outlet": "Engadget",
@@ -3985,7 +3924,7 @@
     "quote": "We're also building Hyperion, which will be able to scale up to 5GW over several years. We're building multiple more titan clusters as well. Just one of these covers a significant part of the footprint of Manhattan.",
     "quoteSource": "https://www.theregister.com/2025/07/15/meta_datacenter_build_plan/",
     "primarySource": null,
-    "context": "Zuckerberg posted that Meta is building several multi-gigawatt clusters for its superintelligence effort, the first (Prometheus) online in 2026 and the second (Hyperion) scaling to 5 GW, and illustrated their size against a map of Manhattan. The Register reports the post on his Facebook account; TechCrunch reports it as a Threads post.",
+    "context": "Zuckerberg posted that Meta is building several multi-gigawatt clusters for its superintelligence effort, the first (Prometheus) online in 2026 and the second (Hyperion) scaling to 5 GW, and illustrated their size against a map of Manhattan.",
     "sources": [
       {
         "outlet": "TechCrunch",
@@ -4001,7 +3940,7 @@
       }
     ],
     "backlash": {
-      "summary": "Weak. The Register's standfirst mocks the announcement ('First, Zuck takes Manhattan. Then he might actually deliver a product that matters') and its closing paragraph says whether he can turn the money into profit is 'questionable', citing about $60 billion spent on Reality Labs since 2020. TechCrunch's report is neutral. No wider backlash to the remark itself was found.",
+      "summary": "The Register's standfirst mocks the announcement ('First, Zuck takes Manhattan. Then he might actually deliver a product that matters') and its closing paragraph says whether he can turn the money into profit is 'questionable', citing about $60 billion spent on Reality Labs since 2020. TechCrunch's report is neutral.",
       "url": "https://www.theregister.com/2025/07/15/meta_datacenter_build_plan/"
     },
     "backlashStrength": "critical commentary",
@@ -4047,7 +3986,7 @@
     "quote": "This is a real downside and I'm not thrilled about it... Unfortunately, I think 'No bad person should ever benefit from our success' is a pretty difficult principle to run a business on.",
     "quoteSource": "https://www.wired.com/story/anthropic-dario-amodei-gulf-state-leaked-memo/",
     "primarySource": null,
-    "context": "WIRED obtained a Slack message Amodei sent to staff on a Sunday morning (WIRED published Monday 2025-07-21, so Sunday is 2025-07-20) saying Anthropic would seek investment from the UAE and Qatar, and acknowledging that this would likely enrich \"dictators\". He argued that access to Gulf capital, \"easily $100B or more\", was needed to stay on the frontier. Internal remarks that leaked.",
+    "context": "WIRED obtained a Slack message Amodei sent to staff on a Sunday morning saying Anthropic would seek investment from the UAE and Qatar, and acknowledging that this would likely enrich \"dictators\". He argued that access to Gulf capital, \"easily $100B or more\", was needed to stay on the frontier. Internal remarks that leaked.",
     "sources": [
       {
         "outlet": "WIRED",
@@ -4166,7 +4105,7 @@
     "ceo": "nadella",
     "date": "2025-07-24",
     "datePrecision": "day",
-    "venue": "Memo to Microsoft employees after about 9,000 layoffs (published by the press)",
+    "venue": "Memo to Microsoft employees after about 9,000 layoffs",
     "leaked": true,
     "headline": {
       "text": "Satya Nadella on the ‘enigma of success’ in the age of AI: A thriving business, but 15,000+ layoffs",
@@ -4176,7 +4115,7 @@
     "quote": "By every objective measure, Microsoft is thriving—our market performance, strategic positioning, and growth all point up and to the right ... enigma of success in an industry that has no franchise value ... Progress isn’t linear. It’s dynamic, sometimes dissonant, and always demanding.",
     "quoteSource": "https://fortune.com/2025/07/24/satya-nadella-memo-microsoft-layoffs-enigma-of-success-artificial-intelligence/",
     "primarySource": null,
-    "context": "Nadella wrote to staff days after Microsoft cut roughly 9,000 jobs while posting strong results and spending heavily on AI infrastructure, calling the combination an 'enigma of success' and acknowledging the cuts were hard. The memo was widely published rather than posted by Microsoft on a page we could read, so no primary copy was fetched.",
+    "context": "Nadella wrote to staff days after Microsoft cut roughly 9,000 jobs while posting strong results and spending heavily on AI infrastructure, calling the combination an 'enigma of success' and acknowledging the cuts were hard.",
     "sources": [
       {
         "outlet": "Fortune",
@@ -4198,7 +4137,7 @@
       }
     ],
     "backlash": {
-      "summary": "Per a Business Insider report summarised by TelecomLive, employee reactions ranged from suspicion about more cuts to criticism of what was called tone-deaf messaging. Second-hand and moderate; the Business Insider original was not fetched.",
+      "summary": "Per a Business Insider report summarised by TelecomLive, employee reactions ranged from suspicion about more cuts to criticism of what was called tone-deaf messaging.",
       "url": "https://telecomlive.in/web/?p=950790"
     },
     "backlashStrength": "critical commentary",
@@ -4244,7 +4183,7 @@
     "quote": "I think in the future, if you don’t have glasses that have AI or some way to interact with AI, I think you’re kind of similarly probably be at a pretty significant cognitive disadvantage compared to other people who you’re working with, or competing against.",
     "quoteSource": "https://uploadvr.com/zuckerberg-people-without-smart-glasses-will-be-at-cognitive-disadvantage",
     "primarySource": null,
-    "context": "Answering an analyst's question on smart glasses as the next computing platform, Zuckerberg first said that without his corrected vision (he wears contact lenses) he would be \"sort of at a cognitive disadvantage going through the world\", then made the comparison to AI glasses. Wording follows UploadVR's full transcript of the answer; Fortune prints the middle as \"you’re kind of similarly, probably [going to] be at a pretty significant cognitive disadvantage compared to other people and who you’re working with\".",
+    "context": "Answering an analyst's question on smart glasses as the next computing platform, Zuckerberg first said that without his corrected vision (he wears contact lenses) he would be \"sort of at a cognitive disadvantage going through the world\", then made the comparison to AI glasses.",
     "sources": [
       {
         "outlet": "Fortune",
@@ -4272,7 +4211,7 @@
       }
     ],
     "backlash": {
-      "summary": "PC Gamer mocked the claim in its headline as \"something the guy who wants you to buy his AI glasses would say\" and called it \"an investor-facing marketing pitch\", noting there is little today that would make glasses wearers cognitively advantaged. The other outlets reported it neutrally, so this is sarcastic commentary rather than a mass outcry.",
+      "summary": "PC Gamer mocked the claim in its headline as \"something the guy who wants you to buy his AI glasses would say\" and called it \"an investor-facing marketing pitch\", noting there is little today that would make glasses wearers cognitively advantaged. The other outlets reported it neutrally.",
       "url": "https://www.pcgamer.com/software/ai/zuckerberg-thinks-those-without-ai-glasses-will-be-at-a-pretty-significant-cognitive-disadvantage-which-sounds-like-something-the-guy-who-wants-you-to-buy-his-ai-glasses-would-say/"
     },
     "backlashStrength": "critical commentary",
@@ -4400,7 +4339,7 @@
     "quote": "going to be 10 times bigger than the Industrial Revolution, and maybe 10 times faster... maybe in the next five to 10 years, possibly the lower end of that",
     "quoteSource": "https://www.pcgamer.com/software/ai/deepmind-ceo-makes-big-brain-claims-saying-agi-could-be-here-in-the-next-five-to-10-years-and-that-humanity-will-see-a-change-10-times-bigger-than-the-industrial-revolution-and-maybe-10-times-faster",
     "primarySource": null,
-    "context": "In a Guardian interview, Hassabis said AGI, meaning something with all the cognitive capabilities of humans, could come in five to ten years, and that the resulting change would be \"10 times bigger than the Industrial Revolution, and maybe 10 times faster\". He conceded the Industrial Revolution was not equally beneficial but said \"we wouldn't wish it hadn't happened\". The Guardian article itself was not retrievable; the date is the first coverage seen (PC Gamer and eWeek, 2025-08-05).",
+    "context": "In a Guardian interview, Hassabis said AGI, meaning something with all the cognitive capabilities of humans, could come in five to ten years, and that the resulting change would be \"10 times bigger than the Industrial Revolution, and maybe 10 times faster\". He conceded the Industrial Revolution was not equally beneficial but said \"we wouldn't wish it hadn't happened\".",
     "sources": [
       {
         "outlet": "PC Gamer",
@@ -4422,7 +4361,7 @@
       }
     ],
     "backlash": {
-      "summary": "PC Gamer opened \"Another week, another prominent name being perhaps all too optimistic about the future of AI\", added \"With Large Language Models still hallucinating and glazing for days, AGI doesn't feel quite that close to me\" and subheaded \"I'm not getting my hopes up though\"; Windows Central's headline mocked the forecast as \"DeepMind Thinks AI Will Do All the Work—You Just Need to Chill Until 2035\". Mild, from two outlets.",
+      "summary": "PC Gamer opened \"Another week, another prominent name being perhaps all too optimistic about the future of AI\", added \"With Large Language Models still hallucinating and glazing for days, AGI doesn't feel quite that close to me\" and subheaded \"I'm not getting my hopes up though\"; Windows Central's headline mocked the forecast as \"DeepMind Thinks AI Will Do All the Work—You Just Need to Chill Until 2035\".",
       "url": "https://www.pcgamer.com/software/ai/deepmind-ceo-makes-big-brain-claims-saying-agi-could-be-here-in-the-next-five-to-10-years-and-that-humanity-will-see-a-change-10-times-bigger-than-the-industrial-revolution-and-maybe-10-times-faster"
     },
     "backlashStrength": "critical commentary",
@@ -4471,7 +4410,7 @@
       "url": "https://mustafa-suleyman.ai/seemingly-conscious-ai-is-coming",
       "kind": "blog"
     },
-    "context": "In an essay on \"seemingly conscious AI\", Suleyman argued that treating AI models as possible welfare subjects will fuel delusion, dependence and a new axis of polarization, and said \"SCAI is something to avoid\". TechCrunch (2025-08-21) says he published it \"on Tuesday\", which is 2025-08-19. The \"premature, and frankly dangerous\" sentence is about the AI-welfare research agenda (claims that some AI systems will be \"welfare subjects and moral patients\").",
+    "context": "In an essay on \"seemingly conscious AI\", Suleyman argued that treating AI models as possible welfare subjects will fuel delusion, dependence and a new axis of polarization, and said \"SCAI is something to avoid\". The \"premature, and frankly dangerous\" sentence is about the AI-welfare research agenda (claims that some AI systems will be \"welfare subjects and moral patients\").",
     "sources": [
       {
         "outlet": "TechCrunch",
@@ -4487,7 +4426,7 @@
       }
     ],
     "backlash": {
-      "summary": "TechCrunch wrote that \"Suleyman's views may sound reasonable, but he's at odds with many in the industry\" and quoted the communications lead of the AI-welfare group Eleos saying his post \"misses the mark\" and \"neglects the fact that you can be worried about multiple things at the same time\". Mild, from a niche group; no mass backlash found.",
+      "summary": "TechCrunch wrote that \"Suleyman's views may sound reasonable, but he's at odds with many in the industry\" and quoted the communications lead of the AI-welfare group Eleos saying his post \"misses the mark\" and \"neglects the fact that you can be worried about multiple things at the same time\".",
       "url": "https://techcrunch.com/2025/08/21/microsoft-ai-chief-says-its-dangerous-to-study-ai-consciousness"
     },
     "backlashStrength": "critical commentary",
@@ -4675,7 +4614,7 @@
     "quote": "not the elected moral police of the world",
     "quoteSource": "https://www.fortune.com/2025/10/16/sam-altman-openai-not-moral-police-chatgpt-erotica-adult-content",
     "primarySource": null,
-    "context": "After saying ChatGPT would allow erotica for verified adults, Altman clarified that this was one example of giving adults more freedom, with strict protections for minors and mental-health cases. Fortune prints only the fragment; the Free Press Journal also prints his line 'In the same way that society differentiates other appropriate boundaries (R-rated movies, for example) we want to do a similar thing here.'",
+    "context": "After saying ChatGPT would allow erotica for verified adults, Altman clarified that this was one example of giving adults more freedom, with strict protections for minors and mental-health cases.",
     "sources": [
       {
         "outlet": "Fortune",
@@ -4747,7 +4686,7 @@
       "url": "https://x.com/elonmusk/status/1979431839824777673",
       "kind": "post"
     },
-    "context": "Musk posted the first line on a Saturday; after an xAI employee endorsed the forecast he followed up with the second. An OpenAI research scientist, Gabriel Petersson, joked about it and Musk replied that he should not call himself a 'researcher'. Futurism spells out '10 percent'; Techbang's report translates the figure as 10%.",
+    "context": "Musk posted the first line on a Saturday; after an xAI employee endorsed the forecast he followed up with the second. An OpenAI research scientist, Gabriel Petersson, joked about it and Musk replied that he should not call himself a 'researcher'.",
     "sources": [
       {
         "outlet": "Futurism",
@@ -4808,7 +4747,7 @@
     "quote": "I just don't feel comfortable building a robot army here and then being ousted because of some asinine recommendations from ISS and Glass Lewis... I mean, those guys are corporate terrorists",
     "quoteSource": "https://electrek.co/2025/10/22/elon-says-quiet-part-out-loud-he-needs-1-trillion-so-he-can-control-a-robot-army/",
     "primarySource": null,
-    "context": "Days before Tesla shareholders voted on a pay package of up to $1 trillion, Musk told the earnings call he needed enough voting power to keep 'a strong influence' over the 'enormous robot army' of Optimus humanoids he wants to build, and attacked the proxy advisers urging a no vote. Fast Company's quotation omits 'asinine'; Fortune and Electrek include it.",
+    "context": "Days before Tesla shareholders voted on a pay package of up to $1 trillion, Musk told the earnings call he needed enough voting power to keep 'a strong influence' over the 'enormous robot army' of Optimus humanoids he wants to build, and attacked the proxy advisers urging a no vote.",
     "sources": [
       {
         "outlet": "Fortune (via Yahoo Finance)",
@@ -4882,7 +4821,7 @@
     "quote": "Grokipedia will exceed Wikipedia by several orders of magnitude in breadth, depth and accuracy",
     "quoteSource": "https://www.newsgram.com/usa/2025/10/29/grokipedia-will-exceed-wikipedia-elon-musk",
     "primarySource": null,
-    "context": "Musk launched Grokipedia, an encyclopedia written by xAI's Grok as a rival to Wikipedia, and posted that it would surpass Wikipedia. At launch he also wrote that its goal is 'the truth, the whole truth and nothing but the truth', adding 'We will never be perfect'. The date is the wire report's; the post itself was not read.",
+    "context": "Musk launched Grokipedia, an encyclopedia written by xAI's Grok as a rival to Wikipedia, and posted that it would surpass Wikipedia. At launch he also wrote that its goal is 'the truth, the whole truth and nothing but the truth', adding 'We will never be perfect'.",
     "sources": [
       {
         "outlet": "NewsGram (IANS)",
@@ -5035,7 +4974,7 @@
       }
     ],
     "backlash": {
-      "summary": "Mild critical commentary. TechRadar's headline calls it 'an embarrassing shortcoming' and hopes it does not 'set the company back in the AI arms race'; Tom's Hardware places it beside consumer energy bills that are rising because of the AI build-out ('negatively affecting the average American'). Notebookcheck notes the knock-on effects of the power crunch. The remark is an admission rather than a provocation, so the reaction is modest.",
+      "summary": "TechRadar's headline calls it 'an embarrassing shortcoming' and hopes it does not 'set the company back in the AI arms race'; Tom's Hardware places it beside consumer energy bills that are rising because of the AI build-out ('negatively affecting the average American'). Notebookcheck notes the knock-on effects of the power crunch.",
       "url": "https://www.techradar.com/pro/you-may-actually-have-a-bunch-of-chips-sitting-in-inventory-that-i-cant-plug-in-satya-nadella-admits-an-embarrassing-shortcoming-so-lets-hope-it-doesnt-set-the-company-back-in-the-ai-arms-race"
     },
     "backlashStrength": "critical commentary",
@@ -5155,7 +5094,7 @@
     "quote": "I think I'm deeply uncomfortable with these decisions being made by a few companies, by a few people... No one. Honestly, no one",
     "quoteSource": "https://fortune.com/article/why-is-anthropic-ceo-dario-amodei-deeply-uncomfortable-companies-in-charge-ai-regulating-themselves/",
     "primarySource": null,
-    "context": "Asked on 60 Minutes who elected him and Sam Altman to make decisions about the technology, Amodei said no one did, and that this is one reason he advocates for regulation. The segment aired Sunday 2025-11-16 (Reason, dated 2025-11-19, says \"On Sunday\"; Fortune's piece is dated 2025-11-17).",
+    "context": "Asked on 60 Minutes who elected him and Sam Altman to make decisions about the technology, Amodei said no one did, and that this is one reason he advocates for regulation.",
     "sources": [
       {
         "outlet": "Fortune",
@@ -5217,7 +5156,7 @@
     "quote": "This is why people also use Google search, and we have other products that are more grounded in providing accurate information. ... have to learn to use these tools for what they're good at, and not blindly trust everything they say ... the current state-of-the-art AI technology is prone to some errors.",
     "quoteSource": "https://www.bbc.com/news/articles/c8drzv37z4jo",
     "primarySource": null,
-    "context": "Asked about the accuracy of his AI models, Pichai said they are prone to errors and that people should use them alongside other tools. The BBC article itself adds that some experts say big tech firms should make their systems more reliable rather than invite users to fact-check them. No BBC video or transcript was read.",
+    "context": "Asked about the accuracy of his AI models, Pichai said they are prone to errors and that people should use them alongside other tools. The BBC article itself adds that some experts say big tech firms should make their systems more reliable rather than invite users to fact-check them.",
     "sources": [
       {
         "outlet": "BBC News",
@@ -5365,7 +5304,7 @@
     "quote": "Jeez there so many cynics! It cracks me up when I hear people call AI underwhelming. I grew up playing Snake on a Nokia phone! The fact that people are unimpressed that we can have a fluent conversation with a super smart AI that can generate any image/video is mindblowing to me.",
     "quoteSource": "https://gigazine.net/gsc_news/en/20251120-microsoft-ai-ceo-against-windows-backlash",
     "primarySource": null,
-    "context": "Posted on X a day after Windows president Pavan Davuluri wrote that Windows is \"evolving into an agentic OS\", which drew heavily critical replies from users who wanted the basics fixed. Windows Central and others read Suleyman's post as a response to that backlash. The wording is the embedded post on GIGAZINE (its article text paraphrases the post differently).",
+    "context": "Posted on X a day after Windows president Pavan Davuluri wrote that Windows is \"evolving into an agentic OS\", which drew heavily critical replies from users who wanted the basics fixed. Windows Central and others read Suleyman's post as a response to that backlash.",
     "sources": [
       {
         "outlet": "80.lv",
@@ -5429,7 +5368,7 @@
     "ceo": "huang",
     "date": "2025-11-20",
     "datePrecision": "day",
-    "venue": "Nvidia all-hands meeting (internal; audio obtained and reported by Business Insider)",
+    "venue": "Nvidia all-hands meeting",
     "leaked": true,
     "headline": {
       "text": "'Are you insane?': Billionaire CEO Jensen Huang blasts Nvidia managers who are 'telling their people to use less AI'",
@@ -5439,7 +5378,7 @@
     "quote": "My understanding is Nvidia has some managers who are telling their people to use less AI ... Are you insane? ... I want every task that is possible to be automated with artificial intelligence to be automated with artificial intelligence ... I promise you, you will have work to do.",
     "quoteSource": "https://fortune.com/2025/11/25/nvidia-jensen-huang-insane-to-not-use-ai-for-every-task-possible",
     "primarySource": null,
-    "context": "At an all-hands meeting on the Thursday after Nvidia's record quarter (Fortune: 'last Thursday', in an article of 2025-11-25), Huang reacted to reports that some managers were telling staff to use less AI and told employees AI would help them rather than replace them. The meeting was internal; Business Insider listened to a recording and Fortune and others reported it from 2025-11-25.",
+    "context": "At an all-hands meeting on the Thursday after Nvidia's record quarter, Huang reacted to reports that some managers were telling staff to use less AI and told employees AI would help them rather than replace them. The meeting was internal; Business Insider listened to a recording.",
     "sources": [
       {
         "outlet": "Fortune",
@@ -5467,7 +5406,7 @@
       }
     ],
     "backlash": {
-      "summary": "Futurism (2025-11-26) mocks the demand ('Don't use AI to do literally everything? You might want to get your head checked, according to Nvidia CEO Jensen Huang') and calls it 'a hard line for Huang to be taking' given there is no consensus that AI coding tools make workers more productive. Mild: the coverage is mostly straight reporting, and the owner's call is to include it.",
+      "summary": "Futurism (2025-11-26) mocks the demand ('Don't use AI to do literally everything? You might want to get your head checked, according to Nvidia CEO Jensen Huang') and calls it 'a hard line for Huang to be taking' given there is no consensus that AI coding tools make workers more productive.",
       "url": "https://futurism.com/artificial-intelligence/nvidia-ceo-insane-ai"
     },
     "backlashStrength": "critical commentary",
@@ -5819,7 +5758,7 @@
       "url": "https://www.youtube.com/watch?v=RSNuB9pj9P8",
       "kind": "video"
     },
-    "context": "Asked about a future of AI-driven abundance on a podcast hosted by Peter Diamandis, Musk said AI and robotics would make goods and services so plentiful that retirement savings would not matter. HousingWire prints the continuation 'If any of the things that we said are true, saving for retirement will be irrelevant'; Gizmodo renders it 'we've said'. The episode date was not confirmed, so the date is the first report.",
+    "context": "Asked about a future of AI-driven abundance on a podcast hosted by Peter Diamandis, Musk said AI and robotics would make goods and services so plentiful that retirement savings would not matter.",
     "sources": [
       {
         "outlet": "Gizmodo",
@@ -5893,7 +5832,7 @@
     "quote": "I think we've done a lot of damage with very well-respected people who have painted a doomer narrative, end of the world narrative, science fiction narrative ... it's not helpful. It's not helpful to people. It's not helpful to the industry. It's not helpful to society. It's not helpful to the governments.",
     "quoteSource": "https://futurism.com/artificial-intelligence/nvidia-ceo-stop-being-negative-ai",
     "primarySource": null,
-    "context": "Looking back on 2025 on the No Priors podcast, Huang called 'the battle of the narratives' one of his biggest takeaways and said warnings from respected people about the end of the world do damage because they push governments toward policy. He added it is 'too simplistic' to say everything doomers say is irrelevant. The recording date is not given in the coverage fetched; TechSpot's report (2026-01-11) is used as the date.",
+    "context": "Looking back on 2025 on the No Priors podcast, Huang called 'the battle of the narratives' one of his biggest takeaways and said warnings from respected people about the end of the world do damage because they push governments toward policy. He added it is 'too simplistic' to say everything doomers say is irrelevant.",
     "sources": [
       {
         "outlet": "TechSpot",
@@ -6061,7 +6000,7 @@
       }
     ],
     "backlash": {
-      "summary": "Windows Central opened by saying \"'coding is dead' with the prevalence of AI is starting to sound like a broken record by now\"; Entrepreneur reported the claim \"sparked intense debate on social media\" (\"Yeah, we're cooked\"); Fortune found CEOs at Davos split on how bad the job wipeout would be. Mild: sceptical and anxious rather than angry.",
+      "summary": "Windows Central opened by saying \"'coding is dead' with the prevalence of AI is starting to sound like a broken record by now\"; Entrepreneur reported the claim \"sparked intense debate on social media\" (\"Yeah, we're cooked\"); Fortune found CEOs at Davos split on how bad the job wipeout would be. Sceptical and anxious rather than angry.",
       "url": "https://www.windowscentral.com/artificial-intelligence/engineers-dont-write-code-anymore-anthropic-ceo-says-ai-is-about-to-eat-the-entire-profession"
     },
     "backlashStrength": "critical commentary",
@@ -6189,7 +6128,7 @@
     "quote": "In fact, I would say we will quickly lose even the social permission to actually take something like energy, which is a scarce resource, and use it to generate these tokens, if these tokens are not improving health outcomes, education outcomes, public sector efficiency, private sector competitiveness across all sectors, small and large.",
     "quoteSource": "https://www.tomshardware.com/tech-industry/artificial-intelligence/microsoft-ceo-says-ai-needs-to-have-a-wider-impact-or-else-it-risks-quickly-losing-social-permission-also-says-that-the-technology-should-benefit-more-people-to-avoid-a-bubble",
     "primarySource": null,
-    "context": "At Davos Nadella said AI must show real gains in health, education and productivity, in more places than the tech industry, or it will lose public tolerance for the energy it uses. In the same conversation he said it would be a bubble if only tech firms benefited. Windows Central's text of the same passage is slightly shorter; this is Tom's Hardware's fuller version.",
+    "context": "At Davos Nadella said AI must show real gains in health, education and productivity, in more places than the tech industry, or it will lose public tolerance for the energy it uses. In the same conversation he said it would be a bubble if only tech firms benefited.",
     "sources": [
       {
         "outlet": "Tom's Hardware",
@@ -6223,7 +6162,7 @@
       }
     ],
     "backlash": {
-      "summary": "Commentary rather than public anger. Futurism mocked the Davos remarks (bubble talk): 'If AI fails, in other words, it's everyone else's fault for not using it', and tied them to his 'slop' post weeks earlier; Windows Central ('says AI needs to prove its worth') noted the remarks came weeks after his 'slop' post, which it says was 'earning Microsoft a new nickname', Microslop. The 'social permission' sentence itself drew no direct criticism in the pages read; Neowin ran a critical headline (page blocked, not read).",
+      "summary": "Commentary rather than public anger. Futurism mocked the Davos remarks (bubble talk): 'If AI fails, in other words, it's everyone else's fault for not using it', and tied them to his 'slop' post weeks earlier; Windows Central ('says AI needs to prove its worth') noted the remarks came weeks after his 'slop' post, which it says was 'earning Microsoft a new nickname', Microslop.",
       "url": "https://futurism.com/artificial-intelligence/microsoft-ceo-nervous-ai"
     },
     "backlashStrength": "critical commentary",
@@ -6272,7 +6211,7 @@
       "url": "https://www.darioamodei.com/essay/the-adolescence-of-technology",
       "kind": "essay"
     },
-    "context": "A roughly 22,000-word essay on the risks of powerful AI (autonomy, misuse, authoritarianism, economic disruption). The first passage is the claim Mashable's critique targets; the second is about people with lower intellectual ability being displaced, where Amodei writes it is not clear where \"these people will go or what they will do\". Gizmodo dates the publication to Monday 2026-01-26.",
+    "context": "A roughly 22,000-word essay on the risks of powerful AI (autonomy, misuse, authoritarianism, economic disruption). The first passage is the claim Mashable's critique targets; the second is about people with lower intellectual ability being displaced, where Amodei writes it is not clear where \"these people will go or what they will do\".",
     "sources": [
       {
         "outlet": "The Register",
@@ -6300,7 +6239,7 @@
       }
     ],
     "backlash": {
-      "summary": "The Register headlined it a \"thinly veiled plea against regulation\" and said the essay was \"as good an advertisement as any for the summarization capabilities\" of Claude; Mashable's tech editor wrote \"I'm not buying it\" and that Amodei \"falls into the same traps he warns about\" and that his essay \"repeatedly evokes science fiction\"; Fortune called it \"as much a novella-length marketing message as it is an impassioned prophecy\"; Gizmodo's subhead was \"When has that ever stopped us?\". The \"underclass\" wording itself drew no specific backlash that was found.",
+      "summary": "The Register headlined it a \"thinly veiled plea against regulation\" and said the essay was \"as good an advertisement as any for the summarization capabilities\" of Claude; Mashable's tech editor wrote \"I'm not buying it\" and that Amodei \"falls into the same traps he warns about\" and that his essay \"repeatedly evokes science fiction\"; Fortune called it \"as much a novella-length marketing message as it is an impassioned prophecy\"; Gizmodo's subhead was \"When has that ever stopped us?\".",
       "url": "https://www.theregister.com/2026/01/28/anthropic_ceo_regulation_essay/"
     },
     "backlashStrength": "critical commentary",
@@ -6414,7 +6353,7 @@
     "quote": "We don't know if the models are conscious. We are not even sure that we know what it would mean for a model to be conscious or whether a model can be conscious... But we're open to the idea that it could be.",
     "quoteSource": "https://futurism.com/artificial-intelligence/anthropic-ceo-unsure-claude-conscious",
     "primarySource": null,
-    "context": "Douthat pressed Amodei on Anthropic's published model-welfare findings for Claude Opus 4.6, including a hypothetical in which a model gives itself a 72 percent chance of being conscious. Amodei said the company is uncertain, was careful not to commit to the word \"conscious\", and described precautionary measures in case models have \"some morally relevant experience\". Date is the earliest coverage seen (Hot Air, 2026-02-12).",
+    "context": "Douthat pressed Amodei on Anthropic's published model-welfare findings for Claude Opus 4.6, including a hypothetical in which a model gives itself a 72 percent chance of being conscious. Amodei said the company is uncertain, was careful not to commit to the word \"conscious\", and described precautionary measures in case models have \"some morally relevant experience\".",
     "sources": [
       {
         "outlet": "Futurism",
@@ -6473,7 +6412,7 @@
     "ceo": "suleyman",
     "date": "2026-02-13",
     "datePrecision": "reported",
-    "venue": "Financial Times interview (reported in February 2026); walked back on The Verge's Decoder podcast on 2026-06-08",
+    "venue": "Financial Times interview",
     "leaked": false,
     "headline": {
       "text": "Microsoft's AI Chief Puts 18 Months on White-Collar Work",
@@ -6483,7 +6422,7 @@
     "quote": "White-collar work, where you're sitting down at a computer, either being a lawyer or an accountant or a project manager or a marketing person — most of those tasks will be fully automated by an AI within the next 12 to 18 months.",
     "quoteSource": "https://www.unite.ai/microsofts-ai-chief-puts-18-months-on-white-collar-work",
     "primarySource": null,
-    "context": "Suleyman told the Financial Times that compute scaling would bring human-level performance on most professional computer-based tasks. The FT original is paywalled and was not read; The Verge confirms the quote ran in an FT report \"in February\" and reproduces it, and Unite.AI (dated 2026-02-13) reproduces it as a single quotation. In June 2026 Suleyman said on Decoder that he had said \"tasks\", \"so that does not mean jobs\".",
+    "context": "Suleyman told the Financial Times that compute scaling would bring human-level performance on most professional computer-based tasks. In June 2026 Suleyman said on Decoder that he had said \"tasks\", \"so that does not mean jobs\".",
     "sources": [
       {
         "outlet": "Unite.AI",
@@ -6641,7 +6580,7 @@
     "quote": "I think the fact that everything is scarce is fantastic for us ... I love constraints. I love constraints. The reason for that is because in a world of constraint, you have no choice but to choose the best",
     "quoteSource": "https://redgamingtech.com/nvidia-ceo-admits-supply-scarcity-fantastic-for-the-company/",
     "primarySource": null,
-    "context": "Asked about bottlenecks in the AI build-out (memory, packaging, wafers, power), Huang said Nvidia benefits when supply is tight because customers who cannot get everything must pick the best product. The same memory shortage was pushing up prices of consumer GPUs and other gaming hardware. PC Gamer (published 2026-03-05) places the conference 'yesterday' and The Backdash dates it 2026-03-04.",
+    "context": "Asked about bottlenecks in the AI build-out (memory, packaging, wafers, power), Huang said Nvidia benefits when supply is tight because customers who cannot get everything must pick the best product. The same memory shortage was pushing up prices of consumer GPUs and other gaming hardware.",
     "sources": [
       {
         "outlet": "Tom's Hardware",
@@ -6790,7 +6729,7 @@
     "quote": "xAI was not built right first time around, so is being rebuilt from the foundations up",
     "quoteSource": "https://techcrunch.com/2026/03/13/not-built-right-the-first-time-musks-xai-is-starting-over-again-again/",
     "primarySource": null,
-    "context": "Musk posted this on a Thursday as two more of xAI's co-founders left; he added that 'the same thing happened with Tesla'. He later apologised on X to candidates the company had earlier declined to interview. This is the mildest item in the file: the coverage is critical of xAI's churn more than of the sentence.",
+    "context": "Musk posted this on a Thursday as two more of xAI's co-founders left; he added that 'the same thing happened with Tesla'. He later apologised on X to candidates the company had earlier declined to interview.",
     "sources": [
       {
         "outlet": "TechCrunch",
@@ -6911,7 +6850,7 @@
     "quote": "Well, first of all, they're completely wrong ... It's not post-processing, it's not post-processing at the frame level, it's generative control at the geometry level",
     "quoteSource": "https://www.tomshardware.com/pc-components/gpus/jensen-huang-says-gamers-are-completely-wrong-about-dlss-5-nvidia-ceo-responds-to-dlss-5-backlash",
     "primarySource": null,
-    "context": "At GTC 2026 Nvidia showed DLSS 5, a generative-AI rendering step that critics said altered faces and art direction. The day after the reveal, Tom's Hardware editor-in-chief Paul Alcorn asked Huang in a press Q&A about the reaction from gamers, and he answered that they misunderstood the technology, which he said stays under the game developer's control. Days later, on the Lex Fridman podcast, he said 'I think their perspective makes sense and I can see where they're coming from, because I don't love AI slop myself.' The Q&A is dated the day after the keynote (Tom's Hardware quotes the question as 'revealed yesterday' and published on 2026-03-17).",
+    "context": "At GTC 2026 Nvidia showed DLSS 5, a generative-AI rendering step that critics said altered faces and art direction. The day after the reveal, Tom's Hardware editor-in-chief Paul Alcorn asked Huang in a press Q&A about the reaction from gamers, and he answered that they misunderstood the technology, which he said stays under the game developer's control. Days later, on the Lex Fridman podcast, he said 'I think their perspective makes sense and I can see where they're coming from, because I don't love AI slop myself.'",
     "sources": [
       {
         "outlet": "Tom's Hardware",
@@ -7032,7 +6971,7 @@
       }
     ],
     "backlash": {
-      "summary": "Mild but real critical commentary. Analytics India Magazine says the framing 'naturally favours NVIDIA's business' because more tokens mean more GPU demand, reports that some developers see the $250,000 benchmark as 'far removed from reality' and that critics say token counts do not track productivity. TechCrunch's piece on tokens as pay warns engineers to 'hold the line' because large token budgets bring large expectations and change the 'financial logic of headcount'. The Decoder notes the line has 'at least as much meme potential' as 'The more you buy, the more you save'. No outrage or viral pile-on found.",
+      "summary": "Analytics India Magazine says the framing 'naturally favours NVIDIA's business' because more tokens mean more GPU demand, reports that some developers see the $250,000 benchmark as 'far removed from reality' and that critics say token counts do not track productivity. TechCrunch's piece on tokens as pay warns engineers to 'hold the line' because large token budgets bring large expectations and change the 'financial logic of headcount'. The Decoder notes the line has 'at least as much meme potential' as 'The more you buy, the more you save'.",
       "url": "https://analyticsindiamag.com/global-tech/developers-are-burning-tokens-to-look-more-productive"
     },
     "backlashStrength": "critical commentary",
@@ -7078,7 +7017,7 @@
     "quote": "Your [AI] agents are harassing you, micromanaging you, and you're busier than ever",
     "quoteSource": "https://fortune.com/2026/04/20/nvidia-ceo-jensen-huang-ai-agents-more-like-overbearing-managers-than-job-destroyers-micromanaging-you/",
     "primarySource": null,
-    "context": "Arguing that AI will create jobs rather than destroy them, Huang described AI agents as overbearing managers while the company 'is able to do more'. Fortune says 'a recent panel at Stanford Graduate School of Business'; the panel date is not given, so the date is Fortune's report date.",
+    "context": "Arguing that AI will create jobs rather than destroy them, Huang described AI agents as overbearing managers while the company 'is able to do more'.",
     "sources": [
       {
         "outlet": "Fortune",
@@ -7100,7 +7039,7 @@
       }
     ],
     "backlash": {
-      "summary": "Futurism (2026-04-22) says whether the view 'will offer much reassurance to sacked tech workers who are facing a challenging job market is dubious at best' and that Huang's chip empire 'has been selling shovels during the ongoing AI gold rush'; Entrepreneur's subtitle says AI assistants will act like demanding managers, 'which might be worse'. Mild, mocking in tone.",
+      "summary": "Futurism (2026-04-22) says whether the view 'will offer much reassurance to sacked tech workers who are facing a challenging job market is dubious at best' and that Huang's chip empire 'has been selling shovels during the ongoing AI gold rush'; Entrepreneur's subtitle says AI assistants will act like demanding managers, 'which might be worse'.",
       "url": "https://futurism.com/artificial-intelligence/nvidia-ceo-ai-micromanaging-boss"
     },
     "backlashStrength": "critical commentary",
@@ -7183,7 +7122,7 @@
       }
     ],
     "backlash": {
-      "summary": "Indirect. Futurism (2026-06-05) set the claim against internal Google memes reported by 404 Media: 'It's clear who these jokes are being aimed at ... the anti-AI memes suggest that many employees don't see this as a bragging right at all.' The memes were internal and about AI tools generally, not a public reaction to the post. Lowest strength; included so the lead can decide.",
+      "summary": "Futurism (2026-06-05) set the claim against internal Google memes reported by 404 Media: 'It's clear who these jokes are being aimed at ... the anti-AI memes suggest that many employees don't see this as a bragging right at all.' The memes were internal and about AI tools generally, not a public reaction to the post.",
       "url": "https://futurism.com/artificial-intelligence/google-employees-mocking-ai"
     },
     "backlashStrength": "critical commentary",
@@ -7229,7 +7168,7 @@
     "quote": "The worst-case situation is where it is a terminator situation ... where AI will kill us all",
     "quoteSource": "https://www.theguardian.com/technology/2026/apr/30/openai-founding-trial-elon-musk-sam-altman",
     "primarySource": null,
-    "context": "Questioned by his own lawyer about his wish to build an army of robots, Musk gave this answer. The judge cut in to call a break and, once the jury had left the room, told Musk and his lawyers the court would not 'talk much about extinction in this case'. On the Tuesday he had told the jury 'We don't want to have a Terminator outcome' (NPR). TechRadar reports the same testimony as 'The biggest risk would be that AI kills us all'.",
+    "context": "Questioned by his own lawyer about his wish to build an army of robots, Musk gave this answer. The judge cut in to call a break and, once the jury had left the room, told Musk and his lawyers the court would not 'talk much about extinction in this case'. On the Tuesday he had told the jury 'We don't want to have a Terminator outcome' (NPR).",
     "sources": [
       {
         "outlet": "The Guardian",
@@ -7309,7 +7248,7 @@
     "quote": "We basically have two major cost centers in the company: compute infrastructure and people-oriented things ... If we're investing more in one area to serve our community, then that means we have less capital to allocate to the other. So that means we do need to take down the size of the company somewhat",
     "quoteSource": "https://allwork.space/2026/05/ceo-zuckerberg-admits-meta-cut-jobs-to-fund-ai-push-more-layoffs-possible/",
     "primarySource": null,
-    "context": "Zuckerberg addressed employees for the first time since Reuters reported the plan to lay off about 10% of staff (about 8,000 roles, from 20 May). The two quoted sentences are separated in Reuters by the words \"Zuckerberg said in the session, heard by Reuters\". He also said using AI tools internally \"is not the thing that's driving layoffs\" and that he had no \"crystal ball plan for the next, like, three years\".",
+    "context": "Zuckerberg addressed employees for the first time since Reuters reported the plan to lay off about 10% of staff (about 8,000 roles, from 20 May). He also said using AI tools internally \"is not the thing that's driving layoffs\" and that he had no \"crystal ball plan for the next, like, three years\".",
     "sources": [
       {
         "outlet": "Reuters (via Yahoo Finance)",
@@ -7383,7 +7322,7 @@
     "quote": "In some ways, these graduates are actually both going to be a big part of driving that progress and also dealing with the impact of that technology ... I’ve always been extraordinarily optimistic about the next generation.",
     "quoteSource": "https://futurism.com/artificial-intelligence/google-ceo-speech-stanford-graduation",
     "primarySource": null,
-    "context": "Weeks after graduates at other universities booed speakers who praised AI, Hard Fork's hosts asked Pichai what he planned to say at Stanford and whether he had a 'boo strategy'. The date is the NYT episode page's date (2026-05-22), not fetched (403); the episode itself was not heard. The Stanford speech (2026-06-14) drew a walkout that Fortune and others attribute to Google's Project Nimbus contract rather than AI.",
+    "context": "Weeks after graduates at other universities booed speakers who praised AI, Hard Fork's hosts asked Pichai what he planned to say at Stanford and whether he had a 'boo strategy'. The Stanford speech (2026-06-14) drew a walkout that Fortune and others attribute to Google's Project Nimbus contract rather than AI.",
     "sources": [
       {
         "outlet": "Futurism",
@@ -7405,7 +7344,7 @@
       }
     ],
     "backlash": {
-      "summary": "Futurism wrote that his answer 'was more a series of truisms and corporate-speak than a coherent rejoinder' and joked he might 'word anything he says in such a vague and circumspect way that the kids can't figure out the right moment to heckle him'. Mild, one outlet; other coverage was neutral to sympathetic.",
+      "summary": "Futurism wrote that his answer 'was more a series of truisms and corporate-speak than a coherent rejoinder' and joked he might 'word anything he says in such a vague and circumspect way that the kids can't figure out the right moment to heckle him'. Other coverage was neutral to sympathetic.",
       "url": "https://futurism.com/artificial-intelligence/google-ceo-speech-stanford-graduation"
     },
     "backlashStrength": "critical commentary",
@@ -7531,7 +7470,7 @@
     "quote": "The cooling loop is filled once, and the data center can operate effectively with zero water consumption ... The daily water usage over the course of an entire year is roughly equivalent to what a single restaurant would use.",
     "quoteSource": "https://www.tomshardware.com/tech-industry/big-tech/microsoft-ceo-says-new-ai-data-centers-use-as-little-water-annually-as-a-restaurant-closed-loop-cooling-system-aims-to-slash-consumption-from-millions-of-gallons-as-ai-infrastructure-faces-mounting-environmental-scrutiny",
     "primarySource": null,
-    "context": "Presenting Microsoft's 'community-first' AI infrastructure plan at Build 2026, Nadella said the newest data centers use a cooling loop filled once, and likened a year of water use to a single restaurant's. The design is so far in place at the Fairwater campus in Wisconsin; no keynote video was fetched.",
+    "context": "Presenting Microsoft's 'community-first' AI infrastructure plan at Build 2026, Nadella said the newest data centers use a cooling loop filled once, and likened a year of water use to a single restaurant's. The design is so far in place at the Fairwater campus in Wisconsin.",
     "sources": [
       {
         "outlet": "Tom's Hardware",
@@ -7559,7 +7498,7 @@
       }
     ],
     "backlash": {
-      "summary": "Critical commentary: Analytics India Magazine says critics call the reassurance premature because most data centers still use evaporative cooling, and reports protesters outside Build; Tom's Hardware calls the claim 'striking' against historic hyperscale water use and notes it applies so far to one campus.",
+      "summary": "Analytics India Magazine says critics call the reassurance premature because most data centers still use evaporative cooling, and reports protesters outside Build; Tom's Hardware calls the claim 'striking' against historic hyperscale water use and notes it applies so far to one campus.",
       "url": "https://analyticsindiamag.com/ai-features/ai-is-thirsty-nadella-says-thats-not-a-problem"
     },
     "backlashStrength": "critical commentary",
@@ -7605,7 +7544,7 @@
     "quote": "We need to create new social norms ... I would advocate that everybody use AI. Just go engage it.",
     "quoteSource": "https://broadbandbreakfast.com/in-interview-with-ap-nvidias-jensen-huang-urges-americans-to-use-ai-more/",
     "primarySource": null,
-    "context": "In an AP interview, asked how society should adapt to fast AI change, Huang compared AI to cars (regulation, technology and social norms all had to change) and said the first norm he would advocate is that everybody uses AI. The AP text says the interview was 'Tuesday'; PC Gamer reported it on 2026-06-17, so Tuesday is 2026-06-16 (the Broadband Breakfast copy carries a later AP dateline).",
+    "context": "In an AP interview, asked how society should adapt to fast AI change, Huang compared AI to cars (regulation, technology and social norms all had to change) and said the first norm he would advocate is that everybody uses AI.",
     "sources": [
       {
         "outlet": "Broadband Breakfast (AP text)",
@@ -7621,7 +7560,7 @@
       }
     ],
     "backlash": {
-      "summary": "PC Gamer (2026-06-17) says the answer 'isn't particularly satisfying', that 'just use a car' would not have convinced anyone, that 'free' AI is 'free' 'my arse', and wonders whether the plea reflects worry that weak end-user demand will catch up with Nvidia's customers. Mild.",
+      "summary": "PC Gamer (2026-06-17) says the answer 'isn't particularly satisfying', that 'just use a car' would not have convinced anyone, that 'free' AI is 'free' 'my arse', and wonders whether the plea reflects worry that weak end-user demand will catch up with Nvidia's customers.",
       "url": "https://www.pcgamer.com/software/ai/nvidia-ceo-jensen-huang-says-we-need-to-deal-with-social-norms-surrounding-ai-but-apparently-that-means-just-go-engage-it/"
     },
     "backlashStrength": "critical commentary",
@@ -7668,7 +7607,7 @@
     "quote": "You can’t say, hey, all white-collar jobs are gone and this could even be a weapon and we will use all the power to build data centers",
     "quoteSource": "https://futurism.com/future-society/microsoft-ceo-satya-nadella-ai-society",
     "primarySource": null,
-    "context": "Interviewed by the Wall Street Journal, Nadella criticised AI leaders who say white-collar work is ending while asking for more power for data centers, said companies should think about reorganizing jobs rather than cutting them, and said the public would not accept a few companies 'doing all of the learning for the world'. The WSJ article (https://www.wsj.com/tech/ai/microsofts-satya-nadella-we-cant-let-ai-giants-eat-the-economy-b9d33b9f, seen as a link on Futurism) is paywalled and was not read; the date is the first coverage date (2026-06-22), one outlet suggests the interview ran on 2026-06-21.",
+    "context": "Interviewed by the Wall Street Journal, Nadella criticised AI leaders who say white-collar work is ending while asking for more power for data centers, said companies should think about reorganizing jobs rather than cutting them, and said the public would not accept a few companies 'doing all of the learning for the world'.",
     "sources": [
       {
         "outlet": "Fox Business",
@@ -7684,7 +7623,7 @@
       }
     ],
     "backlash": {
-      "summary": "Critical commentary from Futurism: it frames the remarks as public relations ('If Nadella were genuinely concerned about AI's impact on working people, he has the power to rein the company's efforts in'). No wider public reaction found.",
+      "summary": "Futurism frames the remarks as public relations ('If Nadella were genuinely concerned about AI's impact on working people, he has the power to rein the company's efforts in').",
       "url": "https://futurism.com/future-society/microsoft-ceo-satya-nadella-ai-society"
     },
     "backlashStrength": "critical commentary",
@@ -7721,7 +7660,7 @@
     "ceo": "musk",
     "date": "2026-07-01",
     "datePrecision": "month",
-    "venue": "Interview with The Economist's editor-in-chief Zanny Minton Beddoes (exact day not confirmed)",
+    "venue": "Interview with The Economist's editor-in-chief Zanny Minton Beddoes",
     "leaked": false,
     "headline": {
       "text": "One year later, Tesla and Musk still don't have a good definition of 'abundance'",
@@ -7731,7 +7670,7 @@
     "quote": "there really won't be anything AI won't be able to do better than humans, apart from being human, perhaps ... I think AI may exceed the sum of human intelligence in around five years ... The most likely outcome is an age of amazing abundance where anyone can have anything they can think of",
     "quoteSource": "https://futurism.com/future-society/elon-musk-saving-money-pointless",
     "primarySource": null,
-    "context": "In an interview with The Economist's editor-in-chief in summer 2026, Musk said AI would do everything better than humans except being human, and described a benign outcome of 'amazing abundance'. Futurism calls it a 'now infamous interview'; the interview page on economist.com was not readable (HTTP 403), so the words are as quoted by Futurism, and TechCrunch separately quotes 'anyone can have anything they can think of' from the same July interview.",
+    "context": "In an interview with The Economist's editor-in-chief in summer 2026, Musk said AI would do everything better than humans except being human, and described a benign outcome of 'amazing abundance'.",
     "sources": [
       {
         "outlet": "Futurism",
@@ -7856,7 +7795,7 @@
     "quote": "Any firm that doesn’t have this control, I will claim will not remain a firm because you’ve essentially outsourced your thinking",
     "quoteSource": "https://techcrunch.com/2026/07/27/satya-nadella-says-companies-that-trust-one-ai-for-everything-may-not-survive/",
     "primarySource": null,
-    "context": "Asked on CNN what counts as sharing too much with an AI model provider, Nadella said companies should keep their usage data and keep the harness separate from the model so they can train their own. The date is Sunday 2026-07-26, from TechCrunch ('On Sunday') and Futurism ('interview Sunday'); no CNN transcript was fetched.",
+    "context": "Asked on CNN what counts as sharing too much with an AI model provider, Nadella said companies should keep their usage data and keep the harness separate from the model so they can train their own.",
     "sources": [
       {
         "outlet": "TechCrunch",
@@ -7872,7 +7811,7 @@
       }
     ],
     "backlash": {
-      "summary": "Mild. Futurism calls the claim 'ironic' since outsourcing thinking is arguably the point of AI that Microsoft sells, and says TechCrunch notes he is 'pretty hypocritical' on consumer data; TechCrunch itself calls it an 'obvious self-serving fear tactic' while adding 'he's not wrong'.",
+      "summary": "Futurism calls the claim 'ironic' since outsourcing thinking is arguably the point of AI that Microsoft sells, and says TechCrunch notes he is 'pretty hypocritical' on consumer data; TechCrunch itself calls it an 'obvious self-serving fear tactic' while adding 'he's not wrong'.",
       "url": "https://futurism.com/artificial-intelligence/microsoft-ceo-warns-ai-business"
     },
     "backlashStrength": "critical commentary",
@@ -8041,7 +7980,7 @@
     "ceo": "altman",
     "date": "2026-08-14",
     "datePrecision": "reported",
-    "venue": "Interview with Cory Levy of Z Fellows (per The Comeback; explainx.ai places the remarks at an OpenAI intern event)",
+    "venue": "Interview with Cory Levy of Z Fellows",
     "leaked": false,
     "headline": {
       "text": "'Only the biggest losers alive actually want this': Sam Altman sparks outrage with 'alarming' ChatGPT update",
@@ -8273,7 +8212,7 @@
     "quote": "I agree with Jacob much more than I disagree with him",
     "quoteSource": "https://officechai.com/ai/i-agree-with-jacob-coxon-more-than-i-disagree-with-him-anthropic-ceo-dario-amodei/",
     "primarySource": null,
-    "context": "Asked by Anderson Cooper whether he shares former Anthropic and OpenAI researcher Jacob Coxon's viral claim that the people building AI \"earnestly believe that it could kill us all by the end of the decade\", Amodei said he largely agreed, that Coxon was criticising the industry's pace and not Anthropic, and that a single probability is the wrong way to describe the risk. The interview came the same weekend as his essay \"We Must Pace the Frontier\". The date is the first coverage seen (OfficeChai and IBTimes Australia, 2026-09-13); the CNN page itself was not reached.",
+    "context": "Asked by Anderson Cooper whether he shares former Anthropic and OpenAI researcher Jacob Coxon's viral claim that the people building AI \"earnestly believe that it could kill us all by the end of the decade\", Amodei said he largely agreed, that Coxon was criticising the industry's pace and not Anthropic, and that a single probability is the wrong way to describe the risk. The interview came the same weekend as his essay \"We Must Pace the Frontier\".",
     "sources": [
       {
         "outlet": "Office Chai",
@@ -8347,7 +8286,7 @@
     "quote": "2030 is not going to be the end of the world. There is 0% chance that's going to be the end of the world ... Scaring people is unnecessary. It is irresponsible.",
     "quoteSource": "https://www.pcgamer.com/software/ai/i-remember-when-jensen-huang-used-to-sell-me-gpus-now-hes-out-there-having-to-deny-that-ai-will-cause-the-end-of-the-world/",
     "primarySource": null,
-    "context": "Responding to a former Anthropic researcher's claim that AI could 'kill us all by the end of the decade', Huang told CBS News on Friday (CBS updated its story on 2026-09-20) that such claims are 'not grounded in science'. He added that Nvidia's success depends on safe deployment and that products should never be shipped before they are ready.",
+    "context": "Responding to a former Anthropic researcher's claim that AI could 'kill us all by the end of the decade', Huang told CBS News on Friday that such claims are 'not grounded in science'. He added that Nvidia's success depends on safe deployment and that products should never be shipped before they are ready.",
     "sources": [
       {
         "outlet": "CBS News",
@@ -8369,7 +8308,7 @@
       }
     ],
     "backlash": {
-      "summary": "PC Gamer's opinion piece (2026-09-21) calls it 'a strange state of affairs' that 'the guy who used to primarily sell us PC gamers GPUs is having to offer assurances that the world isn't ending' (and notes 50-series cards still cannot be found at MSRP); Tom's Hardware's headline frames it as dismissing Anthropic's warnings and rejecting new regulations. Mild to moderate.",
+      "summary": "PC Gamer's opinion piece (2026-09-21) calls it 'a strange state of affairs' that 'the guy who used to primarily sell us PC gamers GPUs is having to offer assurances that the world isn't ending' (and notes 50-series cards still cannot be found at MSRP); Tom's Hardware's headline frames it as dismissing Anthropic's warnings and rejecting new regulations.",
       "url": "https://www.pcgamer.com/software/ai/i-remember-when-jensen-huang-used-to-sell-me-gpus-now-hes-out-there-having-to-deny-that-ai-will-cause-the-end-of-the-world/"
     },
     "backlashStrength": "critical commentary",
@@ -8419,7 +8358,7 @@
       "url": "https://www.nytimes.com/2026/09/23/opinion/ezra-klein-podcast-jensen-huang.html",
       "kind": "transcript"
     },
-    "context": "Klein raised a study of 26,000 students suggesting AI helps students finish work faster but weakens the underlying skills. Huang agreed skills are fading, asked 'Does it matter?', Klein answered 'That's my question for you', and Huang said he did not think it does, adding 'We're going to discover new [skills], just maybe not those' and that he does not know his own address or phone number. The NYT episode page was not readable by shell (JavaScript wall), so the wording follows American Bazaar and Otakukart, which agree, and TechRadar, which prints it slightly condensed. The episode ran 2026-09-23.",
+    "context": "Klein raised a study of 26,000 students suggesting AI helps students finish work faster but weakens the underlying skills. Huang agreed skills are fading, asked 'Does it matter?', Klein answered 'That's my question for you', and Huang said he did not think it does, adding 'We're going to discover new [skills], just maybe not those' and that he does not know his own address or phone number. The episode ran 2026-09-23.",
     "sources": [
       {
         "outlet": "American Bazaar",
@@ -8447,7 +8386,7 @@
       }
     ],
     "backlash": {
-      "summary": "TechRadar's piece on the interview opens 'What happened to Jensen Huang?' and calls him 'about as disconnected as a person can be from other humans' life experiences'; American Bazaar notes 'Huang's comments have led to some backlash'; AI Weekly's roundup of the NYT story shows the 'Does it matter?' exchange being shared on Bluesky (Karl Bode and others). Kotaku also covered it (URL seen in search results, page blocked to the shell).",
+      "summary": "TechRadar's piece on the interview opens 'What happened to Jensen Huang?' and calls him 'about as disconnected as a person can be from other humans' life experiences'; American Bazaar notes 'Huang's comments have led to some backlash'; AI Weekly's roundup of the NYT story shows the 'Does it matter?' exchange being shared on Bluesky (Karl Bode and others).",
       "url": "https://aiweekly.co/alerts/nyt-jensen-huang-tells-ezra-klein-ai-labs-not-ready-to-ship-shouldnt-ship-after"
     },
     "backlashStrength": "widespread criticism",
@@ -8765,7 +8704,7 @@
     "ceo": "altman",
     "date": "2026-10-30",
     "datePrecision": "reported",
-    "venue": "Cheeky Pint (Stripe's YouTube interview series; video titled 'Why Sam Altman is against a single superintelligence')",
+    "venue": "Cheeky Pint, Stripe's interview series",
     "leaked": false,
     "headline": {
       "text": "OpenAI CEO says it's 'quite terrible' for your PC to have RAM — Sam Altman says data centers offer better utilization",
@@ -8800,7 +8739,7 @@
       }
     ],
     "backlash": {
-      "summary": "Futurism calls the argument 'tone-deaf' and reports that the PC gaming community was enraged ('What a self-centered POS', 'Cult leader mentality really shining with this one'); the Tom's Hardware comment section is hostile too.",
+      "summary": "Futurism calls the argument 'tone-deaf' and reports that the PC gaming community was enraged, with commenters calling him selfish; the Tom's Hardware comment section is hostile too.",
       "url": "https://futurism.com/artificial-intelligence/sam-altman-hates-local-ai-models-computers"
     },
     "backlashStrength": "widespread criticism",
