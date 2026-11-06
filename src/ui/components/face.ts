@@ -1,4 +1,5 @@
 import type {Ceo, Photo} from "../../lib/content.js";
+import {isUrl} from "../../lib/url.js";
 import {attrs, esc, initials} from "../lib.js";
 
 const SHIELD = "M2 2h28v15.5c0 8.4-6 13.6-14 16.5C8 31.1 2 25.9 2 17.5z";
@@ -53,6 +54,7 @@ export function face(ceo: Ceo, {size = "sm", gold = false, eager = false, beside
 }
 
 function external(url: string, text: string): string {
+    if (!isUrl(url)) return esc(text);
     return `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(text)}</a>`;
 }
 
