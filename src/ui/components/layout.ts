@@ -10,7 +10,7 @@ import {Ticker} from "./ticker.js";
 const OG_WIDTH = 1200;
 const OG_HEIGHT = 630;
 
-const DESCRIPTION =
+export const DESCRIPTION =
     "The court gazette of artificial intelligence: the most powerful men in tech, ranked by the pitchforks their own words raised. Every quote real, every score earned.";
 const OG_DESCRIPTION = "The most powerful men in tech, ranked by the pitchforks their own words raised.";
 const FONTS =
@@ -45,15 +45,19 @@ export function previewTags({url, image}: Preview): string {
   <meta property="og:image:height" content="${OG_HEIGHT}">`;
 }
 
+function siteTags(): string {
+    return `
+  <meta name="description" content="${esc(DESCRIPTION)}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Let Them Eat Tokens">
+  <meta property="og:description" content="${esc(OG_DESCRIPTION)}">`;
+}
+
 function head(title: string, preview: boolean, scripts: string[]): string {
     const own = scripts.map((src) => `\n  <script src="${esc(src)}" defer></script>`).join("");
     return `<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>${esc(title)}</title>
-  <meta name="description" content="${esc(DESCRIPTION)}">
-  <meta property="og:type" content="website">${preview ? PREVIEW_SLOT : ""}
-  <meta property="og:title" content="Let Them Eat Tokens">
-  <meta property="og:description" content="${esc(OG_DESCRIPTION)}">
+  <title>${esc(title)}</title>${preview ? PREVIEW_SLOT : siteTags()}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="/assets/pitchfork.svg" type="image/svg+xml">
@@ -157,6 +161,10 @@ function Seasonbar(site: Site): string {
   </div>`;
 }
 
+function isPage(site: MaybeUndefined<Site>): boolean {
+    return site !== undefined && site.route.view !== "error";
+}
+
 function hasSeason(site: Site): boolean {
     return ["table", "results", "race", "honours", "club"].includes(site.route.view);
 }
@@ -237,7 +245,7 @@ export function SiteLayout({title, children, site, preview, scripts = []}: SiteL
     return `<!doctype html>
 <html lang="en">
 <head>
-  ${head(title, preview ?? false, scripts)}
+  ${head(title, preview ?? isPage(site), scripts)}
 </head>
 <body>
   ${SPRITE}
