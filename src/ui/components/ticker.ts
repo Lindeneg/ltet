@@ -14,10 +14,11 @@ function tick(st: ScoredStatement, copy: boolean): string {
     return `<li><a${link}><span class="tick-date">${esc(tickDate(st))}</span><span class="tick-home">${esc(st.who.shortName)}</span><span class="tick-score">${st.forks}</span><span class="tick-away">The Public</span></a></li>`;
 }
 
-export function Ticker(newest: ScoredStatement[]): string {
+export function Ticker(newest: ScoredStatement[], paused = false): string {
     const ticks = (copy: boolean) => newest.map((st) => tick(st, copy)).join("");
-    return `<div class="ticker" id="ticker">
-    <h2 class="ticker-label" id="ticker-label">Latest<span class="tl-more">&nbsp;results</span></h2>
+    const toggle = paused ? "Play the results ticker" : "Pause the results ticker";
+    return `<div class="ticker" id="ticker"${paused ? " data-paused" : ""}>
+    <p class="ticker-label" id="ticker-label">Latest<span class="tl-more">&nbsp;results</span></p>
     <div class="ticker-track" id="ticker-track">
       <div class="ticker-belt" id="ticker-belt">
         <ol id="ticker-list" class="ticker-list" aria-labelledby="ticker-label" aria-describedby="ticker-help"${reportList(newest)}>${ticks(false)}</ol>
@@ -25,8 +26,8 @@ export function Ticker(newest: ScoredStatement[]): string {
       </div>
     </div>
     <p id="ticker-help" class="sr-only">Every result, newest first. The left and right arrow keys move from one to the next.</p>
-    <button type="button" class="ticker-toggle" id="ticker-toggle" aria-label="Pause the results ticker" title="Pause the results ticker">
-      ${icon("pause")}
+    <button type="button" class="ticker-toggle" id="ticker-toggle" aria-label="${toggle}" title="${toggle}">
+      ${icon(paused ? "play" : "pause")}
     </button>
   </div>`;
 }
