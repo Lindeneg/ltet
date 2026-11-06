@@ -161,6 +161,27 @@ describe("RulesView", () => {
         );
     });
 
+    it("says who the squad is, counted from the contenders, before the honours", async () => {
+        const site = await siteFor([makeStatement()], undefined, {view: "rules"});
+        const ceos = [
+            makeCeo(),
+            makeCeo({id: "musk", name: "Elon Musk"}),
+            makeCeo({id: "huang", name: "Jensen Huang"}),
+        ];
+
+        const html = RulesView({site, title: "t", ceos});
+
+        expect(html).toContain(
+            '<a href="#law-squad" data-law="squad"><span class="law-n">Law 5</span><span>The squad</span></a>'
+        );
+        expect(html).toContain(
+            "<p>The squad is the 3 contenders in the table: the people who lead the biggest AI labs and platforms."
+        );
+        expect(html.indexOf('id="law-squad"')).toBeLessThan(html.indexOf('id="law-honours"'));
+        expect(RulesView({site, title: "t", ceos: ceos.slice(0, 2)})).toContain("The squad is the 2 contenders");
+        expect(RulesView({site, title: "t", ceos: ceos.slice(0, 1)})).toContain("The squad is the 1 contender in");
+    });
+
     it("credits only the contenders with a photo, escaped", async () => {
         const site = await siteFor([makeStatement()], undefined, {view: "rules"});
         const ceos = [makeCeo({photo}), makeCeo({id: "musk", name: "Elon Musk"})];
