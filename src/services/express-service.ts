@@ -46,8 +46,8 @@ class ExpressService {
                 contentSecurityPolicy: {
                     directives: {
                         "script-src": ["'self'"],
-                        "style-src": ["'self'", "https://fonts.googleapis.com"],
-                        "font-src": ["'self'", "https://fonts.gstatic.com"],
+                        "style-src": ["'self'"],
+                        "font-src": ["'self'"],
                         "img-src": ["'self'", "data:"],
                         "upgrade-insecure-requests": opts.production ? [] : null,
                     },
