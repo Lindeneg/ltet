@@ -174,6 +174,10 @@ if (report) {
     let opener = null;
     let leftAt = null;
     let pending = 0;
+    let goingBack = null;
+    let closingByHistory = false;
+    const doc = Math.random().toString(36).slice(2);
+    const ours = (state) => state?.report !== undefined && state.doc === doc;
 
     // the report's ids are the page's own, so in the dialog they take a prefix to stay unique
     const prefixIds = (root) => {
@@ -227,6 +231,7 @@ if (report) {
         let html;
         try {
             html = await load(id);
+            await goingBack;
         } catch {
             location.assign(matchPath(id));
             return;
@@ -248,7 +253,9 @@ if (report) {
             (prev.disabled ? next : prev).focus();
         }
         copy.textContent = "Copy link";
-        history.replaceState(history.state, "", matchPath(id));
+        const state = {report: id, doc};
+        if (ours(history.state)) history.replaceState(state, "", matchPath(id));
+        else history.pushState(state, "", matchPath(id));
         if (!report.open) {
             report.showModal();
             report.querySelector("[data-close]").focus();
@@ -264,6 +271,24 @@ if (report) {
         }
         show(list.indexOf(id));
     };
+
+    const goBack = () => {
+        goingBack = new Promise((resolve) => addEventListener("popstate", resolve, {once: true})).then(() => {
+            goingBack = null;
+        });
+        history.back();
+    };
+
+    addEventListener("popstate", (event) => {
+        if (ours(event.state)) {
+            if (!list.includes(event.state.report)) list = everyStatement;
+            if (!report.open) leftAt = null;
+            show(list.indexOf(event.state.report));
+        } else if (report.open) {
+            closingByHistory = true;
+            report.close();
+        }
+    });
 
     const step = (delta) => {
         const to = index + delta;
@@ -301,7 +326,9 @@ if (report) {
     report.addEventListener("close", () => {
         activeVar = null;
         pending++;
-        if (leftAt !== null) history.replaceState(history.state, "", leftAt);
+        if (closingByHistory) closingByHistory = false;
+        else if (ours(history.state)) goBack();
+        else if (leftAt !== null) history.replaceState(history.state, "", leftAt);
         leftAt = null;
         if (opener?.isConnected) opener.focus({preventScroll: true});
         opener = null;
