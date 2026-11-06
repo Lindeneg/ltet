@@ -1,3 +1,5 @@
+import {VERSION, type Version} from "../../lib/version.js";
+import type {MaybeNull} from "../../lib/types.js";
 import {esc} from "../lib.js";
 
 const TITLE = "The referee's room | Let Them Eat Tokens";
@@ -12,6 +14,15 @@ const TABS: Array<{id: AdminTab; href: string; label: string}> = [
     {id: "runs", href: "/admin/runs", label: "Scout runs"},
     {id: "settings", href: "/admin/settings", label: "Settings"},
 ];
+
+const COMMIT_URL = "https://github.com/Lindeneg/ltet/commit/";
+
+export function versionLine(version: MaybeNull<Version>): string {
+    if (!version) return "Version dev";
+    const date = version.date.slice(0, 16).replace("T", " ");
+    const link = `<a href="${esc(COMMIT_URL + version.sha)}">${esc(version.sha.slice(0, 7))}</a>`;
+    return `Version ${link}${version.dirty ? "-dirty" : ""} · ${esc(date)} UTC`;
+}
 
 export type Refresh = {seconds: number; url: string};
 
@@ -34,6 +45,7 @@ function document(bar: string, main: string, refresh?: Refresh): string {
         ${bar}
     </header>
     <main>${main}</main>
+    <footer class="version">${versionLine(VERSION)}</footer>
 </body>
 </html>`;
 }
