@@ -220,3 +220,20 @@ describe("the password change", () => {
         expect(await login()).toBeTruthy();
     });
 });
+
+describe("the version line", () => {
+    it("shows on the login and the cms pages, and dev without a build", async () => {
+        const cookie = await login();
+        for (const res of [
+            await get("/admin/login"),
+            await get("/admin", cookie),
+            await get("/admin/settings", cookie),
+        ]) {
+            expect(res.html).toContain(`<footer class="version">Version dev</footer>`);
+        }
+    });
+
+    it("stays off the public site", async () => {
+        expect((await get("/")).html).not.toContain(`class="version"`);
+    });
+});
