@@ -1,6 +1,13 @@
 import {readFileSync} from "node:fs";
 import {describe, expect, it} from "vitest";
-import {isId, isRealDate, isUrl, statementErrors, validate} from "../../../src/lib/statement-rules.js";
+import {
+    isId,
+    isRealDate,
+    isUrl,
+    statementErrors,
+    validate,
+    workingNoteErrors,
+} from "../../../src/lib/statement-rules.js";
 import {makeContent, makeStatement} from "../helpers.js";
 
 const rules = makeContent();
@@ -73,5 +80,94 @@ describe("statement rules", () => {
         };
 
         expect(validate(data)).toEqual([]);
+    });
+});
+
+describe("working notes", () => {
+    const inContext = (context: string) => workingNoteErrors(makeStatement({context}));
+
+    it("takes notes that are absent, empty or text and refuses anything else", () => {
+        expect(statementErrors(makeStatement(), rules)).toEqual([]);
+        expect(statementErrors(makeStatement({notes: ""}), rules)).toEqual([]);
+        expect(statementErrors(makeStatement({notes: "The FT page was paywalled."}), rules)).toEqual([]);
+        expect(statementErrors({...makeStatement(), notes: 3}, rules)).toEqual(["notes must be text"]);
+    });
+
+    it("finds notes on fetching and reading pages", () => {
+        for (const text of [
+            "The CBS page returned an error to the fetch.",
+            "The keynote video was not fetched.",
+            "The post itself was not read.",
+            "The original post was not readable.",
+            "The FT original is paywalled.",
+            "The WSJ article (https://www.wsj.com/a) ran first.",
+            "The page failed with HTTP 403.",
+            "No backlash was documented in the pages read.",
+        ]) {
+            expect(inContext(text), text).not.toEqual([]);
+        }
+    });
+
+    it("finds asides to the people reviewing it", () => {
+        for (const text of [
+            "Included so the lead can decide.",
+            "Included because the brief covers jobs.",
+            "The owner's call is to include it.",
+            "The 2024 interview is already in the dataset.",
+            "No video was reachable, so primarySource is null.",
+        ]) {
+            expect(inContext(text), text).not.toEqual([]);
+        }
+    });
+
+    it("finds notes on how the date was chosen", () => {
+        expect(inContext("Date is the report date.")).not.toEqual([]);
+        expect(inContext("The date is the first coverage seen.")).not.toEqual([]);
+    });
+
+    it("finds grades of the reaction", () => {
+        for (const text of ["Mild. Fox News quoted experts.", "Weak. Futurism frames it.", "No backlash was found."]) {
+            expect(inContext(text), text).not.toEqual([]);
+        }
+    });
+
+    it("names the field and the phrase", () => {
+        const statement = makeStatement({venue: "Fetched from X", backlash: {summary: "Mild.", url: "https://a.b"}});
+
+        expect(workingNoteErrors(statement)).toEqual([
+            'venue holds a working note ("Fetched"), which belongs in notes',
+            'backlash summary holds a working note ("Mild."), which belongs in notes',
+        ]);
+    });
+
+    it("leaves public prose that only resembles a note alone", () => {
+        for (const text of [
+            "404 Media reported it first.",
+            "Critics feared a paywall for thinking.",
+            "An agent broke into Hugging Face datasets.",
+            "Nvidia took the lead in AI chips.",
+            "Musk, the owner of X, posted it.",
+            "The reaction was mild.",
+        ]) {
+            expect(inContext(text), text).toEqual([]);
+        }
+    });
+
+    it("lints only the venue, the context and the backlash summary", () => {
+        const statement = makeStatement({
+            quote: "We fetched the dataset and the lead was not readable",
+            headline: {text: "Paywalled: the owner speaks", outlet: "404 Media", url: "https://a.example"},
+            notes: "Not fetched, HTTP 403. Mild.",
+        });
+
+        expect(workingNoteErrors(statement)).toEqual([]);
+    });
+
+    it("counts working notes as data errors in the check", () => {
+        const statement = makeStatement({context: "Date is the report date."});
+
+        expect(validate({...rules, statements: [statement]})).toEqual([
+            `statement ${statement.id}: context holds a working note ("Date is"), which belongs in notes`,
+        ]);
     });
 });

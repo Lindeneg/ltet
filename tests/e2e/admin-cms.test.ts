@@ -481,3 +481,38 @@ describe("an unknown cms path", () => {
         expect(res.html).toContain("Log out");
     });
 });
+
+describe("a statement's notes", () => {
+    it("shows them in the editor, keeps them through an edit and never on the site", async () => {
+        const notes = `Not fetched, HTTP 403 ${uid()}`;
+        const statement = {...newStatement(), notes};
+        const proposal = await propose("statement", statement, statement.id);
+        await postForm(`/admin/proposals/${proposal}/approve`, editorFields(statement), cookie);
+
+        const editor = await get(`/admin/statements/${statement.id}`, cookie);
+        expect(editor.html).toContain(notes);
+        await postForm(`/admin/statements/${statement.id}`, editorFields(await bodyOf(statement.id)), cookie);
+        expect((await bodyOf(statement.id)).notes).toBe(notes);
+
+        const paths = [
+            `/match/${statement.id}`,
+            `/s/${statement.id}`,
+            "/",
+            "/results",
+            "/25-26/results",
+            "/race",
+            "/honours",
+            "/club/altman",
+            "/25-26/club/altman",
+            "/sitemap.xml",
+        ];
+        for (const path of paths) {
+            const res = await get(path);
+            expect(res.status, path).toBeLessThan(400);
+            expect(res.html, path).not.toContain(notes);
+        }
+        expect((await get(`/match/${statement.id}`)).html).toContain(statement.headline.text);
+
+        await postForm(`/admin/statements/${statement.id}/published`, {published: "0"}, cookie);
+    });
+});

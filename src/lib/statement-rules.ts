@@ -22,6 +22,39 @@ export function isRealDate(value: unknown): boolean {
 
 const isText = (value: unknown) => typeof value === "string" && value.trim() !== "";
 
+const WORKING_NOTES = [
+    /\bfetch(?:ed|ing)?\b/i,
+    /\bnot read\b/i,
+    /\b(?:un)?readable\b/i,
+    /\bpaywalled\b/i,
+    /\bhttps?\b/i,
+    /\b403\b/,
+    /\bpages read\b/i,
+    /\bthe lead\b(?!\s+(?:in|of|on)\b)/i,
+    /\bthe brief\b/i,
+    /\bthe owner\b(?!\s+of\b)/i,
+    /\bthe dataset\b/i,
+    /\bprimarySource\b/i,
+    /\bdate is\b/i,
+    /\bMild\./,
+    /\bWeak\./,
+    /\bwas found\b/i,
+];
+
+export function workingNoteErrors(value: unknown): string[] {
+    const s = (value ?? {}) as Partial<RawStatement>;
+    const fields = {venue: s.venue, context: s.context, "backlash summary": s.backlash?.summary};
+    const errors: string[] = [];
+    for (const [field, text] of Object.entries(fields)) {
+        if (typeof text !== "string") continue;
+        for (const pattern of WORKING_NOTES) {
+            const match = text.match(pattern);
+            if (match) errors.push(`${field} holds a working note ("${match[0]}"), which belongs in notes`);
+        }
+    }
+    return errors;
+}
+
 export function statementErrors(value: unknown, {ceos, rubric}: Rules): string[] {
     const s = (value ?? {}) as Partial<Record<keyof RawStatement, any>>;
     const errors: string[] = [];
@@ -67,6 +100,7 @@ export function statementErrors(value: unknown, {ceos, rubric}: Rules): string[]
     if (s.manualCheck !== undefined && (!isRealDate(s.manualCheck?.date) || !s.manualCheck?.note)) {
         fail("manualCheck needs a date and a note");
     }
+    if (s.notes !== undefined && typeof s.notes !== "string") fail("notes must be text");
     return errors;
 }
 
@@ -104,6 +138,7 @@ export function validate({ceos, rubric, statements}: Rules & {statements: unknow
         if (statementIds.has(id)) fail(`statement ${id}`, "duplicate id");
         statementIds.add(id);
         for (const message of statementErrors(value, {ceos, rubric})) fail(`statement ${id}`, message);
+        for (const message of workingNoteErrors(value)) fail(`statement ${id}`, message);
     }
     return errors;
 }

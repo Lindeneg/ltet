@@ -15,10 +15,13 @@ Otherwise write the statement:
 - `headline`: `text` is one of the titles given for an article page, verbatim (drop a trailing " | Outlet" or " - Outlet" site name); `outlet` the publication's name; `url` that page.
 - `sources`: every lead page that loaded and reports the statement, each with its `outlet`, its `title` (from the titles given) and `url`; `date` (YYYY-MM-DD) when the page text shows it. At least two different outlets.
 - `primarySource`: `{ "url", "kind" }` when one of the pages is the primary source (kind: video, transcript, post, blog, essay, earnings-call, testimony), else null.
-- `venue`: where it was said, in a few words ("Interview with The Verge's Decoder podcast"). `date`, `datePrecision`, `leaked` as the lead and the pages say.
+- `venue`: where it was said, in about six words at most ("The Verge's Decoder podcast"), with no provenance: never which outlet reported it or how you know. `date`, `datePrecision`, `leaked` as the lead and the pages say.
 - `context`: one to three neutral sentences: where it was said, what was asked, what they meant. Be fair to the speaker; the joke is that people disliked it anyway. Short quotes from the pages in single quotes are fine.
 - `backlash`: `summary`, one or two sentences on the reception as the pages document it, and `url`, the page that documents it. `backlashStrength`: "outrage", "widespread criticism" or "critical commentary", by the size the pages show.
 - `topics`: from {{topics}}.
+- `notes`: for the owner only, never shown on the site. Every note on the sources (a page that did not load, a paywall, a page you could not read), on wording variants, on how you chose the date, and on how strong or weak the reaction is goes here, and nowhere else. Empty when there is nothing to note.
+
+`venue`, `context` and `backlash.summary` are public prose, read by visitors as the site's own words. They say what happened and how people reacted, never how you worked: no fetching, readability, paywalls, HTTP errors, dates you inferred, grades like "Mild." or "Weak.", "no backlash was found", and no asides to whoever reviews it. Code rejects a statement whose public prose reads like a working note.
 - `id`: `<contender id>-<yyyy>-<mm>-<three to six word slug>`, lowercase, hyphens.
 
 ## Scoring
