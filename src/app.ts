@@ -69,7 +69,7 @@ export async function startApp(env: AppEnv, log: LoggerService): Promise<void> {
         onStatementsChange,
         log
     );
-    const leagueService = new LeagueService(statementRepo, content);
+    const leagueService = new LeagueService(statementRepo, content, log);
     const pageService = new PageService(leagueService, content, new PageCacheService(PAGE_CACHE_SIZE));
     const previewService = new PreviewService(content, photos, log);
     const feedbackService = new FeedbackService(proposalRepo);

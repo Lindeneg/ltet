@@ -4,7 +4,7 @@ import {AppError} from "../../../src/lib/errors.js";
 import type {RawStatement} from "../../../src/lib/content.js";
 import LeagueService, {ALL_TIME_KEY} from "../../../src/services/league-service.js";
 import type StatementRepository from "../../../src/repositories/statement-repository.js";
-import {fake, makeCeo, makeContent, makeStatement, makeContentService} from "../helpers.js";
+import {fake, fakeLog, makeCeo, makeContent, makeStatement, makeContentService} from "../helpers.js";
 
 const NOW = Date.UTC(2026, 10, 15, 12);
 
@@ -14,7 +14,9 @@ function setup(statements: RawStatement[], clock = () => NOW) {
     const content = makeContent({
         ceos: [makeCeo(), makeCeo({id: "musk", name: "Elon Musk"}), makeCeo({id: "huang", name: "Jensen Huang"})],
     });
-    return {listPublished, league: new LeagueService(repo, makeContentService(content), clock)};
+    const contentService = makeContentService(content);
+    const log = fakeLog();
+    return {listPublished, contentService, log, league: new LeagueService(repo, contentService, log, clock)};
 }
 
 async function load(league: LeagueService) {
@@ -54,6 +56,57 @@ describe("LeagueService", () => {
 
         expect(await league.get()).toEqual(failure(AppError.DB_ERROR));
         expect((await league.get()).ok).toBe(true);
+    });
+
+    it("turns a throw in the build into a failure and retries on the next request", async () => {
+        const {league, contentService, log} = setup([makeStatement()]);
+        const real = contentService.get;
+        contentService.get = vi.fn(() => {
+            throw new Error("bad statement");
+        });
+
+        expect(await league.get()).toEqual(failure(AppError.DB_ERROR));
+        expect(log.error).toHaveBeenCalledOnce();
+        contentService.get = real;
+        expect((await league.get()).ok).toBe(true);
+    });
+
+    it("turns a rejected load into a failure", async () => {
+        const {league, listPublished} = setup([]);
+        listPublished.mockRejectedValueOnce(new Error("gone"));
+
+        expect(await league.get()).toEqual(failure(AppError.DB_ERROR));
+        expect((await league.get()).ok).toBe(true);
+    });
+
+    it("leaves no unhandled rejection when the build throws", async () => {
+        const unhandled = vi.fn();
+        process.on("unhandledRejection", unhandled);
+        try {
+            const {league, listPublished} = setup([]);
+            listPublished.mockRejectedValueOnce(new Error("gone"));
+            await league.get();
+            await new Promise((resolve) => setTimeout(resolve, 0));
+            expect(unhandled).not.toHaveBeenCalled();
+        } finally {
+            process.off("unhandledRejection", unhandled);
+        }
+    });
+
+    it("keeps the newer load when a failed one settles after invalidate", async () => {
+        const {league, listPublished} = setup([makeStatement()]);
+        let reject!: (err: Error) => void;
+        listPublished.mockReturnValueOnce(new Promise((_resolve, rej) => (reject = rej)));
+
+        const failed = league.get();
+        league.invalidate();
+        const fresh = league.get();
+        reject(new Error("gone"));
+
+        expect(await failed).toEqual(failure(AppError.DB_ERROR));
+        expect((await fresh).ok).toBe(true);
+        expect(league.get()).toBe(fresh);
+        expect(listPublished).toHaveBeenCalledTimes(2);
     });
 
     it("lists the seasons with all time as the default", async () => {
