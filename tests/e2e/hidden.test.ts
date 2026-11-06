@@ -53,6 +53,34 @@ describe("what the site hides", () => {
         expect(found).toContainEqual({hidden: true, display: "none"});
     });
 
+    it.each(["/", "/results", match])("shows no control that needs javascript on %s without it", async (path) => {
+        const context = await browser.newContext({javaScriptEnabled: false});
+        const page = await context.newPage();
+        await page.goto(BASE_URL + path);
+
+        const shown = await page
+            .locator("#theme-toggle, #ticker-toggle, #table-mode, [data-suggest], .var-open")
+            .evaluateAll((els) =>
+                els.filter((el) => (el as HTMLElement).offsetParent !== null).map((el) => el.outerHTML)
+            );
+        await context.close();
+
+        expect(shown).toEqual([]);
+    });
+
+    it("opens a match from the results as its own page without javascript", async () => {
+        const context = await browser.newContext({javaScriptEnabled: false});
+        const page = await context.newPage();
+        await page.goto(BASE_URL + "/results");
+
+        await page.locator(".results a[href^='/match/']").first().click();
+        await page.waitForURL(/\/match\//);
+        const headline = await page.locator("h1.rp-headline").count();
+        await context.close();
+
+        expect(headline).toBe(1);
+    });
+
     it("shows every panel of a match report without javascript", async () => {
         const context = await browser.newContext({javaScriptEnabled: false});
         const page = await context.newPage();
