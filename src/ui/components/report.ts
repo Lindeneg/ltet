@@ -1,4 +1,5 @@
 import type {ScoredStatement} from "../../lib/score.js";
+import {isUrl} from "../../lib/url.js";
 import {icon} from "../icons.js";
 import {cardDate, esc, formatDate, sentence} from "../lib.js";
 import type {Site} from "../site.js";
@@ -8,6 +9,7 @@ export const COMMENT_CHARS = 500;
 export const QUOTE_CHARS = 1000;
 
 function external(url: string, inner: string): string {
+    if (!isUrl(url)) return inner;
     return `<a href="${esc(url)}" target="_blank" rel="noopener">${inner}</a>`;
 }
 
