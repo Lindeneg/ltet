@@ -70,6 +70,11 @@ function laws(site: Site, ceos: Ceo[]): Law[] {
             body: `<p>To enter the record a statement must be the contender's own words, said in public or leaked and reported, about technology, work or the people who use it, and it must have met with documented disapproval. One statement per occasion. Each is confirmed word for word against a published source and carries at least two.</p>`,
         },
         {
+            id: "squad",
+            title: "The squad",
+            body: `<p>${esc(`The squad is the ${ceos.length} contenders in the table: the people who run the companies building and selling the biggest AI models and platforms. A place comes with the job, not with anything said; what they say decides only where they finish. The squad can change.`)}</p>`,
+        },
+        {
             id: "honours",
             title: "Honours",
             body: `<ul class="law-honours">${[
