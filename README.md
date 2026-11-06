@@ -168,6 +168,8 @@ node dist/scout.js --dry-run                     # a trial: prints what it would
 
 Then give the server's own environment the token, `CLAUDE_CODE_OAUTH_TOKEN=<the token>` (and `CLAUDE_BIN` when `claude` is not on its `PATH`), since the scout it starts inherits it. The server leaves `SUPER_USER` and `JWT_SECRET` out of the scout's environment.
 
+To change the token later, paste it under Claude token in the CMS's Settings. It is stored in the database encrypted with a key derived from `JWT_SECRET`, is never shown again, and goes to every scout the server starts from then on, ahead of the environment's. Remove falls back to the environment's token. If `JWT_SECRET` changes, the saved token can't be read any more: Settings says so, and the scout uses the environment's token until it is pasted again. `npm run scout` by hand uses its own shell's environment.
+
 The scout removes `ANTHROPIC_API_KEY` from Claude Code's environment, since in headless mode Claude Code bills that key whenever it is set: runs always use the subscription.
 
 A run takes a few minutes and uses about a dollar's worth of the subscription's usage (Claude Code's list-price estimate, in each run's log). `--since YYYY-MM-DD` looks back to a given date, the same as the CMS's since field; `SCOUT_MODEL` picks the model (default `opus`); `CLAUDE_BIN` points at the `claude` binary when it is not on the server's `PATH`. A dry run from the CMS is saved as a run marked "Dry run", with what it would propose in its log; `--dry-run` by hand only prints. Dry runs never count as the last good run. A run that finds nothing is a good run: a quiet week is a valid result.

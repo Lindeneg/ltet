@@ -4,6 +4,7 @@ import {readFile, readlink} from "node:fs/promises";
 import {basename, resolve} from "node:path";
 import {failure, success, type AsyncResult} from "../lib/result.js";
 import {AppError, type DbError} from "../lib/errors.js";
+import {open, seal} from "../lib/secret-box.js";
 import type {MaybeNull, ValueOf} from "../lib/types.js";
 import type RunRepository from "../repositories/run-repository.js";
 import type SettingRepository from "../repositories/setting-repository.js";
@@ -12,6 +13,8 @@ import {STALE_RUN_MS} from "./scout-service.js";
 
 export const SCOUT_TIME_KEY = "scoutTime";
 export const DEFAULT_SCOUT_TIME = "06:00";
+export const CLAUDE_TOKEN_KEY = "claudeToken";
+const TOKEN_ENV = "CLAUDE_CODE_OAUTH_TOKEN";
 const DAY_MS = 86_400_000;
 const STOPPED = "Stopped.";
 const NOT_STARTED = "The scout failed to start.";
@@ -27,6 +30,11 @@ export const StartError = {
 export type StartError = ValueOf<typeof StartError>;
 
 export type StartOpts = {startedBy: string; since?: string; dryRun: boolean};
+
+export type TokenStatus =
+    {source: "cms"; setAt: Date; unreadable: false} | {source: "env" | "none"; unreadable: boolean};
+
+type StoredToken = {token: MaybeNull<string>; setAt: MaybeNull<Date>; unreadable: boolean};
 
 export type ProcessInfo = {argv: string[]; cwd: string};
 
@@ -62,11 +70,21 @@ export type ScoutRunnerDeps = {
     root: string;
     logFile: string;
     env: NodeJS.ProcessEnv;
+    tokenKey: Buffer;
     spawn?: typeof nodeSpawn;
     processInfo?: (pid: number) => Promise<MaybeNull<ProcessInfo>>;
     kill?: (pid: number, signal: NodeJS.Signals) => void;
     stopWaitMs?: number;
 };
+
+function parseStored(value: string): {sealed?: unknown; setAt?: unknown} {
+    try {
+        const parsed: unknown = JSON.parse(value);
+        return typeof parsed === "object" && parsed !== null ? parsed : {};
+    } catch {
+        return {};
+    }
+}
 
 const withLine = (log: MaybeNull<string>, line: string) => (log ? `${log}\n${line}` : line);
 
@@ -84,6 +102,7 @@ class ScoutRunnerService {
         if (!claimed.ok) return claimed;
         if (claimed.data === null) return failure(StartError.BUSY);
         const id = claimed.data;
+        const env = await this.#childEnv();
 
         const args = [entry, "--run", String(id)];
         if (since) args.push("--since", since);
@@ -93,7 +112,7 @@ class ScoutRunnerService {
             fd = openSync(logFile, "a");
             const child = spawn(process.execPath, args, {
                 cwd: root,
-                env: this.#childEnv(),
+                env,
                 detached: true,
                 stdio: ["ignore", fd, fd],
             });
@@ -151,6 +170,23 @@ class ScoutRunnerService {
         if (!saved.ok) return saved;
         await this.schedule();
         return saved;
+    }
+
+    async claudeToken(): AsyncResult<TokenStatus, DbError> {
+        const stored = await this.#storedToken();
+        if (!stored.ok) return stored;
+        const {token, setAt, unreadable} = stored.data;
+        if (token && setAt) return success({source: "cms", setAt, unreadable: false});
+        return success({source: this.deps.env[TOKEN_ENV] ? "env" : "none", unreadable});
+    }
+
+    setClaudeToken(token: string): AsyncResult<void, DbError> {
+        const value = JSON.stringify({sealed: seal(this.deps.tokenKey, token), setAt: new Date().toISOString()});
+        return this.deps.settingRepo.set(CLAUDE_TOKEN_KEY, value);
+    }
+
+    removeClaudeToken(): AsyncResult<void, DbError> {
+        return this.deps.settingRepo.remove(CLAUDE_TOKEN_KEY);
     }
 
     nextRun(): MaybeNull<Date> {
@@ -226,8 +262,23 @@ class ScoutRunnerService {
         return new Date(Date.now() - STALE_RUN_MS);
     }
 
-    #childEnv(): NodeJS.ProcessEnv {
+    async #storedToken(): AsyncResult<StoredToken, DbError> {
+        const value = await this.deps.settingRepo.get(CLAUDE_TOKEN_KEY);
+        if (!value.ok) return value;
+        if (value.data === null) return success({token: null, setAt: null, unreadable: false});
+        const {sealed, setAt} = parseStored(value.data);
+        const token = typeof sealed === "string" ? open(this.deps.tokenKey, sealed) : null;
+        const date = typeof setAt === "string" ? new Date(setAt) : null;
+        if (token && date && !Number.isNaN(date.getTime())) return success({token, setAt: date, unreadable: false});
+        this.deps.log.warn("the saved claude token can't be read, so the scout gets the server's own");
+        return success({token: null, setAt: null, unreadable: true});
+    }
+
+    async #childEnv(): Promise<NodeJS.ProcessEnv> {
         const {SUPER_USER: _user, JWT_SECRET: _secret, ...env} = this.deps.env;
+        const stored = await this.#storedToken();
+        if (!stored.ok) this.deps.log.error({reason: stored.ctx}, "failed to read the claude token");
+        else if (stored.data.token) env[TOKEN_ENV] = stored.data.token;
         return env;
     }
 }
