@@ -18,6 +18,7 @@ export const DONE = {
     shown: "Back on the site.",
     started: "Started.",
     stopped: "Stopped.",
+    removed: "Removed.",
 } as const;
 
 export type Done = keyof typeof DONE;

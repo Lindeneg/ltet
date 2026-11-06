@@ -367,6 +367,9 @@ h2 {
     gap: 12px;
     max-width: 420px;
 }
+.stack + form {
+    margin-top: 12px;
+}
 .stack label {
     display: grid;
     gap: 4px;
