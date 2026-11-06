@@ -10,6 +10,7 @@ import {
 import {headlineOnPage, matchQuote, normalize, type QuoteMatch} from "./quote-check.js";
 import type {ScoredStatement} from "./score.js";
 import type {PageLoader} from "./pages.js";
+import type {MaybeNull} from "./types.js";
 
 export const RECORD_START_DAY = "2022-11-30";
 const EXAMPLES = 16;
@@ -46,6 +47,35 @@ export type FindOutput = {leads: Lead[]; suggestionOutcomes: SuggestionOutcome[]
 export type WriteResult = {lead: number; keep: boolean; dropReason: string; statement: RawStatement | null};
 
 export type WriteOutput = {results: WriteResult[]};
+
+export type ProposedOutcome = {
+    statementId: string;
+    ceo: string;
+    headline: string;
+    verified: boolean;
+    foundOn: number;
+    forks: number;
+    proposalId: MaybeNull<number>;
+};
+
+export type MissedOutcome = {
+    kind: "dropped" | "duplicate" | "failed";
+    ceo: string;
+    date: string;
+    venue: string;
+    statementId: MaybeNull<string>;
+    reason: string;
+};
+
+export type ResearchedOutcome = {
+    id: number;
+    url: string;
+    qualifies: boolean;
+    finding: string;
+    proposalId: MaybeNull<number>;
+};
+
+export type RunOutcomes = {proposed: ProposedOutcome[]; missed: MissedOutcome[]; suggestions: ResearchedOutcome[]};
 
 export type Checks = {
     quotePages: (QuoteMatch & {url: string})[];
