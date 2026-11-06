@@ -588,6 +588,13 @@ main:focus {
     gap: 16px;
     min-height: 76px;
 }
+.strapline {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--gutter) 12px;
+    color: var(--muted);
+    font: 500 14px/1.4 var(--sans);
+}
 .brand {
     display: flex;
     align-items: center;

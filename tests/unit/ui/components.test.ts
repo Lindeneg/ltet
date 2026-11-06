@@ -179,6 +179,26 @@ describe("Ticker", () => {
         expect(html).toContain('<ol class="ticker-list copy" aria-hidden="true">');
         expect(html.match(/tabindex="-1"/g)).toHaveLength(2);
     });
+
+    it("names its list with a label that is not a heading", async () => {
+        const site = await siteFor([makeStatement()]);
+
+        const html = Ticker(site.league.newest);
+
+        expect(html).not.toMatch(/<h\d/);
+        expect(html).toContain('<p class="ticker-label" id="ticker-label">');
+        expect(html).toContain('aria-labelledby="ticker-label"');
+        expect(html).toContain('aria-label="Pause the results ticker"');
+    });
+
+    it("shows the play button when it starts paused", async () => {
+        const site = await siteFor([makeStatement()]);
+
+        const html = Ticker(site.league.newest, true);
+
+        expect(html).toContain('aria-label="Play the results ticker" title="Play the results ticker"');
+        expect(html).toContain('href="#play"');
+    });
 });
 
 describe("ReportBody", () => {
