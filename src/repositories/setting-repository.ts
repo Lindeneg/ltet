@@ -19,6 +19,13 @@ class SettingRepository {
             this.db.p.setting.upsert({where: {key}, create: {key, value}, update: {value}}).then(() => undefined)
         );
     }
+
+    remove(key: string): AsyncResult<void, DbError> {
+        return this.db.run(
+            "setting-repo.remove",
+            this.db.p.setting.deleteMany({where: {key}}).then(() => undefined)
+        );
+    }
 }
 
 export default SettingRepository;

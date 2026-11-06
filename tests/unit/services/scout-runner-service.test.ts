@@ -5,7 +5,9 @@ import {join} from "node:path";
 import {afterEach, beforeEach, describe, expect, it, vi, type Mock} from "vitest";
 import {failure, success} from "../../../src/lib/result.js";
 import {AppError} from "../../../src/lib/errors.js";
+import {deriveKey, seal} from "../../../src/lib/secret-box.js";
 import ScoutRunnerService, {
+    CLAUDE_TOKEN_KEY,
     StartError,
     isScout,
     processInfo as readProcess,
@@ -18,6 +20,8 @@ import {fake, fakeLog, makeRun} from "../helpers.js";
 
 const ROOT = "/srv/ltet";
 const ENTRY = "/srv/ltet/dist/scout.js";
+const KEY = deriveKey("a secret of at least thirty two characters", "claude token");
+const TOKEN = "sk-ant-oat01-the-cms-token";
 
 describe("nextAt", () => {
     const at = (iso: string) => Date.parse(iso);
@@ -46,7 +50,7 @@ describe("isScout", () => {
 
 describe("ScoutRunnerService", () => {
     let runRepo: {claim: Mock; running: Mock; setPid: Mock; finish: Mock; get: Mock};
-    let settingRepo: {get: Mock; set: Mock};
+    let settingRepo: {get: Mock; set: Mock; remove: Mock};
     let spawn: Mock;
     let child: EventEmitter & {pid?: number; unref: Mock};
     let processInfo: Mock;
@@ -64,6 +68,7 @@ describe("ScoutRunnerService", () => {
             root: ROOT,
             logFile,
             env: {HOME: "/home/x", SUPER_USER: "a,b,c,d", JWT_SECRET: "s", CLAUDE_CODE_OAUTH_TOKEN: "t"},
+            tokenKey: KEY,
             spawn: spawn as never,
             processInfo,
             kill,
@@ -82,6 +87,7 @@ describe("ScoutRunnerService", () => {
         settingRepo = {
             get: vi.fn().mockResolvedValue(success(null)),
             set: vi.fn().mockResolvedValue(success(undefined)),
+            remove: vi.fn().mockResolvedValue(success(undefined)),
         };
         child = Object.assign(new EventEmitter(), {pid: 321, unref: vi.fn()});
         spawn = vi.fn(() => child);
@@ -140,6 +146,104 @@ describe("ScoutRunnerService", () => {
                 summary: null,
                 log: "The scout failed to start.",
             });
+        });
+    });
+
+    describe("the claude token", () => {
+        const stored = (key = KEY, setAt = "2026-11-06T10:00:00.000Z") =>
+            JSON.stringify({sealed: seal(key, TOKEN), setAt});
+        const childEnv = () => (spawn.mock.calls.at(-1) as unknown as [string, string[], {env: object}])[2].env;
+        const logged = () => JSON.stringify(Object.values(log).map((fn) => (fn as Mock).mock.calls));
+
+        it("saves the token sealed, never in plain text", async () => {
+            expect(await runner().setClaudeToken(TOKEN)).toEqual(success(undefined));
+
+            const [key, value] = settingRepo.set.mock.calls[0];
+            expect(key).toBe(CLAUDE_TOKEN_KEY);
+            expect(value).not.toContain(TOKEN);
+            expect(JSON.parse(value)).toEqual({sealed: expect.any(String), setAt: expect.any(String)});
+        });
+
+        it("seals the same token differently each time", async () => {
+            await runner().setClaudeToken(TOKEN);
+            await runner().setClaudeToken(TOKEN);
+
+            const [first, second] = settingRepo.set.mock.calls.map(([, value]) => JSON.parse(value).sealed);
+            expect(first).not.toBe(second);
+        });
+
+        it("gives the scout the cms token over the server's, without the server's secrets", async () => {
+            settingRepo.get.mockResolvedValue(success(stored()));
+
+            await runner().start({startedBy: "schedule", dryRun: false});
+
+            expect(settingRepo.get).toHaveBeenCalledWith(CLAUDE_TOKEN_KEY);
+            expect(childEnv()).toEqual({HOME: "/home/x", CLAUDE_CODE_OAUTH_TOKEN: TOKEN});
+            expect(logged()).not.toContain(TOKEN);
+        });
+
+        it("gives the scout no token when neither the cms nor the server has one", async () => {
+            await runner({env: {HOME: "/home/x"}}).start({startedBy: "schedule", dryRun: false});
+
+            expect(childEnv()).toEqual({HOME: "/home/x"});
+        });
+
+        it("keeps a going run on the token it started with, and gives the next run the new one", async () => {
+            const service = runner();
+            await service.start({startedBy: "schedule", dryRun: false});
+            const first = childEnv();
+            settingRepo.get.mockResolvedValue(success(stored()));
+
+            await service.start({startedBy: "schedule", dryRun: false});
+
+            expect(first).toEqual({HOME: "/home/x", CLAUDE_CODE_OAUTH_TOKEN: "t"});
+            expect(childEnv()).toEqual({HOME: "/home/x", CLAUDE_CODE_OAUTH_TOKEN: TOKEN});
+        });
+
+        it("falls back to the server's token and warns when the saved one can't be read", async () => {
+            const rotated = deriveKey("another secret of at least thirty two chars", "claude token");
+            for (const value of [stored(rotated), "not json", JSON.stringify({sealed: "AAAA"}), stored(KEY, "never")]) {
+                settingRepo.get.mockResolvedValue(success(value));
+                log = fakeLog();
+
+                await runner().start({startedBy: "schedule", dryRun: false});
+
+                expect(childEnv(), value).toEqual({HOME: "/home/x", CLAUDE_CODE_OAUTH_TOKEN: "t"});
+                expect(log.warn, value).toHaveBeenCalledWith(
+                    "the saved claude token can't be read, so the scout gets the server's own"
+                );
+                expect(logged()).not.toContain(TOKEN);
+            }
+        });
+
+        it("falls back to the server's token when the setting can't be read", async () => {
+            settingRepo.get.mockResolvedValue(failure(AppError.DB_ERROR));
+
+            expect(await runner().start({startedBy: "schedule", dryRun: false})).toEqual(success(5));
+
+            expect(childEnv()).toEqual({HOME: "/home/x", CLAUDE_CODE_OAUTH_TOKEN: "t"});
+            expect(log.error).toHaveBeenCalled();
+        });
+
+        it("says where the token comes from", async () => {
+            settingRepo.get.mockResolvedValue(success(stored()));
+            expect(await runner().claudeToken()).toEqual(
+                success({source: "cms", setAt: new Date("2026-11-06T10:00:00.000Z"), unreadable: false})
+            );
+
+            settingRepo.get.mockResolvedValue(success(null));
+            expect(await runner().claudeToken()).toEqual(success({source: "env", unreadable: false}));
+            expect(await runner({env: {}}).claudeToken()).toEqual(success({source: "none", unreadable: false}));
+
+            settingRepo.get.mockResolvedValue(success(stored(deriveKey("x".repeat(32), "claude token"))));
+            expect(await runner().claudeToken()).toEqual(success({source: "env", unreadable: true}));
+            expect(await runner({env: {}}).claudeToken()).toEqual(success({source: "none", unreadable: true}));
+        });
+
+        it("removes the saved token", async () => {
+            expect(await runner().removeClaudeToken()).toEqual(success(undefined));
+
+            expect(settingRepo.remove).toHaveBeenCalledWith(CLAUDE_TOKEN_KEY);
         });
     });
 
