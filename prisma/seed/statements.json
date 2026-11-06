@@ -4,7 +4,7 @@
     "ceo": "pichai",
     "date": "2023-01-20",
     "datePrecision": "day",
-    "venue": "Staff memo announcing 12,000 layoffs, published on Google's blog",
+    "venue": "Staff memo on Google's blog",
     "leaked": false,
     "headline": {
       "text": "Alphabet cuts 12,000 jobs after pandemic hiring spree, refocuses on AI",
@@ -77,7 +77,7 @@
     "ceo": "nadella",
     "date": "2023-02-07",
     "datePrecision": "day",
-    "venue": "The Verge interview (Decoder) after the launch of the new Bing",
+    "venue": "The Verge's Decoder interview",
     "leaked": false,
     "headline": {
       "text": "Microsoft CEO Satya Nadella says he hopes Google is ready to compete when it comes to A.I. search: ‘I want people to know that we made them dance’",
@@ -159,7 +159,7 @@
     "ceo": "zuckerberg",
     "date": "2023-03-14",
     "datePrecision": "day",
-    "venue": "Memo to Meta employees, published on Meta's newsroom and Zuckerberg's Facebook page",
+    "venue": "Memo to Meta employees",
     "leaked": false,
     "headline": {
       "text": "Mark Zuckerberg’s ‘year of efficiency’ now means another 10,000 layoffs and a hiring freeze on 5,000 more jobs",
@@ -235,7 +235,7 @@
     "ceo": "pichai",
     "date": "2023-04-16",
     "datePrecision": "day",
-    "venue": "CBS, 60 Minutes (interview with Scott Pelley)",
+    "venue": "CBS 60 Minutes interview",
     "leaked": false,
     "headline": {
       "text": "AI researchers claim Google, '60 Minutes' spread ‘disinformation’ in recent interview: ‘Still bulls---'",
@@ -318,7 +318,7 @@
     "ceo": "pichai",
     "date": "2023-05-12",
     "datePrecision": "reported",
-    "venue": "The Verge interview (Nilay Patel) around Google I/O 2023",
+    "venue": "The Verge interview with Nilay Patel",
     "leaked": false,
     "headline": {
       "text": "Google CEO Baffled by Suggestion That AI Will Take People’s Jobs",
@@ -389,7 +389,7 @@
     "ceo": "altman",
     "date": "2023-05-16",
     "datePrecision": "day",
-    "venue": "US Senate Judiciary Subcommittee on Privacy, Technology, and the Law, hearing on oversight of AI",
+    "venue": "US Senate hearing on AI oversight",
     "leaked": false,
     "headline": {
       "text": "Should AI development require a license? ChatGPT’s creator thinks so, but some experts disagree",
@@ -460,7 +460,7 @@
     "ceo": "altman",
     "date": "2023-05-24",
     "datePrecision": "reported",
-    "venue": "Remarks to reporters in London during a world tour",
+    "venue": "Remarks to reporters in London",
     "leaked": false,
     "headline": {
       "text": "OpenAI chief accused of ‘blackmail’ in EU dispute",
@@ -528,7 +528,7 @@
     "ceo": "altman",
     "date": "2023-09-25",
     "datePrecision": "reported",
-    "venue": "Profile in New York magazine by Elizabeth Weil",
+    "venue": "New York magazine profile",
     "leaked": false,
     "headline": {
       "text": "Sam Altman Says He Intends to Replace Normal People With AI",
@@ -675,7 +675,7 @@
     "ceo": "musk",
     "date": "2023-11-02",
     "datePrecision": "day",
-    "venue": "Conversation with Rishi Sunak at Lancaster House, London, closing the AI Safety Summit",
+    "venue": "AI Safety Summit, with Rishi Sunak",
     "leaked": false,
     "headline": {
       "text": "When Rishi met Elon: five things we learned from AI summit",
@@ -743,7 +743,7 @@
     "ceo": "suleyman",
     "date": "2024-01-17",
     "datePrecision": "day",
-    "venue": "World Economic Forum, Davos, CNBC Squawk Box (Suleyman was then CEO of Inflection AI)",
+    "venue": "CNBC Squawk Box at Davos",
     "leaked": false,
     "headline": {
       "text": "DeepMind Co-Founder: AI Is Fundamentally a \"Labor Replacing Tool\"",
@@ -817,7 +817,7 @@
     "ceo": "zuckerberg",
     "date": "2024-01-18",
     "datePrecision": "day",
-    "venue": "Facebook and Instagram post and an interview with The Verge",
+    "venue": "Facebook post and The Verge interview",
     "leaked": false,
     "headline": {
       "text": "‘Very scary’: Mark Zuckerberg’s pledge to build advanced AI alarms experts",
@@ -956,7 +956,7 @@
     "ceo": "musk",
     "date": "2024-03-01",
     "datePrecision": "month",
-    "venue": "Abundance Summit 2024, 'Great AI Debate' seminar",
+    "venue": "Abundance Summit 2024",
     "leaked": false,
     "headline": {
       "text": "Top AI researcher says AI will end humanity and we should stop developing it now — but don't worry, Elon Musk disagrees",
@@ -1030,7 +1030,7 @@
     "ceo": "altman",
     "date": "2024-03-05",
     "datePrecision": "reported",
-    "venue": "Interview for the book and online community 'Our AI Journey' by Adam Brotman and Andy Sack",
+    "venue": "Interview for 'Our AI Journey'",
     "leaked": false,
     "headline": {
       "text": "Sam Altman Says AI Will Handle “95%” of Marketing Work Done by Agencies and Creatives",
@@ -1098,7 +1098,7 @@
     "ceo": "huang",
     "date": "2024-03-10",
     "datePrecision": "reported",
-    "venue": "2024 SIEPR Economic Summit, Stanford (keynote Q&A)",
+    "venue": "SIEPR Economic Summit, Stanford",
     "leaked": false,
     "headline": {
       "text": "Jensen Huang says even free AI chips from his competitors can't beat Nvidia's GPUs",
@@ -1160,7 +1160,7 @@
     "ceo": "suleyman",
     "date": "2024-04-01",
     "datePrecision": "month",
-    "venue": "TED2024 talk \"What is an AI anyway?\", Vancouver",
+    "venue": "TED2024 talk, Vancouver",
     "leaked": false,
     "headline": {
       "text": "Microsoft Executive Says AI Is a \"New Kind of Digital Species\"",
@@ -1288,7 +1288,7 @@
     "ceo": "altman",
     "date": "2024-05-13",
     "datePrecision": "day",
-    "venue": "Post on X (@sama) on the day OpenAI demoed GPT-4o voice",
+    "venue": "Post on X (@sama)",
     "leaked": false,
     "headline": {
       "text": "Scarlett Johansson Issues Blistering Statement Against OpenAI And Sam Altman Over 'Sky'",
@@ -1434,7 +1434,7 @@
     "ceo": "nadella",
     "date": "2024-05-20",
     "datePrecision": "reported",
-    "venue": "Wall Street Journal video interview with Joanna Stern (Copilot+ PCs)",
+    "venue": "Wall Street Journal video interview",
     "leaked": false,
     "headline": {
       "text": "Microsoft CEO boasts about new AI chatbot that will surveil users aided by 'photographic memory'",
@@ -1517,7 +1517,7 @@
     "ceo": "pichai",
     "date": "2024-05-20",
     "datePrecision": "reported",
-    "venue": "The Verge, Decoder interview with Nilay Patel",
+    "venue": "The Verge's Decoder interview",
     "leaked": false,
     "headline": {
       "text": "Will web traffic die? Google CEO Sundar Pichai defends AI search amidst publisher backlash",
@@ -1672,7 +1672,7 @@
     "ceo": "suleyman",
     "date": "2024-06-25",
     "datePrecision": "day",
-    "venue": "Aspen Ideas Festival, interview with CNBC's Andrew Ross Sorkin",
+    "venue": "Aspen Ideas Festival interview",
     "leaked": false,
     "headline": {
       "text": "Microsoft AI CEO Mustafa Suleyman describes content on the open web as 'freeware'",
@@ -1820,7 +1820,7 @@
     "ceo": "huang",
     "date": "2024-09-13",
     "datePrecision": "reported",
-    "venue": "Goldman Sachs Communacopia + Technology Conference, San Francisco",
+    "venue": "Goldman Sachs Communacopia conference",
     "leaked": false,
     "headline": {
       "text": "'We can't do computer graphics anymore without artificial intelligence. We compute one pixel, we infer the other 32': Jensen thinks AI is integral to next-gen graphics tech",
@@ -1959,7 +1959,7 @@
     "ceo": "zuckerberg",
     "date": "2024-09-25",
     "datePrecision": "day",
-    "venue": "The Verge interview with Alex Heath, around Meta Connect 2024",
+    "venue": "The Verge interview with Alex Heath",
     "leaked": false,
     "headline": {
       "text": "Mark Zuckerberg: creators and publishers ‘overestimate the value’ of their work for training AI",
@@ -2107,7 +2107,7 @@
     "ceo": "musk",
     "date": "2024-10-10",
     "datePrecision": "day",
-    "venue": "Tesla \"We, Robot\" event, Warner Bros. studio lot, Hollywood",
+    "venue": "Tesla \"We, Robot\" event",
     "leaked": false,
     "headline": {
       "text": "It sure seems like the Optimus robots at Tesla's event were under human control",
@@ -2186,7 +2186,7 @@
     "ceo": "amodei",
     "date": "2024-10-11",
     "datePrecision": "day",
-    "venue": "Essay on his personal website, \"Machines of Loving Grace\"",
+    "venue": "Essay \"Machines of Loving Grace\"",
     "leaked": false,
     "headline": {
       "text": "Anthropic CEO goes full techno-optimist in 15,000-word paean to AI",
@@ -2258,7 +2258,7 @@
     "ceo": "pichai",
     "date": "2024-10-29",
     "datePrecision": "day",
-    "venue": "Alphabet Q3 2024 earnings call (remarks published on Google's blog)",
+    "venue": "Alphabet Q3 2024 earnings call",
     "leaked": false,
     "headline": {
       "text": "Google CEO Says 25 Percent of Its Code Is Now AI-Generated",
@@ -2486,7 +2486,7 @@
     "ceo": "huang",
     "date": "2025-01-07",
     "datePrecision": "day",
-    "venue": "Nvidia financial analyst Q&A at CES 2025, Las Vegas",
+    "venue": "Nvidia analyst Q&A at CES 2025",
     "leaked": false,
     "headline": {
       "text": "Quantum stocks like Rigetti plunge after Nvidia's Huang says the computers are 15 to 30 years away",
@@ -2626,7 +2626,7 @@
     "ceo": "zuckerberg",
     "date": "2025-01-14",
     "datePrecision": "day",
-    "venue": "Internal memo to Meta staff, reported by Bloomberg",
+    "venue": "Internal memo to Meta staff",
     "leaked": true,
     "headline": {
       "text": "Mark Zuckerberg warns Meta staff of ‘intense year’ ahead as he announces low performers will be cut",
@@ -2711,7 +2711,7 @@
     "ceo": "amodei",
     "date": "2025-01-23",
     "datePrecision": "day",
-    "venue": "World Economic Forum, Davos, panel \"Technology in the World\"",
+    "venue": "World Economic Forum panel, Davos",
     "leaked": false,
     "headline": {
       "text": "Anthropic CEO Hilariously Claims AI Will Double Human Lifespans Within a Decade",
@@ -2785,7 +2785,7 @@
     "ceo": "hassabis",
     "date": "2025-02-04",
     "datePrecision": "day",
-    "venue": "Google blog post \"Responsible AI: Our 2024 report and ongoing work\", co-authored with James Manyika",
+    "venue": "Google blog post with James Manyika",
     "leaked": false,
     "headline": {
       "text": "Google drops pledge not to use AI for weapons, surveillance",
@@ -2862,7 +2862,7 @@
     "ceo": "amodei",
     "date": "2025-03-10",
     "datePrecision": "day",
-    "venue": "Council on Foreign Relations CEO Speaker Series, in conversation with Michael Froman",
+    "venue": "Council on Foreign Relations event",
     "leaked": false,
     "headline": {
       "text": "Anthropic CEO Dario Amodei's prediction about AI in software development is nowhere nearly to becoming a reality",
@@ -2939,7 +2939,7 @@
     "ceo": "altman",
     "date": "2025-03-27",
     "datePrecision": "day",
-    "venue": "Post on X (@sama) during the Studio Ghibli-style image trend",
+    "venue": "Post on X (@sama)",
     "leaked": false,
     "headline": {
       "text": "Sam Altman says ChatGPT's Studio Ghibli-style images are ‘melting’ OpenAI’s GPUs",
@@ -3013,7 +3013,7 @@
     "ceo": "suleyman",
     "date": "2025-04-04",
     "datePrecision": "day",
-    "venue": "AP interview at Microsoft's 50th anniversary event",
+    "venue": "AP interview, Microsoft's 50th anniversary",
     "leaked": false,
     "headline": {
       "text": "Microsoft's head of AI wants to create an artificial overly-attached companion for us all: 'It will have its own name, its own style. It will adapt to you. It may also have its own visual appearance and expressions'",
@@ -3076,7 +3076,7 @@
     "ceo": "hassabis",
     "date": "2025-04-20",
     "datePrecision": "day",
-    "venue": "CBS 60 Minutes interview with Scott Pelley",
+    "venue": "CBS 60 Minutes interview",
     "leaked": false,
     "headline": {
       "text": "We Need a Cure for AI Health Hype",
@@ -3153,7 +3153,7 @@
     "ceo": "altman",
     "date": "2025-04-21",
     "datePrecision": "reported",
-    "venue": "Reply on X to a user asking about electricity costs of polite prompts",
+    "venue": "Reply to a user on X",
     "leaked": false,
     "headline": {
       "text": "ChatGPT burns tens of millions of Softbank dollars listening to you thanking it",
@@ -3310,7 +3310,7 @@
     "ceo": "amodei",
     "date": "2025-05-22",
     "datePrecision": "day",
-    "venue": "Press briefing at Code with Claude, Anthropic's developer event, San Francisco",
+    "venue": "Press briefing at Code with Claude",
     "leaked": false,
     "headline": {
       "text": "Anthropic CEO claims AI models hallucinate less than humans",
@@ -3371,7 +3371,7 @@
     "ceo": "amodei",
     "date": "2025-05-28",
     "datePrecision": "reported",
-    "venue": "Axios interview (Behind the Curtain column), repeated to CNN's Anderson Cooper the next day",
+    "venue": "Axios interview",
     "leaked": false,
     "headline": {
       "text": "Anthropic CEO says AI could wipe out half of all entry-level white-collar jobs",
@@ -3451,7 +3451,7 @@
     "ceo": "pichai",
     "date": "2025-05-28",
     "datePrecision": "reported",
-    "venue": "The Verge's Decoder podcast with Nilay Patel, after Google I/O 2025",
+    "venue": "The Verge's Decoder podcast",
     "leaked": false,
     "headline": {
       "text": "Google's Sundar Pichai Doesn't Think Web Publishing Is Dead",
@@ -3648,7 +3648,7 @@
     "ceo": "altman",
     "date": "2025-06-12",
     "datePrecision": "day",
-    "venue": "AMD Advancing AI 2025 keynote conversation with AMD CEO Lisa Su",
+    "venue": "AMD Advancing AI, with Lisa Su",
     "leaked": false,
     "headline": {
       "text": "Sam Altman's vision is the stuff of my nightmares: \"A significant fraction of the power on Earth should be spent running AI\"",
@@ -3914,7 +3914,7 @@
     "ceo": "zuckerberg",
     "date": "2025-07-14",
     "datePrecision": "day",
-    "venue": "Facebook and Threads post on Meta's multi-gigawatt AI data center clusters",
+    "venue": "Facebook and Threads post",
     "leaked": false,
     "headline": {
       "text": "Meta reveals plan for several multi-gigawatt datacenter clusters",
@@ -3976,7 +3976,7 @@
     "ceo": "amodei",
     "date": "2025-07-20",
     "datePrecision": "day",
-    "venue": "Internal Slack message to Anthropic staff, obtained by WIRED",
+    "venue": "Internal Slack message to staff",
     "leaked": true,
     "headline": {
       "text": "Leaked Memo: Anthropic CEO Says the Company Will Pursue Gulf State Investments After All",
@@ -4038,7 +4038,7 @@
     "ceo": "altman",
     "date": "2025-07-23",
     "datePrecision": "reported",
-    "venue": "Fireside chat with Fed vice chair Michelle Bowman, Capital Framework for Large Banks conference, Federal Reserve Board",
+    "venue": "Federal Reserve Board conference",
     "leaked": false,
     "headline": {
       "text": "OpenAI CEO Sam Altman thinks some jobs will be 'totally, totally gone' thanks to AI, but he still wouldn't trust ChatGPT with his 'medical fate'",
@@ -4105,7 +4105,7 @@
     "ceo": "nadella",
     "date": "2025-07-24",
     "datePrecision": "day",
-    "venue": "Memo to Microsoft employees after about 9,000 layoffs",
+    "venue": "Memo to Microsoft employees",
     "leaked": true,
     "headline": {
       "text": "Satya Nadella on the ‘enigma of success’ in the age of AI: A thriving business, but 15,000+ layoffs",
@@ -4329,7 +4329,7 @@
     "ceo": "hassabis",
     "date": "2025-08-05",
     "datePrecision": "reported",
-    "venue": "Interview with The Guardian at DeepMind's London offices",
+    "venue": "Interview with The Guardian",
     "leaked": false,
     "headline": {
       "text": "DeepMind CEO makes big brain claims, saying AGI could be here within 'five to 10 years' and cause humanity to experience widespread change that's '10 times bigger than the Industrial Revolution, and maybe 10 times faster'",
@@ -4397,7 +4397,7 @@
     "ceo": "suleyman",
     "date": "2025-08-19",
     "datePrecision": "day",
-    "venue": "Essay on his personal blog, \"We must build AI for people; not to be a person\"",
+    "venue": "Essay on his personal blog",
     "leaked": false,
     "headline": {
       "text": "Microsoft AI chief says it’s ‘dangerous’ to study AI consciousness",
@@ -4463,7 +4463,7 @@
     "ceo": "altman",
     "date": "2025-10-04",
     "datePrecision": "reported",
-    "venue": "Blog post on Sora, days after the Sora 2 launch",
+    "venue": "Blog post on Sora",
     "leaked": false,
     "headline": {
       "text": "You Can't Use Copyrighted Characters in OpenAI's Sora Anymore and People Are Freaking Out",
@@ -4536,7 +4536,7 @@
     "ceo": "altman",
     "date": "2025-10-12",
     "datePrecision": "reported",
-    "venue": "Live interview with Rowan Cheung (The Rundown) at OpenAI DevDay 2025",
+    "venue": "Live interview at OpenAI DevDay 2025",
     "leaked": false,
     "headline": {
       "text": "Sam Altman Says If Jobs Gets Wiped Out, Maybe They Weren't Even \"Real Work\" to Start With",
@@ -4879,7 +4879,7 @@
     "ceo": "altman",
     "date": "2025-11-02",
     "datePrecision": "reported",
-    "venue": "BG2 podcast with Brad Gerstner and Satya Nadella",
+    "venue": "BG2 podcast with Satya Nadella",
     "leaked": false,
     "headline": {
       "text": "Sam Altman says ‘enough’ to questions about OpenAI’s revenue",
@@ -4942,7 +4942,7 @@
     "ceo": "nadella",
     "date": "2025-11-02",
     "datePrecision": "reported",
-    "venue": "BG2 Pod (Brad Gerstner), 'All things AI' Halloween special with Sam Altman",
+    "venue": "BG2 podcast with Sam Altman",
     "leaked": false,
     "headline": {
       "text": "Microsoft CEO says the company doesn't have enough electricity to install all the AI GPUs in its inventory - 'you may actually have a bunch of chips sitting in inventory that I can't plug in'",
@@ -5084,7 +5084,7 @@
     "ceo": "amodei",
     "date": "2025-11-16",
     "datePrecision": "day",
-    "venue": "CBS News 60 Minutes, interview with Anderson Cooper",
+    "venue": "CBS 60 Minutes interview",
     "leaked": false,
     "headline": {
       "text": "‘I’m deeply uncomfortable’: Anthropic CEO warns that a cadre of AI leaders, including himself, should not be in charge of the technology’s future",
@@ -5146,7 +5146,7 @@
     "ceo": "pichai",
     "date": "2025-11-18",
     "datePrecision": "reported",
-    "venue": "BBC interview with Faisal Islam at Google's California headquarters",
+    "venue": "BBC interview with Faisal Islam",
     "leaked": false,
     "headline": {
       "text": "Don't blindly trust what AI tells you, says Google's Sundar Pichai",
@@ -5220,7 +5220,7 @@
     "ceo": "musk",
     "date": "2025-11-19",
     "datePrecision": "day",
-    "venue": "U.S.-Saudi Investment Forum, Kennedy Center, Washington DC (panel with Jensen Huang)",
+    "venue": "U.S.-Saudi Investment Forum, Washington DC",
     "leaked": false,
     "headline": {
       "text": "Elon Musk on the future of jobs and AI, 'My prediction is that work will be optional'",
@@ -5587,7 +5587,7 @@
     "ceo": "altman",
     "date": "2025-12-09",
     "datePrecision": "reported",
-    "venue": "The Tonight Show Starring Jimmy Fallon (his late-night debut)",
+    "venue": "The Tonight Show Starring Jimmy Fallon",
     "leaked": false,
     "headline": {
       "text": "Sam Altman Says Caring for a Baby Is Now Impossible Without ChatGPT",
@@ -5655,7 +5655,7 @@
     "ceo": "nadella",
     "date": "2025-12-29",
     "datePrecision": "day",
-    "venue": "Nadella's personal blog, sn scratchpad (shared on LinkedIn): 'Looking Ahead to 2026'",
+    "venue": "Nadella's personal blog",
     "leaked": false,
     "headline": {
       "text": "“Microslop” memes take over social media after Microsoft CEO pushes back on “the arguments of slop”",
@@ -5968,7 +5968,7 @@
     "ceo": "amodei",
     "date": "2026-01-20",
     "datePrecision": "day",
-    "venue": "World Economic Forum, Davos, interview with The Economist",
+    "venue": "The Economist interview at Davos",
     "leaked": false,
     "headline": {
       "text": "“Engineers don’t write code anymore” — Anthropic CEO says AI is about to eat the entire profession",
@@ -6118,7 +6118,7 @@
     "ceo": "nadella",
     "date": "2026-01-20",
     "datePrecision": "day",
-    "venue": "World Economic Forum, Davos: conversation with BlackRock CEO Larry Fink",
+    "venue": "Davos conversation with Larry Fink",
     "leaked": false,
     "headline": {
       "text": "Microsoft CEO says AI needs to have a wider impact or else it risks quickly losing ‘social permission’ — also says that the technology should benefit more people to avoid a bubble",
@@ -6198,7 +6198,7 @@
     "ceo": "amodei",
     "date": "2026-01-26",
     "datePrecision": "day",
-    "venue": "Essay on his personal website, \"The Adolescence of Technology\"",
+    "venue": "Essay \"The Adolescence of Technology\"",
     "leaked": false,
     "headline": {
       "text": "Anthropic CEO bloviates for 20,000+ words in thinly veiled plea against regulation",
@@ -6276,7 +6276,7 @@
     "ceo": "altman",
     "date": "2026-02-04",
     "datePrecision": "day",
-    "venue": "Post on X (@sama) answering Anthropic's Super Bowl ads",
+    "venue": "Post on X (@sama)",
     "leaked": false,
     "headline": {
       "text": "OpenAI CEO mocked for 'tantrum' over rival's Super Bowl ad",
@@ -6343,7 +6343,7 @@
     "ceo": "amodei",
     "date": "2026-02-12",
     "datePrecision": "reported",
-    "venue": "The New York Times \"Interesting Times\" podcast with Ross Douthat",
+    "venue": "\"Interesting Times\" podcast with Ross Douthat",
     "leaked": false,
     "headline": {
       "text": "Anthropic CEO Says Company No Longer Sure Whether Claude Is Conscious",
@@ -6492,7 +6492,7 @@
     "ceo": "altman",
     "date": "2026-02-20",
     "datePrecision": "day",
-    "venue": "Interview with The Indian Express (Express Adda) at the India AI Impact Summit, New Delhi",
+    "venue": "India AI Impact Summit, New Delhi",
     "leaked": false,
     "headline": {
       "text": "Sam Altman: Know What Else Used a Lot of Energy? Human Civilization",
@@ -6570,7 +6570,7 @@
     "ceo": "huang",
     "date": "2026-03-04",
     "datePrecision": "day",
-    "venue": "Morgan Stanley Technology, Media and Telecom Conference",
+    "venue": "Morgan Stanley technology conference",
     "leaked": false,
     "headline": {
       "text": "Nvidia CEO Huang declares 'I love constraints' amid ongoing component shortage — claims lack of options forces AI clients to only choose the very best",
@@ -6651,7 +6651,7 @@
     "ceo": "altman",
     "date": "2026-03-11",
     "datePrecision": "day",
-    "venue": "BlackRock U.S. Infrastructure Summit, Washington, D.C. (fireside chat with OpenAI board member Adebayo Ogunlesi)",
+    "venue": "BlackRock U.S. Infrastructure Summit",
     "leaked": false,
     "headline": {
       "text": "Sam Altman Says Intelligence Will Be a Utility, and He's Just the Man to Collect the Bills",
@@ -6840,7 +6840,7 @@
     "ceo": "huang",
     "date": "2026-03-17",
     "datePrecision": "day",
-    "venue": "Press Q&A with Tom's Hardware at Nvidia GTC 2026",
+    "venue": "Press Q&A at Nvidia GTC 2026",
     "leaked": false,
     "headline": {
       "text": "Jensen Huang says gamers are 'completely wrong' about DLSS 5 — Nvidia CEO responds to DLSS 5 backlash",
@@ -6927,7 +6927,7 @@
     "ceo": "huang",
     "date": "2026-03-19",
     "datePrecision": "reported",
-    "venue": "All-In Podcast, recorded at Nvidia GTC 2026 (San Jose)",
+    "venue": "All-In Podcast at Nvidia GTC 2026",
     "leaked": false,
     "headline": {
       "text": "Jensen Huang says he would be 'deeply alarmed' if his $500,000 engineer did not consume at least $250,000 of tokens",
@@ -7007,7 +7007,7 @@
     "ceo": "huang",
     "date": "2026-04-20",
     "datePrecision": "reported",
-    "venue": "Panel at Stanford Graduate School of Business",
+    "venue": "Stanford Graduate School of Business panel",
     "leaked": false,
     "headline": {
       "text": "Nvidia CEO says that AI agents will make workers busier than ever—they’ll ‘harass’ and ‘micromanage’ you, instead of take your job",
@@ -7075,7 +7075,7 @@
     "ceo": "pichai",
     "date": "2026-04-22",
     "datePrecision": "day",
-    "venue": "Pichai's blog post for Google Cloud Next 2026",
+    "venue": "Blog post for Google Cloud Next",
     "leaked": false,
     "headline": {
       "text": "While Google's CEO Pumps Up AI, Its Actual Employees Are Disgusted by It",
@@ -7158,7 +7158,7 @@
     "ceo": "musk",
     "date": "2026-04-30",
     "datePrecision": "day",
-    "venue": "Testimony in Musk v. Altman (his lawsuit against OpenAI), US District Court, Oakland",
+    "venue": "Testimony in Musk v. Altman",
     "leaked": false,
     "headline": {
       "text": "Judge cuts off Musk's AI doomsday talk as his testimony ends in OpenAI case",
@@ -7238,7 +7238,7 @@
     "ceo": "zuckerberg",
     "date": "2026-04-30",
     "datePrecision": "day",
-    "venue": "Meta company town hall (heard by Reuters)",
+    "venue": "Meta company town hall",
     "leaked": true,
     "headline": {
       "text": "Meta CEO Zuckerberg blames layoffs on capital spending, won't rule out more job cuts",
@@ -7312,7 +7312,7 @@
     "ceo": "pichai",
     "date": "2026-05-22",
     "datePrecision": "reported",
-    "venue": "The New York Times, Hard Fork podcast",
+    "venue": "Hard Fork podcast",
     "leaked": false,
     "headline": {
       "text": "As College Grads Boo Any Mention of AI, the CEO of Google Is Trying to Figure Out What to Say at an Upcoming Graduation",
@@ -7381,7 +7381,7 @@
     "ceo": "huang",
     "date": "2026-06-01",
     "datePrecision": "day",
-    "venue": "GTC Taipei 2026 keynote (Computex week), Taipei Music Center",
+    "venue": "GTC Taipei 2026 keynote",
     "leaked": false,
     "headline": {
       "text": "'People talk about AI reducing jobs, complete nonsense': Nvidia's Jensen Huang criticises economic doomerism on GTC stage",
@@ -7660,7 +7660,7 @@
     "ceo": "musk",
     "date": "2026-07-01",
     "datePrecision": "month",
-    "venue": "Interview with The Economist's editor-in-chief Zanny Minton Beddoes",
+    "venue": "Interview with The Economist",
     "leaked": false,
     "headline": {
       "text": "One year later, Tesla and Musk still don't have a good definition of 'abundance'",
@@ -7910,7 +7910,7 @@
     "ceo": "zuckerberg",
     "date": "2026-08-10",
     "datePrecision": "day",
-    "venue": "Meta essay \"The Future is for Everyone\" (about.fb.com)",
+    "venue": "Essay \"The Future is for Everyone\"",
     "leaked": false,
     "headline": {
       "text": "Mark Zuckerberg Posts Deranged 6,500-Word Essay About Giving Everyone AI Superintelligence",
@@ -7980,7 +7980,7 @@
     "ceo": "altman",
     "date": "2026-08-14",
     "datePrecision": "reported",
-    "venue": "Interview with Cory Levy of Z Fellows",
+    "venue": "Z Fellows interview with Cory Levy",
     "leaked": false,
     "headline": {
       "text": "'Only the biggest losers alive actually want this': Sam Altman sparks outrage with 'alarming' ChatGPT update",
@@ -8042,7 +8042,7 @@
     "ceo": "amodei",
     "date": "2026-08-15",
     "datePrecision": "day",
-    "venue": "X post (part 2 of 2), reply to investor Gavin Baker",
+    "venue": "X reply to investor Gavin Baker",
     "leaked": false,
     "headline": {
       "text": "'Wildly off-base and impossible': Anthropic's Dario Amodei says AI will cure cancer. Doctors disagree",
@@ -8276,7 +8276,7 @@
     "ceo": "huang",
     "date": "2026-09-18",
     "datePrecision": "day",
-    "venue": "CBS News interview with Jo Ling Kent",
+    "venue": "CBS News interview",
     "leaked": false,
     "headline": {
       "text": "Nvidia's Jensen Huang rejects AI extinction warnings as \"doomsday narratives\"",
@@ -8345,7 +8345,7 @@
     "ceo": "huang",
     "date": "2026-09-23",
     "datePrecision": "reported",
-    "venue": "The Ezra Klein Show (New York Times podcast), recorded at Nvidia HQ",
+    "venue": "The Ezra Klein Show",
     "leaked": false,
     "headline": {
       "text": "8 wild quotes from Nvidia CEO Jensen Huang's latest interview showing how disconnected AI leaders are from the real world — and why that's so dangerous",
@@ -8499,7 +8499,7 @@
     "ceo": "altman",
     "date": "2026-10-04",
     "datePrecision": "day",
-    "venue": "POLITICO Decoded (new daily newsletter and podcast), interview with Brendan Bordelon",
+    "venue": "POLITICO Decoded interview",
     "leaked": false,
     "headline": {
       "text": "'Freaking Insane': Sam Altman Sparks Horror by Saying We Should 'Accept Some Bad Things Happening' for Sake of AI",
