@@ -2,7 +2,7 @@ import {JSDOM} from "jsdom";
 import {beforeAll, describe, expect, it} from "vitest";
 import {readSeed} from "../../src/lib/content.js";
 import {seasonKey, seasonStartYear} from "../../src/lib/seasons.js";
-import {BASE_URL, get, type TestResponse} from "./helpers.js";
+import {get, type TestResponse} from "./helpers.js";
 
 const GENERIC_LINK_TEXT = new Set([
     "click here",
@@ -22,7 +22,13 @@ const GENERIC_LINK_TEXT = new Set([
 ]);
 
 const sitemap = await get("/sitemap.xml");
-const paths = [...sitemap.html.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].slice(BASE_URL.length));
+const locs = new Map(
+    [...sitemap.html.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => {
+        const url = new URL(loc);
+        return [url.pathname + url.search, loc];
+    })
+);
+const paths = [...locs.keys()];
 const pages = new Map<string, PageFacts>();
 
 type PageFacts = {
@@ -98,7 +104,7 @@ describe("seo audit of every page in the sitemap", () => {
 
         expect(page.title).not.toBe("");
         expect(page.description).not.toBe("");
-        expect(page.canonicals).toEqual([BASE_URL + path]);
+        expect(page.canonicals).toEqual([locs.get(path)]);
     });
 
     it.each(paths)("%s has structured data that parses", (path) => {
