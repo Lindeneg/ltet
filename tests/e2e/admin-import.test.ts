@@ -1,6 +1,6 @@
 import {afterAll, beforeAll, describe, expect, it} from "vitest";
 import {readSeed, type RawStatement} from "../../src/lib/content.js";
-import {MAX_FORM_BYTES} from "../../src/lib/http.js";
+import {MAX_FORM_BYTES, MAX_IMPORT_FORM_BYTES} from "../../src/lib/http.js";
 import {SkipReason} from "../../src/lib/statement-import.js";
 import StatementRepository from "../../src/repositories/statement-repository.js";
 import {IMPORT_NOTE} from "../../src/services/statement-service.js";
@@ -41,6 +41,12 @@ describe("the bulk import", () => {
 
     it("needs a login and a same-origin post", async () => {
         expect((await get("/admin/import")).status).toBe(302);
+        const target = await hidden();
+        const write = JSON.stringify({edits: [venueEdit(target.id, "A first venue", "Anonymous")]});
+        const anonymous = await postForm("/admin/import/apply", {edits: write});
+        expect(anonymous.status).toBe(302);
+        expect(anonymous.location).toContain("/admin/login");
+        expect(JSON.parse((await row(target.id)).body).venue).toBe("A first venue");
         const file = JSON.stringify({edits: [venueEdit("x", "a", "b")]});
         const res = await postForm("/admin/import/apply", {edits: file}, cookie, {origin: "https://elsewhere.example"});
         expect(res.status).toBe(403);
@@ -91,6 +97,16 @@ describe("the bulk import", () => {
         const res = await postForm("/admin/import/preview", {edits: file}, cookie);
         expect(res.status).toBe(200);
         expect(res.html).toContain("0 statements will change, 0 skipped, 1 unchanged.");
+    });
+
+    it("refuses a body over the import form's limit", async () => {
+        const res = await postForm("/admin/import/preview", {edits: "x".repeat(MAX_IMPORT_FORM_BYTES + 1)}, cookie);
+        expect(res.status).toBe(413);
+    });
+
+    it("refuses a large body before a login", async () => {
+        const res = await postForm("/admin/import/preview", {edits: "x".repeat(MAX_FORM_BYTES * 2)});
+        expect(res.status).toBe(302);
     });
 
     it("shows a form error for a file over 2 MB", async () => {

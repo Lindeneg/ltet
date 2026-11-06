@@ -25,6 +25,8 @@ function parsed<T extends {body: string}>(row: T): Omit<T, "body"> & {body: RawS
 const lock = (tx: Prisma.TransactionClient, id: string) =>
     tx.statement.updateMany({where: {id}, data: {updatedAt: new Date()}}).then((result) => result.count > 0);
 
+const REPLACE_MANY_LIMITS = {maxWait: 10_000, timeout: 60_000};
+
 class StatementRepository {
     constructor(private readonly db: DataService) {}
 
@@ -161,7 +163,7 @@ class StatementRepository {
                     written.push(body.id);
                 }
                 return written;
-            })
+            }, REPLACE_MANY_LIMITS)
         );
     }
 

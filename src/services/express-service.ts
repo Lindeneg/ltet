@@ -1,10 +1,17 @@
 import type {Server} from "node:http";
-import express, {static as expressStatic, type Request, type Response, type NextFunction, type Router} from "express";
+import express, {
+    static as expressStatic,
+    type Request,
+    type Response,
+    type NextFunction,
+    type RequestHandler,
+    type Router,
+} from "express";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import {failure, emptySuccess, type EmptyResult} from "../lib/result.js";
-import {MAX_FORM_BYTES, MAX_IMPORT_FORM_BYTES} from "../lib/http.js";
+import {MAX_FORM_BYTES} from "../lib/http.js";
 import type {MaybeNull} from "../lib/types.js";
 import {noIndex} from "../middleware/no-index.js";
 import type LoggerService from "./logger-service.js";
@@ -69,14 +76,10 @@ class ExpressService {
         this.app.use(expressStatic(opts.staticPublicRoot, {index: false, maxAge: STATIC_MAX_AGE}));
 
         this.app.use("/api", noIndex, routers.api);
-        this.app.use("/admin/import", express.urlencoded({extended: true, limit: MAX_IMPORT_FORM_BYTES}));
-        this.app.use(
-            "/admin",
-            noIndex,
-            express.urlencoded({extended: true, limit: MAX_FORM_BYTES}),
-            cookieParser(),
-            routers.admin
-        );
+        const form = express.urlencoded({extended: true, limit: MAX_FORM_BYTES});
+        const adminForm: RequestHandler = (req, res, next) =>
+            req.path.startsWith("/import/") ? next() : form(req, res, next);
+        this.app.use("/admin", noIndex, adminForm, cookieParser(), routers.admin);
         this.app.use(routers.public);
 
         this.app.use((err: any, request: Request, response: Response, next: NextFunction) =>

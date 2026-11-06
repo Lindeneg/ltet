@@ -182,6 +182,15 @@ describe("planImport", () => {
         expect(plan.skipped).toEqual([{id, reasons: [{path: "venue", reason: SkipReason.STALE}]}]);
     });
 
+    it("plans through an array index", () => {
+        const plan = planImport(
+            [edit({"sources.1.url": {from: "https://two.example/b", to: "https://two.example/c"}})],
+            live(),
+            rules
+        );
+        expect(plan.ready[0].body.sources[1].url).toBe("https://two.example/c");
+    });
+
     it("compares objects deeply for from", () => {
         const from = {summary: "People were upset.", url: "https://two.example/b"};
         const to = {summary: "Many were upset.", url: "https://two.example/b"};
