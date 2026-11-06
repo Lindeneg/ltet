@@ -13,8 +13,6 @@ const OG_HEIGHT = 630;
 export const DESCRIPTION =
     "The court gazette of artificial intelligence: the most powerful men in tech, ranked by the pitchforks their own words raised. Every quote real, every score earned.";
 const OG_DESCRIPTION = "The most powerful men in tech, ranked by the pitchforks their own words raised.";
-const FONTS =
-    "https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Inter:wght@400;500;600;700&display=swap";
 
 const TABS: {view: SeasonView | "rules"; label: string; icon: IconName}[] = [
     {view: "table", label: "Table", icon: "tab-table"},
@@ -67,9 +65,8 @@ function head(title: string, preview: boolean, scripts: string[], noindex: boole
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="/assets/pitchfork.svg" type="image/svg+xml">
   <script src="/theme-boot.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="${esc(FONTS)}">
+  <link rel="preload" href="/fonts/barlow-condensed/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/widths.css">
   <script src="/site.js" defer></script>
