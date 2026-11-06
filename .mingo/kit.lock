@@ -9,8 +9,8 @@ sha256 = "c3a036b0631a21071be69a41a8f486e0fe921e71ea1b8550c00e105bf8f5f287"
 [[file]]
 path = ".github/workflows/ci.yml"
 module = "ci"
-mingo = "v0.0.0-20261105222606-1ac949d16aba+dirty"
-sha256 = "ae5abb95837a3c71963c0dca663bda2740e7971a5821dce92126a589fd73501b"
+mingo = "v0.0.0-20261106004305-d80fd402a3bd"
+sha256 = "fa0622cada8f0485f40e19aa8d237a2afeed2f19db46ce7f764f5c07f3059002"
 
 [[file]]
 path = ".github/workflows/review.yml"
@@ -21,5 +21,5 @@ sha256 = "eda165d663798248ce201deedec41b3fb64cb5a0c691adc8652602c4583c1a87"
 [[file]]
 path = "tools/heavy.mjs"
 module = "heavy"
-mingo = "v0.0.0-20261105222606-1ac949d16aba+dirty"
-sha256 = "056d4fe957d6ba7050721c7ced3dfef6d3060652ad2127f3d566b4aac1b2624d"
+mingo = "v0.0.0-20261106004305-d80fd402a3bd"
+sha256 = "2f77ce4459156316c0d3e300208bddf723ca36ada55e3a9bad0353670f7d4440"
