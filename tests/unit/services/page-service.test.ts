@@ -207,7 +207,7 @@ describe("PageService", () => {
         it("leave other pages indexable", async () => {
             const {pages} = makePages();
 
-            expect(await html(pages.getRace({season: undefined}))).not.toContain(`name="robots"`);
+            expect(await html(pages.getRace({season: undefined}, ORIGIN))).not.toContain(`name="robots"`);
         });
 
         it("render without the league when it can't load", async () => {

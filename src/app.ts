@@ -56,13 +56,17 @@ export async function startApp(env: AppEnv, log: LoggerService): Promise<void> {
 
     const photos = photosDir(env.DATABASE_URL);
 
+    const onStatementsChange = () => {
+        leagueService.invalidate();
+        previewService.clear();
+    };
     const content = new ContentService(
         new ContenderRepository(dataService),
         new RubricRepository(dataService),
         statementRepo,
         proposalRepo,
         photos,
-        () => onStatementsChange(),
+        onStatementsChange,
         log
     );
     const leagueService = new LeagueService(statementRepo, content);
@@ -70,10 +74,6 @@ export async function startApp(env: AppEnv, log: LoggerService): Promise<void> {
     const previewService = new PreviewService(content, photos, log);
     const feedbackService = new FeedbackService(proposalRepo);
 
-    const onStatementsChange = () => {
-        leagueService.invalidate();
-        previewService.clear();
-    };
     const statementService = new StatementService(statementRepo, proposalRepo, content, onStatementsChange);
     const proposalService = new ProposalService(proposalRepo, statementRepo);
     const runService = new RunService(runRepo);

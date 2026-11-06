@@ -1828,6 +1828,11 @@ a.text-button {
     color: var(--muted);
     font-size: 13px;
 }
+
+.next-fixture[hidden] {
+    display: none;
+}
+
 .nf-label {
     padding: 3px 6px;
     border-radius: 3px;

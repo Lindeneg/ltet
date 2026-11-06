@@ -286,6 +286,16 @@ describe("the dialogs in the layout", () => {
     });
 });
 
+describe("the theme toggle", () => {
+    it("has a name before any script runs, worded as the script words it", async () => {
+        const site = await siteFor([makeStatement()]);
+
+        expect(TableView({site, title: "t"})).toContain(
+            '<button type="button" id="theme-toggle" class="icon-button theme-toggle" aria-label="Switch to dark mode">'
+        );
+    });
+});
+
 describe("the colophon", () => {
     it("links the referee's tip jar in a new tab on every site page", async () => {
         const site = await siteFor([makeStatement()]);
