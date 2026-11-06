@@ -99,10 +99,12 @@ describe("a write while another connection holds the lock", () => {
         await statements.save(existing, {origin: "cms"});
         const approved = newStatement();
         const proposal = await propose(approved);
+        const created = newStatement();
         const contender = `db-${uid()}`;
 
         const writes: Array<() => Promise<{ok: boolean}>> = [
             () => statements.save({...existing, context: "Edited under a lock."}, {origin: "cms", note: "busy"}),
+            () => statements.save(created, {origin: "cms"}),
             () => statements.setPublished(existing.id, false, "busy"),
             () => statements.approve(proposal, approved, "scout"),
             () =>
@@ -125,6 +127,7 @@ describe("a write while another connection holds the lock", () => {
         const history = await db.p.statementHistory.findMany({where: {statementId: existing.id}});
         expect(history.map((h) => h.note)).toEqual(["busy", "busy"]);
         expect(await statusOf(proposal)).toBe("approved");
+        expect(await statements.has(created.id)).toEqual(success(true));
         const last = await db.p.contender.aggregate({where: {id: {not: contender}}, _max: {position: true}});
         expect((await db.p.contender.findUniqueOrThrow({where: {id: contender}})).position).toBe(
             (last._max.position ?? -1) + 1
