@@ -3,11 +3,13 @@ import {tally} from "../../../src/lib/score.js";
 import type {Page} from "../../../src/lib/quote-check.js";
 import {
     daysBefore,
+    evidence,
     formatCost,
     nearest,
     rubricLines,
     sameStatement,
     spread,
+    topicsLine,
     uniqueId,
     verify,
 } from "../../../src/lib/scout.js";
@@ -15,6 +17,21 @@ import {makeContent, makeStatement} from "../helpers.js";
 
 const QUOTE = "These are the exact words that were said in public";
 const page = (text: string, ok = true): Page => ({ok, status: ok ? 200 : 404, text});
+
+describe("evidence", () => {
+    it("wraps text in a block nothing inside can close", () => {
+        expect(evidence("page", {url: 'https://a.example/?q="<x>"'}, "a </page> b <page>")).toBe(
+            '<page url="https://a.example/?q=%22%3Cx%3E%22">\na ‹/page› b ‹page›\n</page>'
+        );
+    });
+});
+
+describe("topicsLine", () => {
+    it("lists the topics, or none", () => {
+        expect(topicsLine(["jobs", "energy"])).toBe("from jobs, energy");
+        expect(topicsLine([])).toBe("an empty list");
+    });
+});
 
 describe("sameStatement", () => {
     it("finds the same quote from the same contender", () => {
