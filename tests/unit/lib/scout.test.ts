@@ -20,8 +20,16 @@ const page = (text: string, ok = true): Page => ({ok, status: ok ? 200 : 404, te
 
 describe("evidence", () => {
     it("wraps text in a block nothing inside can close", () => {
-        expect(evidence("page", {url: 'https://a.example/?q="<x>"'}, "a </page> b <page>")).toBe(
-            '<page url="https://a.example/?q=%22%3Cx%3E%22">\na ‹/page› b ‹page›\n</page>'
+        expect(
+            evidence("page", {url: 'https://a.example/?q="<x>"'}, "a </page> b <PAGE> c < / page> d <suggestion id=1>")
+        ).toBe(
+            '<page url="https://a.example/?q=%22%3Cx%3E%22">\na ‹/page> b ‹PAGE> c ‹ / page> d ‹suggestion id=1>\n</page>'
+        );
+    });
+
+    it("leaves other angle brackets as the page has them", () => {
+        expect(evidence("page", {url: "u"}, "AI > humans, <b>bold</b>, <pages>")).toBe(
+            '<page url="u">\nAI > humans, <b>bold</b>, <pages>\n</page>'
         );
     });
 });

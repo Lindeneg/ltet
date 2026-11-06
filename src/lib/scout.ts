@@ -97,7 +97,7 @@ export function evidence(tag: "page" | "suggestion", attrs: Record<string, strin
     const attributes = Object.entries(attrs)
         .map(([name, value]) => ` ${name}="${attribute(value)}"`)
         .join("");
-    return `<${tag}${attributes}>\n${body.replace(/</g, "‹").replace(/>/g, "›")}\n</${tag}>`;
+    return `<${tag}${attributes}>\n${body.replace(/<(?=\s*\/?\s*(?:page|suggestion)\b)/gi, "‹")}\n</${tag}>`;
 }
 
 export const topicsLine = (topics: string[]) => (topics.length > 0 ? `from ${topics.join(", ")}` : "an empty list");

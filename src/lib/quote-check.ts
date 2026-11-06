@@ -67,15 +67,20 @@ for (const [network, prefix] of [
     ["169.254.0.0", 16],
     ["172.16.0.0", 12],
     ["192.168.0.0", 16],
+    ["224.0.0.0", 4],
+    ["240.0.0.0", 4],
 ] as const) {
     NON_PUBLIC.addSubnet(network, prefix, "ipv4");
 }
 for (const [network, prefix] of [
-    ["::", 128],
-    ["::1", 128],
+    ["::", 96],
+    ["64:ff9b::", 96],
+    ["64:ff9b:1::", 48],
+    ["2002::", 16],
     ["fc00::", 7],
     ["fe80::", 10],
     ["fec0::", 10],
+    ["ff00::", 8],
 ] as const) {
     NON_PUBLIC.addSubnet(network, prefix, "ipv6");
 }

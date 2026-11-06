@@ -1,6 +1,6 @@
 import {createServer, type Server, type ServerResponse} from "node:http";
 import type {AddressInfo} from "node:net";
-import {gzipSync} from "node:zlib";
+import {brotliCompressSync, deflateSync, gzipSync} from "node:zlib";
 import {afterAll, beforeAll, beforeEach, describe, expect, it} from "vitest";
 import {
     MAX_PAGE_BYTES,
@@ -97,6 +97,26 @@ describe("fetchText", () => {
             "/to-private-name": (res) => res.writeHead(302, {location: `http://private.test:${port()}/page`}).end(),
             "/to-file": (res) => res.writeHead(302, {location: "file:///etc/passwd"}).end(),
             "/loop": (res) => res.writeHead(302, {location: "/loop"}).end(),
+            "/hop1": (res) => res.writeHead(302, {location: "/hop2"}).end(),
+            "/hop2": (res) => res.writeHead(302, {location: "/hop3"}).end(),
+            "/hop3": (res) => res.writeHead(302, {location: "/hop4"}).end(),
+            "/hop4": (res) => res.writeHead(302, {location: "/hop5"}).end(),
+            "/hop5": (res) => res.writeHead(302, {location: "/page"}).end(),
+            "/no-location": (res) => res.writeHead(302).end(),
+            "/not-modified": (res) => res.writeHead(304).end(),
+            "/deflate": (res) =>
+                res.writeHead(200, {"content-encoding": "deflate"}).end(deflateSync("<p>deflated</p>")),
+            "/br": (res) => res.writeHead(200, {"content-encoding": "br"}).end(brotliCompressSync("<p>brotli</p>")),
+            "/drop": (res) => {
+                res.writeHead(200, {"content-length": 1000});
+                res.write("<p>half");
+                setTimeout(() => res.destroy(), 20);
+            },
+            "/drop-gzip": (res) => {
+                res.writeHead(200, {"content-encoding": "gzip"});
+                res.write(gzipSync(BIG).subarray(0, 2000));
+                setTimeout(() => res.destroy(), 20);
+            },
             "/missing": (res) => res.writeHead(404).end("no"),
             "/big": (res) => res.writeHead(200, {"content-length": BIG.length}).end(BIG),
             "/big-chunked": (res) => {
@@ -135,6 +155,31 @@ describe("fetchText", () => {
     it("follows a relative redirect and one to a host by name", async () => {
         expect((await fetchPage(`${base}/relative`)).text).toBe("<p>hello</p>");
         expect((await fetchPage(`${base}/by-name`)).text).toBe("<p>hello</p>");
+    });
+
+    it("follows five redirects", async () => {
+        expect((await fetchPage(`${base}/hop1`)).text).toBe("<p>hello</p>");
+        expect(hits).toHaveLength(6);
+    });
+
+    it.each([
+        ["/no-location", 302],
+        ["/not-modified", 304],
+    ])("reports a %s answer without a Location as a page that did not load", async (path, status) => {
+        expect(await fetchPage(`${base}${path}`)).toEqual({ok: false, status, text: ""});
+    });
+
+    it.each([
+        ["/deflate", "<p>deflated</p>"],
+        ["/br", "<p>brotli</p>"],
+    ])("decodes a %s body", async (path, text) => {
+        expect((await fetchPage(`${base}${path}`)).text).toBe(text);
+    });
+
+    it.each(["/drop", "/drop-gzip"])("reports a connection dropped mid-body, %s", async (path) => {
+        const page = await fetchPage(`${base}${path}`);
+        expect(page.ok).toBe(false);
+        expect(page.text).toBe("");
     });
 
     it("gives up after too many redirects", async () => {
@@ -226,6 +271,12 @@ describe("isPublicAddress", () => {
         ["fe80::1", false],
         ["fc00::1", false],
         ["::ffff:10.0.0.1", false],
+        ["::7f00:1", false],
+        ["64:ff9b::a9fe:a9fe", false],
+        ["2002:7f00:1::", false],
+        ["ff02::1", false],
+        ["224.0.0.1", false],
+        ["255.255.255.255", false],
         ["not an address", false],
     ])("%s is public: %s", (address, expected) => {
         expect(isPublicAddress(address)).toBe(expected);
