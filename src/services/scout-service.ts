@@ -22,6 +22,7 @@ import {
     verify,
     writeSchema,
     type FindOutput,
+    type RunOutcomes,
     type WriteOutput,
 } from "../lib/scout.js";
 import type {MaybeNull} from "../lib/types.js";
@@ -77,9 +78,17 @@ type Run = {
     today: string;
     since: string;
     summary: ScoutSummary;
+    outcomes: RunOutcomes;
     log: string[];
     signal?: AbortSignal;
 };
+
+const missed = (lead: {ceo: string; date: string; venue: string}) => ({
+    ceo: lead.ceo,
+    date: lead.date,
+    venue: lead.venue,
+    statementId: null,
+});
 
 function must<T>(result: Result<T, string>, label: string): T {
     if (!result.ok) throw new Error(`${label}: ${result.ctx}`);
@@ -147,7 +156,8 @@ class ScoutService {
             suggestions: 0,
             costUsd: 0,
         };
-        const run: Run = {id, dryRun, today, since, summary, log: [], signal};
+        const outcomes: RunOutcomes = {proposed: [], missed: [], suggestions: []};
+        const run: Run = {id, dryRun, today, since, summary, outcomes, log: [], signal};
         let saved = Promise.resolve();
         const log = (line: string) => {
             run.log.push(line);
@@ -168,14 +178,19 @@ class ScoutService {
             );
             await saved;
             if (id !== null)
-                must(await runRepo.finish(id, {status: "ok", summary, log: run.log.join("\n")}), "finishing");
+                must(await runRepo.finish(id, {status: "ok", summary, outcomes, log: run.log.join("\n")}), "finishing");
             return true;
         } catch (error) {
             const stopped = signal?.aborted === true;
             log(stopped ? "Stopped." : `Failed: ${(error as Error).message}`);
             await saved;
             if (id !== null)
-                await runRepo.finish(id, {status: stopped ? "stopped" : "failed", summary, log: run.log.join("\n")});
+                await runRepo.finish(id, {
+                    status: stopped ? "stopped" : "failed",
+                    summary,
+                    outcomes,
+                    log: run.log.join("\n"),
+                });
             return false;
         }
     }
@@ -187,7 +202,7 @@ class ScoutService {
     async #scout(run: Run, log: (line: string) => void): Promise<void> {
         const {statementRepo, proposalRepo, claude, content, model, workDir} = this.deps;
         const {ceos, rubric} = content;
-        const {summary, today, since, dryRun} = run;
+        const {summary, outcomes, today, since, dryRun} = run;
 
         const halt = () => {
             if (run.signal?.aborted) throw new Error("stopped");
@@ -254,6 +269,13 @@ class ScoutService {
                 "saving a suggestion's checks"
             );
             summary.suggestions += 1;
+            outcomes.suggestions.push({
+                id: suggestion.id,
+                url: (suggestion.body as Suggestion).url,
+                qualifies: outcome.qualifies,
+                finding: outcome.finding,
+                proposalId: null,
+            });
         }
         if (leads.length === 0) return;
 
@@ -322,6 +344,7 @@ class ScoutService {
             if (!lead) continue;
             if (!result.keep || !result.statement) {
                 summary.dropped += 1;
+                outcomes.missed.push({...missed(lead), kind: "dropped", reason: result.dropReason});
                 log(`Dropped: ${lead.ceo}, ${lead.date}, ${lead.venue}: ${result.dropReason}`);
                 continue;
             }
@@ -332,6 +355,12 @@ class ScoutService {
             const twin = others.find((other) => sameStatement(statement, other));
             if (twin) {
                 summary.duplicates += 1;
+                outcomes.missed.push({
+                    ...missed(lead),
+                    kind: "duplicate",
+                    statementId: statement.id,
+                    reason: `repeats ${twin.id}`,
+                });
                 log(`Duplicate: ${statement.id} repeats ${twin.id}.`);
                 continue;
             }
@@ -341,6 +370,12 @@ class ScoutService {
             if (checks.foundOn === 0) errors.push("the quote was not found word for word on any page that loaded");
             if (errors.length > 0) {
                 summary.failed += 1;
+                outcomes.missed.push({
+                    ...missed(lead),
+                    kind: "failed",
+                    statementId: statement.id,
+                    reason: errors.join("; "),
+                });
                 log(`Failed checks: ${statement.id}: ${errors.join("; ")}`);
                 continue;
             }
@@ -354,6 +389,16 @@ class ScoutService {
             log(
                 `Proposed: ${statement.id}, ${forks} ${rubric.unit.many}, quote on ${checks.foundOn} site(s)${checks.headlineFound ? "" : ", headline not found on its page"}.`
             );
+            const entry = {
+                statementId: statement.id,
+                ceo: statement.ceo,
+                headline: statement.headline.text,
+                verified: checks.verified,
+                foundOn: checks.foundOn,
+                forks,
+                proposalId: null as MaybeNull<number>,
+            };
+            outcomes.proposed.push(entry);
             if (dryRun) {
                 log(JSON.stringify(statement, null, 2));
                 continue;
@@ -369,7 +414,10 @@ class ScoutService {
                 }),
                 "saving a proposal"
             );
+            entry.proposalId = proposalId;
             if (lead.suggestion) {
+                const researched = outcomes.suggestions.find((s) => s.id === lead.suggestion);
+                if (researched) researched.proposalId = proposalId;
                 must(
                     await proposalRepo.decide(
                         lead.suggestion,
