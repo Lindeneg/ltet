@@ -31,6 +31,9 @@ const locs = new Map(
     })
 );
 const paths = [...locs.keys()];
+if (sitemap.status !== 200 || paths.length === 0) {
+    throw new Error(`/sitemap.xml answered ${sitemap.status} with ${paths.length} urls`);
+}
 const pages = new Map<string, PageFacts>();
 
 type PageFacts = {
