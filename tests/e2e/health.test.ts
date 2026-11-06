@@ -49,12 +49,29 @@ describe("the server, once started", () => {
         expect(preloads).toHaveLength(2);
         expect(urls).toEqual(expect.arrayContaining(preloads));
         expect(page).not.toMatch(/googleapis|gstatic/);
+        expect(faces(css)).toEqual([
+            "Barlow Condensed 500 normal",
+            "Barlow Condensed 600 normal",
+            "Barlow Condensed 700 normal",
+            "Barlow Condensed 800 italic",
+            "Barlow Condensed 800 normal",
+            "Inter 400 normal",
+            "Inter 500 normal",
+            "Inter 600 normal",
+            "Inter 700 normal",
+        ]);
         for (const url of urls) {
             const res = await get(url);
             expect(res.status, url).toBe(200);
             expect(res.headers.get("content-type")).toBe("font/woff2");
             expect(res.headers.get("cache-control")).toBe("public, max-age=3600");
         }
+    });
+
+    it("leaves the CMS on system fonts", async () => {
+        const page = (await get("/admin/login")).html;
+
+        expect(page).not.toMatch(/googleapis|gstatic|\/fonts\//);
     });
 
     it("keeps each font's licence beside it", async () => {
@@ -65,3 +82,12 @@ describe("the server, once started", () => {
         }
     });
 });
+
+function faces(css: string): string[] {
+    const rules = [...css.matchAll(/@font-face \{([^}]*)\}/g)].map((m) => m[1]);
+    const face = (rule: string) => {
+        const prop = (name: string) => rule.match(new RegExp(`${name}: "?([^";]+)"?;`))?.[1];
+        return `${prop("font-family")} ${prop("font-weight")} ${prop("font-style")}`;
+    };
+    return [...new Set(rules.map(face))].sort();
+}
