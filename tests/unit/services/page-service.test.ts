@@ -1,20 +1,19 @@
 import {describe, expect, it, vi} from "vitest";
 import {failure, success} from "../../../src/lib/result.js";
 import {AppError} from "../../../src/lib/errors.js";
-import type {RawStatement} from "../../../src/lib/content.js";
+import type {Photo, RawStatement} from "../../../src/lib/content.js";
 import LeagueService from "../../../src/services/league-service.js";
 import PageCacheService from "../../../src/services/page-cache-service.js";
 import PageService from "../../../src/services/page-service.js";
 import type StatementRepository from "../../../src/repositories/statement-repository.js";
 import {esc} from "../../../src/ui/lib.js";
-import {fake, makeContent, makeStatement, makeContentService} from "../helpers.js";
+import {fake, makeCeo, makeContent, makeStatement, makeContentService} from "../helpers.js";
 
 const NOW = Date.UTC(2026, 10, 15, 12);
 const ORIGIN = "http://localhost:3000";
 
-function makePages(statements: RawStatement[] = [makeStatement()]) {
+function makePages(statements: RawStatement[] = [makeStatement()], content = makeContent()) {
     const listPublished = vi.fn().mockResolvedValue(success(statements));
-    const content = makeContent();
     const league = new LeagueService(
         fake<StatementRepository>({listPublished}),
         makeContentService(content),
@@ -449,6 +448,107 @@ describe("PageService", () => {
             expect(ofType(page, "WebSite")?.url).toBe(`${hostile}/`);
             expect(ofType(page, "Article")?.mainEntityOfPage).toBe(`${hostile}/match/${match.id}`);
             for (const [, body] of head.matchAll(LD)) expect(body).not.toContain("<");
+        });
+
+        it("describes the race, honours and rules pages, naming a season's", async () => {
+            const {pages} = makePages();
+
+            expect(description(await html(pages.getRace({season: undefined}, ORIGIN)))).toBe(
+                "The race on the record: month by month, how the most powerful men in tech climbed the table on the pitchforks their own words raised."
+            );
+            expect(description(await html(pages.getRace({season: "25-26"}, ORIGIN)))).toContain(
+                "The race in Season 25/26: month by month"
+            );
+            expect(description(await html(pages.getHonours({season: undefined}, ORIGIN)))).toBe(
+                "All-time honours: Marie Antoinette of the Year, The Control Group, Award, the award for every count and the roll of honour."
+            );
+            expect(description(await html(pages.getHonours({season: "25-26"}, ORIGIN)))).toContain(
+                "Season 25/26 honours: "
+            );
+            expect(description(await html(pages.getRules(ORIGIN)))).toBe(
+                "The laws of the game: how a statement is scored in pitchforks, how the table and the seasons work, who is eligible, the honours and the photo credits."
+            );
+        });
+
+        it("describes a club page by its contender's place and pitchforks", async () => {
+            const {pages} = makePages([makeStatement(), match]);
+
+            expect(description(await html(pages.getClub({season: undefined}, "altman", ORIGIN)))).toBe(
+                "Sam Altman (OpenAI): joint 1st all-time with 5 pitchforks from 1 match. Every statement word for word, with the backlash it raised and its sources."
+            );
+            expect(description(await html(pages.getClub({season: "25-26"}, "musk", ORIGIN)))).toMatch(
+                /^Elon Musk \(xAI\): joint 1st in Season 25\/26 with 5 pitchforks from 1 match\. /
+            );
+            expect(description(await html(pages.getClub({season: "26-27"}, "musk", ORIGIN)))).toBe(
+                "Elon Musk (xAI): no matches in Season 26/27. Every statement word for word, with the backlash it raised and its sources."
+            );
+        });
+
+        it("marks a club page up as a page about its contender, with a breadcrumb", async () => {
+            const photo: Photo = {
+                file: "assets/ceos/altman.jpg",
+                author: "A",
+                licence: "CC BY 2.0",
+                source: "https://commons.example/a",
+                changes: "cropped",
+            };
+            const content = makeContent({
+                ceos: [makeCeo({photo}), makeCeo({id: "musk", name: "Elon Musk", company: "xAI"})],
+            });
+            const {pages} = makePages([makeStatement()], content);
+
+            const page = await html(pages.getClub({season: "25-26"}, "altman", ORIGIN));
+            const crumbs = ofType(page, "BreadcrumbList");
+
+            expect(ofType(page, "WebPage")).toEqual({
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                url: `${ORIGIN}/25-26/club/altman`,
+                mainEntity: {
+                    "@type": "Person",
+                    name: "Sam Altman",
+                    worksFor: {"@type": "Organization", name: "OpenAI"},
+                    image: `${ORIGIN}/assets/ceos/altman.jpg`,
+                },
+            });
+            expect(crumbs?.itemListElement).toEqual([
+                {"@type": "ListItem", position: 1, name: "Table", item: `${ORIGIN}/25-26`},
+                {"@type": "ListItem", position: 2, name: "Sam Altman"},
+            ]);
+            expect(crumbs?.itemListElement.length).toBeGreaterThanOrEqual(2);
+            expect(JSON.stringify(jsonLd(page))).not.toMatch(/ClaimReview|ProfilePage/);
+        });
+
+        it("leaves the image out for a contender without a photo, in every season", async () => {
+            const {pages} = makePages();
+
+            for (const season of [undefined, "25-26", "26-27"]) {
+                const person = ofType(await html(pages.getClub({season}, "musk", ORIGIN)), "WebPage")?.mainEntity;
+                expect(person).toEqual({
+                    "@type": "Person",
+                    name: "Elon Musk",
+                    worksFor: {"@type": "Organization", name: "xAI"},
+                });
+            }
+        });
+
+        it("keeps a hostile name and company inside the description and the JSON-LD", async () => {
+            const name = 'Bobby "</script><!--" Tables & Co';
+            const company = "<b>Acme</b> & 'Sons'";
+            const content = makeContent({ceos: [makeCeo({name, company})]});
+            const {pages} = makePages([makeStatement()], content);
+
+            const page = await html(pages.getClub({season: undefined}, "altman", ORIGIN));
+            const head = page.slice(0, page.indexOf("</head>"));
+
+            expect(head.match(/<script>|<b>/g)).toBeNull();
+            for (const [, body] of head.matchAll(LD)) expect(body).not.toContain("<");
+            expect(description(page)).toContain(
+                esc(`${name} (${company}): 1st all-time with 5 pitchforks from 1 match.`)
+            );
+            expect(description(page)?.endsWith("…")).toBe(true);
+            expect(ofType(page, "WebPage")?.mainEntity).toMatchObject({name, worksFor: {name: company}});
+            expect(ofType(page, "BreadcrumbList")?.itemListElement[1].name).toBe(name);
         });
 
         it("leaves a missing match a 404 with no page", async () => {

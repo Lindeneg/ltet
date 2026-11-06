@@ -10,7 +10,7 @@ import {seasonShort, seasonTitle, type Site} from "../../site.js";
 import {RACE_SCRIPT, contendersOf, monthsText, monthsTop} from "./race.js";
 import {posLabel, titleFor, zoneFor} from "./table.js";
 
-const placeName = (p: Place) => `${p.tied ? "joint " : ""}${ordinal(p.pos)}`;
+export const placeName = (p: Place) => `${p.tied ? "joint " : ""}${ordinal(p.pos)}`;
 
 function statRank(site: Site, row: Standing, category: Category): Place {
     const values = site.ctx.standings.map((o) => Math.round(o.byCategory[category.id]));

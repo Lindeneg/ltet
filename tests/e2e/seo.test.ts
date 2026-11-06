@@ -50,4 +50,17 @@ describe("robots, sitemap and noindex", () => {
         expect(missing.html).toContain(`<meta name="robots" content="noindex">`);
         expect((await get("/")).html).not.toContain(`name="robots"`);
     });
+
+    it("gives a club page's contender an image that loads", async () => {
+        const page = await get("/club/altman");
+        const [, body] = page.html.match(
+            /<script type="application\/ld\+json">(\{"@context":"https:\/\/schema.org","@type":"WebPage".*?)<\/script>/
+        )!;
+        const image: string = JSON.parse(body).mainEntity.image;
+
+        expect(image.startsWith(`${BASE_URL}/assets/ceos/`)).toBe(true);
+        const photo = await fetch(image);
+        expect(photo.status).toBe(200);
+        expect(photo.headers.get("content-type")).toBe("image/jpeg");
+    });
 });
