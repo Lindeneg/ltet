@@ -31,6 +31,7 @@ export type SiteLayoutProps = {
     preview?: boolean;
     scripts?: string[];
     noindex?: boolean;
+    tickerPaused?: boolean;
 };
 
 // filled in per request, so a page cached once serves every origin
@@ -105,6 +106,7 @@ function Topbar(site: MaybeUndefined<Site>): string {
         <span class="theme-text" aria-hidden="true"></span>
       </button>
     </div>
+    <p class="strapline">Nine AI bosses. Every public remark that made people angry is a match; the pitchforks it raised are the score.</p>
   </header>`;
 }
 
@@ -245,7 +247,15 @@ function Dialogs(site: Site): string {
   </dialog>`;
 }
 
-export function SiteLayout({title, children, site, preview, scripts = [], noindex = false}: SiteLayoutProps): string {
+export function SiteLayout({
+    title,
+    children,
+    site,
+    preview,
+    scripts = [],
+    noindex = false,
+    tickerPaused = false,
+}: SiteLayoutProps): string {
     return `<!doctype html>
 <html lang="en">
 <head>
@@ -256,7 +266,7 @@ export function SiteLayout({title, children, site, preview, scripts = [], noinde
 
   <a class="skip" href="#main" data-skip>Skip to content</a>
 
-  ${site ? Ticker(site.league.newest) : ""}
+  ${site ? Ticker(site.league.newest, tickerPaused) : ""}
 
   ${Topbar(site)}
 

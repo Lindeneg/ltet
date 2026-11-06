@@ -3,6 +3,7 @@ import {TableView} from "../../../src/ui/views/site/table.js";
 import {ResultsView, type ResultsFilters} from "../../../src/ui/views/site/results.js";
 import {NotFoundView} from "../../../src/ui/views/site/not-found.js";
 import {ServerErrorView} from "../../../src/ui/views/site/server-error.js";
+import {MatchView} from "../../../src/ui/views/site/match.js";
 import {makeStatement} from "../helpers.js";
 import {siteFor} from "./helpers.js";
 
@@ -293,6 +294,29 @@ describe("the theme toggle", () => {
         expect(TableView({site, title: "t"})).toContain(
             '<button type="button" id="theme-toggle" class="icon-button theme-toggle" aria-label="Switch to dark mode">'
         );
+    });
+});
+
+describe("the strapline", () => {
+    it("says what the site is under the masthead on every site page", async () => {
+        const site = await siteFor([makeStatement()]);
+        const line =
+            '<p class="strapline">Nine AI bosses. Every public remark that made people angry is a match; the pitchforks it raised are the score.</p>';
+
+        expect(TableView({site, title: "t"})).toContain(line);
+        expect(NotFoundView(site)).toContain(line);
+        expect(ServerErrorView()).toContain(line);
+    });
+});
+
+describe("the ticker in the layout", () => {
+    it("starts paused on a match page and runs everywhere else", async () => {
+        const site = await siteFor([makeStatement()], "25-26");
+        const paused = '<div class="ticker" id="ticker" data-paused>';
+
+        expect(MatchView({site, title: "t", statement: site.ctx.statements[0]})).toContain(paused);
+        expect(TableView({site, title: "t"})).toContain('<div class="ticker" id="ticker">');
+        expect(TableView({site, title: "t"})).not.toContain(paused);
     });
 });
 
