@@ -75,3 +75,18 @@ describe("the report dialog follows the season of the page underneath", () => {
         expect(club.getAttribute("href")).toBe("/25-26/club/altman");
     });
 });
+
+describe("the headline in the dialog", () => {
+    it("is an h2 under the page's own h1, and still names the dialog", async () => {
+        const {lifted} = await openOver(undefined, "25-26");
+        const dialog = document.getElementById("report")!;
+        const heading = document.getElementById(dialog.getAttribute("aria-labelledby")!)!;
+
+        expect(lifted).toContain(`<h1 class="rp-headline" id="report-headline">`);
+        expect(heading.tagName).toBe("H2");
+        expect(heading.classList.contains("rp-headline")).toBe(true);
+        expect(heading.querySelector("a")!.textContent).toBe(ALTMAN.headline.text);
+        expect(document.querySelectorAll("h1")).toHaveLength(1);
+        expect(dialog.querySelector("h1")).toBeNull();
+    });
+});

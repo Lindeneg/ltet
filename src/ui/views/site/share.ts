@@ -4,7 +4,7 @@ import {esc} from "../../lib.js";
 export type ShareViewProps = {
     statement: ScoredStatement;
     url: string;
-    image: {url: string; width: number; height: number};
+    image: {url: string; width: number; height: number; alt: string};
     description: string;
     target: string;
     canonical: string;
@@ -27,7 +27,9 @@ export function ShareView({statement, url, image, description, target, canonical
   <meta property="og:image" content="${esc(image.url)}">
   <meta property="og:image:width" content="${esc(String(image.width))}">
   <meta property="og:image:height" content="${esc(String(image.height))}">
+  <meta property="og:image:alt" content="${esc(image.alt)}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="${esc(image.alt)}">
   <link rel="canonical" href="${esc(canonical)}">
   <meta http-equiv="refresh" content="0; url=${esc(target)}">
 </head>
