@@ -9,8 +9,8 @@ sha256 = "c3a036b0631a21071be69a41a8f486e0fe921e71ea1b8550c00e105bf8f5f287"
 [[file]]
 path = ".github/workflows/ci.yml"
 module = "ci"
-mingo = "v0.0.0-20261106004305-d80fd402a3bd"
-sha256 = "fa0622cada8f0485f40e19aa8d237a2afeed2f19db46ce7f764f5c07f3059002"
+mingo = "v0.0.0-20261106020136-00c77ad958a7"
+sha256 = "fcf3044c97f3e949275c172394c34984bb1913c5d16ec54f101721b767d05098"
 
 [[file]]
 path = ".github/workflows/review.yml"
