@@ -20,7 +20,9 @@ describe("runs router", () => {
     beforeEach(async () => {
         page = vi.fn().mockResolvedValue(success({runs: [makeRun()], page: 1, pages: 1}));
         get = vi.fn().mockResolvedValue(success(makeRun({log: "<script>x</script>"})));
-        proposals = vi.fn().mockResolvedValue(success([{id: 42, statementId: "altman-dishes", status: "rejected"}]));
+        proposals = vi
+            .fn()
+            .mockResolvedValue(success([{id: 42, statementId: "altman-dishes", status: "rejected", newer: 0}]));
         start = vi.fn().mockResolvedValue(success(8));
         stop = vi.fn().mockResolvedValue(success(undefined));
         nextRun = vi.fn().mockReturnValue(new Date("2026-11-02T06:00:00Z"));

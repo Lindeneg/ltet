@@ -80,6 +80,15 @@ class StatementRepository {
         );
     }
 
+    bodies(ids: string[]): AsyncResult<Map<string, RawStatement>, DbError> {
+        return this.db.run(
+            "statement-repo.bodies",
+            this.db.p.statement
+                .findMany({where: {id: {in: ids}}, select: {id: true, body: true}})
+                .then((rows) => new Map(rows.map((row) => [row.id, JSON.parse(row.body) as RawStatement])))
+        );
+    }
+
     seed(statements: RawStatement[]): AsyncResult<number, DbError> {
         return this.db.run(
             "statement-repo.seed",

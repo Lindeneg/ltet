@@ -8,16 +8,22 @@ import type StatementService from "../../services/statement-service.js";
 import {WriteError} from "../../services/statement-service.js";
 import {InboxView, KINDS, inboxHref, type CardError, type InboxKind} from "../../ui/views/admin/inbox.js";
 import {readEditor} from "./editor-form.js";
-import {SOMETHING_WENT_WRONG, adminPage, intParam, sendError, withDone} from "./respond.js";
+import {SOMETHING_WENT_WRONG, adminPage, intParam, sendError, withDone, type Done} from "./respond.js";
 
 const NO_OPEN_PROPOSAL = "No open proposal with that number.";
+const NO_PAGE = "Page not found";
 
-function viewOf(kind: unknown, status: unknown): {kind: InboxKind; status: InboxStatus} {
+type View = {kind: InboxKind; status: InboxStatus; page: number};
+
+function viewOf(kind: unknown, status: unknown, page: unknown): View {
     return {
         kind: KINDS.some((k) => k.id === kind) ? (kind as InboxKind) : "all",
         status: status === "all" ? "all" : "open",
+        page: intParam(page) ?? 1,
     };
 }
+
+const filterOf = (view: View) => ({status: view.status, kind: view.kind === "all" ? null : view.kind});
 
 const noteOf = (value: unknown) => (typeof value === "string" ? value.trim() : "");
 
@@ -28,23 +34,47 @@ export function inboxRouter(
 ): Router {
     const router = Router();
 
-    async function render(
-        req: Request,
-        res: Response,
-        view: ReturnType<typeof viewOf>,
-        status = 200,
-        failed?: {id: number} & CardError
-    ) {
+    async function render(req: Request, res: Response, view: View, status = 200, failed?: {id: number} & CardError) {
         const page = await adminPage(req, proposalService, "inbox");
-        const items = await proposalService.inbox(view.status);
-        if (!items.ok) return sendError(res, page, SOMETHING_WENT_WRONG, 500);
-        send(res, InboxView({page, content: content.get(), items: items.data, ...view, failed}), status);
+        const inbox = await proposalService.inbox(filterOf(view), view.page, failed !== undefined);
+        if (!inbox.ok) {
+            const missing = inbox.ctx === AppError.NOT_FOUND;
+            return sendError(res, page, missing ? NO_PAGE : SOMETHING_WENT_WRONG, missing ? 404 : 500);
+        }
+        const {items, counts, page: pageNo, pages} = inbox.data;
+        send(
+            res,
+            InboxView({
+                page,
+                content: content.get(),
+                items,
+                counts,
+                kind: view.kind,
+                status: view.status,
+                pageNo,
+                pages,
+                failed,
+            }),
+            status
+        );
     }
 
-    router.get("/", (req, res) => render(req, res, viewOf(req.query.kind, req.query.status)));
+    async function back(res: Response, view: View, done: Done) {
+        const last = view.page > 1 ? await proposalService.lastPage(filterOf(view)) : undefined;
+        const page = last?.ok ? Math.min(view.page, last.data) : 1;
+        res.redirect(302, withDone(inboxHref(view.kind, view.status, page), done));
+    }
+
+    router.get("/", async (req, res) => {
+        const raw = req.query.page;
+        if (raw !== undefined && intParam(raw) === null) {
+            return sendError(res, await adminPage(req, proposalService, "inbox"), NO_PAGE, 404);
+        }
+        await render(req, res, viewOf(req.query.kind, req.query.status, raw));
+    });
 
     router.post("/proposals/:id/approve", async (req, res) => {
-        const view = viewOf(req.body?.kind, req.body?.view);
+        const view = viewOf(req.body?.kind, req.body?.view, req.body?.page);
         const note = noteOf(req.body?.note);
         const id = intParam(req.params.id);
         if (id === null) return sendError(res, await adminPage(req, proposalService, "inbox"), NO_OPEN_PROPOSAL, 404);
@@ -75,11 +105,11 @@ export function inboxRouter(
 
         const result = await statementService.approve(id, form.data.statement);
         if (!result.ok) return failed(result.ctx.code, form.data.values, result.ctx.errors);
-        res.redirect(302, withDone(inboxHref(view.kind, view.status), "published"));
+        await back(res, view, "published");
     });
 
     router.post("/proposals/:id/close", async (req, res) => {
-        const view = viewOf(req.body?.kind, req.body?.view);
+        const view = viewOf(req.body?.kind, req.body?.view, req.body?.page);
         const note = noteOf(req.body?.note);
         const id = intParam(req.params.id);
         if (id === null) return sendError(res, await adminPage(req, proposalService, "inbox"), NO_OPEN_PROPOSAL, 404);
@@ -97,7 +127,7 @@ export function inboxRouter(
                 message: missing ? NO_OPEN_PROPOSAL : SOMETHING_WENT_WRONG,
             });
         }
-        res.redirect(302, withDone(inboxHref(view.kind, view.status), status === "rejected" ? "rejected" : "closed"));
+        await back(res, view, status === "rejected" ? "rejected" : "closed");
     });
 
     return router;

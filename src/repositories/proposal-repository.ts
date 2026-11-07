@@ -17,6 +17,8 @@ export type NewProposal = {
     runId?: MaybeNull<number>;
 };
 
+export type KindCounts = Partial<Record<ProposalKind, number>>;
+
 export type ProposalFilter = {status?: ProposalStatus; kind?: ProposalKind};
 
 function parsed(row: ProposalModel): ProposalRecord {
@@ -45,10 +47,10 @@ class ProposalRepository {
         );
     }
 
-    list(where: ProposalFilter = {}): AsyncResult<ProposalRecord[], DbError> {
+    list(where: ProposalFilter = {}, take?: number, skip?: number): AsyncResult<ProposalRecord[], DbError> {
         return this.db.run(
             "proposal-repo.list",
-            this.db.p.proposal.findMany({where, orderBy: {id: "desc"}}).then((rows) => rows.map(parsed))
+            this.db.p.proposal.findMany({where, orderBy: {id: "desc"}, take, skip}).then((rows) => rows.map(parsed))
         );
     }
 
@@ -100,11 +102,15 @@ class ProposalRepository {
         );
     }
 
-    openCounts(): AsyncResult<Partial<Record<ProposalKind, number>>, DbError> {
+    openCounts(): AsyncResult<KindCounts, DbError> {
+        return this.kindCounts({status: "open"});
+    }
+
+    kindCounts(where: Pick<ProposalFilter, "status"> = {}): AsyncResult<KindCounts, DbError> {
         return this.db.run(
-            "proposal-repo.openCounts",
+            "proposal-repo.kindCounts",
             this.db.p.proposal
-                .groupBy({by: ["kind"], where: {status: "open"}, _count: {_all: true}})
+                .groupBy({by: ["kind"], where, _count: {_all: true}})
                 .then((groups) => Object.fromEntries(groups.map((g) => [g.kind, g._count._all])))
         );
     }

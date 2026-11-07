@@ -1,5 +1,6 @@
 import {describe, expect, it} from "vitest";
 import {InboxView} from "../../../src/ui/views/admin/inbox.js";
+import {esc} from "../../../src/ui/lib.js";
 import {RunView} from "../../../src/ui/views/admin/run.js";
 import {RunsView} from "../../../src/ui/views/admin/runs.js";
 import {SettingsView} from "../../../src/ui/views/admin/settings.js";
@@ -40,6 +41,7 @@ describe("the inbox", () => {
                 statement: null,
             },
         ],
+        counts: {statement: 2},
         kind: "all",
         status: "open",
     });
@@ -62,6 +64,60 @@ describe("the inbox", () => {
 
     it("keeps the score fields' names, which the form posts", () => {
         expect(html.match(/name="score_loss"/g)).toHaveLength(2);
+    });
+
+    const view = (props: Partial<Parameters<typeof InboxView>[0]>) =>
+        InboxView({page, content: makeContent(), items: [], counts: {}, kind: "all", status: "open", ...props});
+
+    it("has one empty page when there are no proposals", () => {
+        const empty = view({});
+
+        expect(empty).toContain("Nothing here.");
+        expect(empty).toContain("Everything (0)");
+        expect(empty).not.toContain(`aria-label="Pages"`);
+    });
+
+    it("counts every kind across pages", () => {
+        const counted = view({counts: {statement: 40, suggestion: 25, dispute: 3}, pageNo: 2, pages: 2});
+
+        expect(counted).toContain("Everything (68)");
+        expect(counted).toContain("Proposed statements (40)");
+        expect(counted).toContain(esc("Visitors' suggestions (25)"));
+        expect(counted).toContain("Score disputes (3)");
+    });
+
+    it("links the chips and the closed toggle to the first page", () => {
+        const second = view({pageNo: 2, pages: 3});
+
+        expect(second).toContain(`href="/admin?kind=dispute"`);
+        expect(second).toContain(`href="/admin?status=all"`);
+    });
+
+    it("shows only Older on the first page and only Newer on the last", () => {
+        expect(view({pageNo: 1, pages: 2})).toContain(`<a class="button quiet" href="/admin?page=2">Older</a>`);
+        expect(view({pageNo: 1, pages: 2})).not.toContain("Newer");
+        expect(view({pageNo: 2, pages: 2})).toContain(`<a class="button quiet" href="/admin">Newer</a>`);
+        expect(view({pageNo: 2, pages: 2})).not.toContain("Older");
+    });
+
+    it("carries the page through a card's decision", () => {
+        const card = view({
+            items: [{...makeProposal({id: 1}), statement: null}],
+            counts: {statement: 51},
+            pageNo: 2,
+            pages: 2,
+        });
+
+        expect(card).toContain(`<input type="hidden" name="page" value="2" />`);
+    });
+
+    it("says a dispute's statement is gone", () => {
+        const gone = view({
+            items: [{...makeProposal({id: 5, kind: "dispute", statementId: "gone-1", body: {}}), statement: null}],
+            counts: {dispute: 1},
+        });
+
+        expect(gone).toContain("(statement gone-1 is gone)");
     });
 });
 
@@ -137,7 +193,7 @@ describe("a run's report", () => {
             page,
             content,
             run: makeRun({status: "stopped", log: "Stopped.", outcomes: {...empty, proposed: [proposed]}}),
-            proposals: [{id: 42, statementId: "altman-dishes", status: "open"}],
+            proposals: [{id: 42, statementId: "altman-dishes", status: "open", newer: 0}],
         });
 
         expect(html).toContain(`<p class="error">Stopped.</p>`);
@@ -152,8 +208,8 @@ describe("a run's report", () => {
                 outcomes: {...empty, proposed: [proposed, {...proposed, verified: false, proposalId: 43, forks: 1}]},
             }),
             proposals: [
-                {id: 42, statementId: "altman-dishes", status: "open"},
-                {id: 43, statementId: "altman-dishes-2", status: "approved"},
+                {id: 42, statementId: "altman-dishes", status: "open", newer: 0},
+                {id: 43, statementId: "altman-dishes-2", status: "approved", newer: 0},
             ],
         });
 
@@ -168,12 +224,34 @@ describe("a run's report", () => {
         );
     });
 
+    it("links a proposal on a later page to its page", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({outcomes: {...empty, proposed: [proposed]}}),
+            proposals: [{id: 42, statementId: "altman-dishes", status: "open", newer: 50}],
+        });
+
+        expect(html).toContain(`<a href="/admin?status=all&amp;page=2#proposal-42">In the inbox</a>`);
+    });
+
+    it("keeps a proposal 49 newer ones down on the first page", () => {
+        const html = RunView({
+            page,
+            content,
+            run: makeRun({outcomes: {...empty, proposed: [proposed]}}),
+            proposals: [{id: 42, statementId: "altman-dishes", status: "open", newer: 49}],
+        });
+
+        expect(html).toContain(`<a href="/admin?status=all#proposal-42">In the inbox</a>`);
+    });
+
     it("links a decided proposal into the inbox's all view with its status", () => {
         const html = RunView({
             page,
             content,
             run: makeRun({outcomes: {...empty, proposed: [proposed]}}),
-            proposals: [{id: 42, statementId: "altman-dishes", status: "rejected"}],
+            proposals: [{id: 42, statementId: "altman-dishes", status: "rejected", newer: 0}],
         });
 
         expect(html).toContain(
@@ -197,7 +275,7 @@ describe("a run's report", () => {
             page,
             content,
             run: makeRun({outcomes: null}),
-            proposals: [{id: 42, statementId: "altman-dishes", status: "done"}],
+            proposals: [{id: 42, statementId: "altman-dishes", status: "done", newer: 0}],
         });
 
         expect(html).toContain(`<dl class="summary scoreboard">`);
