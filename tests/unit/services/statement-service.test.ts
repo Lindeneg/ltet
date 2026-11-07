@@ -1,7 +1,8 @@
 import {describe, expect, it, vi} from "vitest";
 import {failure, success} from "../../../src/lib/result.js";
 import {AppError} from "../../../src/lib/errors.js";
-import StatementService, {WriteError} from "../../../src/services/statement-service.js";
+import {SkipReason} from "../../../src/lib/statement-import.js";
+import StatementService, {IMPORT_NOTE, WriteError} from "../../../src/services/statement-service.js";
 import type StatementRepository from "../../../src/repositories/statement-repository.js";
 import type ProposalRepository from "../../../src/repositories/proposal-repository.js";
 import {fake, makeProposal, makeStatement, makeStatementRecord, makeContentService} from "../helpers.js";
@@ -13,6 +14,10 @@ function setup() {
         save: vi.fn().mockResolvedValue(success(false)),
         setPublished: vi.fn().mockResolvedValue(success(true)),
         approve: vi.fn().mockResolvedValue(success(true)),
+        listAll: vi.fn().mockResolvedValue(success([makeStatementRecord()])),
+        replaceMany: vi
+            .fn()
+            .mockImplementation(async (items: {body: {id: string}}[]) => success(items.map((item) => item.body.id))),
     };
     const proposalRepo = {
         get: vi.fn().mockResolvedValue(success(makeProposal())),
@@ -193,6 +198,88 @@ describe("StatementService", () => {
 
             proposalRepo.get.mockResolvedValue(success(makeProposal({kind: "suggestion"})));
             expect(await service.approvable(1)).toEqual(failure({code: WriteError.NOT_A_STATEMENT, errors: []}));
+        });
+    });
+
+    describe("imports", () => {
+        const other = makeStatement({id: "musk-2025-01-01-other", ceo: "musk"});
+        const venue = (to: string, from = "An interview") => ({venue: {from, to}});
+
+        it("plans without writing", async () => {
+            const {service, statementRepo, onChange} = setup();
+            const plan = await service.planImport([{id, set: venue("A podcast")}]);
+            expect(plan.ok && plan.data.ready.map((item) => item.id)).toEqual([id]);
+            expect(statementRepo.replaceMany).not.toHaveBeenCalled();
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it("writes every ready statement in one call with the import's note and calls onChange once", async () => {
+            const {service, statementRepo, onChange} = setup();
+            statementRepo.listAll.mockResolvedValue(
+                success([makeStatementRecord(), makeStatementRecord({id: other.id, body: other})])
+            );
+            const result = await service.applyImport([
+                {id, set: venue("A podcast")},
+                {id: other.id, set: venue("A speech")},
+            ]);
+            expect(statementRepo.replaceMany).toHaveBeenCalledTimes(1);
+            const [items, note] = statementRepo.replaceMany.mock.calls[0];
+            expect(items.map((item: {body: {venue: string}}) => item.body.venue)).toEqual(["A podcast", "A speech"]);
+            expect(note).toBe(IMPORT_NOTE);
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(result.ok && result.data.ready).toHaveLength(2);
+        });
+
+        it("applies the good statements and leaves one with a skipped edit out", async () => {
+            const {service, statementRepo} = setup();
+            statementRepo.listAll.mockResolvedValue(
+                success([makeStatementRecord(), makeStatementRecord({id: other.id, body: other})])
+            );
+            const result = await service.applyImport([
+                {id, set: {...venue("A podcast"), context: {from: "Stale.", to: "New."}}},
+                {id: other.id, set: venue("A speech")},
+            ]);
+            const [items] = statementRepo.replaceMany.mock.calls[0];
+            expect(items.map((item: {id: string}) => item.id)).toEqual([other.id]);
+            expect(result.ok && result.data.skipped).toEqual([
+                {id, reasons: [{path: "context", reason: SkipReason.STALE}]},
+            ]);
+        });
+
+        it("writes nothing and skips onChange when nothing is ready", async () => {
+            const {service, statementRepo, onChange} = setup();
+            const result = await service.applyImport([{id, set: venue("A podcast", "Stale")}]);
+            expect(statementRepo.replaceMany).not.toHaveBeenCalled();
+            expect(onChange).not.toHaveBeenCalled();
+            expect(result.ok && result.data.skipped).toHaveLength(1);
+        });
+
+        it("reports a statement changed during the import as skipped", async () => {
+            const {service, statementRepo, onChange} = setup();
+            statementRepo.replaceMany.mockResolvedValue(success([]));
+            const result = await service.applyImport([{id, set: venue("A podcast")}]);
+            expect(result.ok && result.data).toEqual({
+                ready: [],
+                unchanged: [],
+                skipped: [{id, reasons: [{reason: SkipReason.CHANGED}]}],
+            });
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it("fails on a database error without onChange", async () => {
+            const {service, statementRepo, onChange} = setup();
+            statementRepo.replaceMany.mockResolvedValue(failure(AppError.DB_ERROR));
+            const result = await service.applyImport([{id, set: venue("A podcast")}]);
+            expect(result).toEqual(failure({code: AppError.DB_ERROR, errors: []}));
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it("fails when the statements cannot be read", async () => {
+            const {service, statementRepo} = setup();
+            statementRepo.listAll.mockResolvedValue(failure(AppError.DB_ERROR));
+            expect(await service.planImport([{id, set: venue("A podcast")}])).toEqual(
+                failure({code: AppError.DB_ERROR, errors: []})
+            );
         });
     });
 });

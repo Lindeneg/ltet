@@ -25,6 +25,8 @@ function parsed<T extends {body: string}>(row: T): Omit<T, "body"> & {body: RawS
 const lock = (tx: Prisma.TransactionClient, id: string) =>
     tx.statement.updateMany({where: {id}, data: {updatedAt: new Date()}}).then((result) => result.count > 0);
 
+const REPLACE_MANY_LIMITS = {maxWait: 10_000, timeout: 60_000};
+
 class StatementRepository {
     constructor(private readonly db: DataService) {}
 
@@ -144,6 +146,33 @@ class StatementRepository {
                 });
                 return false;
             })
+        );
+    }
+
+    // resolves to the ids written, and a statement updated since its updatedAt was read is left out
+    replaceMany(items: {body: RawStatement; updatedAt: Date}[], note: string): AsyncResult<string[], DbError> {
+        return this.db.run(
+            "statement-repo.replaceMany",
+            this.db.p.$transaction(async (tx) => {
+                const written: string[] = [];
+                for (const {body, updatedAt} of items) {
+                    const locked = await tx.statement.updateMany({
+                        where: {id: body.id, updatedAt},
+                        data: {updatedAt: new Date()},
+                    });
+                    if (locked.count === 0) continue;
+                    const old = await tx.statement.findUniqueOrThrow({where: {id: body.id}});
+                    await tx.statementHistory.create({
+                        data: {statementId: old.id, body: old.body, published: old.published, note},
+                    });
+                    await tx.statement.update({
+                        where: {id: body.id},
+                        data: {ceo: body.ceo, date: body.date, body: JSON.stringify(body)},
+                    });
+                    written.push(body.id);
+                }
+                return written;
+            }, REPLACE_MANY_LIMITS)
         );
     }
 

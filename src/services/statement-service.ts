@@ -2,6 +2,7 @@ import {failure, success, type AsyncResult} from "../lib/result.js";
 import {AppError} from "../lib/errors.js";
 import type {RawStatement} from "../lib/content.js";
 import {statementErrors} from "../lib/statement-rules.js";
+import {SkipReason, planImport, type ImportEdit, type ImportPlan} from "../lib/statement-import.js";
 import type {MaybeNull, ValueOf} from "../lib/types.js";
 import type StatementRepository from "../repositories/statement-repository.js";
 import type ProposalRepository from "../repositories/proposal-repository.js";
@@ -18,6 +19,8 @@ export const WriteError = {
 export type WriteError = ValueOf<typeof WriteError>;
 
 export type WriteFailure = {code: WriteError; errors: string[]};
+
+export const IMPORT_NOTE = "bulk import";
 
 const existsAlready = (id: string) => `a statement with the id ${id} exists already`;
 
@@ -56,6 +59,27 @@ class StatementService {
         if (!result.data) return fail(WriteError.NOT_FOUND);
         this.onChange();
         return success(undefined);
+    }
+
+    async planImport(edits: ImportEdit[]): AsyncResult<ImportPlan, WriteFailure> {
+        const rows = await this.statementRepo.listAll();
+        if (!rows.ok) return fail(rows.ctx);
+        return success(planImport(edits, new Map(rows.data.map((row) => [row.id, row])), this.content.get()));
+    }
+
+    async applyImport(edits: ImportEdit[]): AsyncResult<ImportPlan, WriteFailure> {
+        const plan = await this.planImport(edits);
+        if (!plan.ok) return plan;
+        const {ready, unchanged, skipped} = plan.data;
+        if (ready.length === 0) return plan;
+        const written = await this.statementRepo.replaceMany(ready, IMPORT_NOTE);
+        if (!written.ok) return fail(written.ctx);
+        const ids = new Set(written.data);
+        const changed = ready
+            .filter((item) => !ids.has(item.id))
+            .map((item) => ({id: item.id, reasons: [{reason: SkipReason.CHANGED}]}));
+        if (ids.size > 0) this.onChange();
+        return success({ready: ready.filter((item) => ids.has(item.id)), unchanged, skipped: [...skipped, ...changed]});
     }
 
     async approvable(proposalId: number): AsyncResult<ProposalRecord, WriteFailure> {

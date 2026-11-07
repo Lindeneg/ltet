@@ -45,6 +45,7 @@ export function StatementsView({page, content, statements, q}: StatementsViewPro
         children: `
             <div class="toolbar">
                 <h1>Statements (${statements.length})</h1>
+                <a class="button quiet" href="/admin/import">Import edits</a>
                 <form method="get" action="/admin/statements" role="search">
                     <input type="search" name="q" value="${esc(q)}" placeholder="Search quote, headline, contender" aria-label="Search" data-search-input />
                 </form>
