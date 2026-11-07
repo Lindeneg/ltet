@@ -37,6 +37,7 @@ import {contendersRouter} from "./routers/admin/contenders.js";
 import {rubricRouter} from "./routers/admin/rubric.js";
 import {runsRouter} from "./routers/admin/runs.js";
 import {settingsRouter} from "./routers/admin/settings.js";
+import {importRouter} from "./routers/admin/import.js";
 import {notFoundRouter} from "./routers/admin/not-found.js";
 import {ErrorView} from "./ui/views/admin/error.js";
 import {makeApiRouter} from "./routers/api-router.js";
@@ -112,6 +113,7 @@ export async function startApp(env: AppEnv, log: LoggerService): Promise<void> {
             rubricRouter(content, proposalService),
             runsRouter(runService, proposalService, scoutRunner, content),
             settingsRouter(authService, proposalService, scoutRunner),
+            importRouter(statementService, proposalService),
             notFoundRouter(proposalService),
         ]
     );
