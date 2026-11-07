@@ -23,7 +23,8 @@ export async function serveAdmin(router: Router) {
 export function fakeProposalService(overrides: Record<string, unknown> = {}) {
     const impl = {
         openTotal: vi.fn().mockResolvedValue(success(3)),
-        inbox: vi.fn().mockResolvedValue(success([])),
+        inbox: vi.fn().mockResolvedValue(success({items: [], counts: {}, page: 1, pages: 1})),
+        lastPage: vi.fn().mockResolvedValue(success(1)),
         close: vi.fn().mockResolvedValue(success(undefined)),
         ...overrides,
     };

@@ -6,6 +6,7 @@ import {AdminLayout} from "../../components/admin-layout.js";
 import {ceoName, extLink, when} from "../../components/admin-parts.js";
 import {esc} from "../../lib.js";
 import {formatCost} from "../../../lib/scout.js";
+import {INBOX_PAGE} from "../../../services/proposal-service.js";
 import type {AdminPage} from "./page.js";
 import {STATUS_LABELS, startedByText} from "./runs.js";
 
@@ -38,7 +39,10 @@ const MISSED: Record<MissedOutcome["kind"], string> = {
     failed: "Failed checks",
 };
 
-const inboxHref = (id: number) => `/admin?status=all#proposal-${id}`;
+function inboxHref(id: number, newer = 0): string {
+    const page = Math.floor(newer / INBOX_PAGE) + 1;
+    return `/admin?status=all${page > 1 ? `&page=${page}` : ""}#proposal-${id}`;
+}
 
 function summaryList(summary: unknown): string {
     if (!summary || typeof summary !== "object") return "";
@@ -59,7 +63,7 @@ function section(title: string, items: string[]): string {
 
 function inboxLink(proposal: RunProposal | undefined, id: number): string {
     const status = proposal ? ` <span class="tag">${esc(PROPOSAL_STATUS[proposal.status])}</span>` : "";
-    return `<a href="${inboxHref(id)}">In the inbox</a>${status}`;
+    return `<a href="${esc(inboxHref(id, proposal?.newer))}">In the inbox</a>${status}`;
 }
 
 function proposedCard(content: Content, p: ProposedOutcome, proposals: RunProposal[]): string {

@@ -1,4 +1,5 @@
 import type {Content} from "../../../lib/content.js";
+import type {KindCounts} from "../../../repositories/proposal-repository.js";
 import type {InboxItem, InboxStatus} from "../../../services/proposal-service.js";
 import {AdminLayout} from "../../components/admin-layout.js";
 import {
@@ -32,15 +33,19 @@ export type InboxViewProps = {
     page: AdminPage;
     content: Content;
     items: InboxItem[];
+    counts: KindCounts;
     kind: InboxKind;
     status: InboxStatus;
+    pageNo?: number;
+    pages?: number;
     failed?: {id: number} & CardError;
 };
 
-export function inboxHref(kind: InboxKind, status: InboxStatus): string {
+export function inboxHref(kind: InboxKind, status: InboxStatus, page = 1): string {
     const params = new URLSearchParams();
     if (kind !== "all") params.set("kind", kind);
     if (status !== "open") params.set("status", status);
+    if (page > 1) params.set("page", String(page));
     const query = params.toString();
     return query ? `/admin?${query}` : "/admin";
 }
@@ -49,11 +54,12 @@ type Suggestion = {url?: string; ceo?: string; quote?: string; note?: string};
 type SuggestionChecks = {qualifies?: boolean; finding?: string};
 type Dispute = {category?: string; direction?: string; comment?: string};
 
-function closeControls(item: InboxItem, view: Pick<InboxViewProps, "kind" | "status">, note = ""): string {
+function closeControls(item: InboxItem, view: Pick<InboxViewProps, "kind" | "status" | "pageNo">, note = ""): string {
     const action = `/admin/proposals/${item.id}/close`;
     return `
         <input type="hidden" name="kind" value="${esc(view.kind)}" />
         <input type="hidden" name="view" value="${esc(view.status)}" />
+        <input type="hidden" name="page" value="${view.pageNo ?? 1}" />
         <input type="text" name="note" value="${esc(note)}" placeholder="Reason (optional)" title="The scout reads the reasons for rejected statements" aria-label="Reason" size="40" />
         <button type="submit" class="quiet" formaction="${action}" name="status" value="done">Close as done</button>
         <button type="submit" class="danger" formaction="${action}" name="status" value="rejected">Reject</button>`;
@@ -143,12 +149,18 @@ function card(item: InboxItem, props: InboxViewProps): string {
     return `<article class="card" id="proposal-${item.id}">${form(inner)}</article>`;
 }
 
+function pager(kind: InboxKind, status: InboxStatus, pageNo: number, pages: number): string {
+    if (pages <= 1) return "";
+    const newer = pageNo > 1 ? `<a class="button quiet" href="${inboxHref(kind, status, pageNo - 1)}">Newer</a>` : "";
+    const older =
+        pageNo < pages ? `<a class="button quiet" href="${inboxHref(kind, status, pageNo + 1)}">Older</a>` : "";
+    return `<nav class="actions pager" aria-label="Pages">${newer}${older}</nav>`;
+}
+
 export function InboxView(props: InboxViewProps): string {
-    const {items, kind, status} = props;
-    const counts = Object.fromEntries(
-        KINDS.map((k) => [k.id, k.id === "all" ? items.length : items.filter((p) => p.kind === k.id).length])
-    );
-    const shown = items.filter((p) => kind === "all" || p.kind === kind);
+    const {items: shown, kind, status, pageNo = 1, pages = 1} = props;
+    const total = Object.values(props.counts).reduce((sum, n) => sum + (n ?? 0), 0);
+    const counts = Object.fromEntries(KINDS.map((k) => [k.id, k.id === "all" ? total : (props.counts[k.id] ?? 0)]));
     const failed = props.failed;
     const lost = failed && !shown.some((p) => p.id === failed.id) ? ErrorBox(failed.message, failed.errors) : "";
     const chips = KINDS.map((k) => {
@@ -169,6 +181,7 @@ export function InboxView(props: InboxViewProps): string {
             <nav class="chips toolbar" aria-label="Kind">${chips}</nav>
             ${lost}
             ${empty}
-            ${shown.map((item) => card(item, props)).join("")}`,
+            ${shown.map((item) => card(item, props)).join("")}
+            ${pager(kind, status, pageNo, pages)}`,
     });
 }

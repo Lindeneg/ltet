@@ -148,6 +148,71 @@ describe("ContentService", () => {
             expect(contenderRepo.update).toHaveBeenCalledTimes(3);
         });
 
+        describe("when the update fails", () => {
+            const old = Buffer.from("old photo");
+
+            async function failing(update: unknown) {
+                const ctx = setup(dir);
+                ctx.contenderRepo.get.mockResolvedValue(success(record(makeContent().ceos[0], 0)));
+                ctx.contenderRepo.update.mockResolvedValue(update);
+                return ctx;
+            }
+
+            async function oldPhoto() {
+                await mkdir(join(dir, "photos"), {recursive: true});
+                await writeFile(photo(), old);
+            }
+
+            it("restores the old photo when the update fails", async () => {
+                const {service, onChange} = await failing(failure(AppError.DB_ERROR));
+                await oldPhoto();
+
+                expect(await service.updateContender("new-one", fields, jpeg)).toEqual(failure(AppError.DB_ERROR));
+                expect(await readFile(photo())).toEqual(old);
+                expect(onChange).not.toHaveBeenCalled();
+            });
+
+            it("restores the old photo when the contender is gone by the update", async () => {
+                const {service} = await failing(success(false));
+                await oldPhoto();
+
+                expect(await service.updateContender("new-one", fields, jpeg)).toEqual(failure(ContentError.NOT_FOUND));
+                expect(await readFile(photo())).toEqual(old);
+            });
+
+            it("removes a new photo when the update fails", async () => {
+                const {service} = await failing(failure(AppError.DB_ERROR));
+
+                await service.updateContender("new-one", fields, jpeg);
+                expect(existsSync(photo())).toBe(false);
+            });
+
+            it("puts a removed photo back when the update fails", async () => {
+                const {service} = await failing(failure(AppError.DB_ERROR));
+                await oldPhoto();
+
+                await service.updateContender("new-one", fields, null);
+                expect(await readFile(photo())).toEqual(old);
+            });
+
+            it("leaves the photo alone when the update fails", async () => {
+                const {service} = await failing(failure(AppError.DB_ERROR));
+                await oldPhoto();
+
+                await service.updateContender("new-one", fields, undefined);
+                expect(await readFile(photo())).toEqual(old);
+            });
+
+            it("changes no photo it can't first read", async () => {
+                const {service, contenderRepo, log} = await failing(success(true));
+                await mkdir(photo(), {recursive: true});
+
+                expect(await service.updateContender("new-one", fields, jpeg)).toEqual(failure(ContentError.PHOTOS));
+                expect(contenderRepo.update).not.toHaveBeenCalled();
+                expect(log.error).toHaveBeenCalled();
+            });
+        });
+
         it("updates no unknown contender", async () => {
             const {service, contenderRepo} = setup(dir);
 

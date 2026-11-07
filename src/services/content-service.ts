@@ -1,5 +1,5 @@
 import {existsSync} from "node:fs";
-import {mkdir, rename, rm, writeFile} from "node:fs/promises";
+import {mkdir, readFile, rename, rm, writeFile} from "node:fs/promises";
 import {join} from "node:path";
 import {failure, success, type AsyncResult} from "../lib/result.js";
 import {AppError, type DbError} from "../lib/errors.js";
@@ -74,11 +74,15 @@ class ContentService {
         const existing = await this.contenderRepo.get(id);
         if (!existing.ok) return existing;
         if (!existing.data) return failure(ContentError.NOT_FOUND);
+        const previous = photo === undefined ? null : await this.#readPhoto(id);
+        if (previous instanceof Error) return failure(ContentError.PHOTOS);
         if (photo && !(await this.#writePhoto(id, photo))) return failure(ContentError.PHOTOS);
         if (photo === null && !(await this.#removePhoto(id))) return failure(ContentError.PHOTOS);
         const updated = await this.contenderRepo.update(id, fields);
-        if (!updated.ok) return updated;
-        if (!updated.data) return failure(ContentError.NOT_FOUND);
+        if (!updated.ok || !updated.data) {
+            if (photo !== undefined) await (previous ? this.#writePhoto(id, previous) : this.#removePhoto(id));
+            return updated.ok ? failure(ContentError.NOT_FOUND) : updated;
+        }
         return this.#changed();
     }
 
@@ -119,6 +123,16 @@ class ContentService {
 
     #photoFile(id: string): string {
         return join(this.photosDir, `${id}.jpg`);
+    }
+
+    async #readPhoto(id: string): Promise<MaybeNull<Buffer> | Error> {
+        try {
+            return await readFile(this.#photoFile(id));
+        } catch (err) {
+            if ((err as NodeJS.ErrnoException).code === "ENOENT") return null;
+            this.log.error(err, "content-service.readPhoto");
+            return err as Error;
+        }
     }
 
     async #writePhoto(id: string, data: Buffer): Promise<boolean> {
