@@ -20,7 +20,7 @@ export type RunFinish = {
 
 export type RunClaim = {startedBy: MaybeNull<string>; dryRun: boolean; staleBefore: Date};
 
-export type RunProposal = {id: number; statementId: MaybeNull<string>; status: ProposalStatus};
+export type RunProposal = {id: number; statementId: MaybeNull<string>; status: ProposalStatus; newer: number};
 
 const parseSummary = (summary: MaybeNull<string>) => (summary === null ? null : JSON.parse(summary));
 
@@ -117,11 +117,21 @@ class RunRepository {
     proposals(id: number): AsyncResult<RunProposal[], DbError> {
         return this.db.run(
             "run-repo.proposals",
-            this.db.p.proposal.findMany({
-                where: {runId: id},
-                orderBy: {id: "asc"},
-                select: {id: true, statementId: true, status: true},
-            })
+            this.db.p.proposal
+                .findMany({
+                    where: {runId: id},
+                    orderBy: {id: "asc"},
+                    select: {id: true, statementId: true, status: true},
+                })
+                .then(async (rows) => {
+                    if (rows.length === 0) return [];
+                    const later = await this.db.p.proposal.findMany({
+                        where: {id: {gt: rows[0].id}},
+                        orderBy: {id: "desc"},
+                        select: {id: true},
+                    });
+                    return rows.map((row) => ({...row, newer: later.filter((p) => p.id > row.id).length}));
+                })
         );
     }
 

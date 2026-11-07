@@ -5,6 +5,7 @@ import type {RawStatement} from "../../../src/lib/content.js";
 import {inboxRouter} from "../../../src/routers/admin/inbox.js";
 import type StatementService from "../../../src/services/statement-service.js";
 import {WriteError} from "../../../src/services/statement-service.js";
+import type {InboxItem} from "../../../src/services/proposal-service.js";
 import {fake, makeProposal, makeStatement, makeContentService} from "../helpers.js";
 import {fakeProposalService, serveAdmin} from "./admin-app.js";
 
@@ -20,6 +21,12 @@ function editorFields(statement: RawStatement, extra: Record<string, string> = {
     };
 }
 
+function inboxPage(items: InboxItem[], page = 1, pages = 1) {
+    const counts: Record<string, number> = {};
+    for (const item of items) counts[item.kind] = (counts[item.kind] ?? 0) + 1;
+    return success({items, counts, page, pages});
+}
+
 describe("inbox router", () => {
     let approve: Mock;
     let approvable: Mock;
@@ -31,7 +38,7 @@ describe("inbox router", () => {
         approvable = vi.fn().mockResolvedValue(success(makeProposal({id: 1})));
         proposals = fakeProposalService({
             inbox: vi.fn().mockResolvedValue(
-                success([
+                inboxPage([
                     {
                         ...makeProposal({
                             id: 3,
@@ -47,6 +54,7 @@ describe("inbox router", () => {
                     {...makeProposal({id: 1}), statement: null},
                 ])
             ),
+            lastPage: vi.fn().mockResolvedValue(success(2)),
         });
         app = await serveAdmin(
             inboxRouter(proposals.service, fake<StatementService>({approve, approvable}), makeContentService())
@@ -58,7 +66,7 @@ describe("inbox router", () => {
     it("shows every kind with counts and the badge", async () => {
         const html = await (await app.get("/admin")).text();
 
-        expect(proposals.impl.inbox).toHaveBeenCalledWith("open");
+        expect(proposals.impl.inbox).toHaveBeenCalledWith({status: "open", kind: null}, 1, false);
         expect(html).toContain("Waiting for you");
         expect(html).toContain("Everything (3)");
         expect(html).toContain("Score disputes (1)");
@@ -78,15 +86,80 @@ describe("inbox router", () => {
     it("filters by kind and asks for closed ones too", async () => {
         const html = await (await app.get("/admin?kind=dispute&status=all")).text();
 
-        expect(proposals.impl.inbox).toHaveBeenCalledWith("all");
+        expect(proposals.impl.inbox).toHaveBeenCalledWith({status: "all", kind: "dispute"}, 1, false);
         expect(html).toContain("Everything, closed too");
-        expect(html).toContain(`id="proposal-2"`);
-        expect(html).not.toContain(`id="proposal-1"`);
         expect(html).toContain(`href="/admin?kind=dispute"`);
     });
 
     it("treats an unknown kind as everything", async () => {
-        expect(await (await app.get("/admin?kind=<x>")).text()).toContain(`id="proposal-1"`);
+        await app.get("/admin?kind=<x>");
+
+        expect(proposals.impl.inbox).toHaveBeenCalledWith({status: "open", kind: null}, 1, false);
+    });
+
+    it("asks for the page in the address", async () => {
+        await app.get("/admin?status=all&page=3");
+
+        expect(proposals.impl.inbox).toHaveBeenCalledWith({status: "all", kind: null}, 3, false);
+    });
+
+    it("an out-of-range or bad page is a 404", async () => {
+        proposals.impl.inbox.mockResolvedValue(failure(AppError.NOT_FOUND));
+        const past = await app.get("/admin?page=9");
+        expect(past.status).toBe(404);
+        expect(await past.text()).toContain("Page not found");
+
+        proposals.impl.inbox.mockClear();
+        for (const page of ["0", "x", "-1", "1.5", ""]) {
+            expect((await app.get(`/admin?page=${page}`)).status, page).toBe(404);
+        }
+        expect(proposals.impl.inbox).not.toHaveBeenCalled();
+    });
+
+    it("says something went wrong when the inbox can't be read", async () => {
+        proposals.impl.inbox.mockResolvedValue(failure(AppError.DB_ERROR));
+
+        expect((await app.get("/admin")).status).toBe(500);
+    });
+
+    it("the pager links the next and previous page", async () => {
+        proposals.impl.inbox.mockResolvedValue(inboxPage([], 2, 3));
+
+        const html = await (await app.get("/admin?kind=dispute&page=2")).text();
+
+        expect(html).toContain(`<a class="button quiet" href="/admin?kind=dispute">Newer</a>`);
+        expect(html).toContain(`<a class="button quiet" href="/admin?kind=dispute&page=3">Older</a>`);
+    });
+
+    it("a decision returns to the page it was made on", async () => {
+        const res = await app.post("/admin/proposals/3/close", {status: "done", view: "all", page: "2"});
+
+        expect(res.headers.get("location")).toBe("/admin?status=all&page=2&done=closed");
+        expect(proposals.impl.lastPage).toHaveBeenCalledWith({status: "all", kind: null});
+    });
+
+    it("a decision on the last item of the last page returns to the page before", async () => {
+        proposals.impl.lastPage.mockResolvedValue(success(2));
+
+        const res = await app.post("/admin/proposals/3/close", {status: "rejected", page: "3"});
+
+        expect(res.headers.get("location")).toBe("/admin?page=2&done=rejected");
+    });
+
+    it("a decision from the first page asks for no page count", async () => {
+        const res = await app.post("/admin/proposals/3/close", {status: "done", page: "1"});
+
+        expect(res.headers.get("location")).toBe("/admin?done=closed");
+        expect(proposals.impl.lastPage).not.toHaveBeenCalled();
+    });
+
+    it("a failed decision re-renders its page, or the last one", async () => {
+        approve.mockResolvedValue(failure({code: WriteError.INVALID, errors: []}));
+
+        const res = await app.post("/admin/proposals/1/approve", editorFields(makeStatement(), {page: "4"}));
+
+        expect(res.status).toBe(422);
+        expect(proposals.impl.inbox).toHaveBeenCalledWith({status: "open", kind: null}, 4, true);
     });
 
     it("shows a toast after a change", async () => {

@@ -207,6 +207,46 @@ describe("the inbox", () => {
     });
 });
 
+describe("the inbox's pages", () => {
+    it("pages 50 at a time, newest first, and has no page past the last", async () => {
+        const ids: number[] = [];
+        for (let i = 0; i < 51; i++) ids.push(await propose("suggestion", {url: `https://example.com/page-${uid()}`}));
+
+        const first = await get("/admin?kind=suggestion", cookie);
+        const second = await get("/admin?kind=suggestion&page=2", cookie);
+
+        expect(first.html).toContain(`id="proposal-${ids[50]}"`);
+        expect(first.html).not.toContain(`id="proposal-${ids[0]}"`);
+        expect(first.html).toContain(`href="/admin?kind=suggestion&page=2">Older</a>`);
+        expect(second.status).toBe(200);
+        expect(second.html).toContain(`href="/admin?kind=suggestion">Newer</a>`);
+        expect((await get("/admin?page=100000", cookie)).status).toBe(404);
+    });
+
+    it("links a run's proposal to the page it is on", async () => {
+        const run = await db.p.run.create({data: {status: "ok"}});
+        const id = (
+            await db.p.proposal.create({
+                data: {
+                    kind: "suggestion",
+                    origin: "scout",
+                    body: JSON.stringify({url: "https://example.com/r"}),
+                    runId: run.id,
+                },
+            })
+        ).id;
+        for (let i = 0; i < 50; i++) await propose("suggestion", {url: `https://example.com/after-${uid()}`});
+
+        const proposals = await new RunRepository(db).proposals(run.id);
+
+        expect(proposals).toMatchObject(success([{id, status: "open"}]));
+        const newer = proposals.ok ? proposals.data[0].newer : 0;
+        expect(newer).toBeGreaterThanOrEqual(50);
+        const page = Math.floor(newer / 50) + 1;
+        expect((await get(`/admin?status=all&page=${page}`, cookie)).html).toContain(`id="proposal-${id}"`);
+    });
+});
+
 describe("the statements", () => {
     it("lists every statement and searches them", async () => {
         const all = await get("/admin/statements", cookie);

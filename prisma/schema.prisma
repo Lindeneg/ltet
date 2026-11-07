@@ -85,6 +85,8 @@ model Proposal {
   decidedAt   DateTime?
 
   @@index([status, kind])
+  @@index([runId])
+  @@index([statementId])
 }
 
 model Run {
