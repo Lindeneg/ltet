@@ -106,7 +106,6 @@ function Topbar(site: MaybeUndefined<Site>): string {
         <span class="theme-text" aria-hidden="true"></span>
       </button>
     </div>
-    <p class="strapline">Nine AI bosses. Every public remark that made people angry is a match; the pitchforks it raised are the score.</p>
   </header>`;
 }
 
