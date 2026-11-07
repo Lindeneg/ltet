@@ -111,4 +111,25 @@ describe("rules index", () => {
         window.dispatchEvent(new Event("scroll"));
         expect(current()).toBe("scoring");
     });
+
+    it("keeps the second of two quick clicks marked when the first one's wait runs out", () => {
+        const [scoring, table] = document.querySelectorAll("section");
+        vi.useFakeTimers();
+        vi.stubGlobal("requestAnimationFrame", (run: () => void) => run());
+
+        document.querySelector<HTMLElement>('[data-law="scoring"]')!.click();
+        vi.advanceTimersByTime(1000);
+        document.querySelector<HTMLElement>('[data-law="table"]')!.click();
+        vi.advanceTimersByTime(600);
+        observed([
+            {target: scoring, isIntersecting: true},
+            {target: table, isIntersecting: false},
+        ]);
+        expect(current()).toBe("table");
+
+        vi.advanceTimersByTime(1000);
+        window.dispatchEvent(new Event("scroll"));
+        expect(current()).toBe("scoring");
+        vi.useRealTimers();
+    });
 });

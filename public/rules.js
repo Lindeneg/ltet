@@ -37,14 +37,18 @@
 
         // a clicked law stays marked until the scroll it started ends
         var held = null;
+        var timer = 0;
         function release() {
             held = null;
+            clearTimeout(timer);
+            window.removeEventListener("scrollend", release);
         }
         function hold(id) {
+            release();
             held = id;
             mark(id);
             window.addEventListener("scrollend", release, {once: true});
-            setTimeout(release, 1500);
+            timer = setTimeout(release, 1500);
         }
 
         function update() {
