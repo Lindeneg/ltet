@@ -94,4 +94,21 @@ describe("rules index", () => {
 
         expect(current()).toBe("scoring");
     });
+
+    it("keeps a clicked law marked while its scroll runs, then follows the page again", () => {
+        const [scoring, table] = document.querySelectorAll("section");
+        vi.stubGlobal("requestAnimationFrame", (run: () => void) => run());
+
+        document.querySelector<HTMLElement>('[data-law="table"]')!.click();
+        observed([
+            {target: scoring, isIntersecting: true},
+            {target: table, isIntersecting: false},
+        ]);
+        window.dispatchEvent(new Event("scroll"));
+        expect(current()).toBe("table");
+
+        window.dispatchEvent(new Event("scrollend"));
+        window.dispatchEvent(new Event("scroll"));
+        expect(current()).toBe("scoring");
+    });
 });

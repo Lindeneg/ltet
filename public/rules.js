@@ -17,7 +17,7 @@
                 var heading = document.getElementById("law-" + link.dataset.law + "-title");
                 if (!heading) return;
                 event.preventDefault();
-                mark(link.dataset.law);
+                hold(link.dataset.law);
                 var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
                 heading.scrollIntoView({behavior: reduce ? "auto" : "smooth", block: "start"});
                 heading.focus({preventScroll: true});
@@ -35,7 +35,20 @@
             );
         }
 
+        // a clicked law stays marked until the scroll it started ends
+        var held = null;
+        function release() {
+            held = null;
+        }
+        function hold(id) {
+            held = id;
+            mark(id);
+            window.addEventListener("scrollend", release, {once: true});
+            setTimeout(release, 1500);
+        }
+
         function update() {
+            if (held) return;
             if (atBottom()) return mark(last);
             var first = links.find(function (link) {
                 return seen.get(link.dataset.law);
