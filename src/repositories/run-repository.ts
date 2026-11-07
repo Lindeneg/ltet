@@ -123,15 +123,14 @@ class RunRepository {
                     orderBy: {id: "asc"},
                     select: {id: true, statementId: true, status: true},
                 })
-                .then(async (rows) => {
-                    if (rows.length === 0) return [];
-                    const later = await this.db.p.proposal.findMany({
-                        where: {id: {gt: rows[0].id}},
-                        orderBy: {id: "desc"},
-                        select: {id: true},
-                    });
-                    return rows.map((row) => ({...row, newer: later.filter((p) => p.id > row.id).length}));
-                })
+                .then((rows) =>
+                    Promise.all(
+                        rows.map(async (row) => ({
+                            ...row,
+                            newer: await this.db.p.proposal.count({where: {id: {gt: row.id}}}),
+                        }))
+                    )
+                )
         );
     }
 
