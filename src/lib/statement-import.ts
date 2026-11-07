@@ -64,16 +64,16 @@ function has(node: unknown, key: string): boolean {
     return isObject(node) && Object.hasOwn(node, key);
 }
 
+function walk(node: unknown, [key, ...rest]: string[]): {parent: Record<string, unknown>; key: string} | null {
+    if (!has(node, key)) return null;
+    const parent = node as Record<string, unknown>;
+    return rest.length === 0 ? {parent, key} : walk(parent[key], rest);
+}
+
 export function locate(body: unknown, path: string): {parent: Record<string, unknown>; key: string} | null {
     const keys = path.split(".");
     if (keys.some((key) => key === "" || FORBIDDEN.has(key))) return null;
-    let node = body;
-    for (const key of keys.slice(0, -1)) {
-        if (!has(node, key)) return null;
-        node = (node as Record<string, unknown>)[key];
-    }
-    const key = keys[keys.length - 1];
-    return has(node, key) ? {parent: node as Record<string, unknown>, key} : null;
+    return walk(body, keys);
 }
 
 const overlaps = (path: string, paths: string[]) =>
