@@ -54,12 +54,6 @@ describe("rules index", () => {
         expect(document.querySelectorAll("[aria-current]")).toHaveLength(1);
     });
 
-    it("marks a clicked law at once", () => {
-        document.querySelector<HTMLElement>('[data-law="table"]')!.click();
-
-        expect(current()).toBe("table");
-    });
-
     it("marks the last law at the bottom of the page, even with an earlier law in view", () => {
         const [scoring, table] = document.querySelectorAll("section");
         Object.defineProperty(document.documentElement, "scrollHeight", {configurable: true, value: 2000});
@@ -93,43 +87,5 @@ describe("rules index", () => {
         ]);
 
         expect(current()).toBe("scoring");
-    });
-
-    it("keeps a clicked law marked while its scroll runs, then follows the page again", () => {
-        const [scoring, table] = document.querySelectorAll("section");
-        vi.stubGlobal("requestAnimationFrame", (run: () => void) => run());
-
-        document.querySelector<HTMLElement>('[data-law="table"]')!.click();
-        observed([
-            {target: scoring, isIntersecting: true},
-            {target: table, isIntersecting: false},
-        ]);
-        window.dispatchEvent(new Event("scroll"));
-        expect(current()).toBe("table");
-
-        window.dispatchEvent(new Event("scrollend"));
-        window.dispatchEvent(new Event("scroll"));
-        expect(current()).toBe("scoring");
-    });
-
-    it("keeps the second of two quick clicks marked when the first one's wait runs out", () => {
-        const [scoring, table] = document.querySelectorAll("section");
-        vi.useFakeTimers();
-        vi.stubGlobal("requestAnimationFrame", (run: () => void) => run());
-
-        document.querySelector<HTMLElement>('[data-law="scoring"]')!.click();
-        vi.advanceTimersByTime(1000);
-        document.querySelector<HTMLElement>('[data-law="table"]')!.click();
-        vi.advanceTimersByTime(600);
-        observed([
-            {target: scoring, isIntersecting: true},
-            {target: table, isIntersecting: false},
-        ]);
-        expect(current()).toBe("table");
-
-        vi.advanceTimersByTime(1000);
-        window.dispatchEvent(new Event("scroll"));
-        expect(current()).toBe("scoring");
-        vi.useRealTimers();
     });
 });
