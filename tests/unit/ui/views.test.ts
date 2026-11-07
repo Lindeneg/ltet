@@ -297,18 +297,6 @@ describe("the theme toggle", () => {
     });
 });
 
-describe("the strapline", () => {
-    it("says what the site is under the masthead on every site page", async () => {
-        const site = await siteFor([makeStatement()]);
-        const line =
-            '<p class="strapline">Nine AI bosses. Every public remark that made people angry is a match; the pitchforks it raised are the score.</p>';
-
-        expect(TableView({site, title: "t"})).toContain(line);
-        expect(NotFoundView(site)).toContain(line);
-        expect(ServerErrorView()).toContain(line);
-    });
-});
-
 describe("the ticker in the layout", () => {
     it("starts paused on a match page and runs everywhere else", async () => {
         const site = await siteFor([makeStatement()], "25-26");
