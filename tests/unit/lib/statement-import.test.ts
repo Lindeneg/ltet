@@ -110,6 +110,9 @@ describe("locate", () => {
         "scores.__proto__",
         "constructor",
         "scores.constructor.prototype",
+        "prototype",
+        "scores.prototype",
+        "scores.loss.constructor",
         "toString",
         "hasOwnProperty",
     ])("refuses %j", (path) => {
@@ -163,6 +166,16 @@ describe("planImport", () => {
                 ],
             },
         ]);
+    });
+
+    it.each(["__proto__", "prototype", "constructor"])("skips %s as any segment and writes nothing", (segment) => {
+        const paths = [segment, `scores.${segment}`, `scores.loss.${segment}`, `${segment}.polluted`];
+        const set = Object.fromEntries(paths.map((path) => [path, {from: {}, to: {polluted: true}}]));
+        const plan = planImport([edit(set)], live(), rules);
+        expect(plan.ready).toEqual([]);
+        expect(plan.skipped[0].reasons).toEqual(paths.map((path) => ({path, reason: SkipReason.UNKNOWN_PATH})));
+        expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+        expect(Object.hasOwn(Object.prototype, "polluted")).toBe(false);
     });
 
     it("never touches the prototype", () => {
